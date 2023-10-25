@@ -1,0 +1,374 @@
+# Basics
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+## Objects
+
+- In Python, everything is an **object** stored on RAM
+- Can be looked up using object reference that is a memory address on RAM
+- Object stores information in attributes
+    - data attributes
+    - operations (methods)
+- **data = noun** and **operation = verb**
+- **data = state** and **operation = behavior**
+
+## Variables
+
+### Introduction to variables
+
+- Variables are named references that provide a handle to the object
+- Namespaces are mapping between variable names and reference to objects
+- Note that memory address is not constant
+
+- Variables provide handle to objects for
+    - reuse and passing around objects
+    - performing operations
+
+#### Name binding
+
+- Variable are defined using the `=` operator.
+
+- When a variable is defined for example
+    - `some_var = "some text"`
+
+- a string type object `"some text"` is created in RAM which has `some_id`
+- `some_var` variable name is bound to `"some text"` object created
+    - this is referred to as **name binding**
+- variable name `some_var` is mapped to `some_id` in namespace
+
+#### 
+
+![](../../../resources/diagrams/data-types/var-obj-namespace.png)
+
+### Deciding variable names
+
+#### Must-follow
+
+- **case sensitive**
+- **start** with `_` or `letter` (a-z A-Z)
+- **followed by** any number of `_`, letters or digits
+- **cannot** be one of **reserved words**
+
+Below code can be used to check keyword list in Python.
+
+```python
+import keyword
+print(keyword.kwlist)
+```
+
+#### Keywords {.fragile .shrink .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+
+library('reticulate')
+kwp  <- reticulate::import('keyword')
+kws <- kwp$kwlist
+kws <- paste0("`", kws, "`")
+l_kws = length(kws)
+breaks <- seq.int(1, length(kws), 7)
+cns <- paste0("x_", 1:7)
+df <- setNames(data.frame(matrix(ncol = 7, nrow = 5)), cns) |>
+  tibble::tibble()
+for (i in 1:5) {
+  for (j in 1:7) {
+    df[i, j] <- kws[breaks[i] + j - 1]
+  }
+}
+caption <- paste0("Python keywords (", l_kws, ")")
+col_names <- rep("", ncol(df))
+package <- "hux" # hux, pander, kable
+
+create_table(df, caption = caption, package = package, col_names = col_names) |>
+    huxtable::theme_grey() |> 
+    print_tbl_out(package = package)
+```
+
+#### Should-follow
+
+- `_my_var`: names starting with single underscore
+  - used for `private` or `internal` objects
+
+- **avoid using names with dunder**
+    - `__my_var`: names starting with double underscore
+    - `__my_var__`: names starting and ending in double underscore
+
+#### PEP-8 Conventions
+
+- [**PEP**](https://peps.python.org/pep-0000/#): Python enhancement proposals
+
+- [**PEP-8**](https://peps.python.org/pep-0008/): Python code styles
+
+#### PEP-8 Conventions {.fragile .shrink .smaller}
+
+```{r}
+#| output: asis
+#| echo: false
+#| cache: false
+
+tables_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "pep-8-conventions"
+package <- "pander" # hux, pander, kable
+
+df <- readxl::read_excel(here::here(tables_file_path), sheet=sheet)
+
+tbl <- create_table(df, package = package)
+
+print_tbl_out(tbl, package)
+```
+
+### Python features
+
+#### Dynamic `type`
+
+- In Python, variables are typed dynamically
+    - variable `type` do not need to be declared
+    - Variable can be bound to different type of objects
+
+- Opposite is **strict type**, e.g. `C`
+
+```{python}
+some_var = 10
+some_var = "some text string"
+```
+
+```{python}
+print(f'{some_var=}')
+```
+
+#### `type` annotation
+
+- Variable type can be declared for assistance and code readability
+    - Optional
+
+- It is not recommended to declare type and then use different type of object
+
+- [PEP-487](https://peps.python.org/pep-0483/) has more detailed discussion around this
+
+```{python}
+some_var:str = "some text string"
+some_var:int = 10
+```
+
+```{python}
+print(f'{some_var=}')
+```
+
+#### Multiple assignment
+
+To exchange values of a set of variables you do not need temporary assignments. Below examples illustrates this.
+
+```{python}
+a = 10; b = "some text"; c = ["this", "is", "a", "list"]
+```
+
+```{python}
+print(f'{a=}, {b=}, {c=}')
+```
+
+```{python}
+a, b, c = c, a, b
+```
+
+```{python}
+print(f'{a=}, {b=}, {c=}')
+```
+
+## Commonly used syntax
+
+### Comments (`#`)
+
+Comments are text within code which is not evaluated and is used for documentation and code readability.
+
+There are 2 basic rules related to comments.
+
+- Python does not evaluate the content after `#` on a line
+
+- cannot use `#` just after assignment operator `=`
+
+#### Example 1
+
+Below is simple usage to document the code.
+
+```python
+# Enter the value of inputs below
+x = 10
+y = 20
+
+# Calculate sum
+z = x + y
+```
+
+#### Example 2
+
+```{python}
+#| error: true
+# num_in_comment = 10
+print(num_in_comment)
+```
+
+#### Example 3
+
+```{python}
+#| error: true
+some_num = # value on next line
+10
+print(some_num)
+```
+
+### Newline
+
+- New lines can be introduced in multiple ways
+    - explicit method
+        - break lines using `\`
+        - join lines using `;`
+    - implicit method: Expressions within `()`, `[]`, `{}`
+        - can be broken into multiple lines
+        - can contain comments
+        - can have trailing commas
+- New line syntax can be used to enhance code readability
+
+#### Explicit method example
+
+```python
+some_var_1 = 10
+some_var_2 = 20
+some_var_3 = 30
+some_var_4 = 40
+if some_var_1 > 5 and some_var_2 > 10 and some_var_3 > 20 and some_var_4 > 30:
+    print('yes')
+```
+
+```python
+some_var_1 = 10; some_var_2 = 20
+some_var_3 = 30; some_var_4 = 40
+
+if some_var_1 > 5 and some_var_2 > 10 \
+    and some_var_3 > 20 and some_var_4 > 30:
+    print('yes')
+```
+
+#### Implicit method example
+
+::: {layout-ncol="2"}
+
+```python
+a = (
+    "item 1",
+    "item 2",
+    "item 3"
+)
+```
+
+```python
+a = [
+    1, # first item
+    2, # second item
+    3, # third item
+    ]
+```
+:::
+
+### Blocks (indentation)
+
+- Python uses indentation to isolate distinct blocks
+    - e.g. control flow blocks (`if`, `while`), functions (`def`), classes (`class`)
+    - improves code readability
+
+- `tab` vs `space` ([Editor configuration](https://code.visualstudio.com/docs/editor/codebasics#_indentation))
+
+```python
+import math
+def calc_circle_area(r=1, pi=math.pi):
+    if r < 0:
+        print("radius should be >= 0")
+    else:
+        return pi*(r**2)
+```
+
+## Functions
+
+- Objectives
+    - understand at high level what information the function provides
+    - getting a hang of running code in jupyter notebooks
+    - using variable assignment
+    - functions and f-strings will be covered later in detail
+
+### type
+
+- `type(_o)`: returns object type
+
+```{python}
+var_1 = 10
+var_2 = 10.0
+var_3 = "string"
+```
+
+```{python}
+type(var_1), type(var_2), type(var_3), type(10.2)
+```
+
+### id
+
+- `id(_obj)`: returns object memory reference id
+  - `hex(_number)` just converts a number to hexadecimal format for better readability
+
+```{python}
+_string_1 = "some text"
+```
+
+```{python}
+id(_string_1), hex(id(_string_1))
+```
+
+### is
+
+- `a is b`: check if `a` and `b` refer to same object
+- checks if memory addresses are same not just value
+
+```{python}
+a = b = [10]
+```
+
+```{python}
+print(f'{a is b = }\n{hex(id(a))=}\n{hex(id(b))=}')
+```
+
+#### `is` examples
+
+```{python}
+a = [10]
+b = a
+```
+
+```{python}
+print(f'{a is b = }\n{hex(id(a))=}\n{hex(id(b))=}')
+```
+
+#### `is` examples
+
+```{python}
+c = [10]
+d = [10]
+```
+
+```{python}
+print(f'{c is d = }\n{hex(id(c))=}\n{hex(id(d))=}')
+```
+
+### dot operator
+
+- dot operator `.`
+    - `.` operator gives access to object's data attributes and operations
+
+```{python}
+_num_1 = 1.5
+```
+
+```{python}
+_num_1.as_integer_ratio()
+```

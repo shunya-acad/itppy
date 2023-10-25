@@ -1,0 +1,5 @@
+# Recommendations
+
+## Variable names
+## Choosing Data types
+## Functions

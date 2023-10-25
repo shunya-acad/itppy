@@ -1,0 +1,19 @@
+{
+	"folders": [
+        {
+            "name": "itppy",
+            "path": "."
+        },
+        {
+            "name": "website",
+            "path": "../websites/shunya-acad"
+        }
+    ],
+    "settings": {
+        "python.autoComplete.extraPaths": [
+
+        ],
+        "python.defaultInterpreterPath": "./.py_venv/bin/python",
+        "python.analysis.extraPaths": []
+    }
+}

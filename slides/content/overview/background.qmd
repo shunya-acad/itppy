@@ -1,0 +1,81 @@
+---
+title: "Background"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Definition
+
+- **Program** in context of computers
+    - A set of instructions for the computer to follow
+    - Also called software
+
+- **Programming**: Configuring the computer hardware to do certain tasks to solve a problem.
+
+# Hardware
+
+## Introduction
+
+- Computers are based on binary arithmetic
+- Comprise of a large number of electronic circuits
+- Communicate with each other through electrical signals
+- Understand different sequences of binary signals to perform different tasks
+- 1 bit is the atomic unit of storage, 0 or 1
+- Data and instructions are stored in binary
+- Instructions are also binary data but "data" generally refers to static data
+
+## Components
+
+###
+
+- **CPU**: central processing unit or processor
+- **RAM**: random access memory
+- **Hard drive**: long term storage
+- **Input/output devices**: keyboard, mouse, monitor
+
+### 
+
+- **CPU**: central processing unit or processor
+    - **ALU** (Arithmetic logic unit): operates on very small amount of binary data to perform arithmetic and logical operations
+    - **Controller unit**: controls the input/output signals from/to different parts of the computer
+    - **Registers**: smallest memory, closest to processing
+    - **Cache (L1, L2, L3)**: next level memory for preprocessing
+
+###
+
+- **RAM**: random access memory
+    - larger than CPU cache but smaller than hard disk
+    - slower than CPU cache but faster than hard disk
+    - all data slots are equally accessible in same time
+- **Hard drive**: long term storage
+    - largest in size but slowest
+- **Input/output devices**: keyboard, mouse, monitor
+    - also referred to as peripheral devices
+
+## Architecture
+
+###
+
+![](../../../resources/diagrams/architecture/hardware-cpu-ram.png)
+
+### Key config parameters
+
+2 main parameters related to design of instructions
+
+- **Instruction set architecture (ISA)**
+    - **x86-64**: Intel, AMD processors for desktop, server
+    - **ARMv8-64**: Mobile phones
+- **Width**: maximum number of bits the processor can process at a time
+    - currently most CPU's support 64 bit, earlier it was 32 bit
+    - the 64 in x86-64, ARMv8-64 is 64 bit width
+
+# Programming hardware
+
+## Key idea
+
+- **Map**: Natural language code $\to$ Machine code
+
+- e.g. `beep` $\to$ `010011001010...`

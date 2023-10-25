@@ -1,0 +1,8 @@
+# Resources
+
+## Tools
+
+### Bash
+
+- [homepage](https://www.gnu.org/software/bash/)
+- [bash manual](https://www.gnu.org/software/bash/manual/bash.html)

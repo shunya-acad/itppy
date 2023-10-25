@@ -1,0 +1,864 @@
+---
+title: "Data structures & Algorithms (DSA)"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+
+# Introduction
+
+::: {.block data-latex="{}"}
+**Data structures and algorithms**, referred to as **DSA**, is an advanced topic in computer science.
+:::
+
+## Background
+
+### Macro level {.smaller}
+
+- Data and correspondingly requirement for data analysis is growing rapidly
+
+- Application speed depends heavily on data storage and operations
+    - Efficiency in context of speed is one of the most needed property of a computer program
+
+- There are multiple ways to improve efficiency
+    - Hardware: faster CPU, which is hitting a boundary
+    - Program Design: concurrency, multi-threading, multi-processing, async-io
+    - DSA: has been instrumental in increased performance of applications
+
+### Micro level {.smaller}
+
+- A program instructs CPU to perform operations which take time.
+    - load data into RAM
+    - fetch data from RAM
+    - operate on data
+    - write data onto RAM
+
+- The scale of these operations is very large
+    - e.g. simple program to do data analysis
+
+- DSA helps reduce these operations to improve performance
+
+### Current state
+
+- Many languages, including Python, provide basic data structures by default
+- Some languages, like C, leave it to the programmer
+
+### Applications {.smaller}
+
+- Basic user of programming
+    - know basic data structures and algorithms
+    - match the right data structures to situations
+- Advanced user of programming
+    - know advanced data structure and algorithms
+    - implement a data structure if required
+- Research: Computer science & engineering
+    - research on DSA
+    - rigorous math involved
+    - main challenges
+        - find optimal solutions in terms of speed and design to the ever expanding field of data
+        - prove and communicate the solutions
+
+## Objectives
+
+- Present and introduce some of the core results
+- Explain context and intuition behind the developments in the field
+- This should help
+    - Everyone: during usage of these concepts in writing programs
+    - Someone whose target is to get into software development
+        - lay foundation for advanced study of the topic
+
+## Overview {.smaller}
+
+The study of data structures and algorithms can be summarized as below.
+
+- **Problem specification**: **interface**
+    - specification for **structure** of data
+    - specification for **operations** needed to be performed on data
+- **Solution**/**implementation**
+    - **data structure**: implementation of how to store the data with given structure
+    - **algorithms**: implementation of how to perform operations for a given data structure
+- **Measuring efficiency**
+    - **asymptotic notation**
+    - **computation model**: **WordRAM** model
+
+###
+
+- Choosing the data structure depends on use case
+    - how data is to be structured?
+    - which type of operations are to be performed?
+    - how frequently?
+
+- The choice of data structure decides available algorithms for different operations implemented for a data structure
+
+## Interface vs data structure {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "dsa-1" # name or number
+# col_names <- c("", "Interface", "Data structure") # default, NULL or custom
+package <- "hux" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet = sheet)
+tbl_df <- tbl_df[2:3]
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::theme_compact() |>
+    huxtable::set_bottom_border(TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+# Measuring efficiency
+
+There are 2 major costs involved while using a data structure
+
+- **time** taken to perform operations
+- **memory** (**space**) used on **RAM**
+
+Measuring time and memory usage depends on 2 factors
+
+- computation model (hardware)
+- how the data structure uses this model
+
+## Computation model
+
+::: {.block data-latex="{}"}
+Computational model refers to abstracting hardware performance in general terms to study the behavior of different operations to be performed. Typically *word RAM* model is used in theoretical studies. In practice it may differ.
+:::
+
+- Implication of assumptions in *word RAM* model are that all elementary operations take constant amount of time
+    - read, write, delete in RAM for a location
+    - mathematical operations
+    - logical operations
+
+## Measuring time
+
+### Context
+
+Time complexity of an algorithm can be measured in different ways based on different contexts.
+
+- how the time complexity is measured?
+    - measure time to run the algorithm
+    - **measure operations performed and how they grow with size of data structure**
+
+- what time is captured?
+    - best case time
+    - average time
+    - **worst case**
+
+#### {.smaller}
+
+- Measuring time directly has following disadvantages
+    - it depends on the quality of machine
+        - tests can be run on various machines but that is inefficient
+        - testing a slow algorithm on very fast machine leads to false conclusions
+    - it depends on size of data
+        - tests can be run on different data sizes but it is difficult to test for very large sizes
+
+- It is more useful to measure time in terms of operations performed and then see how they grow with size of data.
+    - Using this approach isolates dependency on machine.
+
+#### 
+
+- Using **best case time** might give false results
+    - an algorithm might be fast on small data size but perform slow on large data size
+
+- Using **average time** will give more information
+    - probability distribution is needed to decide which data sizes will be used more frequently
+    - not feasible
+
+- **Worst case time** is used
+    - ensures bound on performance and reduces noise in comparing performance of different algorithms
+
+### Solution
+
+::: {.block data-latex="{}"}
+Time complexity is measured for **worst case** performance, using **asymptotic notation** for **number of operations performed depending on data size**, usually represented with $n$.
+:::
+
+### Asymptotic notation {.smaller}
+
+::: {.block data-latex="{}"}
+Asymptotic notation is used to get an idea of asymptotic growth ignoring scaling factors and constants.
+
+More formally, asymptotic notation represents a set of functions.
+:::
+
+- how the growth of a function behaves when the underlying variable grows too large
+
+- E.g.
+    - if the the performance of an algorithm for a data structure takes the form $T(n) = 3n^2$
+    - what is the growth in value of $T(n)$ as $n \to \infty$
+    - where $T(n)$ is the time the algorithm takes and $n$ is the size of data structure
+
+#### {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "asymptotics" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+tbl_out <- create_table(tbl_df, package = package) |>
+    huxtable::set_markdown(col = 2, value = FALSE) |>
+    huxtable::set_escape_contents(col = 2, value = FALSE) |>
+    huxtable::set_text_color(row = c(3,5), value = "brown") |>
+    huxtable::theme_article() |>
+    huxtable::set_width(1) |>
+    huxtable::theme_compact() |>
+    huxtable::set_bottom_border(TRUE)
+print_tbl_out(tbl_out, package)
+```
+
+- Theta and Big O are mostly used in measuring complexity.
+
+- The notation is some times used as $f(n) = O(g(n))$ but it is more accurate to use $f(n) \in O(g(n))$ as $O(g(n))$ denotes a collection of functions.
+
+#### Definitions
+
+::: {.block data-latex="{}"}
+##### O Notation
+
+A non-negative function $f(n)$ is in $O(g(n))$ if and only if there exist constants $c, n_0 \in \mathbb{R}$ such that $f(n) \le c \cdot g(n) \quad \forall \ n > n_0$.
+:::
+
+::: {.block data-latex="{}"}
+##### Omega Notation
+
+A non-negative function $f(n)$ is in $\Omega(g(n))$ if and only if there exist constants $c, n_0 \in \mathbb{R}$ such that $f(n) \ge c \cdot g(n) \quad \forall \ n > n_0$.
+:::
+
+::: {.block data-latex="{}"}
+##### Theta Notation
+
+A non-negative function $f(n)$ is in $\Theta(g(n))$ if and only if $f(n) \in (O(g(n)) \cap \Omega(g(n)))$.
+:::
+
+#### Example
+
+For example, if it is concluded that number of operations in an algorithm is given by the function $T(n) = 3n^2 + 4n+ 2$ then $T(n) \in \Theta(n^2)$.
+
+Theta notation allows for stating complexity in simpler terms ignoring scaling and constant factors.
+
+Plots show how the $n^2$ term dominates as n grows larger.
+
+#### Plot
+
+```{r}
+#| echo: false
+#| warning: false
+
+func_list <- list(
+    c("3*x^2 + 4*x + 2", "3*n^2 + 4*n + 2"),
+    c("x^2", "n^2"),
+    c("3*x^2", "3*n^2"),
+    c("4*x + 2", "4*n + 2")
+)
+
+plt_function(
+    func = func_list, x_min = 0, x_max = 20, y_min = 0, xlab = "n"
+)
+
+```
+
+#### Plot
+
+```{r}
+#| echo: false
+#| warning: false
+
+plt_function(
+    func = func_list, x_min = 0, x_max = 100, y_min = 0, xlab = "n"
+)
+```
+
+#### Plot
+
+```{r}
+#| echo: false
+#| warning: false
+
+plt_function(
+    func = func_list, x_min = 0, x_max = 10^3, y_min = 0, xlab = "n"
+)
+```
+
+#### Plot
+
+```{r}
+#| echo: false
+#| warning: false
+
+plt_function(
+    func = func_list, x_min = 0, x_max = 10^6, y_min = 0, xlab = "n"
+)
+```
+
+#### {.fragile}
+
+In terms of efficiency of algorithms it is often desired to keep the complexity low.
+
+Below are the common functions which complexity takes in increasing order.
+
+Anything below linear is considered good.
+
+```{r "theta order"}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "theta-order" # name or number
+package <- "hux" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_text_color(row = 2, col = c(1,2), value = "darkgreen") |>
+    huxtable::set_text_color(row = 2, col = c(3), value = "orange") |>
+    huxtable::set_text_color(row = 2, col = c(4), value = "brown") |>
+    huxtable::set_text_color(row = 2, col = c(5,6), value = "red") |>
+    huxtable::set_markdown(FALSE) |>
+    huxtable::set_escape_contents(FALSE) |>
+    huxtable::set_width(1)
+
+print_tbl_out(tbl_out, package)
+```
+
+#### Summary
+
+```{r}
+#| echo: false
+#| warning: false
+
+func_list = list(
+    c("1", "1"),
+    c("log2(x)", "log2(n)"),
+    c("x", "n"),
+    c("x^2", "n^2"),
+    c("x^3", "n^3"),
+    c("2^x", "2^n")
+)
+plt_function(
+    func = func_list, x_min=0, x_max=20, y_min=0, y_max=25, linewidth = .6,
+    xlab = "n"
+)
+```
+
+
+# Interfaces
+
+## Introduction
+
+Interface provides the abstract or theoretical requirements of storing and operating on certain type of data.
+
+For example, tuple, list or dictionary is used depending on the use case.
+
+Abstraction and generalization of use cases is interface. Tuple, list and dictionary are the implementation or data structures.
+
+### Terminology
+
+Interfaces are also referred to as 
+
+- Application programming interface (**API**): by developers
+- Abstract data type (**ADT**): by computer scientists
+
+### Types
+
+There are 2 main types of interfaces.
+
+- sequence
+- mapping
+
+#### Sequence
+
+- **Extrinsic order**: order of items provided externally is preserved
+- Special sequence types
+    - **stack**: insert last and delete last (LIFO: last in first out)
+    - **queue**: insert last and delete first (FIFO: first in first out)
+    - **dequeue** (aka deque, double-ended queue)
+
+#### Mapping
+
+- **Mapping** (also referred to as **set**, **associative array**)
+    - **Intrinsic order**: items identified by unique keys, keys can optionally be stored in order
+    - Types of mapping types
+        - **set**: items are keys themselves
+        - **dictionary**: items are associated with keys
+
+## Operations {.smaller}
+
+Operations on major interfaces can be categorized into 3 basic types
+
+- **container operations**: operations on container itself
+    - e.g. build, length
+- **static operations**: operations on elements that do not alter the container
+    - e.g. search (query) operations on elements by index (sequence) or value (mapping)
+- **dynamic operations**: operations on elements that alter the container itself
+    - e.g. inserting, deleting elements
+
+### Sequence interface {.fragile .shrink .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "dsa-seq-ops" # name or number
+package <- "hux" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet = sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = c(1), value = TRUE) |>
+    huxtable::set_col_width(c(.15, .15, .7)) |>
+    huxtable::theme_compact() |>
+    huxtable::set_font_size(value = 14) |>
+    huxtable::set_bottom_border(TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+### Map interface {.fragile .smaller .shrink}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "dsa-set-ops" # name or number
+package <- "hux" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet = sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = c(1), value = TRUE) |>
+    huxtable::set_col_width(c(.15, .15, .7)) |>
+    huxtable::theme_compact() |>
+    huxtable::set_font_size(value = 16) |>
+    huxtable::set_bottom_border(TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+# Data structures
+
+```{r}
+#| include: false
+
+# header and footer for 2 tables below
+if (knitr::is_html_output()) {
+    tmp <- c("", "Operations - $O(\\cdot)$" = 5)
+    hdr_seq <- c("", "Sequence interface operations - $O(\\cdot)$" = 5)
+    hdr_map <- c("", "Map interface operations - $O(\\cdot)$" = 5)
+    fn <- paste0(
+        "$\\cdot_{(a)}$ implies amortized, ",
+        "$\\cdot_{(e)}$ implies expected, ",
+        "h is height of the tree"
+    )
+} else {
+    tmp <- c("", "Operations - $O(\\\\cdot)$" = 5)
+    hdr_seq <- c("", "Sequence interface operations - $O(\\\\cdot)$" = 5)
+    hdr_map <- c("", "Map interface operations - $O(\\\\cdot)$" = 5)
+    fn <- paste0(
+        "$\\\\cdot_{(a)}$ implies amortized, ",
+        "$\\\\cdot_{(e)}$ implies expected, ",
+        "h is height of the tree"
+    )
+}
+
+cl = list()
+cl$red <- "#efcbcb"
+cl$amber <- "#f0d2c0"
+cl$green <- "#e0e6cd"
+```
+
+```{r}
+#| include: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "dsa-ds-seq" # name or number
+package_seq <- "kable" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+tbl_df_seq <- tbl_df[2:ncol(tbl_df)]
+
+create_table_seq <- function(tbl_df, pkg = package_seq) {
+    tbl_out_seq <- tbl_df |>
+        create_table(package = package_seq, apply_theme = FALSE) |>
+        kableExtra::kable_styling(
+            bootstrap_options = c("hover", "condensed", "responsive"),
+            latex_options = c("HOLD_position", "scale_down"),
+            full_width = FALSE
+        ) |>
+        kableExtra::add_header_above(c(" ", "Build", "Static", "Dynamic" = 3)) |>
+        kableExtra::add_header_above(hdr_seq, escape = FALSE) |>
+        kableExtra::footnote(general = fn, escape = FALSE) |>
+        clrz_ptrn_kbl(df_ = tbl_df, cols_ = 2:6, ptrns_ = c("1|^log n", "^h"),
+            colors_ = c(cl$green, cl$amber), default_color = cl$red)
+}
+
+tbl_out_seq <- create_table_seq(tbl_df_seq)
+```
+
+```{r}
+#| include: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "dsa-ds-map" # name or number
+package_map <- "kable" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+tbl_df_map <- tbl_df[2:ncol(tbl_df)]
+
+create_table_map <- function(tbl_df, pkg = package_map) {
+    tbl_out_map <- tbl_df |>
+        create_table(package = package_map, apply_theme = FALSE) |>
+        kableExtra::kable_styling(
+            bootstrap_options = c("hover", "condensed", "responsive"),
+            latex_options = c("HOLD_position", "scale_down"),
+            full_width = FALSE
+        ) |>
+        kableExtra::add_header_above(c(" ", "Build", "Static", "Dynamic",
+            "Order" = 2)) |>
+        kableExtra::add_header_above(hdr_map, escape = FALSE) |>
+        kableExtra::footnote(general = fn, escape = FALSE) |>
+        clrz_ptrn_kbl(df_ = tbl_df, cols_ = 2:6, ptrns_ = c("1|^log n", "^h"),
+            colors_ = c(cl$green, cl$amber), default_color = cl$red)
+}
+tbl_out_map <- create_table_map(tbl_df_map)
+```
+
+## Overview
+
+### Introduction
+
+- Data structures are the actual implementations of interfaces.
+
+- There is no single data structure that solves all operations required in an interface efficiently.
+
+- Different data structures solve a subset of operations efficiently.
+
+### Types
+
+Below are main types of data structures
+
+- *array based*: **static array**, **dynamic array**
+- *pointer based*: **linked list** (w[/o] tail), **doubly linked list** (w[/o] tail)
+- **hash table** (*array and pointer mixed*)
+- *graph based*: **binary search tree**, **AVL tree**, ...
+
+## Static array
+
+### Introduction
+
+- Random access memory (RAM) of computer hardware is like a giant continuous slots of memory addresses.
+
+- A static array finds and stores data in contiguous slots of equal size, depending on the size of data elements.
+
+- The order is extrinsic, i.e. the items are stored in the order provided.
+
+![](../../../resources/diagrams/dsa/static-array-2.png)
+
+#### Operations
+
+The static array object then needs to contain only the start memory address and length of the array.
+
+- static operations: constant time ($\Theta(1)$)
+    - memory address(i) = memory address(0) + i * item storage size
+- dynamic operations: linear time ($\Theta(n)$)
+
+![](../../../resources/diagrams/dsa/static-array-2.png)
+
+### Python tuples
+
+- Python tuples are approximately static array
+
+- One main difference is tuples are immutable, i.e. modification operations are not supported, a new object is created on modification.
+
+### Performance
+
+- Static arrays are efficient for sequences with static operations only.
+
+- For dynamic operations, in the worst case new contiguous slot of free memory has to be looked and container has to be build, therefore it is $O(n)$ operations.
+
+#### Performance {.shrink .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+
+tbl_df_seq[tbl_df_seq[1] == "array", ] |>
+    create_table_seq() |>
+    print_tbl_out(package = package_seq)
+```
+
+```{r}
+#| echo: false
+#| output: asis
+
+tbl_df_map[tbl_df_seq[1] == "array", ] |>
+    create_table_map() |>
+    print_tbl_out(package = package_map)
+```
+
+## Linked list
+
+### Singly linked list without tail {.shrink .smaller}
+
+::::::::: {layout="[[49,-2,49]]"}
+:::::: {data-latex=""}
+- random slots alloted
+- object stores the
+    - head memory address
+    - len
+- each node stores
+    - item
+    - link to next nodes memory address
+::::::
+:::::: {data-latex=""}
+- static operations: linear time ($\Theta(n)$)
+- dynamic operations
+    - insert/delete first: constant time ($\Theta(1)$)
+    - other: linear time ($\Theta(n)$)
+::::::
+:::::::::
+
+![](../../../resources/diagrams/dsa/linked-list-2.png)
+
+#### Performance {.smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+create_table_seq(tbl_df = tbl_df_seq[tbl_df_seq[1] == "linked list", ]) |>
+    print_tbl_out(package = package_seq)
+```
+
+### Doubly linked list with tail {.smaller}
+
+![](../../../resources/diagrams/dsa/linked-list-dbl-2.png)
+
+#### {.smaller}
+
+::::::::: {layout="[[45,55]]"}
+:::::: {data-latex=""}
+- random slots alloted
+- object stores the
+    - head memory address
+    - tail memory address
+    - len
+- each node stores
+    - item
+    - memory address of previous node
+    - memory address of next node
+::::::
+:::::: {data-latex=""}
+- static operations: linear time ($\Theta(n)$)
+- dynamic operations
+    - insert/delete first: constant time ($\Theta(1)$)
+    - insert/delete last: constant time ($\Theta(1)$)
+    - other: linear time ($\Theta(n)$)
+- good for implementing **stack** and **queue** with unknown length
+    - insert/delete first/last  
+      *aka* push/pop/queue/dequeue
+::::::
+:::::::::
+
+#### Performance {.smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+
+filter = tbl_df_seq[1] == "linked list" | 
+    tbl_df_seq[1] == "doubly linked list w/ tail"
+tbl_df_seq[filter,] |>
+    create_table_seq() |>
+    print_tbl_out(package = package_seq)
+```
+
+## Dynamic array {.smaller}
+
+- Provides faster **insert/delete first/last** operations
+- Extra space is alloted at beginning/end
+- Idea is to **amortize the cost** of operations by providing extra space
+    - when list is full, it is extended by a target **fill ratio**
+    - when list is empty, the size is reduced to target **delete ratio**
+- Python **list** is a dynamic array, with extra slots alloted both in the beginning and end of container
+    - inserting or deleting at first or last position takes $O(1)$ time (averaged over $n$ operations)
+
+![](../../../resources/diagrams/dsa/dyn-array-1.png)
+
+### Performance {.smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+
+tbl_df <- tbl_df_seq[tbl_df_seq[1] == "dynamic array",]
+tbl_df |>
+    create_table_seq() |>
+    print_tbl_out(package = package_seq)
+```
+
+## Hash tables
+
+### Overview {.smaller}
+
+Hash tables are used to implement set interface: **sets** and **dictionaries**.
+
+- Requirement: find items based on keys efficiently
+    - arrays find item by looking up memory address based on index
+    - in set interface the keys can be strings or other objects
+    - search based on item value in array is not fast
+- Key idea is to associate/map the keys with non negative integers (index)
+    - integers map to memory address
+    - given the key, find the associated integer with the key
+    - given the integer, find the associated key
+- Keys can be numeric, strings or other objects
+    - generally, they must be unique
+
+### Hashing numbers
+
+Taking example of a phone book where the requirements are
+
+- store names and phone numbers
+- search by phone number: _hashing numbers_
+- search by name: _hashing strings_
+
+####
+
+![](../../../resources/diagrams/dsa/hash-1.png)
+
+#### {.smaller}
+
+- Assuming phone numbers are 15 digit numbers
+- $u$ is the set of all possible 15 digit numbers
+    - size of universe is $|u| = 10^{15} = `r format(10^15, scientific=FALSE, big.mark=",")`$
+    - not possible to store array of this size
+    - this makes use of *direct access array* ($|m| = |u|$) impractical
+- Let $n$ be the set of numbers to be stored $|n| = ?$, e.g. $|n| \le 1000$
+- $m$ is the array of reduced size that you can store
+    - choose $|m|$ such that $|n| \le |m|$
+    - size of the array is $|m|$, assume $|m| = 1000$
+- *Hash function* maps the key from $u \to m$
+- *Hash table* is the map of key from $u \to m$
+- To search any key takes $\Theta(1)$ time
+    - convert the key to array index using hash function
+    - access the returned index
+
+### Collisions and chaining
+
+- Assuming $n = 4$ contacts have to be stored in array of size $|m| = 7$
+- Since $|u| >>>> |m|$ ($|u| = 10^{15}$) there will be collisions
+    - *collisions*: hash function will give same integer for multiple inputs $h(k_1) = h(k_2)$, where $k_1 \ne k_2$
+    - this is by *pigeon hole principle*
+- There are 2 methods to resolve the issue of collisions
+    - *chaining*: store collisions in a *linked list*
+    - *open addressing*: store collisions in next free slot
+
+####
+
+![](../../../resources/diagrams/dsa/hash-2.png)
+
+### Hashing strings
+
+- Convert characters into integers using ascii or unicode
+- There are many methods to combine the codes to form an integer
+- Then rest of the problem is similar to hashing numbers
+- There are many good solutions available
+- To maintain the phone book by both name and number use 2 hash tables  
+  One hash table with hash of numbers, other with hash of strings
+
+### Key requirements for a good hash function
+
+- **Deterministic**: returns same integer for a given key always
+- **Fast** to compute: $\Theta(1)$
+- Keep the array size ($|m|$) low to **minimize space**
+- Keep number of **collisions low**
+
+### Use cases
+
+- Hash tables have revolutionized searching and can be found everywhere in technology
+- Sets and dictionaries are generally implemented using hash table
+    - Python `dict` and `set`
+- Language interpreter does fast lookup for keywords
+- Contact list in phones
+- Web and other text searches use hashing
+- Applications use hash table for configuration files to search settings
+
+## Summary
+
+### Sequence interface {.shrink .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+
+print_tbl_out(tbl_out_seq, package_seq)
+```
+
+### Map interface {.shrink .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+
+print_tbl_out(tbl_out_map, package_map)
+```
+
+# Algorithms
+
+## Generic
+
+Algorithm is a procedure to solve a problem.
+
+Study of algorithms involves study of finding correct and efficient procedures to solve problems.
+
+## Algorithms for data structures
+
+An algorithm is a solution to implementing operations like search and sort for a data structure.
+
+An operation for a implementation of a data structure can use any of the compatible algorithms, but not all will be efficient.
+
+For example, for sorting an array merge sort is much quicker than most algorithms.
+
+## Examples {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "dsa-alg" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_out <- create_table(tbl_df, package = package) |>
+    huxtable::set_markdown(col = 3, row = c(-1), value = FALSE) |>
+    huxtable::set_escape_contents(col = 3, row = c(-1), value = FALSE) |>
+    huxtable::theme_compact() |>
+    huxtable::set_width(1) |>
+    huxtable::set_background_color(row = (-1), col = 3,
+        value = c(cl$amber, cl$green, cl$red, cl$red, cl$amber))
+
+print_tbl_out(tbl_out, package)
+```

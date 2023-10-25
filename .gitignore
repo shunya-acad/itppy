@@ -1,0 +1,30 @@
+# folders
+*rough/
+*venv*/
+*renv*/
+*cache/
+*_freeze/
+**/_site/
+**/_book/
+**/_slides/
+*pycache*/
+**/site_libs*/
+**/.resources/
+
+# files
+*.tex
+!**/*config/*.tex
+*_files/
+*.html
+*.nav
+*.snm
+*.toc
+*.vrb
+*.log
+*.aux
+*.~*
+*.$*
+/.luarc.json
+*.pdf
+
+# special cases

@@ -1,0 +1,72 @@
+# Overview {.unnumbered}
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+Design in context of programming will depend on the context. Since programming itself is relatively a new field of knowledge and evolving, compared to other subjects like math, structure and content of design concepts is not consistent and formalized. Therefore in current learning resources, for an introduction to programming, often this will be missing or if present, the structure will not be consistent. So consider this section to be an independent attempt to structure the concepts of the topic.
+
+The motivation for design in context of computer programming comes from the rapid growth of scale and complexity of programs. The main purpose of studying design in context of programming is to improve the properties of a program.
+
+It is one thing to write a program that solves the problem, but knowledge and judgement of designing a good program is a skill acquired through practice.
+
+With experience of developers trying to solve more and more problems and building very large programs there has been abstraction of properties of a good program.
+
+---
+
+**What are the recommended properties of a good program?**
+
+- **Readable**: easy to read and understand
+- **Testable**: safe from errors, easy to test even after making changes
+- **Modular**: responsibilities are separated out into small independent blocks
+- **Extensible**: easy to extend functionality with little change in existing code
+- **Efficient**: in terms of speed and memory
+
+---
+
+There are few independent sub contexts when it comes to design in context of programming.
+
+1. Design **components of programs**
+    - **Design patterns**
+    - **Data structures & Algorithms (DSA)**
+    - **Regular expressions**
+    - **Testing**
+    - **Specifications**
+1. Design **structure of programs** (**Frameworks**)
+1. Design **process of creating programs** (**Workflow**)
+    - **Software requirement analysis**
+    - **Documentation**
+    - **Refactoring**
+
+In context of this book, some of these topics have been included with the following objectives.
+
+- It gives more context when using existing solutions from developers.
+- It allows to benefit from best practices by using them early.
+- It provides opportunity to apply and practice some of components in small code.
+    - This should help those who happen to pursue programming to advanced levels.
+
+## Design patterns
+
+Design patterns are abstraction of ways to organize building blocks using the language specifications and architecture to improve properties of a program. Typically a given pattern improves a subset of properties.
+
+Design patterns can be specific to a domain within software development or generic.
+
+There are 2 distinct dimensions
+
+- abstraction of tasks
+- abstraction of patterns to implement those tasks
+
+As the size and number of programs grow, there is progress in both these dimensions. Some patterns emerge as good solution for certain tasks. A certain type of task might be solved using multiple patterns.
+
+Map reduce is a design pattern which is covered with functions (@sec-hof) using functional programming paradigm. Filter is just a special case of map.
+
+Python provides many more such design patterns which have not been included to keep the volume and complexity low for an introduction to programming. These topics are suited for an intermediate course, where these can be covered in more detail, like learning to implement these.
+
+- **Map-reduce**
+- **Iterators**
+- **Generators**
+- **Decorators**
+- **Context managers**
+- **Advanced OOP**
+- **Meta-programming**

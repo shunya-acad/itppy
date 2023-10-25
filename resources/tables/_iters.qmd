@@ -1,0 +1,8 @@
+| Iterators   | Iterables           |
+|-------------|---------------------|
+| `zip`       | `range`             |
+| `enumerate` | `dictionary.keys`   |
+| `open`      | `dictionary.values` |
+|             | `dictionary.items`  |
+
+: Python functions and methods that return iterators and iterables

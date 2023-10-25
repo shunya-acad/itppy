@@ -1,0 +1,478 @@
+---
+title: "Programming languages"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Introduction
+
+## Basic idea
+
+- **Map**: Natural language code $\to$ Machine code
+    - e.g. `beep` $\to$ `010011001010...`
+- Multiple ways to create the mapping
+    - $\implies$ multiple programming languages
+
+## Programming language
+
+### Terminology
+
+- Typically a programming language refers to 2 distinct parts
+    - **Specification**
+    - **Implementation**
+
+### Terminology
+
+- **Specification**: rules for writing code
+    - **lexicon**: allowed keywords, symbols, characters
+    - **syntax**: rules of arranging lexicons and creating new names (variables)
+    - **semantics**: rules to assign meaning to different combinations of lexicons and syntax
+
+### Terminology
+
+- **Implementation**: A system application that implements the specification, like Compiler or Interpreter, to convert the natural language code into machine code and execute.
+    - Referred to as '**language engine**' henceforth.
+
+### Language engines
+
+- **Assembler**
+- **Compiler**
+- **Interpreter**
+
+### Python
+
+- Python has many implementations
+- The official is an hybrid interpreter written in C
+    - Known as CPython
+    - CPython = Specifications + Interpreter
+    - Names are used inter changeably
+- Other implementations: Jython (Java) etc.
+    - Link available in notes for other [implementations](https://wiki.python.org/moin/PythonImplementations)
+
+## Types
+
+- _low level languages_
+    - **assembly languages**
+- _high level languages_
+    - **compiled languages** (_compiler_): C, C++, Go
+    - **interpreted languages** (_interpreter_): shell (bash, etc.)
+        - **hybrid**: Python, Java, JavaScript
+
+### Assembly
+
+- Very few instructions
+    - $\implies$ long code
+- Usually one to one mapping of natural language short code and instruction
+- The engine that converts the instructions is called the **Assembler**
+
+### High level languages
+
+- Lot of specifications in natural language than assembly
+    - $\implies$ lot more features
+    - $\implies$ shorter code
+- Types of high level languages
+    - compiled: e.g. C, C++
+    - interpreted: e.g. shell languages like Bash
+        - hybrid: e.g. Python, Java
+
+### Compiled languages
+
+- **Compiler**: reads the whole program and converts it to machine code
+    - referred to as **Ahead of Time Compilation (AOT)**
+- There are some dependencies for a compiler
+    - **CPU architecture**
+        - **instruction set**: x86, ARM, ...
+        - **processing width**: 64 bit or 32 bit
+    - **Operating system (OS)**
+- Compilers resolve this for common CPU & OS combinations
+
+#### Compiled languages {.smaller}
+
+- **Pros**
+    - **fast**
+        - machine code is generated as standalone output
+- **Cons**
+    - **Portability**
+        - have to be compiled for different OS + Hardware combinations
+        - this is more of an inconvenience, as compilers for most popular combinations are available
+    - **Difficulty**
+        - compared to hybrid interpreter languages which are higher level with more features towards ease of use
+        - have higher development time, takes more time to code
+
+### Interpreted languages
+
+- **Interpreter**: reads the program line by line to produce the machine code during execution
+- If interpreter can be installed it can run the program on any CPU-OS combination
+- e.g. Bash
+
+### Hybrid languages
+
+- The implementation of interpreter has evolved
+- e.g. CPython
+- The interpreter for these languages
+    - **compilation step**: source code is checked and compiled into intermediate **bytecode**
+    - **interpreter step**: the bytecode is interpreted into machine code and run at runtime
+
+### Hybrid languages with JIT
+
+- Some languages have engine which is a hybrid interpreter with JIT
+- JIT $\implies$ Just in time compilation
+- JIT step stores optimized machine code for some parts of the program during runtime
+- e.g. Java, C#, JavaScript
+
+#### Pros and Cons for Hybrid languages {.smaller}
+
+- **Pros**
+    - **Portability**
+        - same program can be run on different machines by just installing the language interpreter
+    - **Ease of use**
+        - generally these languages are higher than compiled languages than C, C++
+        - time to write code is reduced
+- **Cons**
+    - **Slower**
+        - program is converted to machine code at run time
+        - this depends on the use case, specially considering the increase in hardware capacity, for most of common tasks this can be ignored
+
+# Examples
+
+## Overview {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "languages" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = 1, value = TRUE) |>
+    huxtable::set_align(col = c(2:7), value = "center") |>
+    huxtable::set_col_width(c(.2, rep(.8/6, 6))) |>
+    huxtable::set_all_padding(1) |>
+    huxtable::set_text_color(row = c(2:(nrow(tbl_df) + 1)),
+        col = 1, value = "#2c6297")
+
+print_tbl_out(tbl_out, package)
+```
+
+## Desktop & Mobile applications {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "langs-app" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+tbl_df <- tbl_df[1:4]
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = 1, value = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+### Framework
+
+Framework = pre-written code for components of an application with means to combine them
+
+## Web {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "langs-web" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = 1, value = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+## General purpose
+
+### C and C++ {.smaller}
+
+- C and C++ are very popular compiled languages for writing high performance code.
+
+- They provide access to most of the functionality hardware has to offer.
+
+- Most of the critical applications like operating systems, compilers, virtual machines are written in C/C++.
+
+- Steep learning curve
+
+- C is the older among the two with lesser features available.
+
+- C++ is a newer version of C with OOP, few changes in syntax and a lot more features.
+    - C++ is under active development.
+
+### Python
+
+- Python is a general purpose programming language.
+
+- The official and most common version of Python that is used and covered in this course is implemented in C, and therefore also referred to as CPython.
+
+- Python is very popular language with applicability in most of the application areas.
+
+- It has a lot of pre built code available for majority of the regular tasks.
+
+# Programming paradigms
+
+## Introduction
+
+::: {.block data-latex="{}"}
+A programming paradigm defines the approach or style of solving problems through programming.
+:::
+
+- Related to design and historical evolution programming languages
+
+## Overview
+
+Programming paradigms are grouped into 2 main categories.
+
+- **Imperative**: _focusses on how to solve the problem_
+    - **Procedural programming**
+    - **Object oriented programming**
+    - **Structured programming**
+- **Declarative**: _focusses on what to solve_
+    - **Logic programming**
+    - **Functional programming**
+    - **Data driven programming**
+
+## Applications
+
+- A language, through design of specifications and implementation, can support one or more of paradigms.
+
+- Almost all popular programming languages support multiple paradigms and hence the term **multi-paradigm** is used.
+    - e.g Python, C, C++, Java, Javascript etc.
+
+- For example, in Python, a problem can be solved using loops, functional programming or OOP.
+    - Python provides most of the options.
+    - In the beginning avoid using OOP.
+
+# General structure
+
+## Overview
+
+- **Language specifications**
+    - **Building blocks**: _specifications for elements and blocks of code_
+    - **Architecture**: _specifications for writing programs_
+        - means and specifications to combine elements and blocks to build programs
+        - management of execution of blocks (under the hood)
+- **Design**: _knowledge of how to write good programs_
+- **Tools**: _needed to write, test, debug and run programs_
+
+## Detailed
+
+###
+
+:::::: {.callout-note icon="false"}
+## Language specification
+
+::::: {layout="[[-5,35,-5,55]]"}
+
+::: {.callout-note icon="false"}
+### Building blocks
+
+- [Basic specifications]{color="black"}
+    - [Lexicons]{color="black"}
+    - [Variables]{color="black"}
+    - [Comments]{color="black"}
+- [Data types and operations]{color="black"}
+- [Control flow blocks]{color="black"}
+- [Functions]{color="black"}
+- [OOP]{color="black"}
+- [Special features]{color="black"}
+:::
+
+::: {.callout-note icon="false"}
+### Architecture
+
+- [Environment = Namespace + Scope]{color="black"}
+- [Scripts and packages]{color="black"}
+- [External packages]{color="black"}
+- [Language engine]{color="black"}
+- [Debugging]{color="black"}
+:::
+:::::
+::::::
+
+###
+
+:::::: {layout="[[-5,45,-5,45]]"}
+::: {.callout-note icon="false"}
+### Design
+
+- [Components]{color="black"}
+    - [Design patterns]{color="black"}
+        - [Map reduce]{color="black"}
+    - [DSA]{color="black"}
+    - [Regular expressions]{color="black"}
+- [Frameworks]{color="black"}
+- [Workflow]{color="black"}
+:::
+
+::: {.callout-note icon="false"}
+### Tools
+
+- [Command line interface]{color="black"}
+- [Version control system]{color="black"}
+- [Language installation]{color="black"}
+    - [Engine]{color="black"}
+    - [External packages]{color="black"}
+    - [Virtual environments]{color="black"}
+- [Editor]{color="black"}
+:::
+::::::
+
+## Comments
+
+- Almost all programming languages can be fitted to this generic structure/framework
+
+- [Wiki link](https://en.wikipedia.org/wiki/Comparison_of_programming_languages_(basic_instructions))
+
+# Underlying Concepts
+
+## Overview
+
+::: {.block .callout-note icon="false" data-latex="{}"}
+
+- means of **abstraction**
+    - building blueprints of data, operations, functionality, ...
+- means of **encapsulation**
+    - hiding details of implementation
+- means of **combination**
+    - using basic data structures to create compound data
+    - combine basic functions to build bigger functionality
+:::
+
+## Means of Abstraction
+
+::: {.block data-latex="{}"}
+Abstraction in general means to isolate ideas or concepts from actual physical reality.
+:::
+
+### Programming language
+
+::: {.block data-latex="{}"}
+**Programming language** is itself built on this idea where abstract specification is isolated from actual implementation.
+
+- For example C++ language specification is provided and maintained by a group of people.
+
+- The actual implementation of the compiler can be done by anyone using those specifications.
+
+- Therefore there are many C++ compilers available like [GCC](https://gcc.gnu.org/), [LLVM](https://llvm.org/) etc.
+:::
+
+### Data types
+
+::: {.block data-latex="{}"}
+**Data types** have evolved by isolating the specification and implementation.
+
+- Interfaces, or abstract data types (ADT), define general desired properties a certain data type should possess.
+
+- Data structure with algorithms provide a concrete implementation for an interface.
+
+- For example, dictionary is an ADT while Python `dict` is a data structure with algorithms for different operations.
+
+- The performance of a dictionary in CPython might differ from a dictionary in C++ or even JPython (Implementation of Python VM using Java).
+:::
+
+### Functional programming
+
+::: {.block data-latex="{}"}
+**Functional programming** uses this idea in many different ways.
+
+- Example 1, map, filter and reduce are general concepts related to a collection of items, the actual output depends on the function supplied while using the concept.
+
+- Example 2, factory functions provide a blueprint of functionality, the arguments supplied decide the actual function created.
+:::
+
+### Object oriented programming (OOP)
+
+::: {.block data-latex="{}"}
+**Object oriented programming (OOP)** is built around this idea where class is an abstract blueprint of an object and instance is the actual object which depends on the data it holds.
+:::
+
+## Means of Encapsulation
+
+::: {.block data-latex="{}"}
+Encapsulation in general means hiding the details of implementation.
+:::
+
+### Programming language
+
+::: {.block data-latex="{}"}
+**Programming language**: hides the details of mapping problem, which is the actual implementation of the engine, and lets the programmer create new solutions using natural language, rules and syntax without worrying about details of implementation of compiler, hardware management etc.
+:::
+
+### Data types
+
+::: {.block data-latex="{}"}
+**Data types**: Once a data type is implemented you can create multiple instances without worrying about the details of implementation.
+
+- For e.g. most languages provide way of defining numbers and strings by directly entering them without worrying about implementation details of how and where to store the data.
+:::
+
+### Functional programming
+
+::: {.block data-latex="{}"}
+**Functional programming**: Once a function is created you can use them as and when required without worrying about the implementation details during usage.
+:::
+
+### Object oriented programming (OOP)
+
+::: {.block data-latex="{}"}
+**Object oriented programming (OOP)**: Classes provide a way to define blue prints of objects with certain attributes.
+
+- After that multiple instances of the data type can be created and operated upon without worrying about the implementation details during usage.
+:::
+
+## Means of Combination
+
+::: {.block data-latex="{}"}
+Combining in general means joining. In programming it means the same, ways to combine simple parts to make a more complex part and make it simple using encapsulation.
+:::
+
+### Programming language
+
+::: {.block data-latex="{}"}
+**Programming language** is built around the same concept, smaller pieces are the elements of specification like lexicons and syntax, then semantics and architecture defines ways to combine them to make more complex programs.
+:::
+
+### Data types
+
+::: {.block data-latex="{}"}
+**Data types**: Data structures like tuple, list, dictionaries etc. provide means of combining different data types to create arbitrarily larger and more complex data.
+:::
+
+### Functional programming
+
+::: {.block data-latex="{}"}
+**Functional programming**: Using the rules of scopes and namespaces functions can be joined and nested in many interesting ways to create more complex functions.
+:::
+
+### Object oriented programming (OOP)
+
+::: {.block data-latex="{}"}
+**Object oriented programming (OOP)**: Class itself allows combining data and operations to create arbitrarily large and complex data types as needed.
+
+- Further more rules of inheritance provide ways of relating class definitions to create and structure even more complex data types.
+:::
+

@@ -1,0 +1,80 @@
+# Introduction {.unnumbered}
+
+## Book Anatomy
+
+![](../../../resources/images/book-anatomy.png)
+
+## Background
+
+Use of technology is increasing and impacting more and more domains. Most of the workforce in cities use technology for work and personal work. This provides its own challenges but also opportunities, and requirements to use those opportunities. Introduction to programming is one of those requirements.
+
+Learning computer programming serves few important purposes.
+
+- Use technology more efficiently and resourcefully
+- Provides a common language for communicating with those developing solutions
+    - Be aware of the possibilities during communication
+- Create your own solutions
+
+Therefore it makes sense to make introduction to computers, operating systems, computer programming and its basic applications, part of the school education than college for everyone.
+
+## Objectives
+
+Though this book can be read to learn to program or get an independent perspective to programming, the main goal of this book is to serve as a supplement to the course taught in class. This is because for beginners learning without demonstrations adds unnecessary complexity. On the other hand, in class setup demos, experimentation and QnA decrease complexity and aid understanding.
+
+For **learners**, this should help as reference notes to quickly find information as needed while learning and years after initial learning.
+
+For **instructors**, this book along with slides should be helpful to teach the course. The content is available with freedom to use, modify and distribute. It should help focus efforts on creating other material (assignments, quizes, exams, labs, projects) and student interaction and monitoring.
+
+The source code for the book and slides is available to edit as required. More information is at resources section at the end of this chapter.
+
+The offline version for the content is available too and can be downloaded as required.
+
+## Content
+
+The attempt is to abstract the core concepts and contexts related to computer programming which acts as a framework to learn not just Python but any programming language.
+
+The focus is on concretizing the framework to understand evolution of programming. The concepts involved are generally the same for most part.
+
+There are certain topics which are avoided in beginner courses. These have been included with an attempt to reduce the complexity but still give enough exposure. This is with the intent that this will provide a better understanding of how developers provide solutions which eventually should improve the usage of those solutions and writing programs in general.
+
+The part **Overview of programming** sets the outline for the book and programming in general. For those who are new to programming, this will not make sense in first reading but will clearly layout the outline for learning. Second reading is recommended after completing the remaining sections when many of the components will be understood better. This is also recommended for classroom environment, going through the overview part at the end will provide a summary and better understanding of the components compared to the coverage in initial lectures.
+
+Similarly, **Tools** part has a lot of information which will not be useful in the beginning but becomes clearer as you progress forward in the course and use the tools.
+
+### Why Python?
+
+---
+
+**Popular & Generic**
+
+Python is one of the most popular generic programming language at the moment and this increases the chances of using the language you learn programming with.
+
+Python is a generic programming language with contributions in almost every domain, specially compared to other languages. So chances are higher that you will find an existing solution, irrespective of the field you work in.
+
+Another advantage is that there is lot of help available online as there are more users/developers.
+
+---
+
+**Ease of use**
+
+Python has well designed syntax which is clear and easy to write and read which makes it easy to focus on what you need the code to do.
+
+Python provides features like garbage collection which does the memory management in background making it easier to code.
+
+## Terminology
+
+- **Programming** is used in context of **computer programming**
+- **Program** is used in context of **computer programs**
+- **Pseudo code** has been used at several places. Pseudo code is structured natural language code without using the specified syntax, to explain what the code does. Spaces, line breaks etc. are used to make it easier to understand.
+- **Flow diagrams** are used to explain schematics of code through visualization
+- **Symbols**
+    - `[]` typically used to represent optionality
+        - e.g. item[s] means 's' is optional as there can be one or more item[s]
+    - `<>` is typically used as place holder
+        - e.g. `cp <src path> <dst path>` implies source and destination paths are to be entered as needed
+
+## Resources {#sec-resources}
+
+### Lecture slides
+### Solutions
+### Source code

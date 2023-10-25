@@ -1,0 +1,198 @@
+# Automation
+
+## Overview
+
+### Introduction
+
+Programming languages, like Python, provide access to lower level system properties like file system and processes, through functions and classes. This leads to many opportunities to use these in multiple scenarios based on use case.
+
+This is specially useful for situations where a certain task have to be repeated regularly. Doing it manually using applications with gui and mouse is slow and error-prone. Automation through programming not only makes the process faster and robust, but also provides opportunity to create new and custom solutions based on situation, which gui application might not be able to provide.
+
+### Use cases
+
+Below are some examples to illustrate the usage.
+
+- **Project templates**: Consider a situation where certain folder structure needs to be created regularly with timestamps and some prefilled content and structure in certain files. There is significant part of the process that can be automated.
+
+- **System operations** like creating backups.
+
+- **Pdf operations** like merging and splitting documents with custom index operations.
+
+- and many more ...
+
+## System Operations
+
+### Date time
+
+Date time is a data structure required for many tasks related to programming. Python standard library provides [datetime](https://docs.python.org/3/library/datetime.html) module for this and related operations.
+
+It is very common to use a needed data structure implemented through standard library and external packages in `PyPI`.
+
+- [Documentation](https://docs.python.org/3/library/datetime.html)
+    - [Formatting](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior)
+
+#### Exercise {#sec-mp-datetime}
+
+Using Jupyter notebook
+
+- read the system time
+- create strings in following format
+    - date stamp: "yyyy-mm-dd"
+    - date-time stamp: "yyyy-mm-dd-h-m-s-ms"
+    - time stamp: "h-m-s-ms"
+- print time stamps
+
+This is useful when creating any types of logs. Date or time stamps need to be inserted in names for files and folders or even text content into files.
+
+### Path manipulations
+
+[Python standard library](https://docs.python.org/3/library/index.html) provides [pathlib](https://docs.python.org/3/library/pathlib.html) and [os.path](https://docs.python.org/3/library/os.path.html) modules for path manipulations. For most of the operations `pathlib` should be enough. If a solution does not exist in `pathlib`, then `os.path` can be used.
+
+#### Mini project {#sec-mp-path}
+
+Using Jupyter notebook
+
+- Store source and destination paths in a variable
+- Create a function that
+    - takes source path as input
+    - checks if source path is
+        - empty: continue
+        - non empty: prompt the user with message and confirm whether to continue
+    - creates the below folder structure in the source path
+        - .logs
+        - sub_folder_1
+            - `file_1.py`
+        - sub_folder_2
+            - `file_2.py`
+        - `.gitignore`
+        - `pyproject.toml`
+- Create a function that
+    - takes source and destination paths as input
+    - checks if the destination path is
+        - empty: continue
+        - non empty: prompt the user with message and confirm whether to continue
+    - copies the contents of source in destination without overwriting
+        - checks if any file exists before copying
+            - copies only if file in source is newer than in destination
+                - hint: os.path has getmtime (last modified), getctime (created), getatime (last access)
+- call the functions to test everything works
+
+Notes:
+
+- Before creating functions you can try small pieces to check how they work. This is typical of write-refactor cycles.
+- This is an example of how to
+    - create your own templates for creating boiler plate for repetitive projects and tasks
+    - do basic file/folder operations like getting attributes and performing operations
+
+### File read/write
+
+Python provides [open](https://docs.python.org/3/library/functions.html?highlight=open#open) as part of built-in functions to perform read/write operations on files.
+
+For actual usage refer to the tutorial on [Python i/o tutorial](https://docs.python.org/3/tutorial/inputoutput.html). Note the use of `with` statement which is an implementation of design pattern known as context managers.
+
+There are multiple ways to write to file, as illustrated in the tutorial:
+
+- write plain text to file
+- write and read python objects through `json` or `pickle` package
+
+For performing read/write operations on **csv**, **excel** and **database** formats:
+
+- Resources
+    - Python standard library: [`csv`](https://docs.python.org/3/library/csv.html)
+    - [`pandas`](https://pandas.pydata.org/pandas-docs/stable/index.html#)
+- For most basic stuff csv module is sufficient
+
+#### Mini-project
+
+In the previous mini project, @sec-mp-path, add below functionalities using the work done in mini project, @sec-mp-datetime.
+
+- create a current date time stamp
+- create a file in the .logs folder with name as the current date time stamp
+    - open the file and write details
+        - number of files copied
+        - number of files ignored
+- copy the file to destination path .log folder
+- **note**: creating and copying log file is dependent on order of placement in code, number of files will have to be adjusted for the new log file created. Plus care has to be taken to ensure copying the new log file to destination path.
+
+### Creating CLI's
+
+Python scripts can be invoked from shell with Python CLI, e.g. `python -m <name>`. To create system utilities, it easier to pass input arguments directly from CLI rather than opening and running script to edit the inputs and then run the script.
+
+For this there are multiple options available in Python.
+
+- Basic: [`sys.argv`](https://docs.python.org/3/tutorial/stdlib.html#command-line-arguments)
+- Advanced: `argparse` package in standard library
+    - [tutorial](https://docs.python.org/3/howto/argparse.html#argparse-tutorial)
+    - [details](https://docs.python.org/3/library/argparse.html#)
+
+`argparse` is recommended as it is simple to use but can be extended to advanced use cases.
+
+Once the script can take arguments, an alias can be added in `.bashrc` or `.bash_aliases` to refer to the python script. e.g. `alias cmd1="python3 -m ~/utils/cmd1.py"`. Then `cmd1` can be directly used from terminal like any other bash command, and inputs can be passed as well through cli.
+
+Note that these projects cannot use Jupyter notebooks.
+
+#### CLI Project - 1
+
+**Project templates**
+
+Create a python package which can be called from CLI using arguments to create a project template for a certain regular task at a specified path.
+
+- use regular package for the project
+- name can be for example `<create_data_analysis_template>`
+- when called it will create a folder with certain predefined structure and files
+    - the template structure can be stored within package folder and copied to any destination required
+- input arguments from CLI
+    - destination: required, `-d` or `--destination`
+    - source: optional, `-s` or `--source`
+        - if not provided use the default template folder path within package
+    - add time stamp: `-t` or `--timestamp`, optional bool and defaults to true
+        - when true: add date time stamp to the destination path name
+
+Template folder can contain anything, actual files, folder structure and details will depend on the use case, but the design will be similar.
+
+#### CLI Project - 2
+
+**Mirroring Software**
+
+Create a mirroring software implemented as a python cli package with the below features. The idea is to keep a mirror of a folder in a different location.
+
+> Note: This is a bigger project so can be done at relaxed pace, in 2 to 4 weeks.
+
+- cli arguments
+    - source: optional with default value, `-s` or `--source`
+    - destination: optional with default value, `-d` or `--destination`
+    - verbosity: optional with default, `-v` or `--verbosity` with values from a list
+    - dry run flag: optional bool defaulting to `false`, `-r` or `--dry-run`
+- make 2 nested dictionaries for source and destination with below features
+    - file path
+    - file path if it exists in corresponding location else `None`
+    - modified time for both source and destination if exists
+    - flags
+        - both dictionaries: file present in corresponding location
+        - in source dictionary: modified time of source is greater than file in destination if present
+- operations
+    - source dictionary: file copied from source to destination if
+        - file is not present in destination, create parent path as required
+        - modified time in source is greater than in destination
+    - destination dictionary: delete file from destination if it is not in source
+        - delete the containing directory if the file is the last file
+
+## Documentation
+
+Automating documentation can be most rewarding in all setups. The recommended tool for this is [Quarto](https://quarto.org/) which is recommended because of reasons mentioned below. It is difficult to find all these features together in any other option at this time (2023).
+
+- Easy to use, seems intimidating but for simple usage it is as easy as writing in Word or Powerpoint
+- A lot of options in terms of document export (html, pdf, latex, word, ppt, etc.)
+- Good default aesthetics in output with minimal configuration
+- Good isolation of aesthetics, structure and content
+- Support for table rendering is very advanced, using R packages like `huxtable`, `kableExtra`, `GT`
+- Can be used for advanced usage
+    - Can include automated calculations, tables, figures
+    - Can include dynamic content in websites
+
+This and many other websites and books are published using Quarto.
+
+Some other alternatives are listed below for completeness.
+
+- [AsciiDoc](https://asciidoc.org/)
+- [Sphinx](https://www.sphinx-doc.org/en/master/)

@@ -1,0 +1,135 @@
+---
+title: "Design: Workflow"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+## Overview
+
+Designing workflow in context of programming can be split into 2 dimensions.
+
+- **Program**: micro level, workflow while writing code
+- **Project**: macro level, workflow of overall project
+
+## Program
+
+While writing code there are 2 major dimensions.
+
+- Editing tools: like prediction, linting etc.
+    - these only help with basic checks and completion
+    - these are managed at project level through editor settings
+- Elements of code related to properties of a good program
+
+This part of workflow design is related to the 2nd dimension and is dealt with refactoring.
+
+### Refactoring
+
+**Refactoring** means reviewing and changing code to attain properties of a good program, without changing the actual output.
+
+Recommended properties of a good program are: **readable**, **testable**, **modular**, **extensible**, **efficient**
+
+Some practical aspects of writing programs are
+
+- There are multiple ways to solve the same problem
+- It is a cyclical process of writing code and refactoring
+- More often than not, refactoring opportunities become apparent only while reviewing code
+
+### Recommendations
+
+- Follow naming conventions
+- Use doc strings
+- Use and follow type annotations
+    - make exceptions only if necessary
+- Use comments where necessary
+- Any task repeated more than a couple of times can be considered to be put into a function
+- Functions should have minimum possible responsibilities, ideal is single responsibility
+- Use appropriate data types
+
+### Sample workflow
+
+Below is a workflow for writing code, to cover aspects that editing tools cannot cover.
+
+- Step 1: focus on getting the the code to produce the correct result using recommended practices
+- Step 2: review the code for opportunities for refactoring
+- Step 3: refactor code
+- Step 4: goto step 1
+
+Repeat until needed.
+
+## Projects
+
+Learning and practising project workflow management from the very start and for smallest of projects is recommended as it has many advantages like
+
+- Workflow becomes operationally more
+    - organized
+    - efficient
+
+- Reduces errors
+
+- Allows more time on design and thought
+
+- [Python docs: packaging python projects](https://packaging.python.org/en/latest/tutorials/packaging-projects/#packaging-python-projects)
+
+### Tools: Settings
+
+- [VSCode: workspaces](https://code.visualstudio.com/docs/editor/workspaces)
+- [VSCode: profiles](https://code.visualstudio.com/docs/editor/profiles)
+- [VSCode: tasks](https://code.visualstudio.com/docs/editor/tasks)
+- [VSCode: sync](https://code.visualstudio.com/docs/editor/settings-sync)
+
+### Components {#sec-wkfl-comps}
+
+#### Dependencies
+
+There are 2 key dependencies of a Python project.
+
+- Python version used: document using a `pyproject.toml` file
+- External packages and their version used in the project
+    - virtual environments provide solutions
+
+#### Python version
+
+- Python, once installed, is machine and os independent.
+- Python is available for most of the used computer system and operating system combinations.
+- [Python Docs: Packaging: `pyproject.toml`](https://packaging.python.org/en/latest/tutorials/packaging-projects/#configuring-metadata)
+
+#### External packages
+
+- Discussed in virtual environment section in architecture
+
+#### Documentation
+
+- **Doc strings**: document functions, classes
+    - [autoDocstring - Python Docstring Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring)
+- **Comments**: in the code itself to explain key concepts and logic applied
+- `readme.md`: documentation for the project at high level
+- [`Sphinx`](https://www.sphinx-doc.org/en/master/)
+- Refactoring
+    - code structure
+    - names
+
+#### Version control
+
+- Regularly maintain `.gitignore` file
+    - `.py-venv` folder is large and need not be tracked as it can be restored using requirements file
+    - anticipate and add directory and file patterns at the start of the project, it is inefficient to untrack files/folders later
+- Do regular structured commits with helpful messages
+
+### Sample structure {.smaller}
+
+- project root
+    - **.git/**
+    - **.py-venv/**
+    - **docs/**
+    - **src/**
+        - `inputs.py`
+        - `category_1_funcs.py`
+        - `category_2_funcs.py`
+    - `main.py` or `app.py`
+    - `pyproject.toml`
+    - `py-requirements.txt`
+    - `readme.md`
+    - `.gitignore`

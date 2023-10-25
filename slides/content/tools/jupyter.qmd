@@ -1,0 +1,145 @@
+---
+title: "Jupyter Notebooks"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Overview
+
+## Introduction
+
+Jupyter is an independent project that provides
+
+- **Jupyter Notebooks**: interactive code cells, markdown text, tables, plots, latex math formulas
+- **Jupyter Lab**: web-based interactive development environment (editor)
+- **Jupyter Hub**: multi-user version of notebooks
+
+Jupyter notebook is new version of interactive python notebook that have extension `.ipynb`, which is still used.
+
+## Objectives
+
+- Get started with jupyter notebooks using jupyter lab
+- Jupyter notebook is independent from jupyter lab
+    - can be run from other editors which support jupyter notebooks
+    - e.g. VSCode, RStudio, etc.
+
+## Resources
+
+[Jupyter project's website](https://jupyter.org/)
+
+# Installation
+
+- Can be installed independently
+- [Link to help page](https://jupyter.org/install).
+
+```bash
+<python installation path> -m pip install jupyterlab
+```
+
+# Features
+
+- Run code interactively
+- Mix rich text, code and results using markdown and code cells
+- Export results in different formats like html, pdf, word etc.
+
+# Use cases
+
+- **Interactive programming** for quick trials or learning with annotation
+
+- **Reproducible Research**: quick and easy sharing of ideas/analysis with code and results
+
+# Keyboard Shortcuts
+
+::::: {.columns}
+::: {.column width=50%}
+- add cell
+  - below: `b`
+  - above: `a`
+
+- change cell type
+  - markdown: `m`
+  - code: `y`
+
+:::
+::: {.column width=50%}
+
+- cut cell: `x`
+
+- copy cell: `c`
+
+- paste cell below: `p`
+
+- enter/exit cell edit mode: `enter/esc`
+:::
+:::::
+
+- run cell: `Ctrl + Enter`
+
+- run cell and move to cell below: `Shift + Enter`
+
+# Markdown
+
+Markdown is a markup language which provides simple syntax for text to be converted to different formats.
+
+- Tools for automating documentation use it
+    - Quarto
+    - Pandoc
+    - GitHub
+    - Jupyter notebooks
+
+- Markdown syntax is easy and quick to learn
+
+## Syntax cheat sheet
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "md-part-1" # name or number
+package <- "pander"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+tbl_df_1 <- tbl_df[1:4,-3]
+tbl_df_2 <- tbl_df[5:7,-3]
+tbl_df_3 <- tbl_df[8:nrow(tbl_df),-3]
+```
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+tbl_out <- create_table(tbl_df_1, package = package, set_hux_md = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+### 
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+tbl_out <- create_table(tbl_df_2, package = package, set_hux_md = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+
+### 
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+tbl_out <- create_table(tbl_df_3, package = package, set_hux_md = TRUE)
+print_tbl_out(tbl_out, package)
+```
+

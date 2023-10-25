@@ -1,0 +1,153 @@
+---
+title: "Learning Map"
+---
+
+# Introduction
+
+##
+
+Acquiring knowledge of any subject involves answering 3 fundamental questions.
+
+- **Why**? _Most fundamental question that teaches the motivation_
+- **What**? _Declarative knowledge that teaches the definition_
+- **How**? _Imperative knowledge that teaches ways to apply the knowledge_
+
+##
+
+Similarly to learn computer programming you can use the below map.
+
+
+- _**Why** do you learn computer programming?_ $\to$ **Use cases**
+- _**What** is computer programming?_ $\to$ **Theory**: **Building blocks**, **Architecture**, **Design**
+- _**How** do you do computer programming?_ $\to$ **Practical experience**: **Tools**, **Application**
+
+##
+
+- Learning theory equip you with knowledge about the subject
+- **Skill** of **writing good programs** needs **practical experience** of **applying** _theory_ **using** _tools_
+
+## Career paths
+
+- **Generic** $\iff$ **Basic**
+- **STEM** (minus CSE) $\iff$ **Intermediate**
+- **CSE** $\iff$ **Advanced**
+
+_STEM $\implies$ Science, Technology, Engineering & Math_
+
+_CSE $\implies$ Computer Science & Engineering_
+
+# Basic
+
+There are some common elements of programming which can be the starting point for all career paths.
+
+- Introduction to programming with basic applications (this book)
+- Basics of data analysis
+
+## Theory
+
+###
+
+:::::: {.callout-note icon="false"}
+## Language specification
+
+::::: {layout="[[-5,35,-5,55]]"}
+
+::: {.callout-note icon="false"}
+### Building blocks
+
+- [Basic specifications]{color="blue"}
+    - [Lexicons]{color="blue"}
+    - [Variables]{color="blue"}
+    - [Comments]{color="blue"}
+- [Data types and operations]{color="blue"}
+- [Control flow blocks]{color="blue"}
+- [Functions]{color="blue"}
+- [OOP]{color="brown"}
+- [Special features]{color="brown"}
+:::
+
+::: {.callout-note icon="false"}
+### Architecture
+
+- [Environment = Namespace + Scope]{color="brown"}
+- [Scripts and packages]{color="brown"}
+- [External packages]{color="brown"}
+- [Language engine]{color="brown"}
+- [Debugging]{color="brown"}
+:::
+:::::
+::::::
+
+###
+
+:::::: {layout="[[-5,45,-5,45]]"}
+
+::: {.callout-note icon="false"}
+### Design
+
+- [Components]{color="black"}
+    - [Design patterns]{color="black"}
+        - [Map reduce]{color="brown"}
+    - [DSA]{color="brown"}
+    - [Regular expressions]{color="brown"}
+- [Frameworks]{color="black"}
+- [Workflow]{color="brown"}
+:::
+
+::: {.callout-note icon="false"}
+### Tools
+
+- [Command line interface]{color="brown"}
+- [Version control system]{color="brown"}
+- [Language installation]{color="brown"}
+    - [Engine]{color="brown"}
+    - [External packages]{color="brown"}
+    - [Virtual environments]{color="brown"}
+- [Editor]{color="brown"}
+:::
+::::::
+
+## Applications
+
+- Automation
+    - system operations
+    - documentation
+- Basics of data analysis (including visualization)
+- Domain specific basic applications
+
+# Intermediate
+
+- Theory
+    - programming (intermediate level): design
+    - data science (intermediate level)
+    - math: probability & statistics to model data
+- Application
+    - data analytics
+    - building domain specific packages
+    - building basic applications using frameworks
+
+# Advanced
+
+##
+
+In terms of theory there will be advanced coverage of topics depending on the choices.
+
+- Math for computer science
+- Language specification, implementation & design
+- Data structures & Algorithms
+- Design patterns
+- Frameworks
+
+##
+
+In terms of application the path will depend on the choices.
+
+- Embedded devices
+- Operating systems
+- Desktop applications
+- Mobile applications
+- Databases
+- Websites
+- Network applications
+- Media
+- ...

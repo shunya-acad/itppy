@@ -1,0 +1,1024 @@
+---
+title: "Functions"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Introduction
+
+## Terminology
+
+### Historically {.smaller}
+
+::: {.block data-latex="{}"}
+- **Sub-routine**: any named block of code that can be called (run) using its name
+    - **Procedure**: any sub-routine that
+        - has side effects
+        - does not take any input
+        - does not return anything
+    - (**Pure**) **Function**: any sub-routine that
+        - does not have side effects, does not leave its trace after execution
+        - takes inputs and operates only on the inputs
+        - returns something
+:::
+
+### Currently
+
+::: {.block data-latex="{}"}
+- Functions
+:::
+
+## Background {.shrink .smaller}
+
+::: {.block  data-latex="{}"}
+- Functions are a major pillar in any programming language
+
+- **Repeat related tasks with code reuse**
+
+- At a more abstract level, functions provide
+    - **means of combination**
+        - build smaller pieces and then join to make a bigger piece
+    - **means of encapsulation**
+        - hide details of implementation during usage
+    - **means of abstraction**:
+        - create blueprints of functionality
+:::
+
+## Components of a function {.smaller}
+
+![](../../../resources/diagrams/functions/parts.png){width="70%"}
+
+::: {.block data-latex="{}"}
+- *Name*
+- *Parameters* (optional)
+- *Body* (code)
+    - *docstring* (optional, beginning)
+    - *return* statement (optional)
+:::
+
+## Usage {.smaller}
+
+A function can be
+
+- **Called** `function_name(parameter_1 = argument_1, ...)`
+- **Stored** `variable_name = function_name`
+- **Passed** `function_name_2(variable_name = function_name)`
+
+## Functions are callable {.smaller}
+
+- In simplest form a function call
+    - (_optionally_) **receives** arguments (value) for some predefined parameters
+    - (_optionally_) **runs** some code to execute certain operation[s]
+    - (_optionally_) **returns** some object[s]
+    - e.g. `some_func()`, `len(iterable)`, `add(1, 2)`, ...
+
+- A function call can have **side effects**
+    - it does something in background
+        - write to a database
+        - do some i/o task, e.g. print
+    - may or may not return any object
+
+## Functions are objects
+
+- Can be *assigned to a variable*
+- Can be *stored* in a data structure (such as `list`, `tuple`, `dictionary`, ...)
+- Can be *passed to a function as an argument*
+- Can be *returned from a function*
+
+## Different forms of functions
+
+- **Regular functions**
+- **Anonymous functions**: **lambda expressions**
+- **Partials**: new function from an existing function with partial set of arguments provided
+- **Higher order functions**: take function[s] as arguments and optionally return function[s]
+
+## Lifetime of functions {.shrink .smaller}
+
+- At *compile time* (when the function definition is read)
+    - function object is created without evaluation, except
+        - objects are created for parameters with default values
+        - default values are objects stored in function object
+    - code is stored in the function object
+    - variables are assigned scopes
+
+- At *run time* (when the function is called)
+    - a new local scope is created in the calling environment
+    - variable names are looked up in assigned scopes
+    - function code is evaluated
+
+# Basic Specifications
+
+## First line
+
+### {.smaller}
+
+- Statement starting with keyword `def` declares a function definition
+- `def` *must be* followed by
+    - **function name**
+    - a pair of **parenthesis** ending in `:`
+- Parenthesis on the first line can *optionally* contain **parameters**
+    - parameters can *optionally* be **annotated** with `type`
+        - types are *not evaluated*
+        - e.g. `def func(a:int, b:str) -> str:`
+        - `-> str` indicates the function returns a `str` type object
+    - detailed discussion on parameters separately in parameters section
+- Colon (`:`) must be followed by **function body**
+    - if function body is too short it can be included on the same line
+
+### Short functions on 1 line
+
+```python
+def some_short_func(x, y): return x + y
+def some_short_func(): pass
+def some_short_func(): ""
+```
+
+## Function body
+
+::::::::: {.columns}
+:::::: {.column width=50%}
+- *Must be* **indented**
+- First line can *optionally* be a **doc string**
+- *Optionally* contain **return**
+- *Optionally* contain **pass**
+::::::
+:::::: {.column width=5%}
+::::::
+:::::: {.column width=45%}
+
+```python
+def function_name(a, b):
+    """function description
+    parameter 1: description
+    returns: description
+    """
+    # code block
+    return result_object
+```
+::::::
+:::::::::
+
+## Doc strings
+
+- Doc strings are used to document functions
+
+- Can be multiline strings.
+
+- Critical for large projects or packages
+
+- [sphinx](https://www.sphinx-doc.org/en/master/)
+
+- [VSCode Extension: autoDocstring - Python Docstring Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring)
+
+
+## `pass` statement
+
+- `pass` statement does not alter control flow
+- Used as place holder for functions to be implemented
+- Can be replaced by a doc string
+
+```{python}
+#| eval: false
+def some_func(): pass
+
+def some_func(): ""
+```
+
+## `return` statement {.smaller}
+
+- Syntax: `return [expression_list]`
+- `expression_list` can be
+    - a single object
+    - comma separated objects which are turned to a tuple
+- Control flow:
+    - when a `return` statement is hit anywhere in the code block
+        - expression_list, if present, is evaluated and returned
+        - `None` returned if there is no expression
+        - function call is exited
+    - **exception**: when `return` is hit from `try..except..else..finally` block
+        - `finally` block is run before the function call is exited
+
+# Parameters and arguments
+
+## Definitions
+
+- **Parameters**: are input variables in context of defining the function
+
+- **Arguments**: are variables or objects passed to parameters in context of calling the function
+
+### Basic example
+
+```python
+def some_func(a, b):
+  # code block
+  pass
+
+x = "a string"
+
+some_func(10, x) # function call
+```
+
+- `a` and `b` are *parameters* of `some_func`
+- `10` and `x` are *arguments* for `some_func`
+
+## Object passing
+
+- In Python, the arguments are passed as object references to the parameters.
+
+- Therefore if the object passed is mutable, changes will be propagated.
+
+### {.shrink}
+
+```{python}
+#| results: 'hold'
+an_int = 10; a_string = "abc"; a_tuple = (an_int, a_string)
+a_list = [*a_tuple]
+
+def a_func(x1, x2, x3, x4):
+    x4.append("xyz")
+    print('-'*20)
+    print('from within function call')
+    print(x1 is an_int, x2 is a_string, x3 is a_tuple, x4 is a_list)
+    print('-'*20)
+    return x1, x2, x3, x4
+
+ret_tuple = a_func(x1=an_int, x2=a_string, x3=a_tuple, x4=a_list)
+
+print(ret_tuple[0] is an_int, ret_tuple[1] is a_string, \
+        ret_tuple[2] is a_tuple, ret_tuple[3] is a_list)
+
+print(f'{a_list=}')
+```
+
+## Argument types
+
+Based on how parameters are defined arguments can be passed in different ways
+
+- **Positional arguments**: are passed to parameters using position during a function call
+
+- **Keyword arguments**: are passed to parameters using keyword (parameter name) during a function call, also called **named parameters**
+
+- **Optional/default arguments**: any parameter with default value specified makes the argument optional
+    - with positional arguments order has to be kept in mind
+
+### Examples
+
+```python
+def some_func(a, b):
+    pass
+```
+
+```python
+some_func(10, 20) # passed as positional
+some_func(a = 10, b = 20) # passed as keyword
+```
+
+#### Examples
+
+```{python}
+def some_func(a, b=20): # b is optional
+    print(f'{a = }, {b = }')
+```
+
+::: {layout="[[45,-10,45]]"}
+
+```{python}
+some_func(10)
+some_func(10, 30)
+```
+
+```{python}
+some_func(a = 10)
+some_func(b = 30, a = 10)
+```
+
+:::
+
+## Specifications {.smaller}
+
+- General structures for defining parameters (`/`, `*`, `**`)
+    - `function_name(<pos or kw>)`
+    - `function_name(<pos>, /, <po or kw>, *, <kw>)`
+    - `function_name(<pos>, /, <po or kw>, *args, <kw>, **kwargs)`
+
+- **Regular arguments**: by default all arguments can be passed as positional or keyword subject to
+    - **positional** arguments **must** come **before** **keyword arguments**
+    - once a keyword argument is given all remaining arguments are keyword
+
+- After one default argument, remaining must be default
+    - except for keyword only arguments
+
+### {.smaller}
+
+- **Separation**
+    - `/` is used to separate positional only arguments
+    - `*` is used to separate keyword arguments
+
+- **Collection** (**variadic arguments**)
+    - `*args` collects all available positional arguments as a **tuple**
+        - has to be defined after other positional arguments if present
+        - `args` is just convention, can be name of choice, but recommended
+    - `**kwargs` can collect all available keyword arguments as a **dictionary**
+        - has to be defined at the end
+        - `kwargs` is just convention, can be name of choice, but recommended
+
+- `*` and `*args` mark the beginning of keyword arguments, hence cannot precede `/`
+
+## Use cases {.smaller}
+
+- As a user of packages
+    - regular arguments are needed mostly
+    - while using external packages familiarity with the specifications will help
+
+- **Positional only** parameters are used when
+    - parameter names have no meaning
+    - reliance on keyword for passing arguments has to be avoided
+    - e.g. `print` function: multiple objects can be passed before any kw arg
+
+- **Keyword only parameters** are used when
+    - names have special meaning
+    - reliance on positional arguments has to be avoided
+    - e.g. `print` function: `end`, `sep` etc. have to be passed after all positional variadic args as kw
+
+## Examples {.shrink .smaller}
+
+**Regular arguments**: by default all arguments can be passed as positional or keyword subject to
+
+- Positional arguments **must** come before keyword arguments  
+  once a keyword argument is given all remaining arguments **must** be keyword
+
+```{python}
+#| eval: false
+def some_func(a, b, c):
+    pass
+```
+
+::::::::: {layout="[[45,-10,45]]"}
+::: {.callout-tip data-latex="{Allowed}"}
+### Allowed
+- `some_func(10, 20, 30)`
+- `some_func(10, 20, c = 30)`
+- `some_func(10, b = 20, c = 30)`
+:::
+
+::: {.callout-warning data-latex="{Not allowed}"}
+### Not allowed
+- `some_func(a = 10, 20, 30)`
+- `some_func(10, b = 20, 30)`
+- `some_func(a = 10, b = 20, 30)`
+:::
+:::::::::
+
+### Separation
+
+- `/` is used to separate positional only arguments
+- `*` is used to separate keyword arguments
+
+```{python}
+def some_func(pos_1, pos_2, /, pos_or_kw_1, *, kw_1, kw_2):
+    print(f"{pos_1=}, {pos_2=}, {pos_or_kw_1=}, {kw_1=}, {kw_2=}")
+```
+
+```{python}
+some_func(1, 2, 3, kw_1=4, kw_2=5)
+some_func(1, 2, pos_or_kw_1=3, kw_1=4, kw_2=5)
+some_func(1, pos_2=2, pos_or_kw_1=3, kw_1=4, kw_2=5)
+```
+
+### Variadic arguments {.smaller}
+
+- **Collection** (**variadic arguments**)
+    - `*args` collects all available positional arguments as a tuple
+        - has to be defined after other positional arguments if present
+        - `args` is just convention, can be name of choice, but recommended
+    - `**kwargs` can collect all available keyword arguments as a dictionary
+        - has to be defined at the end
+        - `kwargs` is just convention, can be name of choice, but recommended
+
+#### Examples
+
+```{python}
+def some_func(*args, **kwargs):
+    print(f'{args}')
+    print(f'{kwargs}')
+```
+
+```{python}
+some_func(1, 2, 3)
+some_func(1, 2, 3, a = 4, b = 5)
+```
+
+- `args` is just convention, can be name of choice, but recommended
+- `kwargs` is just convention, can be name of choice, but recommended
+
+#### Examples
+
+```{python}
+def some_func(*args_tuple, **kw_dict):
+    print(f'{args_tuple}')
+    print(f'{kw_dict}')
+```
+
+```{python}
+some_func(1, 2, 3)
+some_func(1, 2, 3, a = 4, b = 5)
+```
+
+# Examples
+
+## Check primes
+
+Prime is a positive integer greater than 1 which is divisible only by 1 and itself. E.g. 2, 3, 5, ...
+
+Given a positive integer check if it is a prime. Print a message confirming the result.
+
+### Solution: Code {.shrink}
+
+```{python}
+def check_prime(num: int) -> None:
+    """
+    check if a number is prime and print the result
+    num: positive integer
+    returns: None
+    """
+    if not isinstance(num, int):
+        print(f'{num} is not an integer')
+        return
+    if num <= 1:
+        print(f'{num} is not a positive integer greater than 1')
+        return
+    divisors = []
+    for i in range(1, num + 1):
+        if num % i == 0: divisors.append(i)
+    if divisors == [1, num]:
+        print(f'{num} is a prime')
+    else:
+        print(f'{num} is not a prime')
+```
+
+#### Solution: Results
+
+```{python}
+check_prime(10)
+check_prime(23)
+check_prime(1)
+check_prime(-2)
+```
+
+## GCD {.smaller}
+
+Implement the gcd algorithm using a function that takes 2 numbers as input and returns the greatest common divisor.
+
+Below is gcd algorithm to find the greatest common divisor of 2 integers.
+
+- Given 2 numbers a, b
+    1. find remainder of a, b (*modulo operator `%` gives the remainder*)
+    2. if remainder is zero then b is the gcd
+    3. replace a with b and b with remainder (*in python this is 1 step using multiple assignment*)
+    4. goto to step 1
+
+### Solution: `while`
+
+```{python}
+#| results: 'hold'
+
+a, b = 9, 6
+rem = a % b
+while rem != 0:
+    print(f'{a = }, {b = }, {rem = }')
+    a, b = b, rem
+    rem = a % b
+
+print(f'{a = }, {b = }, {rem = }')
+print(b)
+```
+
+### Solution: function {.shrink .smaller}
+
+```{python}
+def calc_gcd(num_1: int, num_2: int) -> int:
+    """
+    Calculate and return the greatest common divisor of 2 integers
+    """
+    rem = num_1 % num_2
+    while rem != 0:
+        num_1, num_2 = num_2, rem
+        rem = num_1 % num_2
+    return num_2
+```
+
+Having defined the function, it can be called multiple times with different values without worrying about the implementation. This serves as an example of **means of encapsulation**.
+
+```{python}
+calc_gcd(3, 9)
+calc_gcd(12, 45)
+```
+
+# Caveat for default values
+
+## Issue {.smaller}
+
+- When using mutable data types (like list, dictionary or set) as default values for function parameters, the behavior has to be looked out for.
+
+- Default values are typically used for immutable data types like numbers, strings or bool.
+
+- It is important to note that default values are created once in memory at compile time
+    - when the `def` statement is executed for creating the function object
+    - i.e. at compile time
+    - not during a function call.
+
+## Example
+
+```{python}
+#| results: hold
+def some_func(num, some_list=[]):
+    some_list.append(num)
+    return some_list
+
+print(some_func(1))
+print(some_func(2))
+```
+
+- Note that during second call same list was used.
+
+### Solution
+
+```{python}
+#| results: hold
+def some_func(num, some_list=None):
+    if some_list == None: some_list = []
+    some_list.append(num)
+    return some_list
+
+print(some_func(1))
+print(some_func(2))
+```
+
+# Higher order functions
+
+## 
+
+- Higher order functions evolved as part of functional programming paradigm where functions are treated as objects.
+
+- Higher order functions are functions that
+    - take function[s] as input
+    - optionally return function[s]
+
+##
+
+- Higher order functions along with rules of scoping are used to create different types of functions
+
+- Design patterns created using higher order functions
+    - **Map-Reduce**: apply some function to elements of a collection
+    - **Factory** functions: create new functions based on some input argument
+    - **Decorator** functions: add some standard functionality to a function
+
+##
+
+- Python standard library has some modules/packages to help with these
+    - [`functools`](https://docs.python.org/3/library/functools.html?highlight=reduce#module-functools): Higher-order functions and operations on callable objects
+    - [`operators`](https://docs.python.org/3/library/operator.html): Standard operators as functions
+
+
+## Map Reduce
+
+### 
+
+::: {.block data-latex="{}"}
+- Map-Reduce is a design pattern to work with collections.
+- These are newer features in high level languages like Python.
+- They provide a better and cleaner alternative to iterative solutions using loops for working with collections.
+- Filter is a special case of map.
+- Collectively these are also referred to as functionals.
+:::
+
+### {.smaller}
+
+Improvement in in properties of the program
+
+- Readability
+    - iteration is isolated from what operation is being done, hence better readability
+- Modularity
+    - map is responsible for iteration
+    - function passed is responsible for operation to be applied to each element
+- Extensibility
+    - function passed can be anything, so different operations can be applied by defining new functions without impacting the core functionality of iterating and applying the function.
+- Testability
+    - it is easier to test and debug as the structure is modular
+- Efficiency
+    - map is faster than loop but slower than comprehensions
+
+### Map
+
+**Map** is a generic concept of applying (mapping) a function to all elements of a collection or multiple collections in parallel.
+
+**Map** is a better alternative to `for` loops as code readability is improved as what is being done is isolated from iteration.
+
+#### Syntax
+
+- `map(function, iterable[, iterables])` is the Python implementation
+    - returns an *iterator* (consumable, can be used once)
+
+- With **single iterable**
+    - function applied should take 1 argument which will be elements of the iterable
+
+- With **multiple iterables**
+    - function applied should take as many arguments as iterables
+    - `map` stops at iterable of shortest length, if lengths are different
+
+####
+
+:::::: {layout="[[45,-5,50]]"}
+::: {.center data-latex=""}
+![single iterable](../../../resources/diagrams/functions/map-1.png)
+:::
+
+::: {.center data-latex=""}
+![multiple iterables](../../../resources/diagrams/functions/map-2.png)
+:::
+::::::
+
+#### Example: Single iterable
+
+```{python}
+some_list = list(range(5))
+```
+
+##### Loop
+
+```{python}
+sqrd_list = []
+for x in some_list:
+    sqrd_list.append(x**2)
+```
+
+```{python}
+#| echo: false
+print(f'{sqrd_list = }')
+```
+
+##### Map
+
+```{python}
+def sqr(x):
+    return x**2
+
+sqrd_itr = map(sqr, some_list)
+```
+
+```{python}
+#| echo: false
+print(f'{list(sqrd_itr) = }')
+```
+
+#### Map & lambda
+
+```{python}
+sqrd_itr = map(lambda x: x**2, some_list)
+```
+
+```{python}
+#| echo: false
+print(f'{list(sqrd_itr) = }')
+```
+
+#### Example: Multiple iterables
+
+```{python}
+tuple_1 = 1, 2, 3
+tuple_2 = 4, 5
+```
+
+```{python}
+tuple(map(lambda x, y: x + y, tuple_1, tuple_2))
+```
+
+```{python}
+tuple(map(lambda x, y: x + y, tuple_2, tuple_1))
+```
+
+### Filter
+
+::: {.block data-latex="{}"}
+**Filter** is a generic concept of filtering values from a collection using certain conditions.
+
+Note that it is a special case of map.
+:::
+
+**Syntax**
+
+- `filter(function, iterable)` is provided in Python
+    - returns an iterator (consumable, can be used only once)
+    - function should return true or false when acting on an element
+    - if function is `None` then all truthy elements are returned
+
+#### Example: `None`
+
+```{python}
+some_list = [1, 0, None, '', 'abc', tuple()]
+```
+
+```{python}
+list(filter(None, some_list))
+```
+
+Below is the same task done using iterative solution.
+
+```{python}
+filtered_list = []
+for item in some_list:
+    if item: filtered_list.append(item)
+filtered_list
+```
+
+#### Example
+
+- filter positive integers from a list
+
+```{python}
+some_list = [-2, -1, 0, 1, 2]
+```
+
+```{python}
+[*filter(lambda x: x > 0, some_list)]
+```
+
+Below is the same task implemented using iterative solution.
+
+```{python}
+filtered_list = []
+for item in some_list:
+    if item > 0: filtered_list.append(item)
+```
+
+```{python}
+filtered_list
+```
+
+### Reduce
+
+####
+
+- Reduce is a generic concept of **aggregating elements** of a collection into single result.
+
+- The actual underlying operation is to apply a function (operation) to 2 items at a time recursively.
+
+- $collection = [e_0, e_1, e_2, e_3, e_4, \cdots, e_{n - 1}]$
+    - result of step 1: $r_1 = f(e_0, e_1)$
+    - result of step 2: $r_2 = f(r_1, e_2)$
+    - result of step 3: $r_3 = f(r_2, e_3)$
+    - ...
+    - result of step n - 1: $r_{n - 1} = f(r_{n - 2}, e_{n - 1})$
+
+####
+
+- Optionally an initial value can be given which is used as the base case
+    - Step 1 uses this value and the first element.
+    - This is also used in case the collection has 0 or 1 element.
+
+- Note that there will be an error if the collection is empty and no initializer is specified.
+
+- **sum** of some numbers is applying **reduce**
+- **cumulative sum** of some numbers is the **intermediate result of reduce**
+
+####
+
+- Reduce is less often used
+    - most often used to create aggregate tables and data
+
+- Python standard library has tools to apply reduce and accumulate.
+    - `functools.reduce(function, iterable[, initializer])`
+    - `itertools.accumulate(iterable[, func, *, initial=None])`
+
+#### Example
+
+To find the sum of numbers in a list using iterative solution and reduce.
+
+```{python}
+some_list = list(range(10))
+print(some_list)
+```
+
+```{python}
+sum_itr = 0
+for num in some_list:
+    sum_itr += num
+```
+
+```{python}
+sum_itr
+```
+
+####
+
+```{python}
+import functools as ft
+import operator as op
+
+sum_red = ft.reduce(op.add, some_list, 0)
+```
+
+```{python}
+sum_red
+```
+
+- Instead of defining `add_func = lambda x, y: x + y`, `operator` module was used.
+
+# Recursive functions
+
+## Background
+
+- Recursion is a generic concept of repeating a smaller well define task to get to a solution using base case[s]
+    - e.g. gcd algorithm
+
+- Recursion can be implemented using iterative solution or recursive functions
+
+## Introduction {.smaller}
+
+- Recursive functions call themselves from within themselves to terminate when the base case[s] is reached
+    - base case[s] need to be defined carefully to **avoid infinite recursive calls**
+
+- [Python tutor](https://Pythontutor.com/Python-debugger.html#mode=edit)
+
+- Recursive functions in programs
+    - not always efficient
+    - better for code readability
+
+- _Do not use recursive functions unless it is unavoidable_
+    - generally used in algorithms
+    - merge sort is an example of recursive algorithm that is efficient
+
+## Examples
+
+### Factorial
+
+$$
+\begin{aligned}
+n! &= n*(n-1)*(n-2)*\cdots*1 \\
+&= n * (n-1)! \\
+0! &= 1
+\end{aligned}
+$$
+
+####
+
+::::::::: {layout="[[49,-2,49]]"}
+
+```{python}
+#| eval: false
+def fact_iter(n):
+    result = 1
+    for i in range(1, n+1):
+        result *= i
+    return result
+```
+
+```{python}
+#| eval: false
+def fact_rec(n):
+    if n == 0:
+        return 1
+    else:
+        return n*fact_rec(n-1)
+```
+
+:::::::::
+
+```{python}
+#| eval: false
+fact_rec = lambda n: 1 if n == 0 else n*fact_rec(n-1)
+```
+
+### GCD Algorithm {.smaller}
+
+- Given 2 numbers a, b
+    1. find remainder of a, b (*modulo operator `%` gives the remainder*)
+    2. if remainder is zero then b is the gcd
+    3. replace a with b and b with remainder (*in Python this is 1 step*)
+    4. goto to step 1
+
+- Earlier this was solved using `while`
+
+- Implement this using
+    - regular function
+    - recursive function
+
+#### Solution: `while`
+
+```{python}
+#| results: 'hold'
+
+a, b = 9, 6
+rem = a % b
+while rem != 0:
+    print(f'{a=}, {b=}, {rem=}')
+    a, b = b, rem
+    rem = a % b
+
+print(f'{a=}, {b=}, {rem=}')
+print(b)
+```
+
+#### Regular function
+
+```{python}
+def find_gcd(a: int, b: int) -> int:
+    """
+    find the greatest common divisor of 2 integers a and b
+    """
+    rem = a % b
+    while rem != 0:
+        a, b = b, rem
+        rem = a % b
+    return b
+```
+
+```{python}
+find_gcd(35, 28)
+```
+
+#### Recursive function
+
+```{python}
+def find_gcd_rec(a: int, b: int) -> int:
+    """
+    find greatest common divisor of 2 integers a and b using recursion
+    """
+    rem = a % b
+    if rem == 0:
+        result = b
+    else:
+        result = find_gcd_rec(b, rem)
+    return result
+```
+
+```{python}
+find_gcd_rec(35, 28)
+```
+
+#### Refactoring
+
+```{python}
+def find_gcd_rec(a: int, b: int) -> int:
+    """
+    find greatest common divisor of 2 integers a and b using recursion
+    """
+    rem = a % b
+    if rem == 0:
+        return b
+    else:
+        return find_gcd_rec(b, rem)
+```
+
+#### Refactoring
+
+```{python}
+def find_gcd_rec(a: int, b: int) -> int:
+    """
+    find greatest common divisor of 2 integers a and b using recursion
+    """
+    rem = a % b
+    return b if rem == 0 else find_gcd_rec(b, rem)
+```
+
+### Handling exceptions
+
+- Ask user input until it is correct
+- Limit maximum incorrect trials
+
+#### Solution: control flow blocks
+
+```{python}
+#| eval: false
+
+while True:
+    try:
+        some_int = int(input('Enter an integer...'))
+        print(some_int)
+        break
+    except ValueError:
+        continue
+```
+
+#### Solution: recursive function {.shrink}
+
+```{python}
+def get_an_integer(max_count=5, count=1):
+    """
+    Ask user to input an integer until integer is provided
+    or maximum number of trials expire
+    """
+    try:
+        some_int = int(input('Enter an integer...'))
+        return some_int
+    except ValueError:
+        print(f'This was try number {count}, and was not an integer.')
+        if count < max_count:
+            count += 1
+            get_an_integer(count=count)
+        else:
+            print(f"maximum tries ({max_count}) reached")
+```

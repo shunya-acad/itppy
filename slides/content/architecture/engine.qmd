@@ -1,0 +1,115 @@
+---
+title: "Language engine"
+---
+
+# Overview
+
+- [Official implementation of Python](https://www.python.org/) is an **interpreter written in C**, and therefore also referred to as **CPython**
+
+- Below terms refer to this
+    - Python interpreter
+    - CPython
+    - CPython interpreter
+
+## How is program executed
+
+### 
+
+- The interpreter checks the conditions for .py file
+    - is .py file a new file
+    - is .py file modified since last compilation
+    - was .pyc file written using an older Python version
+- If any of the conditions is true then .py file is compiled to .pyc file (byte code)
+- Byte code is converted to machine code and sent for processing
+
+### 
+
+![](../../../resources/diagrams/architecture/python-interpreter.png)
+
+
+### Under the hood
+
+Below is an introductory overview of things that happen under the hood which interpreter handles.
+
+- **Managing execution**: sending and receiving of operations and data, to and from the processor
+- **Garbage collection**: clearing un used objects created during execution
+- **Threads and processes**: python interpreter uses single thread and single core at a time by default
+
+# Hardware Management
+
+## Layers {.smaller}
+
+1. **Hardware**: CPU controls all the different components. It understands only machine code (binary).
+2. **Operating system (OS)**: is the first major layer on top of hardware that controls all programs or applications interacting with the hardware.
+3. **Programs**: also referred to as _computer applications_ or just _applications_. This is the final layer offering specific interactions with the hardware. These have to go through the OS to finally send and receive instructions to and from hardware. Some examples include
+    - **file explorer**: provides a graphical interface to interact with the file system stored on hard disk. It displays the information on monitor and provides interaction through mouse and keyboard events.
+    - **browser**: provides a graphical user interface (gui) to interact with the data on the web. In the background it sends and receives data through network adapter and displays it on monitor.
+    - **network**: there are network processes always running in the background to keep the machine connected to web and internal networks
+
+### Python interpreter {.smaller}
+
+- OS
+    - starts process[es] requested by Python interpreter
+    - allocates space on RAM for these process[es] using some algorithm
+    - manages sending/receiving data and instructions to/from CPU received from all running processes
+- Python interpreter
+    - sends/receives data and instructions to/from CPU through OS
+    - loads all the resources needed to run the program from hard disk to RAM
+    - manages the usage of allocated space on RAM
+- CPU
+    - does all the processing
+    - manages all the data and instructions received from OS
+    - sends back the results to OS
+
+### Resources
+
+There are 2 critical resources that a program has to manage:
+
+- Memory (RAM)
+- Processor (CPU)
+
+Python being a very high level language, manages both these automatically in background
+
+## Memory (RAM)
+
+###
+
+![](../../../resources/diagrams/architecture/ram-usage.png){width="70%" fig-align="center"}
+
+###
+
+{{< include ../../../resources/tables/_architecture-stack-heap.qmd >}}
+
+### Stack
+
+- Stack is the component of memory used for program execution
+- It is modeled as stack data structure, like a book stack, **LIFO**
+- The code instructions and variable names are sent to the stack as the program is read
+    - deleted when the instruction completes.
+
+- **Stack overflow**: when stack gets full
+    - e.g. infinite recursive function call, ~ 3000 calls before stack overflow
+
+- **Stack trace**: history of instructions
+
+### Heap
+
+- Heap is the part of allocated memory which is used for storing objects
+- Heap functions like RAM, random memory addresses can be accessed
+- Garbage collection
+
+## Processor management {.smaller}
+
+Managing the CPU through program is considered as one of the most complex topics in programming as it involves understanding multiple topics
+
+- CPU: how CPU processes data and instructions sent to it
+- OS: how does OS schedules and manages tasks from all running processes
+- Program: what features the programming language provides to handle execution of different tasks in a program
+
+For regular use of programming there is not much requirement to increase performance by designing the program. This is needed when building large and advanced applications.
+
+### Python interpreter
+
+- Python interpreter, by default, starts a single process with 1 main thread while running a program.
+
+- Python has Global interpreter lock (GIL) which limits execution of one thread at a time

@@ -1,0 +1,25 @@
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Regular Expressions
+
+Regular expressions, commonly referred to as "regex", are an abstract specification of creating patterns to do advanced search and replace operations on strings. They are like specification for a mini language for string (text) operations.
+
+There are multiple implementations of this abstract specification with many common features but subtle differences for different use cases.
+
+Python itself has multiple different flavors/implementations of regular expressions.
+
+- Generic pattern matching in Python
+    - `re` module in standard library: [simple tutorial](https://docs.python.org/3/howto/regex.html#regex-howto), [exhaustive documentation](https://docs.python.org/3/library/re.html)
+    - `regex` package in PyPI, extension of `re` module: [homepage](https://github.com/mrabarnett/mrab-regex)
+- Unix style pathname pattern matching, used in bash commands
+    - [`glob`](https://docs.python.org/3/library/glob.html) module
+    - `pathlib` module in standard library provides [`Path.glob()`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob)
+
+The key idea is to provide much more powerful pattern searching than regular string methods provide. For example, to search all pdf files in a folder you can use `*.pdf` pattern to do a search on all file names. Or, `^project` pattern to find all files starting with the word project.
+
+Regular expressions provide much more advanced features but are slower compared to regular string methods. The python tutorial has a [section](https://docs.python.org/3/howto/regex.html#common-problems) dedicated to describe the issue with choice between using string methods and regular expressions.
+
+Regular expressions can get very messy very fast. So in the beginning use only basics of regex, when it is clear that string method is not available or will be too complex. The most common situation is to use regex for path related operations.

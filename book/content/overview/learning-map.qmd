@@ -1,0 +1,156 @@
+# Learning map
+
+## Introduction
+
+Acquiring knowledge of any subject involves answering 3 fundamental questions.
+
+- **Why**? _Most fundamental question that teaches the motivation_
+- **What**? _Declarative knowledge that teaches the definition_
+- **How**? _Imperative knowledge that teaches ways to apply the knowledge_
+
+Similarly to learn computer programming you can use the below map.
+
+- _**Why** do you learn computer programming?_ $\to$ **Use cases**
+- _**What** is computer programming?_ $\to$ **Theory**: **Building blocks**, **Architecture**, **Design**
+- _**How** do you do computer programming?_ $\to$ **Practical experience**: **Tools**, **Application**
+
+Learning theory equip you with knowledge about the subject, but to develop skill in the subject you need the tools and practical experience of applying the knowledge.
+
+While covering theory, there is an attempt to provide exposure to some common scenarios of where and how to apply the concepts along with some common mistakes. Topic of design is related to this. Whereas by experience, you get better at the skill of deciding what concepts to apply under which situations.
+
+For example, there are limited specifications of a language which you can learn quickly, but there are much larger possible ways to combine them. Operating systems, language compilers and interpreters have been written using the same specifications, without even using OOP, which is related to the skill of writing programs (applying theory in practice). For basic usage it is not required to have skills to write an operating system, but the example is to illustrate the difference between the "what" and "how" parts above.
+
+The learning map, in context of depth of knowledge, will depend on the career path. There are 3 distinct possible career paths in context of programming.
+
+- Generic: Basic
+- STEM (minus CSE): Intermediate
+- Computer science & Engineering (CSE): Advanced
+
+> STEM => Science, Technology, Engineering & Math related fields
+
+## Basic
+
+There are some common elements of programming which can be the starting point for all career paths.
+
+- Introduction to programming with basic applications (this book)
+- Basics of data analysis
+
+### Theory
+
+As a beginner, you learn the basics of any one programming language. Python is chosen in this book as it is most popular generic programming language.
+
+This book covers the basics and some intermediate topics in detail. Additionally, some intermediate and advanced topics are introduced, but not covered in detail, to improve the understanding of context while programming, but keeping the complexity low.
+
+> Color coding rules used
+>
+> - [covered in detail]{color="blue"}
+> - [high level introduction]{color="brown"}
+> - [not covered]{color="black"}
+
+:::::: {.callout-note icon="false"}
+### Language specification
+
+::::: {layout="[[-5,35,-5,55]]"}
+
+::: {.callout-note icon="false"}
+#### Building blocks
+
+- [Basic specifications]{color="blue"}
+    - [Lexicons]{color="blue"}
+    - [Variables]{color="blue"}
+    - [Comments]{color="blue"}
+- [Data types and operations]{color="blue"}
+- [Control flow blocks]{color="blue"}
+- [Functions]{color="blue"}
+- [OOP]{color="brown"}
+- [Special features]{color="brown"}
+:::
+
+::: {.callout-note icon="false"}
+#### Architecture
+
+- [Environment = Namespace + Scope]{color="brown"}
+- [Scripts and packages]{color="brown"}
+- [External packages]{color="brown"}
+- [Language engine]{color="brown"}
+- [Debugging]{color="brown"}
+:::
+:::::
+::::::
+
+:::::: {layout="[[-5,45,-5,45]]"}
+
+::: {.callout-note icon="false"}
+#### Design
+
+- [Components]{color="brown"}
+    - [Design patterns]{color="black"}
+        - [Map reduce]{color="brown"}
+    - [DSA]{color="brown"}
+    - [Regular expressions]{color="brown"}
+- [Frameworks]{color="black"}
+- [Workflow]{color="brown"}
+:::
+
+::: {.callout-note icon="false"}
+#### Tools
+
+- [Command line interface]{color="brown"}
+- [Version control system]{color="brown"}
+- [Language installation]{color="brown"}
+    - [Engine]{color="brown"}
+    - [External packages]{color="brown"}
+    - [Virtual environments]{color="brown"}
+- [Editor]{color="brown"}
+:::
+::::::
+
+### Applications
+
+- Automation
+    - system operations
+    - documentation
+- Basics of data analysis (including visualization)
+- Domain specific basic applications
+
+## Intermediate
+
+Most of the science and engineering fields require heavy usage of data science which requires good practical programming skills along with math involved, specially probability and statistics.
+
+In context of programming, the assumption is you would know the basics (content of this book) and move on to learn intermediate level theory. The topics will be same but study will be intermediate to advanced level. For example, details of OOP, design patterns like generators, context managers, etc. and how to implement them from scratch.
+
+In addition it would be good to learn a compiled language like C++, with lower level details like memory management and parallel processing.
+
+The key aim will be to be able to build basic domain specific packages and applications using frameworks if required.
+
+- Theory
+    - programming (intermediate level)
+    - data science (intermediate level)
+    - math: probability & statistics to model data
+- Application
+    - data analytics
+    - building domain specific packages
+    - building basic applications using frameworks
+
+## Advanced
+
+In terms of theory there will be advanced coverage of topics depending on specialization.
+
+- Math for computer science
+- Language specification, implementation & design
+- Data structures & Algorithms
+- Design patterns
+- Frameworks
+
+In terms of application the path will depend on the choices.
+
+- Embedded devices
+- Operating systems
+- Desktop applications
+- Mobile applications
+- Databases
+- Websites
+- Network applications
+- Media
+- ...
+

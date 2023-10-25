@@ -1,0 +1,37 @@
+<mxfile host="Electron" modified="2023-07-10T11:29:29.027Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.1 Chrome/112.0.5615.204 Electron/24.6.1 Safari/537.36" etag="uaqkYdloA07r9ViQFJa8" version="21.6.1" type="device">
+  <diagram name="Page-1" id="Hxm8qDUFzEGc1eLgbDIG">
+    <mxGraphModel dx="1050" dy="635" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="EtbtacArwUT1CQZImPMD-1" value="&lt;div style=&quot;color: rgb(51, 51, 51); background-color: rgb(245, 245, 245); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace, &amp;quot;MesloLGM NF&amp;quot;, &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-weight: normal; font-size: 24px; line-height: 19px;&quot;&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;color: rgb(119, 119, 119); font-weight: bold; font-size: 24px;&quot;&gt;[&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt;item&lt;/span&gt;&lt;span style=&quot;color: rgb(119, 119, 119); font-weight: bold; font-size: 24px;&quot;&gt;**&lt;/span&gt;&lt;span style=&quot;color: rgb(156, 93, 39); font-weight: bold; font-size: 24px;&quot;&gt;2&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: rgb(75, 105, 198); font-weight: bold; font-size: 24px;&quot;&gt;for&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; item &lt;/span&gt;&lt;span style=&quot;color: rgb(75, 105, 198); font-weight: bold; font-size: 24px;&quot;&gt;in&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; some_itr &lt;/span&gt;&lt;span style=&quot;color: rgb(75, 105, 198); font-weight: bold; font-size: 24px;&quot;&gt;if&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; item &lt;/span&gt;&lt;span style=&quot;color: rgb(119, 119, 119); font-weight: bold; font-size: 24px;&quot;&gt;%&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: rgb(156, 93, 39); font-weight: bold; font-size: 24px;&quot;&gt;2&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: rgb(119, 119, 119); font-weight: bold; font-size: 24px;&quot;&gt;==&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: rgb(156, 93, 39); font-weight: bold; font-size: 24px;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: rgb(119, 119, 119); font-weight: bold; font-size: 24px;&quot;&gt;]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=24;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="320" y="280" width="680" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="EtbtacArwUT1CQZImPMD-2" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=-90;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="376.88" y="277.5" width="20.62" height="104.38" as="geometry" />
+        </mxCell>
+        <mxCell id="EtbtacArwUT1CQZImPMD-3" value="expression" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="357.19" y="340" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="EtbtacArwUT1CQZImPMD-4" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=-90;fontSize=24;size=0.5;" parent="1" vertex="1">
+          <mxGeometry x="589.54" y="187.98" width="16.87" height="288.43" as="geometry" />
+        </mxCell>
+        <mxCell id="EtbtacArwUT1CQZImPMD-6" value="loop" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="567.97" y="340" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="EtbtacArwUT1CQZImPMD-7" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=-90;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="858.75" y="216.25" width="20" height="227.5" as="geometry" />
+        </mxCell>
+        <mxCell id="EtbtacArwUT1CQZImPMD-8" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=90;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="650" y="-60" width="20" height="670" as="geometry" />
+        </mxCell>
+        <mxCell id="EtbtacArwUT1CQZImPMD-9" value="braces for list" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="570" y="230" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="EtbtacArwUT1CQZImPMD-11" value="condition" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="838.75" y="340" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

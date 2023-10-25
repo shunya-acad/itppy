@@ -1,0 +1,65 @@
+# Introduction {.unnumbered}
+
+Use of technology is increasing and impacting more and more domains. Most of the workforce in cities use technology for work and personal work. This provides its own challenges but also opportunities, and requirements to use those opportunities. Introduction to programming is one of those requirements.
+
+Learning programming serves few important purposes.
+
+- Use technology more efficiently and resourcefully
+- Provides a common language for communicating with those developing solutions
+    - Be aware of the possibilities during communication
+- Create your own solutions
+
+Therefore it makes sense to make introduction to computers, operating systems, programming and basic applications of programming part of the school education than college for everyone.
+
+## Objectives
+
+Though this book can be read to learn to program or get an independent perspective to programming, the main goal of this book is to serve as a supplement to the course taught in class.
+
+For **learners**, this should help as reference notes to quickly find information as needed while learning and years after initial learning.
+
+For **instructors**, this book along with slides should be helpful to teach a course.
+
+The source code for the book and slides is available to edit as required. More information is at resources section at the end of this chapter.
+
+The offline version for the content is available too and can be downloaded as required.
+
+## Content
+
+The attempt is to abstract the core concepts and contexts related to programming which acts as a framework to learn not just python but any programming language.
+
+The focus is on concretizing the framework to understand evolution of programming. The concepts involved are generally the same for most part.
+
+There are certain topics which are avoided in beginner courses. These have been included with an attempt to reduce the complexity but still give enough exposure. This is with the intent that this will provide a better understanding of how developers provide solutions which eventually should improve the usage of those solutions.
+
+The part **Overview of programming** sets the outline for the book and programming in general. For those who are new to programming, this will not make sense in first reading but will clearly layout the outline for learning. Second reading is recommended after completing the remaining sections when many of the components will be understood better.
+
+Similarly, **Tools** part has a lot of information which will not be useful in the beginning but becomes clearer as you progress forward in the course and use the tools.
+
+### Why python?
+
+---
+
+**Popular & Generic**
+
+Python is one of the most popular generic programming language at the moment and this increases the chances of using the language you learn programming with.
+
+Python is a generic programming language with contributions in almost every domain, specially compared to other languages.
+
+So chances are higher that you will find an existing solution, irrespective of the field you work in.
+
+Another advantage is that there is lot of help available online as there are more users/developers.
+
+---
+
+**Easy**
+
+Python has well designed syntax which is clear and easy to write and read which makes it easy to focus on what you need the code to do rather than struggling with the syntax, in the beginning.
+
+---
+
+## Resources {#sec-resources}
+
+### Jupyter notebooks
+### Lecture slides
+### Solutions
+### Source code

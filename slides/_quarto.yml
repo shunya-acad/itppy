@@ -1,0 +1,44 @@
+project:
+  type: default
+  output-dir: _slides
+  render: 
+    - content/.aggregate/itppy-slides.qmd
+
+filters: 
+  - ".config/lua/color-text.lua"
+
+subtitle: "Introduction to Programming - using Python"
+extract-media: ".resources"
+
+latex-auto-install: true
+
+engine: knitr
+knitr:
+  opts_chunk:
+      comment: ''
+execute:
+  freeze: false
+  cache: false
+  echo: true
+  eval: true
+  error: true
+fig-dpi: 300
+
+code-line-numbers: false
+code-block-bg: '#f0f2f4'
+highlight-style: github
+
+format:
+  beamer:
+      aspectratio: 169
+      theme: CambridgeUS
+      colortheme: seahorse
+      fonttheme: professionalfonts
+      incremental: false
+      keep-tex: true
+      colorlinks: true
+      slide-level: 6
+      include-in-header:
+        - '../../.config/ltx/preamble-common.tex'
+        - '../../.config/ltx/preamble-outlines-multicols.tex'
+        - '../../.config/ltx/preamble-boxes.tex'

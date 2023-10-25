@@ -1,0 +1,117 @@
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Error handling (debugging)
+
+In @sec-error-handlers on Error handling, source of different types of errors was discussed.
+
+Errors in context of computer programming are also called **bugs** because of historical significance. Earlier, when programs were written on actual physical tapes, a large test program stopped and later it was found that there was an actual bug (a moth) that stuck to the program tape. Therefore preventing or removing errors is called **debugging**.
+
+There are several contexts where error handling is used.
+
+- Control flow: handling expected errors through code
+- Debugging: investigating errors while writing code
+    - **trace back**
+    - **debugger**
+- Testing: automate testing for reuse
+    - **Unit tests**: Automating testing of small pieces of code
+    - **Integration tests**: Automating testing of combination of pieces working together
+    - **Resources**
+        - Python standard library: [`unittest`](https://docs.python.org/3/library/unittest.html#module-unittest)
+        - PyPI package: [`pytest`](https://docs.pytest.org/)
+
+This section discusses debugging, which is relevant for all stages of programming.
+
+The second part, program design for making robust code through testing, is relevant for writing large programs when it is hard to test the whole program without designing tests. This is not included in the book because for most light uses of programming as a beginner this is not relevant.
+
+## Error types
+
+While writing a program below are possible types of errors.
+
+- **Lexical and syntax errors**: these are easily caught by the editor tools like linter and style checkers
+- **Semantic errors**: when some rules of implementation details are violated
+    - e.g. passing a string to function when number was required
+    - some common type of errors are caught by the editor tools, but not all
+- **Incorrect logic**: No error but the solution is incorrect
+    - e.g. while using nested loops the order of loop matters
+
+## Tools
+
+Most editors provide support for integrating tools for editing as discussed in tools section (@sec-vscode). Related to debugging while writing code there are 2 main relevant parts
+
+- [Editing tools](https://code.visualstudio.com/docs/python/editing): syntax highlighting, auto completion, refactoring, etc.
+- [Lint tools](https://code.visualstudio.com/docs/python/linting)
+
+These are preventive tools that help in avoiding errors at run time. These help avoid lexical and syntax errors. Semantic errors are caught by lint tools to some extent.
+
+Python interpreter, like most language implementations, provides 2 main tools.
+
+- **Exceptions & trace back**
+- **Debugger**: useful for Semantic errors and incorrect logic errors
+
+### Exceptions & trace back
+
+Exceptions were discussed in @sec-error-handlers. They contain 2 key information
+
+- Exception type
+- Trace back: also called stack trace, stack traceback, stack backtrace etc.
+
+The stack trace is like history of execution instructions sent which caused the error.
+
+When the error is raised, message printed contains both these to help identify
+
+- Where the error occurred
+- Type of error if it is a known type
+
+It is useful to note the order of stack trace information. **Starting from the bottom, it tells where the error occurred and then traces back where the call to this error originated from.**
+
+Below is a simple example to illustrate the point. Exception information is displayed at top and bottom and rest is traceback.
+
+```{python}
+#| code-line-numbers: true
+#| eval: false
+some_list = [1, 2]
+
+def f1(): some_list.pop()
+def f2():
+    for i in range(3):
+        f1()
+
+f2()
+```
+
+```python
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Cell In[1], line 8
+      5     for i in range(3):
+      6         f1()
+----> 8 f2()
+
+Cell In[1], line 6, in f2()
+      4 def f2():
+      5     for i in range(3):
+----> 6         f1()
+
+Cell In[1], line 3, in f1()
+----> 3 def f1(): some_list.pop()
+
+IndexError: pop from empty list
+```
+
+### Debugger
+
+Python interpreter, like most languages, provides a set of tools for debugging, collectively referred to as debugger. These special set of commands which can interrupt the interpreter at given point saving the state of stack and heap and provide interactive execution options.
+
+VSCode, like most editors, integrates this functionality in the editor. The respective section in [VSCode: Python tutorial: Debugging](https://code.visualstudio.com/docs/python/python-tutorial#_configure-and-run-the-debugger) provides a good walkthrough of the functionality.
+
+Note that almost everything related to debugging can be done manually by writing breakpoints in code and running the script through command line, but editors provide a useful user interface around it.
+
+Debugger is useful in case of 
+
+- Runtime errors where error message cannot provide enough information
+    - e.g. Exception is too generic to spot the error
+- Program is running correctly but with unintended results
+    - it is not uncommon to get into this situation

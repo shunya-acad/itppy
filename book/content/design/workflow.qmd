@@ -1,0 +1,168 @@
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Workflow
+
+## Overview
+
+Designing workflow in context of programming can be split into 2 dimensions.
+
+- **Program**: micro level, workflow while writing code
+- **Project**: macro level, workflow of overall project
+
+## Program
+
+While writing code there are 2 major dimensions.
+
+- Editing tools: like prediction, linting etc.
+    - these only help with basic checks and completion
+    - these are managed at project level through editor settings
+- Elements of code related to properties of a good program
+
+This part of workflow design is related to the 2nd dimension and is dealt with refactoring.
+
+### Refactoring
+
+**Refactoring** means reviewing and changing code to attain properties of a good program, without changing the actual output.
+
+Recommended properties of a good program are: **readable**, **testable**, **modular**, **extensible**, **efficient**
+
+Some practical aspects of writing programs are
+
+- There are multiple ways to solve the same problem
+- It is a cyclical process of writing code and refactoring
+- More often than not, refactoring opportunities become apparent only while reviewing code
+
+### Recommendations
+
+- Follow naming conventions
+- Use doc strings
+- Use and follow type annotations
+    - make exceptions only if necessary
+- Use comments where necessary
+- Any task repeated more than a couple of times can be considered to be put into a function
+- Functions should have minimum possible responsibilities, ideal is single responsibility
+- Use appropriate data types
+
+### Sample workflow
+
+Below is a workflow for writing code, to cover aspects that editing tools cannot cover.
+
+- Step 1: focus on getting the the code to produce the correct result using recommended practices
+- Step 2: review the code for opportunities for refactoring
+- Step 3: refactor code
+- Step 4: goto step 1
+
+Note that the process given is an infinite recursion, the base case is when there is no further refactoring needed and it depends on size of the project, skills and experience. For small projects 2 to 3 recursions should be enough. For larger projects the requirements expand quickly.
+
+## Projects
+
+Learning and practising project workflow management from the very start and for smallest of projects is recommended as it has many advantages like
+
+- Workflow becomes operationally more
+    - organized
+    - efficient
+
+- Reduces errors
+
+- Allows more time on design and thought
+
+@sec-wkfl-comps contains discussions on some key considerations while managing programming projects in general from a user of programming perspective. Python related solutions are discussed at respective places.
+
+@sec-wkfl-sample illustrates a Python specific sample project structure which can work as a starter template.
+
+Python documentation has a [section](https://packaging.python.org/en/latest/tutorials/packaging-projects/#packaging-python-projects) dedicated to this for structuring Python projects specifically. Although Python documentation aims at developers who need to publish their packages on `PyPI`, still it gives good background to Python project management in general.
+
+### Tools: Settings
+
+While programming, most of the interaction is with editor. Through editor all the underlying tools, like terminal, Python, git etc., are accessible.
+
+Managing the tools and related settings, including extensions, is an essential part of project workflow.
+
+VSCode related settings can easily be managed through use of workspaces and profiles.
+
+Tasks in VSCode provide automation related to projects.
+
+Sync can be used to keep the settings in the cloud, which makes it easy to switch between computers.
+
+- [VSCode: workspaces](https://code.visualstudio.com/docs/editor/workspaces)
+- [VSCode: profiles](https://code.visualstudio.com/docs/editor/profiles)
+- [VSCode: tasks](https://code.visualstudio.com/docs/editor/tasks)
+- [VSCode: sync](https://code.visualstudio.com/docs/editor/settings-sync)
+
+### Components {#sec-wkfl-comps}
+
+#### Dependencies
+
+There are 2 key dependencies of a Python project.
+
+- Python version used: document using a `pyproject.toml` file
+- External packages and their version used in the project
+    - virtual environments provide solutions
+
+##### Python version
+
+Python, once installed, is machine and os independent. Python is available for most of the used computer system and operating system combinations.
+
+If a project runs on a Python version on a pc then it will run on a different pc with a different architecture and operating system if the same Python version can be installed on it.
+
+As one starts to use programming, recording the Python version should be sufficient, to be able to reproduce the project later. To be extra safe machine and operating system can be documented too if needed.
+
+`pyproject.toml` file is used currently by Python developers for storing metadata about a Python project for creating and distributing packages, which can be used for storing Python version details and some other basic metadata about the project in a structured way. Note that the name is required to be `pyproject.toml` in case automation tools are used later as they check for a file with this specific name.
+
+More details can be found at [Python Docs: Packaging: `pyproject.toml`](https://packaging.python.org/en/latest/tutorials/packaging-projects/#configuring-metadata)
+
+##### External packages
+
+As a user in programming most of the projects will use external modules and packages to find solution to a problem.
+
+Dependencies and solutions related to this have been discussed in @sec-venv related to virtual environments.
+
+#### Documentation
+
+Documentation is a critical part of any code project as it helps the author and users throughout the lifecycle of the project. The most common situation is when looking at the code written by self after some time becomes hard to understand. Documentation helps in this situation too.
+
+There are 3 key areas of documentation.
+
+- **Doc strings**: document functions, classes
+- **Comments**: in the code itself to explain key concepts and logic applied
+- `readme.md`: documentation for the project at high level
+
+VSCode extension, [autoDocstring - Python Docstring Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring) can be used to assist in creating docstrings. Using such tools help use best practices evolved by experience of developers.
+
+There are tools like [`Sphinx`](https://www.sphinx-doc.org/en/master/) to automate parts of documentation of Python projects. These are generally needed for large coding projects.
+
+One of the most important aspect is to structure the code so that it documents itself. For example naming objects, files and folders well so that they are self explanatory. Organizing function definitions and calls such that they self explain the flow of logic implemented. Giving thought to these aspects complements documentation.
+
+#### Version control
+
+Uses of version control systems has been discussed in @sec-vcs. While using `git` below are some things that should be part of the workflow.
+
+- Regularly maintain `.gitignore` file
+    - `.py-venv` folder is large and need not be tracked as it can be restored using requirements file
+    - anticipate and add directory and file patterns at the start of the project, it is inefficient to untrack files/folders later
+- Do regular structured commits with helpful messages
+
+### Sample structure {#sec-wkfl-sample}
+
+- project root
+    - **.git/**
+    - **.py-venv/**
+    - **docs/**
+    - **src/**
+        - `inputs.py`
+        - `category_1_funcs.py`
+        - `category_2_funcs.py`
+    - `main.py` or `app.py`
+    - `pyproject.toml`
+    - `py-requirements.txt`
+    - `readme.md`
+    - `.gitignore`
+
+Since the `main.py` (or `app.py`) can directly call functions from directories beneath it, e.g. `import src.category_1_funcs as <category_1>` and use functions as `<category_1>.<function_name>()`, there is no need for using packages with `__init__.py` for very small projects.
+
+The only drawback is you cannot cross reference objects from files across folders, unless they are in flat hierarchy below.
+
+Functions can further be put into subdirectories.

@@ -1,0 +1,21 @@
+---
+title: "Overview"
+---
+
+#### {.smaller}
+
+- **Operating system**
+  - **Command line interface** (**CLI**)
+      - manage files
+      - build and run files and projects
+      - manage system installations and updates
+  - **Version control system** (**VCS**): manage history of changes
+  - **Python**:
+      - **CPython installation**: interpreter, built-ins, standard library
+      - **External packages**
+  - **Editor**: compilation of tools needed in one place
+
+####
+
+![](../../../resources/diagrams/tools/tools-timeline.png)
+

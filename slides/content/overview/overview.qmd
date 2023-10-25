@@ -1,0 +1,295 @@
+---
+title: "Overview of programming"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Background
+
+## Definition
+
+- Generic
+    - Programming is configuring a machine to follow certain tasks to solve a problem
+    - e.g. clock
+
+- Programming context of computers
+    - Configuring the computer hardware to do a task
+
+- Program in context of computers
+    - A set of instructions for the computer to follow to do some task[s]
+
+## Hardware
+
+### Introduction
+
+- Computers are based on binary arithmetic
+- Comprise of a large number of electronic circuits
+- Communicate with each other through electrical signals
+- Understand different sequences of binary signals to perform different tasks
+- 1 bit is the atomic unit of storage, 0 or 1
+- Data and instructions are stored in binary
+- Instructions are also binary data but "data" refers to static data
+
+### Components
+
+####
+
+- **CPU**: central processing unit or processor
+- **RAM**: random access memory
+- **Hard drive**: long term storage
+- **Input/output devices**: keyboard, mouse, monitor
+
+#### 
+
+- **CPU**: central processing unit or processor
+    - **ALU** (Arithmetic logic unit): operates on very small amount of binary data to perform arithmetic and logical operations
+    - **Controller unit**: controls the input/output signals from/to different parts of the computer
+    - **Registers**: smallest memory, closest to processing
+    - **Cache (L1, L2, L3)**: next level memory for preprocessing
+
+####
+
+- **RAM**: random access memory
+    - larger than CPU cache but smaller than hard disk
+    - slower than CPU cache but faster than hard disk
+    - all data slots are equally accessible in same time
+- **Hard drive**: long term storage
+    - largest in size but slowest
+- **Input/output devices**: keyboard, mouse, monitor
+    - also referred to as peripheral devices
+
+### Architecture
+
+####
+
+![](../../../resources/diagrams/architecture/hardware-cpu-ram.png)
+
+#### Key config parameters
+
+2 main parameters related to design of instructions
+
+- **Instruction set architecture (ISA)**
+    - **x86-64**: Intel, AMD processors for desktop, server
+    - **ARMv8-64**: Mobile phones
+- **Width**: maximum number of bits the processor can process at a time
+    - currently most CPU's support 64 bit, earlier it was 32 bit
+    - the 64 in x86-64, ARMv8-64 is 64 bit width
+
+## Programming hardware
+
+### Key idea
+
+- **Map**: Natural language code $\to$ Machine code
+
+- e.g. `beep` $\to$ `010011001010...`
+
+### Layers
+
+- **Assembler** and **Assembly language**
+    - very limited set of mappings
+
+- **Operating System** (**OS**)
+    - a mix of machine code and assembly code
+    - provides a platform for interaction with the hardware for all applications
+    - created using programming languages
+
+- **Applications**
+    - developed using **high level programming languages**
+
+# Programming Languages
+
+## Introduction
+
+### Basic idea
+
+- **Map**: Natural language code $\to$ Machine code
+    - e.g. `beep` $\to$ `010011001010...`
+- Multiple ways to create the mapping
+    - $\implies$ multiple programming languages
+
+### Programming language
+
+#### Terminology
+
+- Typically a programming language refers to 2 distinct parts
+    - **Specification**
+    - **Implementation**
+
+#### Terminology
+
+- **Specification**: rules for writing code
+    - **lexicon**: allowed keywords, symbols, characters
+    - **syntax**: rules of arranging lexicons and creating new names (variables)
+    - **semantics**: rules to assign meaning to different combinations of lexicons and syntax
+
+#### Terminology
+
+- **Implementation**: A system application, like Compiler or Interpreter, to convert the natural language code into machine code and execute. Referred to as '**language engine**' sometimes.
+
+#### Python
+
+- Python has many implementations
+- The official is an hybrid interpreter written in C
+    - Known as CPython
+    - CPython = Specifications + Interpreter
+    - Names are used inter changeably
+- Other implementations: Jython (Java) etc.
+    - Link available in notes for other [implementations](https://wiki.python.org/moin/PythonImplementations)
+
+#### Language engines
+
+- **Assembler**
+- **Compiler**
+- **Interpreter**
+
+### Types
+
+- _low level languages_
+    - **assembly languages**
+- _high level languages_
+    - **compiled languages** (_compiler_): C, C++, Go
+    - **interpreted languages** (_interpreter_): shell (bash, etc.)
+        - **hybrid**: Python, Java, JavaScript
+
+#### Assembly
+
+- very few instructions
+- usually one to one mapping of natural language short code and instruction
+- the engine that converts the instructions is called the **Assembler**
+
+#### High level languages
+
+- Lot of specifications in natural language than assembly
+- $\implies$ lot more features
+- types of high level languages
+    - compiled: e.g. C, C++
+    - interpreted: e.g. shell languages like Bash
+        - hybrid: e.g. Python, Java
+
+#### Compiled languages
+
+- **Compiler**: reads the whole program and converts it to machine code
+    - referred to as **Ahead of Time Compilation (AOT)**
+- There are some dependencies for a compiler
+    - **CPU architecture**
+        - **instruction set**: x86, ARM, ...
+        - **processing width**: 64 bit or 32 bit
+    - **Operating system (OS)**
+- Compilers resolve this for common CPU & OS combinations
+
+#### Compiled languages
+
+- **Pros**:
+    - fast applications
+- **Cons**:
+    - harder to debug
+    - compilation needed for different CPU-OS combinations
+
+#### Interpreted languages
+
+- **Interpreter**: reads the program line by line to produce the machine code during execution
+- If interpreter can be installed it can run the program on any CPU-OS combination
+- e.g. Bash
+
+#### Hybrid languages
+
+- The implementation of interpreter has evolved
+- e.g. CPython
+- The interpreter for these languages
+    - **compilation step**: source code is checked and compiled into intermediate **bytecode**
+    - **interpreter step**: the bytecode is interpreted into machine code and run at runtime
+
+#### Hybrid languages with JIT
+
+- Some languages have engine which is a hybrid interpreter with JIT
+- JIT $\implies$ Just in time compilation
+- JIT step stores optimized machine code for some parts of the program during runtime
+- e.g. Java, C#, JavaScript
+
+#### Pros and Cons for Hybrid languages
+
+- **Pros**
+    - **Portability**
+    - **Ease of use**
+- **Cons**
+    - **Slower**
+
+## Examples
+
+### Overview {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "languages" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = 1, value = TRUE) |>
+    huxtable::set_align(col = c(2:7), value = "center") |>
+    huxtable::set_col_width(c(.2, rep(.8/6, 6))) |>
+    huxtable::set_all_padding(1) |>
+    huxtable::set_text_color(row = c(2:(nrow(tbl_df) + 1)),
+        col = 1, value = "#2c6297")
+
+print_tbl_out(tbl_out, package)
+```
+
+### Desktop & Mobile applications {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "langs-app" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+tbl_df <- tbl_df[1:4]
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = 1, value = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+#### Framework
+
+Framework = pre-written code for components of an application with means to combine them
+
+Frameworks are an extra layer of functionalities and ways of binding them for a specific hardware architecture + os combination. For example, for creating graphical user interfaces building blocks are prebuilt and can be glued into the main application program without having to write them from scratch.
+
+### Web {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "langs-web" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = 1, value = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+
+## General structure
+
+## Underlying concepts
+
+# Tools
+# Applications
+# Learning Map

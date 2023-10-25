@@ -1,0 +1,390 @@
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Python special features
+
+## Conditional expressions {#sec-ce}
+
+Python has 3 specials concepts related to conditional expressions.
+
+- **truthy/falsy**: object's associated truth value
+- **execution context**: decides evaluation result
+- **short circuit**
+
+All 3 concepts can be combined and used in interesting ways which allow some newer cleaner code styles for some common situations that occur while coding.
+
+### Truthy and Falsy
+
+- Every object in Python has an **associated truth value**
+  - referred to as **object's truth value**
+  - if the **object's truth value** is `True` $\implies$ **truthy**
+  - if the **object's truth value** is `False` $\implies$ **falsy**
+  - hence the object is **truthy** or **falsy**
+
+- Below cases are **falsy** and everything else **truthy**:
+  - `None`
+  - `False`
+  - `0` in any numeric type (e.g. 0, 0.0, 0+0j, …)
+  - `len(c) = 0`: **empty collections**
+  - custom classes that implement `__bool__` or `__len__` method that return `False` or `0`
+
+- `bool(any_object)` function returns **object's truth value**
+
+#### Examples
+
+##### Numeric type
+
+```{python}
+num_1_1 = 1; num_1_2 = 1.0
+```
+
+```{python}
+#| echo: false
+#| results: 'hold'
+
+print(f'{num_1_1 = :3},\t{bool(num_1_1) = },\t{type(num_1_1) = }')
+print(f'{num_1_2 = :3},\t{bool(num_1_2) = },\t{type(num_1_2) = }')
+```
+
+```{python}
+num_2_1 = 0; num_2_2 = 0.0
+```
+
+```{python}
+#| echo: false
+#| results: 'hold'
+
+print(f'{num_2_1 = :3},\t{bool(num_2_1) = },\t{type(num_2_1) = }')
+print(f'{num_2_2 = :3},\t{bool(num_2_2) = },\t{type(num_2_2) = }')
+```
+
+##### Collections
+
+```{python}
+empty_string = ""; empty_tuple = (); empty_list = []; empty_dict = {}
+```
+
+```{python}
+#| echo: false
+#| results: 'hold'
+
+print(f'{bool(empty_string) = }, {bool(empty_tuple) = }')
+print(f'{bool(empty_list) = }, {bool(empty_dict) = }')
+```
+
+```{python}
+non_empty_string = "abc"; non_empty_tuple = (1, 2)
+
+non_empty_list = ["a", 1]; non_empty_dict = {"key 1": empty_list}
+```
+
+```{python}
+#| echo: false
+#| results: 'hold'
+print(f'{bool(non_empty_string) = }, {bool(non_empty_tuple) = }')
+print(f'{bool(non_empty_list) = }, {bool(non_empty_dict) = }')
+```
+
+### Short circuit
+
+Short circuit is general optimization strategy used by many languages. Main idea is to avoid evaluating unnecessary condition in an boolean combination.
+
+For example in `and` combination if first condition is false then there is no point checking the second condition. Therefore, second condition of the combination is not evaluated.
+
+Similarly for `or` combination if the first condition is `true` then the expression is `true` in both possible cases, therefore second condition is not evaluated.
+
+### Execution context
+
+Python treats conditional expressions differently based on where they are used.
+
+Boolean combinations used in conditional expression, can contain objects directly rather than comparisons. Object's truth value (`bool(<object>)`) is used rather than object itself.
+
+#### `if`/`elif` conditions
+
+Conditional expression used in `if`/`elif` statement's condition return booleans values (`True`/`False`).
+
+Condition can contain object's as well, `bool(object)` is used rather than object's value.
+
+In below code, since `x` is an empty list it is falsy, `bool(x) = False`, therefore `else` block is executed.
+
+```{python}
+x = []
+if x:
+    print("x is truthy")
+else:
+    print("x is falsy")
+```
+
+In below code, since `x` is a string, it is truthy (`bool(x) = True`), therefore `if` block is executed.
+
+```{python}
+x = "abcd"
+if x:
+    print("x is truthy")
+else:
+    print("x is falsy")
+```
+
+In below example, since `bool(x) = False`, `else` block is executed without evaluating `bool(y)`.
+
+```{python}
+x = []; y = None
+if x and y:
+    print("x and y returned True")
+else:
+    print("x was false, therefore y was not evaluated")
+```
+
+#### Outside `if`/`elif` condition
+
+If a boolean combination is used outside `if` statement and contains objects rather than comparison, then the underlying object's value is returned, it may or may not be boolean data type.
+
+Below regular comparisons are used outside `if` block and they are treated as usual, returning boolean values (`True`/`False`).
+
+```{python}
+x = []; y = 2
+y < 5; y == 2
+```
+
+Since boolean combination is used outside `if`/`elif` statement, `bool(x)` is checked and found to be falsy, using short circuit for `and`, x is returned and y is not evaluated.
+
+```{python}
+x = []; y = 2
+x and y
+```
+
+Since boolean combination is used outside `if`/`elif` statement, `bool(x)` is checked and found to be falsy, using short circuit for `or`, y is evaluated and returned.
+
+```{python}
+x = []; y = 2
+x or y
+```
+
+### Summary
+
+Tables below summarize the scenarios, where `0` and `1` signify boolean `True` and `False`.
+
+```{r}
+#| echo: false
+#| results: 'asis'
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "bool-tbl" # name or number
+package <- "pander" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_df <- tbl_df[c(1,2,3,4)]
+
+tbl_out <- create_table(tbl_df, package = package)
+
+print_tbl_out(tbl_out, package)
+```
+
+```{r}
+#| echo: false
+#| results: 'asis'
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "bool-tbl" # name or number
+caption <- NULL
+package <- "pander" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_df <- tbl_df[c(1,2,5,6)]
+
+tbl_out <- create_table(tbl_df, package = package)
+
+print_tbl_out(tbl_out, package)
+```
+
+For `x and y`, where `x` and `y` can be variables, objects or conditions:
+
+- evaluate `bool(x)`
+    - if `bool(x)` is `True`
+        - if  `x and y` is part of a condition in `if`/`elif` block
+            - evaluate and return`bool(y)`
+        - if `x and y` is not part of a condition in `if`/`elif` block
+            - return `y`
+    - if `bool(x)` is `False`
+        - if  `x and y` is part of a condition in `if`/`elif` block
+            - return `False`
+        - if `x and y` is not part of a condition in `if`/`elif` block
+            - return `x`
+
+Similarly, for `x or y`, where `x` and `y` can be variables, objects or conditions:
+
+- evaluate `bool(x)`
+    - if `bool(x)` is `True`
+        - if  `x and y` is part of a condition in `if`/`elif` block
+            - return `True`
+        - if `x and y` is not part of a condition in `if`/`elif` block
+            - return `x`
+    - if `bool(x)` is `False`
+        - if  `x and y` is part of a condition in `if`/`elif` block
+            - evaluate and return`bool(y)`
+        - if `x and y` is not part of a condition in `if`/`elif` block
+            - return `y`
+
+### Use cases {#sec-ce-use}
+
+#### Iterables
+
+It is common situation where state of an iterable is not known in advance.
+
+For example a list generated by some operation which can result in `None` or empty list or a list with values. There are some operations to be done only if the list is truthy.
+
+Using the 3 concepts the code can be simplified as below. Both the condition are to ensure that the object is truthy.
+
+Note that `len(some_itr) > 0` is used as second condition in `and` combination. Due to short circuit it is not evaluated if first condition is `False`, i.e. `some_itr` is `None`. If it is used as first condition, it is evaluated always, therefore will give error when the iterable is `None`.
+
+::::: {layout="[[49,-2,49]]"}
+
+```python
+some_itr =  # some iterable object
+if some_itr is not None and len(some_itr) > 0:
+    # code block
+else:
+    # code block
+```
+
+```python
+some_itr =  # some iterable object
+if some_itr:
+    # code block
+else:
+    # code block
+```
+
+:::::
+
+#### Assign default
+
+Another common situation is to assign a default value in case the expected value is falsy.
+
+Below form of assignment will work. If `expected_var` is **truthy**, because of short circuit `or`, it will be returned and assigned to `new_var`. If it is **falsy**, default object will be evaluated and returned.
+
+```python
+new_var = expected_var or default_object
+```
+
+## Comprehensions
+
+Comprehensions are a newer feature in Python which combine the fundamentals of map and filter in a more concise syntax.
+
+They are relevant for iterables, i.e. tuples, lists, sets and dictionaries. Mostly they are used with lists and dictionaries.
+
+Generic idea is 
+
+- [transformation]{color="blue"} [iteration]{color="purple"} [filter]{color="red"} or
+- [expression]{color="blue"} [loop]{color="purple"} [condition]{color="red"}
+
+i.e. map expression to each item in iterable which satisfy the filter.
+
+- Filter/condition is optional
+- Comprehensions can be nested
+
+### List comprehensions
+
+For list comprehension generic syntax is 
+
+- [[expression using item]{color="blue"} [for item in list]{color="purple"} [if condition on item]{color="red"}]
+
+
+- example without filter: _list of squares from a list of integers_
+
+```{python}
+some_itr = list(range(10))
+squared_itr = [item**2 for item in some_itr]
+print(some_itr, squared_itr, sep="\n")
+```
+
+![](../../../resources/diagrams/special-features/list-comp-1.png){width="70%" fig-align="center"}
+
+- example with filter: _list of squares from a list of integers if integer is even_
+
+```{python}
+some_itr = tuple(range(10))
+evens_squared_itr = [item**2 for item in some_itr if item % 2 == 0]
+print(some_itr, evens_squared_itr, sep="\n")
+```
+
+![](../../../resources/diagrams/special-features/list-comp-2.png){width="90%" fig-align="center"}
+
+- example with multiple iterables: list of sum of squares of 2 iterables of numbers
+
+```{python}
+t_1 = (*range(1,4),); t_2 = (*range(4,7),)
+sum_of_sqrs = [x**2 + y**2 for x, y in zip(t_1, t_2)]
+t_1, t_2, sum_of_sqrs
+```
+
+- example of nested comprehensions: make all possible combinations of letters of 2 strings if they are not equal
+
+```{python}
+string_1 = 'abc'; string_2 = 'axy'
+combinations = [l1 + l2 for l1 in string_1 for l2 in string_2 if l1 != l2]
+print(combinations)
+```
+
+For better code readability, this can be written as
+
+```{python}
+string_1 = 'abc'; string_2 = 'axy'
+combinations = [l1 + l2 
+                for l1 in string_1
+                    for l2 in string_2
+                        if l1 != l2]
+print(combinations)
+```
+
+This is same as 
+
+```{python}
+string_1 = 'abc'; string_2 = 'axy'
+combinations = []
+for l1 in string_1:
+    for l2 in string_2:
+        if l1 != l2:
+            combinations.append(l1 + l2)
+print(combinations)
+```
+
+### Tuple, set, dict
+
+To return a tuple instead of a list from a comprehension use tuple constructor instead of square brackets.
+
+For sets and dictionary just use curly braces instead of square brackets.
+
+- example with multiple iterables: tuple of sum of squares of 2 iterables of numbers
+
+```{python}
+t_1 = (*range(1,4),); t_2 = (*range(4,7),)
+sum_of_sqrs = tuple(x**2 + y**2 for x, y in zip(t_1, t_2))
+t_1, t_2, sum_of_sqrs
+```
+
+- example with set
+
+```{python}
+some_set = set((1, 2, 3))
+print({e**2 for e in some_set if e > 1})
+```
+
+- example with dictionary
+
+```{python}
+import string
+dict_1 = dict(zip(string.ascii_letters[0:10], list(range(10))))
+print(dict_1)
+```
+
+```{python}
+#| results: 'hold'
+dict_2 = {k: v**2 for k, v in dict_1.items() if k in {'a', 'e', 'i'}}
+print(type(dict_2))
+print(dict_2)
+```

@@ -1,0 +1,13 @@
+---
+title: "Introduction to Programming"
+subtitle: "Using Python"
+format: 
+    beamer: 
+        top-level-division: part
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+

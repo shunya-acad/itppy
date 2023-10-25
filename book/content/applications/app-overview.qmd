@@ -1,0 +1,49 @@
+# Overview {.unnumbered}
+
+## Background
+
+This section covers the _How?_ part of the puzzle.
+
+- _**Why** do you learn computer programming?_ $\to$ **Use cases**
+- _**What** is computer programming?_ $\to$ **Theory**: **Building blocks**, **Architecture**, **Design**
+- [_**How** do you do computer programming?_ $\to$ **Practical experience**: **Tools**, **Application**]{color="brown"}
+
+## Objectives
+
+The key aim is to provide exposure to
+
+- Application of theoretical concepts of specifications to solve practical problems
+- Practice of writing programs
+- Illustrate some common use cases
+
+## Use cases
+
+In context of use cases, some of the basic areas of day to day operations are covered through projects to demonstrate the following benefits
+
+- Automate repetitive manual tasks to
+    - increases efficiency
+    - reduces errors
+- Create new solutions using programming, which standard tools do not offer
+
+## Process
+
+As a user of programming for basic applications, some of the key steps are
+
+- Finding relevant existing solutions from standard library or PyPI
+- Understanding
+    - how they are structured
+    - what are the different ways they can be used
+- Integrating them with the building blocks and architecture of Python to solve simple tasks
+- For getting help on specific topic,
+    - refer to the documentation
+    - search the web
+        - currently [`stackoverflow`](https://stackoverflow.com/) is a popular place for tech related QnA
+
+Working with individual packages will serve as mini projects and which will be used in a major project.
+
+Solutions are not provided for all projects. There are very less projects and most of them are small. Rest of the material provides solved examples. Consider these to be open book exam where main objective is to apply the concepts without seeing solutions to seal the concepts.
+
+Some recommendations and reminders:
+
+- Remember to refactor code
+- Do not try to memorize everything, remember where to look for information. This is important because in programming there is a lot and it keeps changing at very fast pace compared to other areas.

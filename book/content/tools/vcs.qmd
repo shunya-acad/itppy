@@ -1,0 +1,164 @@
+# Version control system: Git {#sec-vcs}
+
+## Introduction
+
+Version control system, aka **VCS** or **source control**, is a software to maintain history of changes to a project, in context of folders, files and content of files.
+
+In context of programming projects, a vcs is used for code and config files needed to reproduce a project. All the information is stored in a compressed directory.
+
+Major use cases for a **VCS** are
+
+- **Track**: history of changes with related information
+- **Rollback**: in case needed
+- **Collaborate**: changes to different parts can be made in parallel and merged
+
+Some popular VCS are
+
+- **Git**
+- **Apache Subversion**
+- **Mercurial**
+
+This book covers **Git** as it is most popular. Getting familiar with vcs through cli should help with the following
+
+- Basic usage of vcs without branching
+- Introduce how basic things work without gui
+- Understand and use gui tools better
+- There are few complex tasks that can only be done from cli, when needed
+
+There are gui tools in most editors so most of the interaction is through them.
+
+To learn Git in-depth, refer to [Pro Git](https://git-scm.com/book/en/v2). It is recommended to go through first 2 sections of the book to understand the basic fundamentals and operations.
+
+A VCS is complemented by an online (cloud) service for hosting repositories. There are several different online providers with their own set of functionalities.
+
+- **SourceForge**: supports multiple VCS
+- **GitHub**: supports git only
+- **GitLab**: supports git only
+- **BitBucket**: supports multiple VCS
+
+The key ideas behind working of Git are summarized in the first section of [Pro Git](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control), which is highly recommended.
+
+<!-- needed for slides while teaching, not in book/notes as the link is already provided -->
+
+<!-- ## Key ideas behind Git
+
+The key ideas behind working of Git are summarized in the first section of [Pro Git](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control), which is highly recommended. Below are images from it for a quick overview.
+
+### Snapshots, not differences
+
+The second diagram represents git, where the whole file is saved for each point of history saved instead of just the differences (changes).
+
+![](../../../resources/images/git/deltas.png)
+
+![](../../../resources/images/git/snapshots.png)
+
+[Source: Pro Git](https://git-scm.com/book/en/v2)
+
+### 3 states
+
+![](../../../resources/images/git/areas.png)
+
+[Source: Pro Git](https://git-scm.com/book/en/v2)
+
+### Lifecycle
+
+![](../../../resources/images/git/lifecycle.png)
+
+[Source: Pro Git](https://git-scm.com/book/en/v2) -->
+
+## Git CLI
+
+Below is a summary of common Git cli commands based on use cases.
+
+### Config
+
+- Check Git config
+
+```bash
+git config --list --show-origin
+```
+
+- Setup username and email for Git
+  - mandatory after fresh installation
+  - these are stamped for each commit to track who made changes
+
+```bash
+git config --global user.name "name"
+```
+
+```bash
+git config --global user.email "email@example.com"
+```
+
+### Initialize repository
+
+```bash
+git init
+```
+
+The above command is run from the folder to be version controlled.
+
+When a repository is initialized
+
+- `.git` folder is created which is the repository
+- All files and sub-folders are tracked by default
+  - Add `.gitignore` to ignore tracking certain files and folders
+
+### Check status and logs
+
+```bash
+git status --short
+```
+
+```bash
+git log --oneline
+```
+
+### Add changes to staging area
+
+```bash
+git add <file or dir path>
+```
+
+### Commit
+
+#### Using text editor
+
+```bash
+git commit
+```
+
+- Opens the default text editor to enter message and commit the staged changes
+    - in this case first line will be the short message
+    - remaining typed lines will form the detailed message
+
+#### Quick commit
+
+```bash
+git commit -m "message text"
+```
+
+#### Stage all changes and commit
+
+```bash
+git commit -am "message text"
+```
+
+- Stage all changes
+- Commit the staged changes with short message
+- In the -a option no need to add files separately
+
+### Check differences
+
+#### Since last commit
+
+```bash
+git diff
+```
+
+### Undo changes from last commit
+
+```bash
+git restore <file name>
+```
+- Discard changes to file in working directory

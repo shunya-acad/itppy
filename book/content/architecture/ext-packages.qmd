@@ -1,0 +1,183 @@
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Available Modules & Packages {#sec-ext-packages}
+
+Modules and packages allow code re-use and distribution. There are several modules and packages available which provide definitions (functions, constants, classes) for a variety of use cases.
+
+There are 3 main resources for using external modules and packages for use in Python code.
+
+- Built-in
+- Standard library
+- PyPI: Python package index
+
+## Built-in
+
+These are built-in objects that are always available. They are loaded by default and do not need the use of `import`.
+
+- [Built-in **functions**](https://docs.python.org/3/library/functions.html)
+- [Built-in **constants**](https://docs.python.org/3/library/constants.html)
+- [Built-in **types**](https://docs.python.org/3/library/stdtypes.html)
+- [Built-in **Exceptions**](https://docs.python.org/3/library/exceptions.html)
+
+## Standard library {#sec-std-lib}
+
+Standard library consists of several modules (files and packages) available with standard installation.
+
+These have to be loaded using `import`and are not loaded by default like the built-in objects.
+
+Some of these, like `math` and `sys`, are written in `C` for speed.
+
+Full list of available modules with documentation can be found in Python docs: [library reference](https://docs.python.org/3/library/index.html).
+
+### Frequently used modules
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "std-library" # name or number
+package <- "hux" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+tbl_df <- tbl_df[tbl_df$include == TRUE, ][1:3]
+
+tbl <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::merge_repeated_rows(col = c(1)) |>
+    huxtable::set_col_width(value = c(.4, .1, .5)) |>
+    huxtable::set_bold(col = c(1), value = TRUE) |>
+    huxtable::set_text_color(row = -1, col = c(2), value = "purple") |>
+    huxtable::set_bottom_border(TRUE) |>
+    huxtable::set_markdown(row = 1, value = FALSE)
+
+print_tbl_out(tbl, package)
+```
+
+## Python package index (PyPI)
+
+[`PyPI`](https://pypi.org/) handles open source contributions to the language. These are external packages which have to be installed before they can be loaded using`import`.
+
+As Python is one of the most popular languages, it is easy to find a package for almost every use case by searching the web or [`PyPI`](https://pypi.org/).
+
+[`pip`](https://pip.pypa.io/en/stable/) is the installer for external packages on `PyPI`.
+
+### Some important packages
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "ext-library" # name or number
+package <- "hux" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::merge_repeated_rows(col = c(1)) |>
+    huxtable::set_col_width(value = c(.4, .1, .5)) |>
+    huxtable::set_bold(col = c(1), value = TRUE) |>
+    huxtable::set_col_width(value = c(.3, .3, .4)) |>
+    huxtable::set_bottom_border(TRUE)
+
+print_tbl_out(tbl, package)
+```
+
+## Virtual Environments {#sec-venv}
+
+Virtual environments are used to creates separate installation location for external packages, which helps with following
+
+- keep installation of external packages organized for different tasks
+- keep track and manage version requirements for external packages needed for specific projects
+
+At a high level, virtual environment isolates the use of external packages from built-in and standard library.
+
+### Why use a virtual env?
+
+The external packages keep releasing new versions for bug fixes, enhancements and new features.
+
+When working on projects which depend on external packages it is critical to keep track of version of external packages as latest version might no longer support a feature that the project code needed.
+
+When installing packages in base installation there might be a conflict between dependencies of different project's. Some projects might depend on a version of a package while other projects might depend on a different version of the same package.
+
+Some projects might need a specific version of Python itself.
+
+There might be some packages which are needed for one time tasks. This keeps on adding complexity of managing packages which are not needed any more.
+
+All these reasons lead to development of virtual environments and its use is recommended.
+
+### Usage
+
+- **How to create a virtual environment?**
+    - `venv` module is part of standard library and can be used with bash commands
+    - unix/mac: `python3 -m venv <path to new venv>`
+    - win: `py [-v] venv <path to new venv>`
+
+This creates a folder with the name in the given path. Usually it is helpful to name virtual environments starting with `.`, e.g. `.py-venv`. This helps identify that this is a Python virtual environment folder. This dot keeps the folder hidden which is helpful in keeping the folder view clean as the `venv` folder is seldom used directly.
+
+> It is recommended to use Python version in bash commands, while creating and restoring `venv`.
+
+- **how to activate `venv` using bash?**
+    - Linux/Mac:
+        - `source <venv path>/bin/activate`
+    - Windows:
+        - `source <venv path>/Scripts/activate`
+    - Editors, like VSCode, allow to select Python interpreter for running a project
+        - `venv` can be set to be activated by default
+
+Once the `venv` is activated, the associated Python version and external packages installed in the virtual environment are used. Installing packages using `pip` installs them into the activated virtual environment.
+
+- Resources
+    - [Python docs: venv](https://docs.python.org/3/library/venv.html)
+
+### Project dependencies {#sec-venv-proj-dep}
+
+- `venv` along with `pip` can be used to manage project dependencies
+
+- `venv` keeps installed packages isolated in a virtual environment
+
+- `pip` is used to create a list of required external modules installed in `venv`
+    - windows: `py [-v] -m pip freeze > py-requirements.txt`
+    - unix/mac: `python3 -m pip freeze > py-requirements.txt`
+    - version dependencies can be managed as well
+
+- `pip` is used to re-create `venv` by installing required external modules contained in `<py-requirements.txt>` file in `venv`
+    - windows: `py [-v] -m pip install -r py-requirements.txt`
+    - unix/mac: `python3 -m pip install -r py-requirements.txt`
+
+- resources: [pip user guide](https://pip.pypa.io/en/stable/user_guide/)
+
+While using `pip` or `venv` it is advisable to use full command with specific Python version. This ensures that the associated `pip` and `venv` is used.
+
+`pip` records `<package/module name>==<version number installed>`. `pip` documentation has more details how to manage packages for a project using `pip`.
+
+### Structuring `venv`'s {#sec-venv-str}
+
+There are a couple of commonly used strategies for organizing and structuring virtual environments.
+
+- **Centralized approach**: keep all virtual environments in a central location
+    - related projects can share virtual environments
+    - typically location is `$HOME/.venvs/<name of venv>`
+- **De-centralized approach**: each project has its own virtual environment
+    - simple but effective as there is no need to manage conflicts
+    - similar projects can be grouped in a root directory with a common `venv` if needed
+
+> Given the amount of memory used by virtual environments and simplicity of management, de-centralized approach makes more sense unless there is a specific reason.
+
+A sample small project's folder structure with `venv` and `git` could look like below.
+
+- project root
+    - **.git/**
+    - **.py-venv/**
+    - **docs/**
+    - `main.py`
+    - `inputs.py`
+    - `category_1_funcs.py`
+    - `category_2_funcs.py`
+    - `py-requirements.txt`
+    - `.gitignore`

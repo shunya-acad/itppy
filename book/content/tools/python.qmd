@@ -1,0 +1,112 @@
+# Python
+
+## Installation
+
+Python installation resources and instructions, based on operating system, are available at the official website.
+
+- [Download installer](https://www.python.org/downloads/)
+- Instructions
+    - [Unix](https://docs.python.org/3/using/unix.html)
+    - [Mac](https://docs.python.org/3/using/mac.html)
+    - [Windows](https://docs.python.org/3/using/windows.html)
+
+Python installation includes
+
+- CPython interpreter
+- Pre built Python objects, scripts and packages with additional functionality
+    - Built-ins
+    - Standard library
+
+### Check Python installation from bash
+
+- Windows
+
+```bash
+py --list-paths
+```
+
+- Linux/Mac: there are several methods one of which is given below
+
+```bash
+ls -ls /usr/bin/python*
+```
+
+## Ways to run/interact with Python
+
+- Repl
+    - IPython repl: enhanced version of default Python repl
+- Jupyter notebooks
+- Run scripts from command line
+- Run scripts from editor
+
+Python repl and jupyter notebooks are covered in this part. The later two are included in the architecture part of the book.
+
+## Python repl
+
+*repl = read evaluate print loop*
+
+`repl` is a tool to interact with the interpreter.
+
+To start a `repl` simply type `python3`/`py` in bash and press enter, actual command will depend on the operating system and python version.
+
+`repl` is rarely used directly, instead editors use it under the hood to provide functionalities like running and debugging the code. Below are some reasons why this is the case.
+
+- repl does not save work
+- not designed write large programs as it does not have all the tools needed
+
+It is useful in conjunction with editor, to test code short pieces of code or while debugging.
+
+[IPython repl](https://ipython.org/) is newer modern repl. To use ipython instead of default repl, ipython has to be installed. To use it from editor, additional configuration is needed.
+
+## `pip`
+
+[The Python Package Index (PyPI)](https://pypi.org/) is a repository of packages (collection of Python programs) written for use in Python programming language. `pip` is one of the listed packages.
+
+The term package here has special meaning, more than just a regular or namespace package used in Python programming. Package here refers to collection of Python scripts and packages for distribution. In the beginning, details can be avoided, but when needed refer to [Python docs: Installing packaging](https://packaging.python.org/en/latest/tutorials/installing-packages/).
+
+`pip` is the package installer for Python which manages the installation and maintenance of other external packages contributed by developers. It has its own independent website with all the details. [`pip` website](https://pip.pypa.io/en/stable/).
+
+Typically pip is included in Python installation but you can check using bash with any of the below commands.
+
+::: {layout-ncol="3"}
+
+```bash
+pip -V
+```
+
+```bash
+pip -h
+```
+
+```bash
+pip --help
+```
+
+:::
+
+### Usage {#sec-pip-usage}
+
+To install or update refer to [installation guide](https://pip.pypa.io/en/stable/installation/#ensurepip). Once `pip` is installed it is easy to install any external package from cli, `pip install <package name>`, e.g.
+
+```bash
+pip install jupyterlab
+```
+
+Although above works in most cases, it is advisable to use full command with Python version, as given below. This takes care of edge cases when there are multiple Python installations on a pc. Each Python installation can have its own pip or not. Using the below form of installation command ensures relevant pip is used and installation is done in the specified installation. The below command is explicit, use python3 installation's pip and install jupyterlab into python3 installation. If python3 does not have pip installed, it will give error asking to install pip first.
+
+In general use python installation path. For system installation, `python3` for example links to the path directly. For virtual environments, explicit path is needed.
+
+```bash
+python3 -m pip install jupyterlab
+```
+
+When working with virtual environments, which are discussed later (@sec-venv), it is safer to use the below form of command. For Unix based systems (Linux/BSD/MAC)
+
+```bash
+<venv path>/bin/python3 -m pip install jupyterlab
+```
+
+### Requirements file
+
+One of the important feature of `pip` is to manage a project's dependencies, through a `requirements.txt` file. In this book, this is discussed in section on virtual environment in architecture. There is a section dedicated in the official documentation, [link to `requirements` section](https://pip.pypa.io/en/stable/user_guide/#requirements-files).
+

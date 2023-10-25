@@ -1,0 +1,889 @@
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Control Flow
+
+> Control the flow of a computer program
+
+## Introduction
+
+### Overview
+
+_**When do you need to control the flow of a program?**_
+
+- *change outcome based on state of object[s] (condition[s])*
+  - **conditional blocks**: `if...[elif]....[else]`, `match...case`
+- *repeat certain task[s] or iterate through a collection of data*
+  - **loops**: `for...[else]`, `while...[else]` blocks
+- *avoid stopping of program on errors and handle the flow differently*
+  - **error handlers**: `try...[except]...[else]...[finally]` blocks
+- *remove dependency on certain tasks*
+  - **asyncio** (asynchronous input output)
+- *increase efficiency by optimizing redirection of tasks to multiple cpu cores/threads*
+  - **parallel computing**, ...
+
+> Note: square brackets are generally used to represent something optional
+
+As a beginner to programming conditional blocks and loops are sufficient to get started.
+
+Error handlers are not needed for most of the basic stuff, but there are a few cases where it is useful to know the basics. For example it is useful to know the basics of using `try` block for a few situations. Most of debugging is based on the concepts related to error handlers. Editors provide support for debugging using these concepts. Developers rely heavily on using these concepts to handle expected errors differently. Therefore it is useful to understand the basics of error handling as it is certain to make errors and handle them.
+
+Asynchronous input/output (asyncio) and parallel computing are advanced topics used to increase efficiency of larger programs. They are not covered.
+
+### Objectives
+
+For all of the control flow techniques, **conditionals**, **loops** and **error handlers**
+
+- get acquainted to specifications
+- understand the rules and few implications conceptually
+- examples of common use cases
+- understand conceptually when to use what
+- experiment with individual pieces
+
+## Conditional blocks
+
+Conditional blocks use conditions to control and change the flow of a program. Conditions are created using boolean operations.
+
+- `if...[elif]...[elif]...[else]` blocks
+  - covers everything needed from basic conditional blocks
+
+- `match...case...[case_]` blocks
+  - special case where a variable has to be tested for different values
+  - in most cases can be implemented using `if` block
+  - better for code readability
+  - has some additional special features related to pattern matching
+
+### `if` blocks
+
+`if` blocks are used to execute some code only when a condition is evaluated to `True`.
+
+#### Specifications
+
+Below are possible forms of `if` block.
+
+::::: {.columns}
+:::: {.column width=49%}
+
+```python
+if condition:
+    # if block content
+```
+
+```python
+if condition:
+    # if block content
+else:
+    # else block content
+```
+::::
+
+:::::: {.column width=2%}
+::::::
+
+:::: {.column width=49%}
+
+```python
+if condition_1:
+    # if block content
+elif condition_2:
+    # elif block 1 content
+elif condition_3:
+    # elif block 2 content
+else:
+    # else block content
+```
+::::
+:::::
+
+```python
+# execute some short expression conditionally
+if condition: <short expression>
+```
+
+- start an `if` block
+    - `if` statement with an expression ending in colon (`:`)
+- end an `if` block
+    - short expression on the same line
+    - **indented** block of one or more lines of code
+- there can be 0 or more `elif` (else if) blocks
+- there can be 0 or 1 `else` block
+- syntax of `elif` and `else` is same as `if`
+
+##### Ternary operator
+
+Python additionally provides a ternary form for short, one line conditionals. Below is the syntax, where `X` and `Y` are short expressions to be evaluated and returned.
+
+Ternary operator is useful for code readability. It removes the requirement for a multiline `if` block for quick checks required in code.
+
+```python
+X if condition else Y
+```
+
+```{python}
+print("condition True") if 1 > 0 else print("condition False")
+```
+
+```{python}
+print("condition True") if 1 == 0 else print("condition False")
+```
+
+#### Control flow
+
+Flow diagram below illustrates the control flow for a if block.
+
+![](../../../resources/diagrams/control-flow/if-flow.png){width="80%" fig-align="center"}
+
+Basic idea
+
+- check `if` and `elif` conditions sequentially
+    - if any of the conditions evaluate to `True`
+        - execute the corresponding block content and exit
+    - if all of the conditions evaluate to `False`
+        - execute `else` block if present and exit
+
+#### Examples
+
+##### Basic
+
+```{python}
+some_num = 12
+if some_num >= 0:
+    print(f'{some_num} is positive')
+```
+
+##### With `else` block
+
+```{python}
+some_num = 12
+if some_num >= 0:
+    print(f'{some_num} is positive')
+else:
+    print(f'{some_num} is negative')
+```
+
+##### With `elif` block
+
+```{python}
+some_num = 12
+if some_num == 0:
+    print(f'{some_num} is zero')
+elif some_num > 0:
+    print(f'{some_num} is positive')
+elif some_num < 0:
+    print(f'{some_num} is negative')
+```
+
+##### With `elif` and `else`
+
+```{python}
+some_num = 12
+if some_num == 0:
+    print(f'{some_num} is zero')
+elif some_num > 0:
+    print(f'{some_num} is positive')
+else:
+    print(f'{some_num} is negative')
+```
+
+### `match...case` block
+
+Match blocks are used if some object is to be tested against multiple cases. It can be achieved using `if` blocks but `match` blocks are better for code readability and ease of use for the given use case.
+
+`_` is optional and for case when none of the options match.
+
+::::::::: {layout="[[40,-10,40]]"}
+
+```python
+match some_obj:
+    case option_1:
+        # do something and exit
+    case option_2:
+        # do something and exit
+    [case _:
+        # do something and exit
+    ]
+```
+
+```python
+if some_obj == option_1:
+    # do something and exit
+elif some_obj == option_2:
+    # do something and exit
+[else
+    # do something and exit
+]
+```
+:::::::::
+
+More information can be found at [Python documentation for match statements](https://docspython.org/3/tutorial/controlflow.html#match-statements).
+
+## Loops
+
+- Loops are needed for iteration
+    - **repeating** certain pieces of code
+    - iterating over collections to **access**, **operate** or **modify** elements
+- When **number of repetitions** is
+    - **known**: use `for` block
+    - **not known**:  use `while` block
+- It is recommended not to modify the collection that is being iterated,  
+  instead use any of the below solutions
+    - create a new collection
+    - create a copy
+
+> **Iterating** is a common term which refers to going through elements of a collection. **Iterables** and **iterators** in Python are based on this idea.
+
+### `for` block {#sec-for}
+
+#### Specifications
+
+::::::::: {layout="[[45,-10,45]]"}
+
+```{python}
+#| eval: false
+for item in iterable:
+    # do something
+    # item is available
+    print(item)
+```
+
+```{python}
+#| eval: false
+for i in range(n):
+    # do something
+    # i is available
+    print(item)
+```
+
+:::::::::
+
+```python
+for item in iterable: print(item)
+```
+
+Fundamental form
+
+- `for` keyword declares the start of a `for` block
+- `item in iterable` is the generic form
+- `:`, colon, to declare end of `for` declaration
+- code to be repeated, which has access to an item for a given iteration
+    - if a short expression has to be repeated it can be used on the same line
+
+Using this fundamental form other variation are created. e.g.
+
+- `range(n)` function is used to loop through fixed number of times
+    - example to repeat 10 times
+        - `for i in range(10):` i takes values 0 through 9
+        - `for i in range(1, 11):` i takes values 1 through 10
+    - `range()` function is discussed at @sec-range
+- loops can be nested using indentation
+    - useful for working with nested data structures
+
+##### `continue`
+
+`continue` clause causes the loop to jump to next iteration without executing remaining lines in loop.
+
+In the below structure, when the condition is true, item will not be printed.
+
+```{python}
+#| eval: false
+
+for item in iterable:
+    # do something
+    # item is available
+    if condition:
+        continue
+    print(item)
+```
+
+Continue is useful if you need to skip execution of some code for certain elements of the iterable.
+
+##### `break` and `else`
+
+- `break` clause causes exit of the **innermost** loop
+    - is **optional**
+    - **innermost** is critical when there are nested loops
+- `else` clause
+    - is **optional**
+    - is **executed** only if loop ends normally, i.e. no `break` is hit
+
+```{python}
+#| eval: false
+
+for item in iterable:
+    # do something
+    # item is available
+    if condition:
+        break
+    print(item)
+else:
+    print("No break found")
+```
+
+#### Control flow
+
+![](../../../resources/diagrams/control-flow/for-flow.png){width="80%" fig-align="center"}
+
+#### Examples
+
+##### Basic
+
+- Loop through 1 to `n_max = 20`
+    - store even numbers in a list `evens`
+    - store odd numbers in a list `odds`
+
+```{python}
+n_max = 20
+evens = []; odds = []
+for i in range(1, n_max + 1):
+    evens.append(i) if i % 2 == 0 else odds.append(i)
+```
+
+```{python}
+print(evens)
+print(odds)
+```
+
+##### `continue`
+
+In the below example only odd numbers are printed as the loop hits `continue` for even numbers.
+
+```{python}
+for i in range(5):
+    if i % 2 == 0: continue
+    print(i)
+```
+
+##### `break` and `else`
+
+- For a given list of numbers
+    - validate if the numbers are within some limits, e.g. [0, 100]
+    - if all values are within limits
+        - print "validation successful"
+    - if any of the values are outside limits
+        - print "validation failed" with value
+        - exit the loop
+
+```{python}
+correct_list = [65, 24, 53, 91, 59, 81, 93, 7, 78, 10]
+for num in correct_list:
+    if num < 0 or num > 100:
+        print(f"validation failed, list contains {num}")
+        break
+else:
+    print("validation successful")
+```
+
+```{python}
+incorrect_list = [97, 144, 115, 127, 33, 99, 85, 109, 21, 110]
+for num in incorrect_list:
+    if 0 <= num <= 100:
+        continue
+    else:
+        print(f"validation failed, list contains {num}")
+        break
+else:
+    print("validation successful")
+```
+
+> Notice that `else` block is useful in this situation as it is run only when for loop iteration is complete without hitting `break` statement.
+
+> There are different ways to structure the same conditions and required outcome.
+
+##### Nested loops
+
+Print table of numbers from 1 through 12 for multiplication with 1 through 10.
+
+```{python}
+for i in range(1, 13):
+    for j in range(1, 11):
+        end = "\n" if j == 10 else "\t"
+        print(i*j, end=end)
+```
+
+### `while`
+
+#### Specifications
+
+```python
+while condition:
+    # code block
+    [continue]
+    # code block
+    [break]
+[else]:
+    # code block
+```
+
+- loop repeats while **condition** is `True` or `break` statement is hit
+- `continue`, `break`, `else` clauses are optional
+
+Below diagram illustrates the control flow for a while loop.
+
+- main `while` block contents are executed repeatedly until condition is `True`
+    - if `continue` statement is hit
+        - loop restarts and condition is checked again
+- if `break` statement is hit anywhere loop exits
+    - without going through `else` block even if present
+- when condition is `False`
+    - `else` block is executed if present
+    - loop is exited
+
+![](../../../resources/diagrams/control-flow/while-flow.png){width="80%" fig-align="center"}
+
+#### Use cases
+
+A while loop is needed when number of repetitions is not known in advance
+
+- When data structure is dependent on external sources
+    - e.g. user input, web data base, ...
+- Recursive algorithms
+    - Computer science: binary search, merge sort, etc.
+    - Math:
+        - numerical methods of approximations
+        - algorithm to find greatest common divisor
+
+#### Examples
+
+##### Infinite loop
+
+- to be avoided
+- very easy to create by not modifying the condition in while block
+- ***remember `ctrl + c` to bail out***
+
+```{python}
+#| eval: false
+condition = True
+while condition:
+    # forget to set condition = False
+    print("inside infinite loop")
+```
+
+##### Basic
+
+```{python}
+a = 6
+while a != 0:
+    a -= 1
+    if a == 2:
+        print(f'break block: {a = }')
+        break
+    if a == 3:
+        print(f'continue block: {a = }')
+        continue
+    print(f'main block: {a = }')
+```
+
+##### GCD algorithm
+
+Below is gcd algorithm to find the greatest common divisor of 2 integers using while loop.
+
+- given 2 numbers a, b
+    1. find remainder of a, b (*modulo operator `%` gives the remainder*)
+    2. if remainder is zero then b is the gcd
+    3. replace a with b and b with remainder (*in Python this is 1 step using multiple assignment*)
+    4. goto to step 1
+
+Since the number of repetitions needed are based on input, while loop is suitable for this.
+
+```{python}
+#| results: 'hold'
+
+a, b = 9, 6
+rem = a % b
+while rem != 0:
+    print(f'{a = }, {b = }, {rem = }')
+    a, b = b, rem
+    rem = a % b
+
+print(f'{a = }, {b = }, {rem = }')
+print(b)
+```
+
+### Looping techniques
+
+#### Iterators and Iterables
+
+**Iterator** is an object that can be iterated upon its elements only **once**. It is **exhaustible**.
+
+**Iterable** is an object that can be iterated upon its elements repeatedly.
+
+Both cannot be viewed directly and have to be converted into a list or tuple to view contents.
+
+::: {.callout-caution icon="false"}
+Be careful while using iterators since they are **consumable** or **exhaustible**.
+
+Do not store them in variables for re-use.
+:::
+
+```{python}
+some_tuple = "a", "b", "c", "d"
+some_iterator = enumerate(some_tuple)
+```
+
+```{python}
+print(list(some_iterator))
+```
+
+```{python}
+print(list(some_iterator))
+```
+
+{{< include ../../../resources/tables/_iters.qmd >}}
+
+#### Accessing index of iterables (sequences)
+
+It is very common situation where both index and value is needed while iterating over a sequence (sequence is also an iterable).
+
+Python provides a special function, `enumerate(iterable)` to access index and value of items in an iterable.
+
+```{python}
+some_tuple = "a", "b", "c", "d"
+list(enumerate(some_tuple))
+```
+
+```{python}
+for idx, item in enumerate(some_tuple):
+    print(f'{idx=}, {item=}')
+```
+
+It is possible to have access to index without `enumerate` function, which is lengthier, inconvenient and less efficient, hence not required while using Python.
+
+```{python}
+for idx in range(len(some_tuple)):
+    print(f'{idx=}, item={some_tuple[idx]}')
+```
+
+#### Multiple iterables
+
+Python provides a `zip(iterable1, iterable2, ...)` function which returns an iterator with tuples of elements of iterables provided until the shortest iterable is exhausted.
+
+This is helpful when multiple iterables are needed to be iterated through in some connected way.
+
+```{python}
+some_list = [1, 2, 3]
+some_tuple = (4, 5, 6)
+list(zip(some_list, some_tuple))
+```
+
+```{python}
+result = []
+for e1, e2 in zip(some_list, some_tuple):
+    result.append(e1 + e2)
+print(result)
+```
+
+This can be achieved without `zip` but again since it is lengthier and inconvenient, it is not recommended while using Python.
+
+```{python}
+result = []
+for idx in range(len(some_list)):
+    result.append(some_tuple[idx] + some_list[idx])
+print(result)
+```
+
+#### Dictionary
+
+Python provides multiple functions to help iterating over dictionaries.
+
+- keys: `d.keys()`
+- values: `d.values()`
+- keys, values: `d.items()`
+
+All of these return a view object which is an iterator. Most commonly used is `d.items()` as it provides access to both key and value.
+
+```{python}
+some_dict = {"key 1": "value 1", "key 2": "value 2", "key 3": "value 3"}
+for k, v in some_dict.items():
+    print(f'key = {k}, value = {v}')
+```
+
+#### Mutable collections
+
+It is important to remember that while iterating through mutable collections (`list`, `dict`, `set`) it is recommended not to modify the collection as it gets complicated to handle unexpected situations. So best to use the solutions provided when in doubt rather than introducing a bug.
+
+If the collection is immutable then modifying is not allowed and generally not used.
+
+Another thing to note is **modifying the collection** in this context refers to changing the structure of collection, e.g. deleting an item. It does not refer to modifying the value of an item within the collection.
+
+Solutions to this are, if a mutable collection is to be modified then
+
+- create a new collection
+- create a copy while iterating
+
+##### Examples with errors
+
+Below are some examples to illustrate when things go wrong when modifying a mutable collection while iterating through it.
+
+###### List
+
+In the list in example all numbers <= 3 were to be removed, but there is bug due to modifying the list while iterating over it.
+
+Note that 2 is not removed. Figuring out in this case is simple. In the 2^nd^ iteration 1 was already removed from the list and second item was 3 not 2.
+
+This is a simple example hence finding the bug is easy, but as programs get larger it becomes difficult and inefficient to find such bugs.
+
+```{python}
+nums = list(range(1, 6))
+print(nums)
+for num in nums:
+    if num <= 3:
+        nums.remove(num)
+
+print(nums)
+```
+
+###### Dictionary
+
+In case of dictionary it gives a run time error.
+
+```{python}
+#| error: true
+some_dict = {"k1": "v1", "k2": "v2", "k3": "v3"}
+for k, v in some_dict.items():
+    if k == "k2":
+        del some_dict[k]
+```
+
+##### Solutions
+
+###### Create a new collection
+
+####### List
+
+```{python}
+nums = list(range(1, 6))
+new_nums = []
+for num in nums:
+    if not num <= 3:
+        new_nums.append(num)
+```
+
+```{python}
+print(nums)
+print(new_nums)
+```
+
+####### Dictionary
+
+```{python}
+some_dict = {"k1": "v1", "k2": "v2", "k3": "v3"}
+new_dict = {}
+for k, v in some_dict.items():
+    if not k == "k2":
+        new_dict[k] = v
+```
+
+```{python}
+print(some_dict)
+print(new_dict)
+```
+
+###### Create a copy
+
+####### List
+
+```{python}
+nums = list(range(1, 6))
+print(nums)
+for num in nums.copy():
+    if num <= 3:
+        nums.remove(num)
+```
+
+```{python}
+print(nums)
+```
+
+####### Dictionary
+
+```{python}
+some_dict = {"k1": "v1", "k2": "v2", "k3": "v3"}
+print(some_dict)
+for k, v in some_dict.copy().items():
+    if k == "k2":
+        del some_dict[k]
+```
+
+```{python}
+print(some_dict)
+```
+
+## Error handlers {#sec-error-handlers}
+
+### Introduction
+
+#### Errors
+
+- given the number of rules and syntax there are a lot of opportunities for errors
+
+- 2 broad categories
+    - **Syntax error**: caught when the code is being parsed
+        - parsed means interpreter is reading the code to figure out what is to be done
+        - commonly referred to as [**compile time error**]{color="brown"}
+    - **Exception**: error detected during execution
+        - commonly referred to as [**run time error**]{color="brown"}
+
+- Syntax error
+
+```{python}
+#| error: true
+
+a =, 2
+```
+
+- Exception
+
+```{python}
+#| error: true
+# try:
+#     1/0
+# except Exception as e:
+#     print(e)
+eg_num = 1/0
+```
+
+When a run time error occurs, program stops and exception messages are printed along with the traceback. Traceback is a track of where the error occurred in the program to which part of the program lead to running of the line which caused the error.
+
+#### Exceptions
+
+Python has some built-in known exceptions or error types. Exceptions are objects built using object oriented programming.
+
+- Examples
+    - `Exception`: base catch almost all errors
+    - `ZeroDivisionError`: division by zero
+    - `TypeError`: operation not supported by `type`[s] used in operation
+- On run time error, an `Exception` type object is created which has information regarding
+    - `Exception` type
+    - **traceback**
+
+Below figure shows Python's built-in `Exception` hierarchy. More details can be found at [Python documentation for built in exceptions](https://docspython.org/3/library/exceptions.html?highlight=typeerror#built-in-exceptions).
+
+![](../../../resources/diagrams/control-flow/exceptions-hierarchy.png){width="100%" fig-align="center"}
+
+##### `raise`
+
+`raise` statements causes the program to stop with default exception. Optionally a known error can be passed with a custom message, e.g. `raise ValueError("Invalid input")`. `raise` statement can be used anywhere in the program but is suited for use with `try` and `while` blocks, when an expected error is intercepted and has to handled differently.
+
+```python
+raise ValueError("some custom message")
+```
+
+#### Examples
+
+Below are some examples of common errors which are recommended to be tried and experimented in jupyter notebook cells. See the error messages and map them to the Exception hierarchy. Look at the traceback to see how it is structured.
+
+```{python}
+1/0
+```
+
+```{python}
+undefined_var_name
+```
+
+```{python}
+some_list = [1, 2, 3]
+print(some_list[10])
+```
+
+```{python}
+float("text")
+```
+
+```{python}
+"abc"*"xyz"
+```
+
+### `try` blocks
+
+`try...except` blocks are used to [intercept]{color="blue"} and [handle]{color="blue"} [expected]{color="green"} [run time errors]{color="red"} [differently]{color="blue"}. It provides many options like
+
+- ignore the error and continue running the program
+- do some clean up before letting the error stop the program
+- run some code irrespective of error or not
+
+Note that exception handling has a large number of specifications which can be combined in a lot of ways which can lead to complexity in the beginning. This is being covered with the objective of simple usage. All the specifications are for completeness and information.
+
+#### Specifications
+
+`try...[except]...[else]...[finally]`
+
+```python
+try:
+    # try code block
+[except Exception as e:
+    # except code block
+    [raise]]
+[else:
+    # else code block]
+[finally:
+    #  finally code block]
+```
+
+- **required**
+    - there must be at-least one `except` or `finally` block
+    - `else` clause (if present) should be after the `except` block
+- **optional**
+    - there can be multiple `except` clauses
+    - `raise` statement and `else` block are optional
+
+- `try` block statements are always evaluated first
+- `except` blocks are run when they trap  specified **error**
+    - if `raise` statement is hit
+        - `finally` block is run
+        - program is stopped with the `<Exception type>` raised
+- `else` block is run in case of **no error**
+- `finally` block is run ***always***, error or no error
+    - generally used for clean up
+
+![](../../../resources/diagrams/control-flow/try-flow.png){width="90%" fig-align="center"}
+
+##### `except` blocks
+
+`except` statement in a `try` block is used to declare an `except` block. They can be used in 2 forms.
+
+- `except <Exception type>`
+- `except <Exception type> as <variable name>`
+
+`except` block is run if there is a run time error while executing `try` block and the error matches the `<Exception type>` specified.
+
+When second form is used, `<variable name>` is bound to the `<Exception type>` object.
+
+There are 2 concepts involved.
+
+- which `Exception` is supposed to be handled, e.g. `NameError`, `TypeError`, etc.
+- error object
+
+The first concept is of using the exception type. Base `Exception` catches all known errors and is the most generic. In the beginning it should be enough. As the requirements increase there is a need to specify more specific errors. For multiple `except` blocks, it is recommended to have specific exceptions before generic exceptions
+
+The second is the error object. In the beginning it is not of much use as handling the exception should be enough, but as you progress it is this object which helps in dealing different errors differently as it holds a lot of information, like the traceback.
+
+#### Use cases
+
+Try blocks are generally used to **intercept expected errors** and control the outcome if error occurs, use case depends on the context. e.g. 
+
+- avoid stopping program on an expected error
+    - when program depends on external sources, e.g. db operations, web requests, ...
+- do something on an expected error and then raise the error
+- handle different error types differently
+
+#### Examples
+
+##### Ask user input until it is correct {#sec-ask-user}
+
+This is an example for nesting different control flow techniques.
+
+The same problem serves as a use case for using recursive functions which is discussed in @sec-rec-he.
+
+```{python}
+#| eval: false
+
+while True:
+    try:
+        some_int = int(input('Enter an integer...'))
+        print(some_int)
+        break
+    except ValueError:
+        continue
+```

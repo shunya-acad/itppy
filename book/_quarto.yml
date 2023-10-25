@@ -1,0 +1,110 @@
+project:
+  type: book
+
+filters: 
+  -  ".config/color-text.lua"
+execute: 
+  cache: true
+  freeze: true
+  warning: false
+  error: true
+engine: knitr
+knitr:
+  opts_chunk: 
+    comment: ">>> "
+
+book:
+  title: "Introduction to Programming"
+  subtitle: "Using Python"
+  output-file: "itppy-book"
+  search: true
+  reader-mode: true
+  sidebar:
+    collapse-level: 1
+    style: docked
+  downloads: [pdf]
+  chapters:
+    - index.qmd
+    - content/intro/intro.qmd
+
+    - part: "Overview of programming"
+      chapters: 
+        - content/overview/background.qmd
+        - content/overview/languages.qmd
+        - content/overview/applications.qmd
+        - content/overview/learning-map.qmd
+
+    - part: "Tools"
+      chapters:
+        - content/tools/tools-overview.qmd
+        - content/tools/cmd-line.qmd
+        - content/tools/vcs.qmd
+        - content/tools/python.qmd
+        - content/tools/jupyter.qmd
+        - content/tools/editor.qmd
+
+    - part: "Building Blocks"
+      chapters:
+        - content/building-blocks/bb-overview.qmd
+        - content/building-blocks/basics.qmd
+        - content/building-blocks/data-types.qmd
+        - content/building-blocks/control-flow.qmd
+        - content/building-blocks/functions.qmd
+        - content/building-blocks/oop.qmd
+        - content/building-blocks/python-special-features.qmd
+
+    - part: "Architecture"
+      chapters:
+        - content/architecture/arch-overview.qmd
+        - content/architecture/namespaces-scopes.qmd
+        - content/architecture/modules-packages.qmd
+        - content/architecture/ext-packages.qmd
+        - content/architecture/engine.qmd
+        - content/architecture/debug.qmd
+
+    - part: "Design"
+      chapters:
+        - content/design/design-overview.qmd
+        - content/design/dsa.qmd
+        - content/design/regex.qmd
+        - content/design/workflow.qmd
+
+    - part: "Applications"
+      chapters:
+        - content/applications/app-overview.qmd
+        - content/applications/automation.qmd
+        - content/applications/data-analysis.qmd
+
+  # appendices:
+  #   - content/appendices/sample.qmd
+
+toc-depth: 6
+code-block-bg: true
+code-block-border-left: "#3ab2ea"
+highlight-style: github
+latex-auto-install: true
+extract-media: ".resources"
+comments: 
+  hypothesis: true
+
+format:
+  html:
+    theme:
+      light: [default, .config/custom.scss]
+      dark: [darkly]
+    css: .config/custom.css
+    embed-resources: false
+    toc-depth: 4
+    grid:
+      sidebar-width: 400px
+      body-width: 700px
+      margin-width: 400px
+      gutter-width: 1.5rem
+  pdf:
+    geometry:
+      - margin=10mm
+    include-in-header:
+        - '.config/preamble-tables.tex'
+        - '.config/preamble-list-nesting.tex'
+  # docx:
+  #   prefer-html: true

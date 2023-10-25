@@ -1,0 +1,317 @@
+# Command line interface {#sec-cli}
+
+## Overview
+
+### Introduction
+
+There is a lot of ambiguity in terminology. **Terminal** is an old term which refers to a physical interface to access the system. **Console** and **tty** is also often used in similar context, **tty** derives its name from hitorical tele typewriter machine.
+
+**Terminal emulator** is a generic term for an application to provide text input/output environment.
+
+**Shell** is a generic term for an interpreter that provides commands to interact with the system.
+
+**Terminal emulator** and the **shell** program together provide **command line interface**, aka **cli**, to interact with the system (hardware, processes, applications, ...) using text based interface.
+
+Compared to graphical user interface (gui) based interaction with the system, cli is much faster and more powerful, once you learn it.
+
+![](../../../resources/diagrams/tools/cli.png)
+
+### Terminal Emulator
+
+Every operating system gives a default and often is called **terminal**.
+
+- **Windows**
+  - **Windows Console Host**: old
+  - **Windows Terminal**: latest (as of 2023)
+- **Linux**: default depends on the version
+- **Mac**: has its own default terminal emulator referred to as terminal
+
+### Shell
+
+There are several popular shells for Linux based systems.
+
+- **Windows**: command prompt (cmd), powershell
+- **Linux**: bash, zsh, fish, ...
+- **Mac**: earlier it was bash, now (as of 2023) it is zsh
+
+#### Bash
+
+`bash` is the default shell on most linux based operating systems and is available across all operating systems.
+
+- **Linux**: default on most distributions
+- **Mac**: earlier bash was default, latest is zsh, extension of bash
+- **Windows**: easily accessible through wsl, cygwin, git/gitbash
+
+#### What do shell programs do?
+
+Shell provides commands and scripts to manage system.
+
+- Hardware (monitor, keyboard, mouse, network, camera, ...)
+- Processes (logon, startup, users, security, ...)
+- Applications (browser, file explorer, ...)
+- File system (create/delete/rename/move files and folders)
+
+Scripts contain commands and variables, combined using the language specifications, as any other programming language. Scripts behave as other commands and can be used from cli.
+
+#### Use cases
+
+Some examples of where cli is used.
+
+##### Managing Workflow
+
+- Files and directory operations
+- Installation, update, maintenance of applications (software)
+- Automation
+
+##### System Administration
+
+- Files and directory operations
+- Installation, update, maintenance of applications (software)
+- Automation
+- Security: Group and user access
+- Managing databases, servers, processes
+
+#### Note
+
+Most of the tasks that can be done from command line can be done with Python but understanding command line will help use Python better.
+
+:::::::: {.v-center-container}
+:::::: {.callout-warning icon="true"}
+#### Caution
+
+Command line can be dangerous as one wrong command can destroy a large chunk of your work or even bring the system down.
+::::::
+::::::::
+
+:::::: {.callout-important icon="true"}
+#### Important
+... and this happens more frequently with experienced users
+::::::
+
+## Bash
+
+### Resources
+
+- [Homepage](https://www.gnu.org/software/bash/)
+- [Bash manual](https://www.gnu.org/software/bash/manual/)
+
+### Setup
+
+Installation depends on operating system.
+
+- Linux distributions: `bash` is available and default on most distributions
+- MacOS: `zsh` is the default but `bash` is available
+- Windows: `git` comes with `gitbash` which should be enough
+
+For windows, Git is covered in the next chapter. There are some other options for installing bash on windows, [`msys2`](https://www.msys2.org/), [`cygwin`](https://www.cygwin.com/), [`wsl`](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+### Configuration
+
+There are certain aspects which are driven by the terminal emulator program. These are colors, fonts, terminal related keyboard shortcuts, windows and tabs management etc. These are configured directly through terminal program.
+
+Bash configurations involve
+
+- **Environment**: What are the default variables like `$PATH`, `$HOME` etc. available
+- **Prompt**: What information does the prompt show
+- **History**: How and where history is saved
+- **Aliases**: Short codes for frequently used commands
+
+Such settings are configured through `.bashrc`, `.bash_profile`, `.bash_aliases` files which are stored in `$HOME` path, which depends on operating system.
+
+Actual configuration has more details to it and more configuration files. Additionally there are dependencies on the operating system. To learn more, it is advisable to do web search based on OS.
+
+### Commands
+
+Bash is an interpreter that runs tasks using the concept of commands which are usually short codes (functions) to do certain task. They can optionally take flags, options and (positional) arguments.
+
+#### General format
+
+`<command name> [-flag[s]] [-option[s][=/ ]value[s]] [<argument[s]>]`
+
+- **Command name**: are scripts containing code to perform tasks
+    - e.g. `ls` prints files and folders contained in a folder
+    - comes first
+- **Flags (Switches)**: are short codes to alter the behavior of the program
+    - multiple flags can be combined
+    - it is safer to combine and provide all flags before any options and arguments
+    - e.g. `ls -al` changes the way `ls` command lists the files and folders
+        - note that `a` and `l` are 2 flags combined
+        - `ls -a -l` works as well
+- **Options**: are codes that take value
+    - e.g. `head -n=15 <file path>` prints starting 15 lines of the given file
+    - options can use `=` or space, e.g. `head -n 15 <file path>` works
+- **Arguments**: inputs to the command interpreted based on position
+    - e.g. `cp <src> <dst>`: first argument is provided to source to be copied from and second to destination where to copy
+
+The flags and options additionally have long and short forms. e.g.
+
+- `ls -l --all` $\iff$ `ls -al`
+
+There are many variations to how flags, options and arguments can be positioned. The allowed placements vary by commands as well. The safe rule of thumb is
+
+- *Beginning* (after command name): combine **flags** using short forms
+- *Middle*: **options**
+- *End*: **arguments**
+
+#### Types
+
+Commands can be grouped into below types
+
+- **built-ins**: present by default
+    - `man`, `less`, `ls`, `cp`, `mv`, `mkdir`, `rm`, `find`, `grep`, ...
+
+- **command line utilities**
+    - many applications give command line utility commands
+    - e.g. create a Python virtual environment
+      - `python3 -m venv <path to virtual environment>`
+
+- **custom scripts**: create your own
+
+Bash, like other shell programs, have its own *scripting language* which can be used to create scripts. Bash scripts end with `.sh` extension and can be run using  
+`bash <custom_script_name>.sh` command.
+
+This is basic way to run scripts. There are advanced ways using file permissions which can be avoided in the beginning.
+
+Below are some common commands based on category of tasks.
+
+#### Summary
+
+- help: `man`, `<cmd_name> --help`
+- list and print: `ls`, `pwd`, `echo`, `| less`
+- change directory: `cd`
+- create file/directory: `touch`, `mkdir`
+- remove file/directory: `rm`
+- move/rename file/directory: `mv`
+
+#### Getting help
+
+- search web by use-case
+- within terminal: `man <command name>`
+  - `man man`
+  - **to sroll and search** `man man | less`
+- on windows/git-bash `man` will not work
+  - `<command name> --help`
+- check installation location
+  - `which <app name>`
+
+#### List and Print
+
+- list files and folders: `ls`
+- list **all** files and folders: `ls -a`
+- list **all** files and folders in **long format**: `ls -al`
+- print current directory: `pwd`
+- print to console: `echo "content"`
+
+#### File & Folder
+
+##### Change directory
+
+- change directory 1 level up: `cd ..`
+  - change directory 2 level up: `cd ../..`
+
+- `cd <relative dir path>`
+- `cd <absolute dir path>`
+- tab completion
+
+##### Create
+
+- create file: `touch <file-path>`
+  - directory should exist
+
+- create directory: `mkdir <dir-path>`
+- create directory and intermediate directories if does not exist:
+  - `mkdir -p <dir-path>`
+
+##### Remove
+
+- remove file: `rm <file path>`
+- remove empty directory: `rm -r <dir path>`
+- remove non-empty directory: `rm -rf <dir path>`
+
+##### Copy
+
+- copy file:
+
+  `cp <src file path> <dst file path>`
+
+- copy source dir with its content recursively:
+
+  `cp -r <src dir path> <dst dir path>`
+
+- copy only contents of source dir to destination recursively:
+
+  `cp -r <src dir path>/. <dst dir path>`
+
+##### Move (rename)
+
+- move/rename: `mv <src> <dst>`
+  - `src` = old file/directory name
+  - `dst` = new file/directory name
+  - if the `src` and `dst` path are
+    - different => move
+    - same => rename
+
+### Keyboard shortcuts
+
+::::: {.columns}
+
+:::: {.column width=49%}
+
+::: {.callout-note icon="false" .fragment .highlight-current-red}
+### Main
+
+- clear: `ctrl-l` (L)
+- quit: `ctrl-d`
+- copy: `ctrl-shift-c`
+- paste: `ctrl-shift-v`
+:::
+
+::: {.callout-note icon="false"}
+### Delete
+
+- delete till end (from cursor): `ctrl-k`
+- delete till start (from cursor): `ctrl-u`
+:::
+
+::::
+
+:::::: {.column width=2%}
+
+::::::
+
+:::: {.column width=49%}
+
+::: {.callout-note icon="false"}
+### Movement
+
+- move to start: `ctrl-a`
+- move to end: `ctrl-e`
+
+:::
+
+::: {.callout-note icon="false"}
+### Processes
+
+- cancel (kill) running jobs: `ctrl-c`
+- put current process in background: `ctrl-z`
+
+:::
+
+::::
+:::::
+
+::: {.callout-note icon="false"}
+### History
+
+- view history: `history`
+
+- run command from history: `!<#>`
+
+- put command from history: `!<#>:p`
+
+- search previous command: `ctrl-r`
+
+  - *keep pressing `ctrl-r` to go through search list*
+
+:::
+

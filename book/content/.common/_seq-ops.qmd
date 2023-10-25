@@ -1,0 +1,13 @@
+- operations *on* **sequence** itself
+  - **length** (`len(s)`)
+  - **concatenate** (`s1 + s2`), *for same type sequences*
+  - **repeat** (`s*n` or `n*s`) where `n` is the number of repeats
+  - **comparisons**, *for same type sequences*
+
+- operations *on* **items** in sequence
+  - **retrieve by position**: index/slice (`s[i[, j[, k=1]]]`)
+  - `min/max`
+  - **check element's**
+    - **existence**: `e in s`, `e not in s`
+    - **index**: `s.index(e)`
+    - **count**: `s.count(e)`

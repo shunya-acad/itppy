@@ -1,0 +1,12 @@
++-------------------------------------------------+-------------------------------------------------+
+| Stack                                           | Heap                                            |
++=================================================+=================================================+
+| -   used to store smaller data like references  | -   used for storing larger objects             |
+|                                                 |                                                 |
+| -   relatively smaller in size                  | -   size grows as the need of the program       |
+|                                                 |                                                 |
+| -   size does not grow during execution         | -   **garbage collection** is used to clear     |
+|                                                 |     space automatically                         |
++-------------------------------------------------+-------------------------------------------------+
+
+: Stack Vs Heap

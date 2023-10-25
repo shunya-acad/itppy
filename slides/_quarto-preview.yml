@@ -1,0 +1,16 @@
+project:
+  output-dir: _slides/preview
+
+format:
+  revealjs:
+    theme:
+      - default
+      - .config/css/slides-custom.scss
+    slide-level: 4
+    slide-number: c/t
+    smaller: false
+    scrollable: true
+    preview-links: true
+    chalkboard: true
+    incremental: false
+    center: true

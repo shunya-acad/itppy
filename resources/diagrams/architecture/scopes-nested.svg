@@ -1,0 +1,65 @@
+<mxfile host="Electron" modified="2023-06-18T04:00:50.112Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.4.1 Chrome/112.0.5615.204 Electron/24.5.1 Safari/537.36" etag="rEC6a7GtVkep96nW5Lq4" version="21.4.1" type="device">
+  <diagram id="a04e7eHbOWQ25WkcdleF" name="Page-1">
+    <mxGraphModel dx="1105" dy="668" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Fv3Z_BNgQ9TWv0EIz3a4-1" value="" style="ellipse;whiteSpace=wrap;html=1;horizontal=1;verticalAlign=top;fontSize=25;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="1040" height="710" as="geometry" />
+        </mxCell>
+        <mxCell id="Fv3Z_BNgQ9TWv0EIz3a4-2" value="Built-in scope" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="1" vertex="1">
+          <mxGeometry x="465" y="50" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Fv3Z_BNgQ9TWv0EIz3a4-3" value="" style="ellipse;whiteSpace=wrap;html=1;horizontal=1;verticalAlign=top;fontSize=25;" parent="1" vertex="1">
+          <mxGeometry x="80" y="110" width="960" height="610" as="geometry" />
+        </mxCell>
+        <mxCell id="Fv3Z_BNgQ9TWv0EIz3a4-4" value="Global scope&amp;nbsp;(module)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="1" vertex="1">
+          <mxGeometry x="410" y="140" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Fv3Z_BNgQ9TWv0EIz3a4-5" value="" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="305" y="340" width="560" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="Fv3Z_BNgQ9TWv0EIz3a4-6" value="outer function - local scope" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="1" vertex="1">
+          <mxGeometry x="422.5" y="380" width="325" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="alkfc-dq0p0pAmITkVTP-1" value="outer function object referece" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;fontColor=#333333;" parent="1" vertex="1">
+          <mxGeometry x="200" y="230" width="350" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="alkfc-dq0p0pAmITkVTP-2" value="outer function call" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="1" vertex="1">
+          <mxGeometry x="150" y="290" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="alkfc-dq0p0pAmITkVTP-3" value="" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;fontSize=25;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="alkfc-dq0p0pAmITkVTP-2" target="Fv3Z_BNgQ9TWv0EIz3a4-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="550" y="390" as="sourcePoint" />
+            <mxPoint x="600" y="340" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="585" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="alkfc-dq0p0pAmITkVTP-4" value="inner function object referece" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;fontColor=#333333;" parent="1" vertex="1">
+          <mxGeometry x="585" y="230" width="350" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="alkfc-dq0p0pAmITkVTP-5" value="inner function call" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="1" vertex="1">
+          <mxGeometry x="480" y="470" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="alkfc-dq0p0pAmITkVTP-7" value="" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="390" y="529.5" width="380" height="129" as="geometry" />
+        </mxCell>
+        <mxCell id="alkfc-dq0p0pAmITkVTP-10" value="inner function - local scope" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="1" vertex="1">
+          <mxGeometry x="417.5" y="560" width="325" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="alkfc-dq0p0pAmITkVTP-11" value="" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;fontSize=25;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="alkfc-dq0p0pAmITkVTP-5" target="alkfc-dq0p0pAmITkVTP-7" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="550" y="510" as="sourcePoint" />
+            <mxPoint x="600" y="460" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="alkfc-dq0p0pAmITkVTP-12" value="inner function - non local scope" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="1" vertex="1">
+          <mxGeometry x="400" y="410" width="360" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,1442 @@
+---
+title: "Data types"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Introduction
+
+- Data types are the most critical part of any language
+- They are used to **store**, **access** and **operate** on data (information)
+- Numbers and text are the fundamentals
+- Collections provide ways to combine data types: `tuple`, `list`, `set`, `dict`
+- **Data Structures and Algorithms (DSA)** used to design data types and operations (methods)
+
+### Overview {.shrink}
+
+![](../../../resources/mindmaps/python-dataobject-types.png)
+
+::: {.notes}
+- move to mind map
+- do not try to remember all operations quickly
+  - just refer whats needed, gradually it will stick
+:::
+
+### Terminology
+
+- **Collection** is generally used for collection of objects, and it can be compounded, collection of collection of objects.
+
+- **Sequence type** is a collection of objects with preserved order. In base Python, strings, tuples and lists are sequence type.
+
+- Sequences can be **mutable** or **immutable**.
+
+- **Iterable** is any collection of objects from which objects can be retrieved one at a time and hence can be looped through. `str`, `tuple`, `list`, `dict`, `set` are all iterables.
+
+- **Sequence** is a subset of **collections**. All sequences are iterables.
+
+### Objectives
+
+- **Creation and syntax**
+- **Operations**: understand how operations are **structured** across data types
+- **Indexing** and **slicing** for sequence types
+- **Implications**: understand the usage and implications using example use cases given
+    - **Mutable** vs **Immutable** data types
+- **Choosing data types**: understand **when to use which data type**
+
+# None type
+
+- `None` signifies absence of value
+- used in 
+  - conditionals
+    - to avoid error when value is absent
+  - function calls
+- will be covered later
+
+# Numeric types {.noframenumbering}
+
+## Numeric data types {.fragile .smaller}
+
+```{r message=FALSE, warning=FALSE, eval=TRUE}
+#| output: asis
+#| echo: false
+
+tables_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "num-dt-list"
+df <- readxl::read_excel(here::here(tables_file_path), sheet=sheet)
+
+package <- "pander"
+
+create_table(df, package = package) |>
+    print_tbl_out(package = package)
+```
+
+::: {.block  data-latex=""}
+- numeric data types are **immutable**
+- for basic calculations `int` and `float` are sufficient
+  - others are listed for completeness
+- **boolean** and **comparison operations** are discussed separately
+:::
+
+## Operations on numeric data types {.fragile .smaller}
+
+```{r message=FALSE, warning=FALSE, eval=TRUE}
+#| output: asis
+#| echo: false
+
+tables_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "num-dt-ops-list"
+df <- readxl::read_excel(here::here(tables_file_path), sheet = sheet)
+
+package <- "pander"
+
+create_table(df, package = package) |>
+    print_tbl_out(package = package)
+```
+
+
+::: {.block  data-latex=""}
+- using `division` always returns `float`
+- when using `int` and `float`, `float` is returned
+- Other operations
+    - `round(x[, n])` is a builtin function provided
+    - Standard library has more options for [numeric operations](https://docs.python.org/3/library/random.html#module-random)
+        - [`math` module](https://docs.python.org/3/library/math.html#module-math), e.g. `math.floor(x)`, `math.ceil(x)`, `math.trunc(x)` etc.
+        - [`random` module](https://docs.python.org/3/library/random.html#module-random) for pseudo random number generations
+
+:::
+
+#### Increment/Decrement
+
+- `x += n` is same as `x = x + n`
+- `x -= n` is same as `x = x - n`
+
+- Extended syntax in Python
+    - `x *= n` is same as `x = x * n`
+    - `x /= n` is same as `x = x / n`
+    - `x **= n` is same as `x = x ** n`
+
+## Examples
+
+----
+
+- basic example of assigning int and float
+
+::: {.block data-latex=""}
+```{python}
+num1 = 10; num2 = 10.0
+```
+:::
+
+::: {.block data-latex="{}"}
+```{python}
+print(f'{num1 = }, {type(num1) = }')
+print(f'{num2 = }, {type(num2) = }')
+```
+:::
+
+- if decimal is present then, even if number is integer, it is stored as float
+
+----
+
+- Operations with `int` and `float` return `float`.
+
+::: {.block data-latex=""}
+```{python}
+num1 = .25; num2 = 100
+num3 = num2 * num1
+```
+:::
+
+::: {.block data-latex="{}"}
+```{python}
+print(f'{num1 = }, {type(num1) = }')
+print(f'{num2 = }, {type(num2) = }')
+print(f'{num3 = }, {type(num3) = }')
+```
+:::
+
+----
+
+- Objects of type `int` (-5 to 256) are not **duplicated**
+
+
+::: {.block data-latex="{}"}
+```{python}
+some_int_1 = 10; some_int_2 = 10
+```
+:::
+
+::: {.block data-latex="{}"}
+```{python}
+some_int_1 is some_int_2
+```
+:::
+
+----
+
+- Numeric data types are immutable
+
+::: {.block data-latex="{}"}
+```{python}
+some_int = 10
+print(hex(id(some_int)), f'{some_int=}')
+```
+:::
+
+::: {.block data-latex="{}"}
+```{python}
+some_int += 1
+print(hex(id(some_int)), f'{some_int=}')
+```
+:::
+
+# String {.noframenumbering}
+
+Collection > Sequence > Immutable
+
+## Overview {.smaller}
+
+- `str` type object is an **immutable** **sequence** of unicode code points
+    - generally: characters, numbers, symbols
+
+- **sequence type**
+  - like mathematics, order has meaning in sequences
+    - `string` is not same as `trgins`
+  - this helps enable support for **indexing** and **slicing**
+
+- **immutable**
+  - a **new object** is created in memory on modification
+    - referred as **copy-on-modify**
+  - adding/deleting/changing elements is not provided by default
+
+## Specifications {.noframenumbering}
+
+### Overview {.shrink .smaller}
+
+- Strings can be created using
+    - **single quotes**: `'some string'`
+    - **double quotes**: `"some string"`
+    - **multi-line** strings
+        - **triple single quotes**: `'''some string'''`
+        - **triple double quotes**: `"""some string"""`
+    - **raw** strings just need a preceding `r` character for any method
+        - `r"string with \"`, `r'string with \'`
+
+- Special string types
+  - **multiline strings**
+  - **raw strings**
+  - **formatted string literals**
+
+- `print` changes the way results are displayed
+
+### Basic strings
+
+::: {.block data-latex=""}
+```{python}
+#| eval: false
+string_1 = 'using single quotes'
+```
+:::
+::: {.block data-latex=""}
+```{python}
+#| eval: false
+string_2 = "using double quotes"
+```
+:::
+::: {.block data-latex=""}
+```{python}
+#| eval: false
+string_3 = "including \"double quotes\" using double quotes"
+```
+:::
+::: {.block data-latex=""}
+```{python}
+#| eval: false
+string_4 = 'including "double quotes" using single quotes'
+```
+:::
+
+### Multiline strings {.shrink}
+
+- **multiline strings** are created using triple quotes (single/double)
+
+::: {.block data-latex=""}
+```{python}
+string_1 = """This is a multiline string
+with no tabs using triple double quotes"""
+string_2 = '''This is a multiline string
+              with tabs using triple single quotes'''
+```
+:::
+
+::: {.block data-latex="{}"}
+```{python}
+print(string_1)
+```
+:::
+
+::: {.block data-latex="{}"}
+```{python}
+print(string_2)
+```
+:::
+
+### Using backslash (`\`) {.shrink}
+
+- newline: `\n`
+- tabs: `\t`
+- escape quote symbol: `\'` or `\"`
+
+::: {.block data-latex=""}
+```{python}
+string_1 = "Line 1\nLine 2"
+string_2 = "text 1\ttext 2"
+```
+:::
+
+::: {.block data-latex="{}"}
+```{python}
+string_1; print(string_1)
+```
+:::
+
+::: {.block data-latex="{}"}
+```{python}
+string_2; print(string_2)
+```
+:::
+
+> `print` changes the way results are displayed
+
+### Raw strings
+
+- **raw strings** do not escape backslash (`\`)
+  - prepend string with `r` character
+
+::: {.block data-latex="{}"}
+```{python}
+#| error: true
+string_1 = "C:\user\name"
+```
+:::
+
+::: {.block data-latex=""}
+```{python}
+string_2 = r"C:\User\name"
+```
+:::
+
+::: {.block data-latex="{}"}
+```{python}
+print(string_2)
+```
+:::
+
+### Formatted strings {.smaller}
+
+- used for **mixing** **hard coded text** and **variable values with formatting**
+- old syntax
+  - `"text with {0[:fs]} and {1}".format(var1, var2)`
+- new syntax (python version >= 3.6)
+  - `f'text with {var1[:fs]} and {var2[:fs]}'`
+
+> where `fs` to be read as format specifier
+
+### Formatted strings (old) example
+
+::: {.block data-latex=""}
+```{python}
+user_name = "First Last"
+user_age = 20
+my_string = "Name: {0}\nAge: {1}".format(user_name, user_age)
+```
+:::
+::: {.block data-latex="{}"}
+```{python}
+print(my_string)
+```
+:::
+
+### Formatted strings (old) example with format specifier
+
+::: {.block data-latex=""}
+```{python}
+user_name = "First Last"
+user_age = 20
+user_balance = 1000001
+my_string = "Name: {0:^30}\nAge: {1:^30}\nBalance: {2:>30,.2f}".format(\
+  user_name, user_age, user_balance)
+```
+:::
+::: {.block data-latex="{}"}
+```{python}
+print(my_string)
+```
+:::
+
+### Formatted strings (new) example
+
+::: {.block data-latex=""}
+```{python}
+user_name = "First Last"
+user_age = 20
+user_balance = 1000001
+my_string = f"Name: {user_name:^30}\nAge: {user_age:^30}\
+    \nBalance: {user_balance:,.2f}"
+```
+:::
+::: {.block data-latex="{}"}
+```{python}
+print(my_string)
+```
+:::
+
+
+## Operations
+
+- **common operations on sequence types**
+- **operations specific to strings**
+
+### Sequence {.smaller .shrink}
+
+{{< include ../.common/_seq-ops.qmd >}}
+
+#### Index & Slice
+
+- Retrieve by position
+    - Indexing: retrieving elements by position
+    - Slicing: extracting subset of elements of a sequence
+
+#### Index & Slice {.smaller .shrink}
+
+![](../../../resources/diagrams/data-types/seq-idx.png){fig-align="center" height="25%"}
+
+##### 
+
+- Indexing starts at 0 and ends at n - 1
+- Negative indices are allowed
+- Usage
+  - `s[i]`: return item at index `i`
+  - `s[i:j]`: return items from index `i` to `j-1`
+    - returns `j - i` items
+  - `s[i:j:k]`: return items from index `i` to `j-1` with step `k`
+    - `k=1` by default
+
+#### Examples
+
+```{python}
+some_str = "abcdefgh"
+```
+
+Enumerate function is used to get pairs of index and elements of a sequence.
+
+```{python}
+#| output: asis
+
+print([*enumerate(some_str)])
+```
+
+- select `c` to `f`
+
+```{python}
+some_str[2:6]
+```
+
+#### Examples
+
+```{python}
+some_str = "abcdefgh"
+```
+
+```{python}
+#| output: asis
+
+print([*enumerate(some_str)])
+```
+
+- select second last - `g`
+
+```{python}
+some_str[-2]
+```
+
+#### Examples
+
+```{python}
+some_str = "abcdefgh"
+```
+
+```{python}
+#| output: asis
+
+print([*enumerate(some_str)])
+```
+
+- select last 3 elements
+
+```{python}
+some_str[-3:]
+```
+
+#### Examples
+
+```{python}
+some_str = "abcdefgh"
+```
+
+```{python}
+#| output: asis
+
+print([*enumerate(some_str)])
+```
+
+- select `d` onwards
+
+```{python}
+some_str[3:]
+```
+
+#### Examples
+
+```{python}
+some_str = "abcdefgh"
+```
+
+```{python}
+#| output: asis
+
+print([*enumerate(some_str)])
+```
+
+- select up till `d`
+
+```{python}
+some_str[:4]
+```
+
+```{python}
+some_str[:3] + some_str[3:]
+```
+
+### String specific
+
+- There are a lot of default operations ([link](https://docs.Python.org/3/library/stdtypes.html#string-methods))
+    - case, find/replace, checks, strip, split, ...
+    - usually easy to use, look at reference as needed
+
+- regular expressions
+  - searching and matching patterns in strings
+  - depends on module `re` in standard library
+  - advanced topic, avoid at this stage
+
+### Arithmetic Operators
+
+The `+` and `*` operations can be used with strings, other operators will give error.
+
+Note that operations work with compatible type of objects.
+
+- `+`: concatenate strings
+    - works with `str` type objects, i.e. strings
+- `*`: repeat a string
+    - works with a `str` and an `int`
+
+#### Example 1
+
+```{python}
+some_str_1 = "some string 1"; some_str_2 = "some string 2"
+concat_1_2 = some_str_1 + " " + some_str_2
+print(concat_1_2)
+```
+
+#### Example 2
+
+```{python}
+some_str = "xyz"
+print(some_str*5)
+```
+
+#### Example 3
+
+```{python}
+some_str_1 = "some string 1"; some_str_2 = "some string 2"
+concat_1_2 = some_str_1 * some_str_2
+```
+
+# Tuple
+
+## Overview {.smaller .shrink}
+
+Tuple is an **immutable** **collection** of **ordered**, **heterogeneous** objects with below features
+
+- **sequence type** (collection of ordered objects)
+  - this helps enable support for **indexing** and **slicing**
+  - the position of data has meaning
+  - useful in passing and operating on set of objects within code
+
+- **heterogeneous**: *can contain any type of object*
+  - more efficient if items are homogeneous
+
+- **immutable**
+  - modify **in-place** operations are not supported
+    - a new object is created in memory on modification if elements are immutable
+  - adding/deleting/changing elements is not provided by default
+
+- [Python Tutorial: Gentle introduction to tuples](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)
+- [Python library reference: Detailed documentation on sequences](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)
+
+## Specifications
+
+### Creation syntax
+
+- using **commas**
+  - comma decides the tuple
+  - parenthesis are just for code readability
+- using tuple **constructor**: `tuple()`
+- using **unpacking** (Python special syntax)
+- using **comprehension** (covered in Python special features)
+
+### Creation by use case {.smaller .shrink}
+
+- using **elements**
+  - *0 item*: `()` or `tuple()`
+  - *1 item*: `i,` or `(i,)`
+    - `(i)` will give error, comma is needed
+  - *more than 1 item*: `i1, i2, i3` or `(i1, i2, i3)`
+
+- using **elements from another iterable[s]**:
+  - using tuple **constructor**: `tuple(iterable[s])`
+  - using **unpacking**
+    - `t = *l,`, `t = (*l,)`, `t = (*s, *l)`
+    - `t = (*l)` will give error, comma is needed
+
+## Operations {.smaller .shrink}
+
+Tuple has access to **common** operations on **sequence types** with no additional methods.
+
+{{< include ../.common/_seq-ops.qmd >}}
+
+# List
+
+## Overview {.smaller .shrink}
+
+List is a **mutable** **collection** of **ordered**, **heterogeneous** objects with following features.
+
+- **sequence type**
+  - this helps enable support for **indexing** and **slicing**
+  - the position of data has meaning
+  - useful in passing and operating on set of objects within code
+
+- **heterogeneous**: can contain any type of object
+  - more efficient if items are homogeneous
+
+- **mutable**
+  - adding/deleting/changing elements is provided by default
+  - modify **in-place** operations are supported
+
+- Python Tutorial: Gentle introduction to list: [part 1](https://docs.python.org/3/tutorial/introduction.html#lists), [part 2](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)
+- [Python library reference: Detailed documentation on sequences](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)
+
+## Specifications
+
+- **empty** list: `[]` or `list()`
+- using **elements**: `[i1, i2, ...]`, `[i1]`
+- using **elements from iterable[s]**:
+  - using list **constructor**: `list(iterable)`
+  - using **unpacking**
+    - `[*t]`, `[*t,]`, `[*s, *t, *l]`
+  - using **comprehension** (covered in Python special features)
+
+## Operations
+
+- **common** operations on **sequence types**
+- operations on **mutable** sequence types
+
+### Sequence operations {.smaller .shrink}
+
+{{< include ../.common/_seq-ops.qmd >}}
+
+### Mutable sequence operations
+
+- most of the operations are in-place
+  - implies no new object creation on modification
+
+- **operations on sequence itself**
+  - copy (shallow), extend, repeat, reverse
+
+- **operations on items**
+  - delete, replace, append, clear all, remove, insert, pop
+
+- [link](https://docs.Python.org/3/library/stdtypes.html#mutable-sequence-types)
+
+# Range {.smaller .shrink}
+
+Range is a special **iterable** to **generate a sequence of integers** with following characteristics.
+
+- **immutable sequence type**
+- cannot see all elements at a time
+  - have to be unpacked into a list or tuple
+- syntax for creation
+  - `range(stop)`
+  - `range(start, stop[, step])`
+    - **start** is **included**
+    - **stop** is **excluded**
+- primarily used for loops, discussed later
+
+## Examples
+
+```{python}
+print(range(10))
+```
+
+```{python}
+print(list(range(10)))
+```
+
+```{python}
+print([*range(11)])
+```
+
+```{python}
+print([*range(1, 11)])
+```
+
+```{python}
+print([*range(-1, -11)])
+```
+
+```{python}
+print([*range(-1, -11, -1)])
+```
+
+# Dictionary
+
+## Overview {.smaller .shrink}
+
+A dictionary is a **mutable** **mapping type** collection of **heterogeneous objects** **mapped** to **keys** that are **hashable** and **unique** objects.
+
+- in newer versions (>3.9) the order is guaranteed
+
+- collection of `{key: value}` pairs where
+    - **key** can be any **hashable object**
+        - **strings, numeric data types can be used**
+        - immutable type which contain only immutable objects
+        - tuples with immutable objects can be used
+        - **lists, dictionary cannot be used**
+    - **value** can be any **Python object**
+
+----
+
+A dictionary is useful when a collection of objects is needed with the option to do quick searches based on keys rather than index, unlike sequences.
+
+- [Python Tutorial: Gentle introduction to dictionary](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)
+- [Python library reference: Detailed dictionary documentation](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict)
+
+- Concept of hashable objects is introduced in DSA
+
+## Specifications {.smaller .shrink}
+
+- using key value pairs separated by commas
+    - `d = {"key1": value1, "key2": value2, ...}`
+
+- using type constructor
+    - `d = dict([("key1", value1), ("key2", value2), ...])`
+    - `d = dict(key1=value1, key2=value2)`
+
+- create empty dictionary
+    - `d = {}`
+    - `d = dict()`
+
+- using comprehensions (covered in Python special features)
+
+- if a key is passed multiple times, final value exists
+
+## Operations
+
+- operations on **dictionary itself**
+- operations on **keys** and **values**
+
+### Operations on dictionary
+
+- length: `len(d)`
+- clear: `d.clear()`
+- shallow copy: `d.copy()`
+- update from another dictionary: `d.update([other])`
+
+### Operations on keys and values {.smaller .shrink}
+
+- **check** [keys]{color="brown"}: `key in d` / `key not in d`
+- **view all** [keys]{color="brown"}/[values]{color="blue"}: `d.keys()` / `d.values()` / `d.items()`
+- **get all** [keys]{color="brown"}/[values]{color="blue"} as list of tuples: `list(enumerate(d))`
+- **get all** [keys]{color="brown"} as list: `list(d)`
+- **get all** [keys]{color="brown"} as list reversed: `list(reversed(d))`
+- **get [value]{color="blue"}**, error if key not present: `d[key]`
+- **set [value]{color="blue"}**, inserts key if key not present: `d[key] = value`
+- **del [key]{color="brown"}/[value]{color="blue"}**, deletes last entry and returns deleted key, value: `d.popitem()`
+- if key not present return default if defined else error
+    - **get [value]{color="blue"}**: `d.get(key[, default])`
+    - **del [key]{color="brown"}/[value]{color="blue"}** and return deleted value: `d.pop(key[, default])`
+
+# Set {.smaller .shrink}
+
+::: {.block data-latex="{}"}
+Set is a collection of unique objects with operations related to math sets available, e.g. union, intersection. A special dictionary with keys only.
+:::
+
+::: {.block data-latex="{}"}
+In Python specifically, set is an unordered collection of hashable objects. In newer versions (>3.9) the order is guaranteed.
+:::
+
+- [Python tutorial for sets](https://docs.python.org/3/tutorial/datastructures.html#sets)
+- [Python documentation on set type](https://docs.Python.org/3/library/stdtypes.html#set-types-set-frozenset)
+
+Sets are commonly used for
+
+- membership testing: search by value
+- removing duplicates from a collection
+
+## Specifications
+
+A set can be created using curly braces with the exception of empty set.
+
+- create a set with valid keys
+    - curly braces
+    - `set` constructor
+
+```python
+some_set = {key1, key2, ...}
+some_set = set(iterable)
+```
+
+- empty set can be created using `set()` constructor
+    - using `{}` creates an empty dictionary
+
+# Boolean data type
+
+## Overview
+
+- Boolean data type, `True` and `False`, is the fundamental unit for implementing boolean conditional expressions
+
+- Boolean **comparison operator** are used to create elementary conditions
+
+- **Combination operators** allow for building larger conditions by combining multiple conditions
+
+- Conditional control flow blocks, `if` and `match`, use conditions
+
+- There are some additional features which Python provides
+    - covered later in Python special features
+
+## Specifications {.smaller .shrink}
+
+- `bool` in Python, based on usage, can refer to
+    - data type
+    - function
+- `bool` type is used to represent `boolean values`
+- `bool` type inherits from `int` type
+- `bool` data type can take value from 2 built-in constants, `True` and `False`
+  - underlying `int` values are `int(True) = 1` and `int(False) = 0` respectively
+- *can be stored in variables like other objects*
+  - *useful in conditional blocks*
+
+## Examples {.smaller .shrink}
+
+- basics
+
+```{python}
+bool(True), int(True), type(True)
+bool(False), int(False), type(False)
+```
+
+- storing in variables
+  - it is useful to name boolean variables like `is_<some check>`
+
+```{python}
+#| results: 'hold'
+
+is_int = True
+is_int, bool(is_int), int(is_int), type(is_int)
+```
+
+## Boolean comparison operators
+
+### Overview {.smaller .shrink}
+
+::: {.block data-latex="{}"}
+Boolean comparison operators
+
+- used for **object comparisons**, e.g. equality testing
+- return `True` or `False`, if used with **compatible** object types
+- used to create boolean **conditions** which are used in conditional blocks, `if` and `match..case`
+:::
+
+::: {.block data-latex="{}"}
+When used with sequence types (string, tuple, list)
+
+- equality operators (`==`, `!=`) return `True` if all elements are equal (not equal) in content
+- inequality operators only test minimum and maximum as appropriate
+- membership testing check for existence of elements and is most useful
+:::
+
+### Options and syntax {.fragile .smaller .shrink}
+
+```{r}
+#| output: asis
+#| echo: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "bool-ops" # name or number
+package <- "hux" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_df <- tbl_df[tbl_df$Type == "Comparison",][-c(1, 5)]
+
+tbl_out <- create_table(tbl_df, package=package) |>
+    huxtable::theme_article() |>
+    huxtable::set_col_width(c(.3, .25, .4))
+
+print_tbl_out(tbl_out, package)
+```
+
+### Examples
+
+#### Numeric
+
+```{python}
+num_1 = 10; num_2 = 15; num_3 = 10.0
+```
+
+```{python}
+num_1 == num_2, num_1 < num_2, num_1 <= num_3
+```
+
+- can be stored in variables
+```{python}
+cnd = num_1 > num_3
+```
+
+```{python}
+print(f"{cnd = }, {type(cnd) = }")
+```
+
+#### Sequence type
+
+> Membership testing is more useful for sequence types
+
+#### Strings
+
+- test character in a string
+
+```{python}
+some_string = "abcd"
+some_chr_1 = "a"
+some_chr_2 = "e"
+```
+
+```{python}
+some_chr_1 in some_string
+```
+
+```{python}
+some_chr_2 in some_string
+```
+
+----
+
+#### Small string in a longer string
+
+```{python}
+some_long_str = "A reasonably long string"
+some_short_str = "long"
+```
+
+```{python}
+some_short_str in some_long_str
+```
+
+#### Tuples and lists {.shrink}
+
+```{python}
+some_list = [1, 2, 3, 4, (1, 2, 3)]
+some_tuple = 1, 2, 3
+num_1 = 3; num_2 = 5
+```
+
+```{python}
+num_1 in some_list
+```
+
+```{python}
+some_tuple in some_list
+```
+
+```{python}
+num_2 in some_tuple
+```
+
+- store a boolean operation in a variable
+
+```{python}
+cnd = some_tuple in some_list
+```
+
+```{python}
+#| echo: false
+print(f'{cnd = }, {type(cnd) = }')
+```
+
+#### None type
+
+- Single instance of `None` type object created in a Python session
+- `None` is used to signify if a variable is defined but not assigned a value yet
+
+```{python}
+some_var = None
+some_var is None
+```
+
+## Boolean combination operators
+
+> Boolean combination operators use boolean math to provide means of combining multiple comparison operations and conditions to form larger conditions.
+
+### Overview {.fragile .smaller .shrink}
+
+```{r}
+#| output: asis
+#| echo: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "bool-ops" # name or number
+package <- "hux" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_df <- tbl_df[tbl_df$Type == "Combination",][-c(1, 5)]
+
+tbl_out <- create_table(tbl_df, package) |>
+    huxtable::theme_article() |>
+    huxtable::set_col_width(c(.1, .4, .5))
+
+print_tbl_out(tbl_out, package)
+```
+
+### Specifications {.smaller .shrink}
+
+- **basic examples** of combining conditions
+  - `a == 10`
+  - `a >= 5 and a <= 10`
+  - `(a > 0 and a < 10) or (a >= 10 and a < 25)`
+
+- **order of precedence** used for evaluation
+    1. `()`
+    2. comparison operators have same priority (`==`, `!=`, `<`, `>`, `<=`, `>=`)
+    3. `not` > `and` > `or`
+
+- **chained comparisons**
+    - are automatically converted to paired `and` comparisons
+    - example: `a < b < c` is same as `a < b and b < c`
+    - this is specific to Python
+
+----
+
+- for conditions with too many nested combinations
+  it is recommended to use `()`
+    - best for code readability
+    - avoid errors due to precedence order
+
+- *can be stored in variables like other objects*
+    - and used later in control flow
+
+#### Truth tables {.fragile .smaller .shrink}
+
+```{r}
+#| echo: false
+#| results: 'asis'
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "bool-tbl" # name or number
+package <- "hux" # hux, pander, kable
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_df <- tbl_df[c(1,2,3,5)]
+
+tbl_out <- create_table(tbl_df, package = package) |>
+    huxtable::theme_article() |>
+    huxtable::set_align("center") |>
+    huxtable::set_width(1) |>
+    huxtable::set_col_width(.25)
+
+print_tbl_out(tbl_out, package)
+```
+
+# Generic concepts
+
+## Iterable unpacking {.smaller .shrink}
+
+- Special feature in newer versions of Python
+    - introduced in Python 2
+    - [PEP-3132: Extended Iterable Unpacking](https://peps.python.org/pep-3132/) in Python 3
+
+- `*` unpacks remaining items
+- returns a list
+- advantages
+    - **better code readability**
+    - **easier** than using indexing
+    - **faster**
+- gives **error** if there is a **mismatch** in number of items and variables
+
+### Examples
+
+#### 
+
+- Unpack and assign elements of an iterable to variables
+    - get first and remaining items of an iterable
+
+```{python}
+some_list = [1, 2, 3, 4]; some_tuple = (1, 2, 3, 4)
+```
+
+```{python}
+first_item = some_list[0]
+end_items = some_list[1:]
+```
+
+```{python}
+print(f'{first_item = }, {end_items = }')
+```
+
+```{python}
+first_item, *end_items = some_list
+```
+
+```{python}
+print(f'{first_item = }, {end_items = }')
+```
+
+#### 
+
+- Unpack and assign elements of an iterable to variables
+    - get last and remaining items of an iterable
+
+```{python}
+some_list = [1, 2, 3, 4]; some_tuple = (1, 2, 3, 4)
+```
+
+```{python}
+begin_items = some_tuple[0:-1]
+last_item = some_tuple[-1]
+```
+
+```{python}
+print(f'{begin_items = }, {last_item = }')
+```
+
+```{python}
+*begin_items, last_item = some_tuple
+```
+
+```{python}
+print(f'{begin_items = }, {last_item = }')
+```
+
+####
+
+- Unpack and assign elements of an iterable to variables
+    - get first two, last and remaining middle items of an iterable
+
+```{python}
+some_list = [1, 2, 3, 4, 5, 6, 7]; some_tuple = (1, 2, 3, 4, 5, 6, 7)
+```
+
+```{python}
+first_item, second_item, *remaining_items, last_item = some_tuple
+```
+
+```{python}
+print(f'{first_item = }, {second_item = }')
+print(f'{remaining_items = }, {last_item = }')
+```
+
+#### Combine iterables into another
+
+```{python}
+some_list_1 = [1, 2, 3]; some_tuple_1 = (4, 5);
+some_tuple_2 = (*some_list_1, *some_tuple_1)
+```
+
+```{python}
+#| echo: false
+print(f'{some_tuple_2=}')
+```
+
+#### `**` for dictionary
+
+```{python}
+some_dict_1 = {"key1": "value1", "key2": "value2.1"}
+some_dict_2 = {"key2": "value2.2", "key3": "value3"}
+some_dict_3 = {**some_dict_1, **some_dict_2}
+```
+
+```{python}
+#| echo: false
+print(f'{some_dict_3=}')
+```
+
+## Implications of mutability
+
+### Background {.smaller .shrink}
+
+- **Modify in-place**: any modification to the object does not lead to creation of a new object
+
+- **Copy on modify**: create a new copy of object if modified, opposite of modify in-place
+
+- **Mutable** $\implies$ **modify in-place**
+    - Lists and dictionaries can be modified without creation of new object on RAM
+
+- **Immutable** $\implies$ **copy on modify**
+    - Strings and tuples create new objects on RAM if modified
+
+#### 
+
+- Implications
+    - **flexibility**
+    - **efficiency** (in terms of speed and memory)
+
+- **Immutable** objects (strings, tuples) are
+  - **efficient** for **constant data**
+  - **less flexible**
+
+- **Mutable** objects (lists, dictionaries) are
+  - **less efficient** for **constant data**
+  - **flexible**, support in-place modification
+  - ***can be more efficient if data keeps changing over time***
+
+### Changing elements
+
+#### Immutable types - strings, tuples
+
+```{python}
+#| error: true
+some_string = "abcdee"
+some_string[-1] = "f"
+```
+
+```{python}
+#| error: true
+some_tuple = (0, 1, 1)
+some_tuple[2] = 2
+```
+
+#### Mutable types - lists, dictionaries
+
+```{python}
+some_list = [0, 1, 5]
+some_list[2] = 2
+print(some_list)
+```
+
+Strings have internal methods that can change elements, but then they follow copy-on-modify.
+
+```{python}
+some_string_1 = "abc"
+some_string_2 = some_string_1.replace("a", "b")
+```
+
+```{python}
+print(f'{some_string_1=}, {some_string_2=}\n\
+    {some_string_1 is some_string_2 = }')
+```
+
+#### 
+
+```{python}
+some_string = "abc"; some_string_orig_id = hex(id(some_string))
+```
+
+```{python}
+#| echo: false
+print(f'{some_string=}, {some_string_orig_id = }')
+```
+
+```{python}
+#| echo: false
+print(f'{hex(id(some_string.replace("a", "b"))) = }')
+```
+
+```{python}
+#| echo: false
+print(f'{some_string=}, {some_string_orig_id = }')
+```
+
+```{python}
+some_string = some_string.replace("a", "b")
+```
+
+```{python}
+#| echo: false
+print(f'{some_string=}\n{hex(id(some_string)) = }\n{some_string_orig_id = }')
+```
+
+### Propagation of changes
+
+Mutable types like lists or dictionaries, when passed around through variable assignment, changes are propagated.
+
+- when you make changes to original list they propagate
+  - this is required in many cases
+  - but can also lead to a bug
+  - *be aware of the concept*
+
+- to *avoid default behavior* when needed use
+  - **constructor** `list(iterable)`
+  - **unpacking** `[*iterable]`
+  - **loops**
+
+```{python}
+some_list_1 = [1, 2, "a", "b"]
+some_list_2 = some_list_1
+```
+
+```{python}
+print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
+```
+
+```{python}
+some_list_1[2] = "abc"
+```
+
+```{python}
+print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
+```
+
+```{python}
+some_list_2[-1] = "xyz"
+```
+
+```{python}
+print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
+```
+
+- using constructor or unpacking does not pass the object itself
+
+```{python}
+some_list_1 = [1, 2, "a", "b"]
+some_list_2 = list(some_list_1)
+```
+
+```{python}
+#| echo: false
+print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
+```
+
+```{python}
+some_list_1[2] = "abc"
+```
+
+```{python}
+#| echo: false
+print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
+```
+
+- using constructor or unpacking does not pass the object itself
+
+```{python}
+some_list_1 = [1, 2, "a", "b"]
+some_list_2 = [*some_list_1]
+```
+
+```{python}
+print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
+```
+
+```{python}
+some_list_1[2] = "abc"
+```
+
+```{python}
+print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
+```
+
+### Mutable in immutable {.shrink}
+
+- `tuple` is immutable in terms of its element objects
+
+- the contained object remains mutable if it is mutable
+
+```{python}
+some_list = [1, 2, 3, 4, 5]
+some_tuple = (some_list, "some other object")
+```
+
+```{python}
+print(f'{some_list=}\n{some_tuple=}\n{some_list is some_tuple[0] = }')
+```
+
+```{python}
+some_list.pop()
+```
+
+```{python}
+print(f'{some_list=}\n{some_tuple=}\n{some_list is some_tuple[0] = }')
+```
+
+#### 
+
+- if only contents are needed and propagation is to be avoided use **unpacking** or **constructor**
+
+```{python}
+some_list = [1, 2, 3, 4, 5]
+some_tuple_1 = *some_list,; some_tuple_2 = tuple(some_list)
+```
+
+```{python}
+print(f'{some_list=}\n{some_tuple_1=}\n{some_tuple_2=}')
+print(f'{some_list is some_tuple_1 = }')
+print(f'{some_list is some_tuple_2 = }')
+```
+
+####
+
+```{python}
+some_list.pop()
+```
+
+```{python}
+print(f'{some_list=}\n{some_tuple_1=}\n{some_tuple_2=}')
+print(f'{some_list is some_tuple_1 = }')
+print(f'{some_list is some_tuple_2 = }')
+```
+
+### Shallow vs deep copy
+
+- **Shallow copy**: creates a new object for the collection not elements
+    - Default copy method available with collections (string, tuple, list, dictionary)
+
+- **Issue**: if elements in nested collection is mutable
+
+- **Solution**: The standard library has `copy` module which has `deepcopy`
+
+- **Deep copy**: create new objects for collection and its elements recursively
+
+#### Example {.shrink}
+
+```{python}
+import copy
+some_list = [1,2,3]; some_tuple = (4, 5); some_dict = {"six": 6, "seven": 7}
+some_list_1 = [some_list, some_tuple, some_dict]
+some_list_2 = some_list_1.copy()
+some_list_3 = copy.copy(some_list_1)
+some_list_4 = copy.deepcopy(some_list_1)
+```
+
+```{python}
+#| echo: false
+print(f'{some_list_2 is some_list_1 = }')
+print(f'{some_list_3 is some_list_1 = }')
+print(f'{some_list_4 is some_list_1 = }')
+print(f'{some_list_2[0] is some_list_1[0] = }')
+print(f'{some_list_3[0] is some_list_1[0] = }')
+print(f'{some_list_4[0] is some_list_1[0] = }')
+```

@@ -1,0 +1,31 @@
+<mxfile host="Electron" modified="2023-07-10T03:29:57.566Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.1 Chrome/112.0.5615.204 Electron/24.6.1 Safari/537.36" etag="lCu5dLt0PrQ5plbK0xEd" version="21.6.1" type="device">
+  <diagram name="Page-1" id="RAzFXFKGDU9Yczn-7tU3">
+    <mxGraphModel dx="1050" dy="635" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Gp066AqFP7StEyIaWlab-1" value="&lt;div style=&quot;color: rgb(51, 51, 51); background-color: rgb(245, 245, 245); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace, &amp;quot;MesloLGM NF&amp;quot;, &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-weight: normal; font-size: 24px; line-height: 19px;&quot;&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;color: rgb(119, 119, 119); font-weight: bold; font-size: 24px;&quot;&gt;[&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt;item&lt;/span&gt;&lt;span style=&quot;color: rgb(119, 119, 119); font-weight: bold; font-size: 24px;&quot;&gt;**&lt;/span&gt;&lt;span style=&quot;color: rgb(156, 93, 39); font-weight: bold; font-size: 24px;&quot;&gt;2&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: rgb(75, 105, 198); font-weight: bold; font-size: 24px;&quot;&gt;for&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; item &lt;/span&gt;&lt;span style=&quot;color: rgb(75, 105, 198); font-weight: bold; font-size: 24px;&quot;&gt;in&lt;/span&gt;&lt;span style=&quot;color: rgb(207, 73, 86); font-weight: bold; font-size: 24px;&quot;&gt; some_itr&lt;/span&gt;&lt;span style=&quot;color: rgb(119, 119, 119); font-weight: bold; font-size: 24px;&quot;&gt;]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=24;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="440" y="200" width="440" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Gp066AqFP7StEyIaWlab-2" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=-90;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="500" y="200" width="20" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Gp066AqFP7StEyIaWlab-3" value="expression" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="480" y="260" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Gp066AqFP7StEyIaWlab-4" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=-90;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="705" y="110" width="20" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="Gp066AqFP7StEyIaWlab-6" value="loop" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="685" y="260" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Gp066AqFP7StEyIaWlab-7" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=90;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="645" y="-15" width="20" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="Gp066AqFP7StEyIaWlab-8" value="braces for list" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="566.25" y="150" width="177.5" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

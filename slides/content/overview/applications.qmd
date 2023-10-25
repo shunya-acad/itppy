@@ -1,0 +1,166 @@
+---
+title: "Applications"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Embedded Devices
+
+- Across industries more and more robotic devices are in use for automation of manual tasks.
+
+- Most of this is done using assembly languages and C/C++ by embedding the final machine code in the robotic device itself.
+
+# Operating Systems
+
+- Major operating systems like Microsoft Windows, Apple Mac, Linux distributions are built with C/C++.
+
+- Mobile devices have their own operating systems like Google's Android and Apple's IOS.
+    - These are written in multiple languages but use C heavily.
+
+- OS provides a default set of operations to interact with the hardware.
+
+##
+
+- There are several smaller applications to interact with components of hardware
+    - input devices: keyboard, mouse, camera, microphone
+    - output devices: display, speakers
+    - network devices
+    - hard disk: file system
+
+- All the smaller applications are glued by the operating system and a graphical user interface is provided to interact with the hardware.
+
+- This is done through desktop applications like file manager, text editor, photo viewer etc.
+
+# CLI = Terminal + Shell
+
+- Terminal is the first layer of interaction provided by the os.
+
+- Terminal is a tui application which hosts a shell program.
+
+- Shell program is an interpreter running the commands written in shell language.
+
+- Terminal and shell programs are mostly written in C/C++ too.
+
+- Terminal and shell together provide the command line interface or CLI.
+
+# Desktop applications
+
+- Examples of desktop applications are the file manager, media viewer etc.
+
+- A desktop application is simply a program that can run on the os and provide means to perform certain tasks.
+
+- Some are provided by the os as default applications while others like Adobe's Acrobat, Photoshop etc. are provided by companies.
+
+##
+
+- In addition individual developers and group of developers can provide desktop applications through Windows app store or Apple store. Linux distributions have their own app stores.
+
+- Microsoft Office applications (word, excel, powerpoint, access database) are written in C/C++.
+
+- [LibreOffice](https://www.libreoffice.org/discover/libreoffice/) is the free version of Microsoft Office which is developed using multiple languages like C++, Java, XML, Bash, SQL, etc.
+
+# Databases
+
+Databases are applications which specialize in storage, maintenance and operations on data. Most of them are built using C or C++.
+
+## {.fragile .smaller}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "databases" # name or number
+package <- "pander"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_df <- tbl_df[c(1,3:5)]
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+# Websites
+
+Web technologies have become popular with the creation and development of browsers and web networks.
+
+- Front end (GUI) is based on HTML, CSS and JavaScript
+- Backend functionalities: like databases, analytics can be developed in language of choice
+
+In practice there are many frameworks available for development which provide standard templates of pre built code for different functionalities.
+
+## {.fragile}
+
+```{r}
+#| echo: false
+#| output: asis
+#| cache: false
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "langs-web" # name or number
+package <- "pander"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE)
+    # huxtable::set_bold(col = 1, value = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+##
+
+**How do browsers run code?**
+
+Browsers are primarily running **JavaScript** using their own set of mapping engines.
+
+Earlier the browser JavaScript engines were using interpreter approach but now have shifted to JIT approach like Java.
+
+- Google Chrome: V8 engine
+- Mozilla Firefox: SpiderMonkey
+- Apple Safari: JavaScriptCore
+- Microsoft Edge: Chakra
+
+
+# Mobile Applications
+
+- Mobile applications for Android and IOS are like desktop applications but designed to use limited resources of mobile.
+
+- These are primarily oriented to use touch input.
+
+- Google play and Apple store host applications developed by companies, individuals and group of developers.
+
+# Data Analysis
+
+- With the continuous increase in volume of data collected, data analysis & visualization, artificial intelligence, machine learning are getting developed and used heavily for analysis and decision making.
+
+- Python and R are the languages used in this field as there is a lot of dependence on scientific computing, statistics and math.
+
+- Basic data analysis is helpful for everyone using technology across all domains.
+
+# Automation
+
+## Documentation
+
+- There are tools like [Quarto](https://quarto.org/) available to automate documentation in multiple output formats.
+
+- Quarto is based on [Pandoc](https://pandoc.org/) which is an application written in Haskell programming language for conversions between different markup languages.
+
+- Quarto uses Pandoc's markdown syntax which makes writing documents as easy as writing text in a word processor or notepad.
+
+- Content once written can be exported to different formats, html based website, pdf, word etc. This book has been written using Quarto.
+
+## System tasks
+
+- Shell and Python scripts are used to automate a large number of system tasks both for personal and official work.
+
+- Task can be as simple as creating a backup of your important files to more complex tasks to create templates of a project or task which you can create with automatic time and date stamps and other content pre-filled.
+
+- This book therefore introduces system task automation later as an application of programming.
+

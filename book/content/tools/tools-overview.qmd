@@ -1,0 +1,71 @@
+# Overview {.unnumbered}
+
+## Background
+
+To be able to use any of the tools a computer with an operating system is required. Computers come with 2 major commercial operating system options are Windows and Mac. Then there are a large number of free (in context of price) and open source Linux (Unix based) distributions. Mac is itself based on Linux so has similar workflow as other Linux distributions. Newer windows machines can run a Linux distribution using wsl or a virtual machine.
+
+With the evolution of programming, there has been evolution of tools to write and execute programs. Learning these tools is not a one time task and takes time.
+
+## Introduction
+
+Below is an overview of main tools used with their primary uses in context of programming.
+
+- **Operating system**
+  - **Command line interface** (**CLI**)
+      - manage files
+      - build and run files and projects
+      - manage system installations and updates
+  - **Version control system** (**VCS**): manage history of changes
+  - **Python**:
+      - **CPython installation**: interpreter, built-ins, standard library
+      - **External packages**
+  - **Editor**: compilation of tools needed in one place
+
+## Resources
+
+Linux foundation offers a course, [Introduction to Linux](https://training.linuxfoundation.org/training/introduction-to-linux/). This should provide a good background on how an operating system provides an interface to work on a computer. There are some parts of the course, example bash scripting, which should be referred to after getting some experience with programming.
+
+[MIT Course: The Missing Semester of Your CS Education](https://missing.csail.mit.edu/) covers the tools needed. You can refer to cli and Vim (editor) part ignoring what seems advanced or irrelevant.
+
+These can be considered as an optional pre-requisites.
+
+## Objectives
+
+The chapters in this part provide background and introduction to these tools, to help get started and act as notes for reference in the beginning. There are a lot of choices for each of the tools, some recommendations are provided.
+
+There is a lot of learning involved with the tools, specially cli and editor, as there is a lot of functionality and it keeps evolving. Therefore it makes sense to start gradually, focus on using the features when needed, research when there is spare time.
+
+Usage, e.g. configuration of advanced editors like NeoVim, requires knowledge of programming. Therefore just an introduction to the tools is provided to act as quick start guides, to use them while learning to program. Once you learn to program, you can learn more about the tools using reference to resources provided and also do an independent research.
+
+![](../../../resources/diagrams/tools/tools-timeline.png)
+
+### CLI
+
+Basic usage of CLI is independent from programming. The built-in commands can be used as is for normal tasks while working on a computer. These are included.
+
+Scripting is typically used to automate repetitive tasks. The scripting part can be learnt gradually after introduction to programming as the requirements arise. The [Bash manual](https://www.gnu.org/software/bash/manual/) and the [Linux course](https://training.linuxfoundation.org/training/introduction-to-linux/) should be enough to get to a decent stage.
+
+### VCS
+
+Git is introduced here to provide a high level introduction for familiarity and basic usage.
+
+After learning basics of Git, you can start experimenting with it using CLI. For example, initialize a rough repository for the files you create while learning this content and create some commits, view logs. Once you move to editor you can use the integrated gui support for Git.
+
+VCS is typically used for large coding projects and in practical set up has a lot more to it. Actual details will depend on the set up, which you can learn if needed.
+
+### Python
+
+Installation and management of Python and external packages is a requirement for programming with Python and will be used throughout.
+
+### Jupyter notebooks
+
+Jupyter notebooks are introduced to do experiments by executing small pieces of code in isolation with annotation, like while learning the building blocks.
+
+Although experimentation with small pieces of code can be done using a regular Python script, Jupyter notebooks provide an extra option with other functionality like basic documentation, interactively view data and visualization, required for data analysis.
+
+### Editor
+
+Editor is used after learning about scripts and packages in Architecture part.
+
+It is the main tool to do programming, so it will be used throughout.
+

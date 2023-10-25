@@ -1,0 +1,135 @@
+# Editor {#sec-vscode}
+
+## Overview
+
+### Introduction
+
+Editor combines most of the tools and functionality needed for programming in one interface. Therefore, it is the tool which is used most while programming.
+
+### Background
+
+As the programming languages evolved, so did the tools, specially editors. Historically there were two primary types of editors, text based lightweight editors (e.g. Emacs, Vim, Nano, Atom) and full fledged integrated development environments or IDE's (e.g. Visual Studio, IntelliJ Idea).
+
+IDE's were loaded with lot of features for developers, but used a lot of CPU and RAM. IDE's conventionally were designed for use with specific languages and provided a lot of features for development in that language. IDE's were focussed towards ease of use to attract developers towards specific platforms and frameworks.
+
+The text based editors were lightweight with less features but generic. Text based editors have evolved to be able to be configured to as IDE while being generic, they can be configured for use with almost any programming language. e.g. VSCode (based on Atom), Emacs, NeoVim (Based on Vim). Emacs was an exception, it was light weight by default, but provided extensibility to configure it as much more powerful than a conventional IDE, but that required good programming skills in Lisp (programming language).
+
+Currently (as of 2023) the boundary is blurred because of technologies like language server protocol (lsp). For example, VSCode, a text editor based on Atom, is light weight but can work like an IDE using extensions (plugins) without much knowledge of programming. Emacs and NeoVim are also similar but not as easy to configure, but once you know programming then they can be configured to be much more powerful.
+
+_Plugins or extensions are pieces of code to add some functionality to a computer application._
+
+### Features
+
+Below are some features that an editor can have. Some are independent of programming language and some depend on the programming language.
+
+Even features that are specific to a programming language, need initial configuration specific to the programming language. Post that much of the interaction in editor, like keyboard shortcuts and commands, remain the same.
+
+Therefore, it makes sense to choose an editor which has support for most languages.
+
+:::: {layout="[[-5,45,-5,45]]"}
+
+::: {.callout-note icon="false" data-latex=""}
+### Common features
+
+- User interface
+    - themes
+    - windows
+    - frames
+- Editing
+    - tabs/spaces
+    - folding
+    - multiple cursors
+    - keybindings
+- Outline
+    - project files
+    - vcs
+    - extensions
+- Terminal
+- Projects & Workspaces
+- Version control
+:::
+
+::: {.callout-note icon="false" data-latex=""}
+### Language specific features
+
+- Syntax highlighting
+- Auto
+    - completion
+    - formatting
+    - linting
+    - refactoring
+    - snippets
+    - help/documentation
+- Object browser
+- Debugger
+- Compile/build/run
+- Testing
+:::
+::::
+
+### Options
+
+There are a lot of editors available. There are some editors specific to a language and some are generic. Below are examples of some popular editors.
+
+It makes sense to use a generic editor as it reduces effort while using multiple languages. This is because you can leverage the learning involved for language independent common features. Some popular open source options are listed below with features.
+
+#### Python Specific
+
+- [PyCharm](https://www.jetbrains.com/pycharm/)
+- [Spyder](https://www.spyder-ide.org/)
+- [RStudio](https://posit.co/products/open-source/rstudio/)
+
+#### Generic
+
+##### Vim
+
+- [Homepage](https://www.vim.org/)
+- Plain text editor
+- Steep learning curve
+- Modal key bindings are powerful
+- Useful for quick changes directly from terminal
+- Extensions are available for additional functionality
+- [NeoVim](https://neovim.io/) is based on Vim
+    - advanced features
+    - offers extensibility with Lua programming language
+    - neorg, inspired by Emacs org mode, under development
+- Faster than most other editors
+- Works from cli
+
+##### Emacs
+
+- [Homepage](https://www.gnu.org/software/emacs/)
+- Very powerful and hackable using `emacs lisp` language
+- Steep learning curve
+- [Spacemacs](https://develop.spacemacs.org/) (a modified distribution of Emacs) is a good blend of vim keybindings and emacs
+- Extensions are available for additional functionality
+
+##### VSCode
+
+- Works out the box
+- Easy to configure
+- Easy to use
+- Supports Jupyter notebooks
+- Highly configurable
+- Light weight
+- Supports most of the languages
+- Supports most of functionality required
+- Extensions available for additional functionality
+
+## Recommendation
+
+VSCode is recommended to begin programming with, specially because of ease of use in getting started.
+
+Keybindings in VSCode can be configured. It is recommended to learn and use Vim key bindings. Learning Vim keybindings will help using Vim when needed. [VSpaceCode](https://vspacecode.github.io/docs/) extension is useful as it includes Vim keybindings and additionally allows integration of all keybindings in more mnemonic style.
+
+## Resources
+
+VSCode is well documented at [VSCode docs](https://code.visualstudio.com/docs/). Below are recommended sections to get started.
+
+- [Setup](https://code.visualstudio.com/docs/setup/setup-overview)
+    - [Keybindings](https://code.visualstudio.com/docs/getstarted/keybindings#_keymap-extensions)
+- [Introductory video series](https://code.visualstudio.com/docs/getstarted/introvideos)
+- [Python setup](https://code.visualstudio.com/docs/python/python-tutorial)
+- [Profiles](https://code.visualstudio.com/docs/editor/profiles)
+
+As you progress you can learn and use more features using the documentation.

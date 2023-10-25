@@ -1,0 +1,226 @@
+---
+title: "Modules & Packages"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Introduction
+
+## Background
+
+- Python repl does not offer saving and repeating code.
+    - All the work is gone once the repl is closed.
+    
+- Jupyter notebooks are good for interactive tasks but not useful for large programs.
+
+- Scripts provide additional functionality.
+    - Save and run large programs from command line
+    - Save and re use definitions, like variables, functions and classes, related to a task
+        - e.g. standard library, external modules and packages
+
+- Packages help organizing scripts for large projects
+
+## Resources
+
+Python documentation on modules and packages
+
+- [Python tutorial: Modules & Packages](https://docs.python.org/3/tutorial/modules.html#modules)
+- [Python reference: `__main__`](https://docs.python.org/3/library/__main__.html)
+- [Python reference: Import system](https://docs.python.org/3/reference/import.html?highlight=namespace#the-import-system)
+- Namespace packages
+    - [Python reference](https://docs.python.org/3/reference/import.html?highlight=namespace#namespace-packages)
+    - [PEP 420](https://peps.python.org/pep-0420/)
+
+# Module
+
+## Terminology
+
+In Python a module can refer to several different things.
+
+- Commonly module refers to a file with `.py` extension.
+- Packages are special type of modules, but referred to as packages explicitly
+- `module` is also a `type` or `class`
+- Python object once the module file or a package is loaded using `import`
+    - instance object of `type` `module`
+
+## Module objects
+
+There are 3 cases when module type object is created using import in Python
+
+- *file*: a file or script containing Python code
+- *package*: a folder containing sub-folders and scripts
+    - *regular* package: declared using `__init__.py` file
+    - *namespace* package
+
+# Regular package
+
+- Any folder with a `__init__.py` file, even if empty, is treated as a **regular package**.
+
+- Packages provide a way to organize and exchange code as they can contain packages (sub-packages) and file type modules.
+
+- Optionally, a regular package can also contain a `__main__.py` file, this is run when the package is run as the top level environment.
+
+- Cross referencing between modules in sub packages using relative imports.
+
+# Naming
+
+##
+
+**Convention**: lower snake case
+
+**Rule**: names containing special characters other than `_` give error, essentially same rules as for variable names
+
+## Pep-8 Conventions {.fragile .smaller}
+
+```{r}
+#| output: asis
+#| echo: false
+#| cache: false
+
+tables_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "pep-8-conventions"
+package <- "hux" # hux, pander, kable
+
+df <- readxl::read_excel(here::here(tables_file_path), sheet=sheet)
+
+tbl <- create_table(df[c(1,2),], package = package, apply_theme = TRUE)
+
+print_tbl_out(tbl, package)
+```
+
+# Usage
+
+There are 2 main uses of modules and packages.
+
+- Execution as top level environment  
+   Python `'__main__'` system manages this
+- Organizing and cross referencing objects  
+   Python `import` system manages this
+
+## `__main__`
+
+- Manages the run time behavior of modules and packages
+- Only run when a module or package is run as top level, i.e. directly
+    - `python3 -m <module or package name>`
+        - works when in the same directory as the module or package
+        - module name is used without `.py` extension
+    - `python3 <module or package path>`
+        - full path includes `.py` extension for files
+
+### Modules
+
+When a module is run directly as top level environment
+
+- `__name__` is set to `'__main__'`
+- all code is run
+- the code is isolated using `if __name__ = '__main__'` block
+    - the code is not run with `import`
+
+### Regular packages
+
+When a package is run directly as top level environment
+
+- `__name__` is set to `'__main__'`
+- all code is run
+- the code is isolated using `__main__.py` file
+    - the code is not run with `import`
+- `if __name__ = '__main__'` block not used
+    - gives error if present in `__init__.py` or `__main__.py`
+
+## `import` system
+
+### Introduction {.smaller}
+
+- Helps manage using object definitions (variables, functions, classes) from other scripts.
+- It loads the file or package as a module type object with access to exported objects
+- Python assigns values to some special attributes under the hood
+    - `<module name>.__name__`: module's name or `__main__` if run directly
+    - `<module name>.__file__`: absolute path to the module location
+    - `<module name>.__package__`: is populated if is a regular package or a part of one, else is empty string
+    - `<module name>.__path__`: exists if module is a regular package or is part of one, else gives error
+
+### Modules
+
+Full module (file or package) can be imported using below statements.
+
+- `import <module name>`
+- `import <module name> as <module alias>`
+
+### Objects & sub-modules {.smaller}
+
+- `from <module_name> import <object_name>`
+    - `from <module name> import *`
+    - `from <module name> import <object name>`
+    - `from <module name> import <sub module name>`
+    - `from <module name> import <object name> as <object alias>`
+    - `from <module name> import <sub module name> as <module alias>`
+
+- `from <module name> import *` is not recommended when using other packages
+    - it pollutes the namespace
+    - creates name clashes
+    - `<module name>.<obj name>` is better for code readability  
+      It is provides information about source of the object used
+
+### Runtime behavior {.smaller}
+
+Whenever a file or package type module is imported the following things happen
+
+- Python interpreter checks if the module/package is already loaded into current namespace
+    - if the module/package is loaded
+        - nothing is done
+    - if the module/package is not loaded
+        - Python interpreter runs the code in module or `__init__.py` for a package
+        - main code is not run
+        - all the exported objects are loaded
+
+- When only a sub package is imported Python still loads the parent package
+    - therefore there is no efficiency gain if only a sub package is imported
+
+# Applications
+
+## 
+
+A Python project might be intended to do one or both type of below tasks.
+
+- Perform some task[s] by running a script as top level environment
+- Create a package to define objects (functions, classes, data-objects, ...) for re-use and sharing
+
+## 
+
+Below are the use cases with recommendations.
+
+- **Adhoc and small projects**: jupyter notebooks are sufficient most of the times.
+
+- For **adhoc and large projects** modules may be needed.
+    - If the size of code grows, it is useful to organize the code using regular packages.
+
+- For **recurring tasks** it makes sense to use modules which can be run from command line.
+    - If the size of code grows, it is useful to organize the code using regular packages.
+
+## Small projects
+
+###
+
+- `main.py` to run the task from top level
+    - it refers to function definitions and input objects from other modules as described below
+    - it is a convention to name this file as `app.py` or `main.py`
+- `category_1.py`, `category_2.py`, ... contain all functions for a category of tasks
+- `inputs.py` contains all inputs required for configuration
+
+###
+
+- project root
+    - `main.py`
+    - `inputs.py`
+    - `category_1.py`
+    - `category_2.py`
+
+## Large projects
+
+- Use regular packages
+    - categorizing into sub packages
+    - relative imports for cross referencing
+    - controlling exports

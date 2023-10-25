@@ -1,0 +1,206 @@
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Namespaces and scopes {#sec-namespace}
+
+## Introduction
+
+A **namespace** is a mapping from names (variables) to object references. When python interpreter reads the code it needs to lookup objects referenced by variable names used. As discussed earlier, objects are stored on computer RAM and can be accessed using object's memory address. Namespaces help find and access the associated objects using variable names. Technically, in Python, they are dictionaries that store this mapping.
+
+A **scope** is a textual region of the code which has its own separate namespace. This helps isolate and manage different variable names and objects used in different blocks of code. Many languages do this by keeping track of namespace for all blocks, e.g. control flow blocks (`if`, `for`, ...). Python restricts this to just function and class/instance object blocks. Control flow blocks like `if`, `for` etc. do not have their local scopes.
+
+There is a lot of ambiguity in terminology related to this. For example environments and frames are used interchangeably to refer to the concept of namespace and scope discussed here. To avoid this issue, try to understand the underlying concepts and the issue with the terminology will not impact.
+
+[Python tutor](https://pythontutor.com/python-debugger.html#mode=edit) is an excellent resource to do small experiments to understand the rules explained in this section. A good starting point would be to try the examples provided in the tool.
+
+## Specifications
+
+### Basic
+
+Below are the scopes in the order they are searched
+
+- **Innermost scope for a function**
+    - namespace contains **local names** (*only if present*)
+- **Scope of enclosing functions**
+    - namespace contains **non local names** (*only if present*)
+- **Global scope** (scope of the module)
+    - namespace contains **global names**
+    - for functions: scope of the Python file where the function is defined
+- **Built-in scope**
+    - namespace contains **built-in names**
+
+### Creation and destruction times
+
+- **Built-in** scope's namespace
+    - created when the interpreter starts up
+    - never deleted, exists till interpreter is terminated
+
+- **Global** (module) scope's namespace
+    - created at compile time, when the module is read for the first time
+    - never deleted, exists till interpreter is terminated
+
+- **Local** scope's namespace for a function
+    - compile time (when the definition is read)
+        - local scope's namespace is not created at this stage
+        - variables are tagged scopes
+        - objects for default parameters are created and stored in function object
+        - the function object is created in the enclosing scope's namespace
+    - run time (during function call)
+        - _every time function is called a new local scope's namespace is created_
+        - deleted when the call terminates, i.e. on `return` or **error**
+
+### Function scope
+
+- Scope of variable names used in a function definition
+
+    - Explicit declaration of scope
+        - `global`: variable is looked up in global name space skipping enclosing functions namespaces
+        - `nonlocal`: variable is looked up only in the enclosing function scope
+
+    - Without explicit declaration of scope
+        - If a **variable is assigned** within a function
+            - compile time: **tagged to local scope**
+
+        - If a **variable is referenced without being assigned** within the function
+            - compile time
+                - the next level up enclosing scope is searched until builtin scope
+                - **tagged to the first scope it is found in**
+            - run time: **error is raised if not found**
+
+- On end of function execution the function scope's namespace is deleted
+
+- When cross referencing functions from other modules
+    - the global scope for a function is the scope of the module in which it is defined
+    - this will become clear after understanding modules and packages discussed in next chapter
+
+::: {.center  data-latex=""}
+![Scopes](../../../resources/diagrams/architecture/scopes.png){width="90%"}
+:::
+
+::: {.center  data-latex=""}
+![Nested scopes](../../../resources/diagrams/architecture/scopes-nested.png){width="90%"}
+:::
+
+## Examples
+
+### `global`
+
+```{python}
+#| results: 'hold'
+var = "global"
+
+def func():
+    print("inside func call var = " + var)
+
+func()
+
+print("in global scope var = " + var)
+```
+
+Since `var` is not assigned, only referenced in the `func` definition, it is searched in local namespace then in global namespace. Since global namespace has `var` defined its value is used.
+
+### `local`
+
+```{python}
+#| results: 'hold'
+var = "global"
+
+def func():
+    var = "local"
+    print("inside func call var = " + var)
+
+func()
+
+print("in global scope var = " + var)
+```
+
+Since `var` is assigned in `func` definition, it is tagged to local scope. Therefore there are 2 different `var` names in 2 different namespaces, global namespace and func's namespace created during its call.
+
+### `global` with nested scopes
+
+```{python}
+#| results: 'hold'
+var = "global"
+
+def outer_func():
+
+    def inner_func():
+        print("inside inner_func call var = " + var)
+
+    inner_func()
+
+outer_func()
+
+print("in global scope var = " + var)
+```
+
+### `nonlocal`
+
+```{python}
+#| results: 'hold'
+var = "global"
+
+def outer_func():
+    var = "nonlocal"
+
+    def inner_func():
+        nonlocal var
+        print("inside inner_func call var = " + var)
+
+    inner_func()
+    print("inside outer_func call var = " + var)
+
+outer_func()
+
+print("in global scope var = " + var)
+```
+
+### Declaring `global` in nested scopes
+
+```{python}
+#| results: 'hold'
+var = "global"
+
+def outer_func():
+    var = "nonlocal"
+
+    def inner_func():
+        global var
+        print("inside inner_func call var = " + var)
+
+    inner_func()
+    print("inside outer_func call var = " + var)
+
+outer_func()
+
+print("in global scope var = " + var)
+```
+
+## Use cases
+
+Namespaces and scopes are always getting used by the interpreter while running any piece of code. In the beginning, being aware of the rules is sufficient for regular use in avoiding and resolving errors and understanding code. It is advisable to keep the use of namespaces simple.
+
+For example while using functions, do not try to use namespace and scope rules to create complex solutions if the problem can be solved using without them.
+
+There are many program design techniques implemented using the rules of namespaces and scopes. For example factory and decorator functions are created using these rules.
+
+:::: {layout="[[45,-10,45]]"}
+
+::: {.div data-latex="{}"}
+- Basic use cases
+    - avoiding errors
+    - resolving errors
+    - understand code
+:::
+
+::: {.div data-latex="{}"}
+- Advanced use cases
+    - implementing design patterns
+        - factory functions
+        - decorators
+        - generators
+:::
+
+::::

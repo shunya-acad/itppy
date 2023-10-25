@@ -1,0 +1,311 @@
+---
+title: "Command Line Interface (CLI)"
+---
+
+# Overview
+
+## Terminology
+
+###
+
+- There is a lot of ambiguity in terminology
+- **Terminal** is an old term which refers to a physical interface to access the system
+- **Console** and **TTY** are also used in similar context
+- **Terminal emulator** is a generic term for an application to provide text input/output environment
+- **Shell** is a generic term for an interpreter that provides commands to interact with the system
+- **Command Line Interface (CLI)** = **Terminal Emulator** + **Shell**
+
+### {.c}
+
+::: {layout="[[-1], [1], [-1]]"}
+![](../../../resources/diagrams/tools/cli.png)
+:::
+
+## Terminal Emulator
+
+Every operating system gives a default and often is called **terminal**.
+
+- **Linux**: default depends on the version
+- **Windows**
+  - **Windows Console Host**: old
+  - **Windows Terminal**: latest
+- **Mac**: has its own default terminal emulator referred to as terminal
+
+## Shell
+
+*Shell* is the program, usually an interpreter, that runs inside a terminal emulator to give access to the system using text based commands.
+
+- **Linux**: **bash**, zsh, fish, ...
+- **Windows**: command prompt (cmd), powershell
+- **Mac**: earlier it was bash, now it is zsh
+
+### bash
+
+`bash` is the default shell on most linux based operating systems and is available across all operating systems.
+
+- **Linux**: default on most distributions
+- **Windows**: easily accessible through wsl, cygwin, git/gitbash
+- **Mac**: earlier bash was default, latest is zsh, extension of bash
+
+### What do shell programs do?
+
+Shell provides commands and scripts to manage system.
+
+- Hardware (monitor, keyboard, mouse, network, camera, ...)
+- Processes (logon, startup, users, security, ...)
+- Applications (browser, file explorer, ...)
+- File system (create/delete/rename/move files and folders)
+
+### Use cases {.smaller}
+
+- Managing Workflow
+    - Files and directory operations
+    - Installation, update, maintenance of applications (software)
+    - Automation
+- System Administration
+    - Files and directory operations
+    - Installation, update, maintenance of applications (software)
+    - Automation
+    - Security: Group and user access
+    - Managing databases, servers, processes
+
+### Note
+
+:::::: {.callout-note icon="true"}
+Most of the tasks that can be done from command line can be done with Python but understanding command line will help use Python better.
+::::::
+
+:::::: {.callout-warning icon="true"}
+### Caution
+
+Command line can be dangerous as one wrong command can destroy a large chunk of your work or even bring the system down.
+::::::
+
+:::::: {.callout-important icon="true"}
+### Important
+... and this happens more frequently with experienced users
+::::::
+
+# Bash
+
+## Resources
+
+- [Homepage](https://www.gnu.org/software/bash/)
+- [Bash manual](https://www.gnu.org/software/bash/manual/)
+
+## Setup
+
+Installation depends on operating system.
+
+- Linux distributions: `bash` is available and default on most distributions
+- MacOS: `zsh` is the default but `bash` is available
+- Windows: `git` comes with `gitbash` which should be enough
+    - other options: [`msys2`](https://www.msys2.org/), [`cygwin`](https://www.cygwin.com/), [`wsl`](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+## Configuration
+
+### What to configure?
+
+Bash configurations involve
+
+- **Environment**: What are the default variables like `$PATH`, `$HOME` etc. available
+- **Prompt**: What information does the prompt show
+- **History**: How and where history is saved
+- **Aliases**: Short codes for frequently used commands
+
+### How to configure?
+
+- Configuration files kept at prescribed locations containing configuration options
+- `.bashrc`, `.bash_profile`, `.bash_aliases`
+- Configuation and placement of files depends on operating system
+
+## Commands
+
+### General format {.smaller .shrink}
+
+`<command name> [-flag[s]] [-option[s][=/ ]value[s]] [<argument[s]>]`
+
+- **Command name**: are scripts containing code to perform tasks
+    - e.g. `ls` prints files and folders contained in a folder
+    - comes first
+- **Flags (Switches)**: are short codes to alter the behavior of the program
+    - multiple flags can be combined
+    - it is safer to combine and provide all flags before any options and arguments
+    - e.g. `ls -al` changes the way `ls` command lists the files and folders
+        - note that `a` and `l` are 2 flags combined
+        - `ls -a -l` works as well
+
+#### {.smaller .shrink}
+
+- **Options**: are codes that take value
+    - e.g. `head -n=15 <file path>` prints starting 15 lines of the given file
+    - options can use `=` or space, e.g. `head -n 15 <file path>` works
+- The flags and options additionally have **long** and **short** forms. e.g.
+    - `ls -l --all` $\iff$ `ls -al`
+- **Arguments**: inputs to the command interpreted based on position
+    - e.g. `cp <src> <dst>`: first argument is provided to source to be copied from and second to destination where to copy
+
+#### Recommendations
+
+- *Beginning* (after command name): combine **flags** using short forms
+- *Middle*: **options**
+- *End*: **arguments**
+
+### Types {.smaller}
+
+- **built-ins**: present by default
+    - `man`, `less`, `ls`, `cp`, `mv`, `mkdir`, `rm`, `find`, `grep`, ...
+
+- **command line utilities**
+    - many applications give command line utility commands
+    - e.g. create a Python virtual environment
+      - `python3 -m venv <path to virtual environment>`
+
+- **custom scripts**: create your own
+    - run using
+        - `bash <custom_script_name>.sh`
+        - `<custom_script_name>.sh` (needs permission config)
+
+### Summary
+
+- help: `man`, `<cmd_name> --help`
+- list and print: `ls`, `pwd`, `echo`, `| less`
+- change directory: `cd`
+- create file/directory: `touch`, `mkdir`
+- remove file/directory: `rm`
+- move/rename file/directory: `mv`
+- search path using regex: `find`
+- search content using regex: `grep`
+
+### Getting help
+
+- search web by use-case
+- within terminal: `man <command name>`
+  - `man man`
+  - **to sroll and search** `man man | less`
+- on windows/git-bash `man` will not work
+  - `<command name> --help`
+- check installation location
+  - `which <app name>`
+
+### List and Print
+
+- list files and folders: `ls`
+- list **all** files and folders: `ls -a`
+- list **all** files and folders in **long format**: `ls -al`
+- print current directory: `pwd`
+- print to console: `echo "content"`
+
+### File & Folder: Change directory
+
+- change directory 1 level up: `cd ..`
+  - change directory 2 level up: `cd ../..`
+
+- `cd <relative dir path>`
+- `cd <absolute dir path>`
+- tab completion
+
+### File & Folder: Create
+
+- create file: `touch <file-path>`
+  - directory should exist
+
+- create directory: `mkdir <dir-path>`
+- create directory and intermediate directories if does not exist:
+  - `mkdir -p <dir-path>`
+
+### File & Folder: Remove
+
+- remove file: `rm <file path>`
+- remove empty directory: `rm -r <dir path>`
+- remove non-empty directory: `rm -rf <dir path>`
+
+### File & Folder: Copy
+
+- copy file:
+
+  `cp <src file path> <dst file path>`
+
+- copy source dir with its content recursively:
+
+  `cp -r <src dir path> <dst dir path>`
+
+- copy only contents of source dir to destination recursively:
+
+  `cp -r <src dir path>/. <dst dir path>`
+
+### File & Folder: Move (rename)
+
+- move/rename: `mv <src> <dst>`
+  - `src` = old file/directory name
+  - `dst` = new file/directory name
+  - if the `src` and `dst` path are
+    - different => move
+    - same => rename
+
+## Keyboard shortcuts
+
+::::: {.columns}
+
+:::: {.column width=49%}
+
+::: {.callout-note icon="false" .fragment .highlight-current-red}
+## Main
+
+- clear: `ctrl-l` (L)
+- quit: `ctrl-d`
+- copy: `ctrl-shift-c`
+- paste: `ctrl-shift-v`
+:::
+
+::: {.callout-note icon="false"}
+## Delete
+
+- delete till end (from cursor): `ctrl-k`
+- delete till start (from cursor): `ctrl-u`
+:::
+
+::::
+
+:::::: {.column width=2%}
+
+::::::
+
+:::: {.column width=49%}
+
+::: {.callout-note icon="false"}
+## Movement
+
+- move to start: `ctrl-a`
+- move to end: `ctrl-e`
+
+:::
+
+::: {.callout-note icon="false"}
+## Processes
+
+- cancel (kill) running jobs: `ctrl-c`
+- put current process in background: `ctrl-z`
+
+:::
+
+::::
+:::::
+
+### 
+
+::: {.callout-note icon="false"}
+## History
+
+- view history: `history`
+
+- run command from history: `!<#>`
+
+- put command from history: `!<#>:p`
+
+- search previous command: `ctrl-r`
+
+  - *keep pressing `ctrl-r` to go through search list*
+
+:::
+

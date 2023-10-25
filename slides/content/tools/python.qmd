@@ -1,0 +1,122 @@
+---
+title: 'Python'
+---
+
+# Installation
+
+## Resources
+
+- [Download installer](https://www.python.org/downloads/)
+- Instructions
+    - [Unix](https://docs.python.org/3/using/unix.html)
+    - [Mac](https://docs.python.org/3/using/mac.html)
+    - [Windows](https://docs.python.org/3/using/windows.html)
+
+## Components
+
+- CPython interpreter
+- Pre built Python scripts with additional functionality
+    - Built-ins
+    - Standard library
+
+## Check Python installation from bash
+
+- Windows
+
+```bash
+py --list-paths
+```
+
+- Linux/Mac: there are several methods one of which is given below
+
+```bash
+ls -ls /usr/bin/python*
+```
+
+# Ways to run/interact with Python
+
+- Repl
+    - IPython repl: enhanced version of default Python repl
+- Jupyter notebooks
+- Run scripts from command line
+- Run scripts from editor
+
+# Python repl
+
+*repl = read evaluate print loop*
+
+##
+
+- `repl` is a tool to interact with the interpreter.
+
+- To start a `repl`
+    - `python3`/`py`
+
+##
+
+- `repl` is rarely used directly, instead editors use it under the hood 
+    - `repl` does not save work
+    - not designed write large programs as it does not have all the tools needed
+    - useful in conjunction with editor, to
+        - test code short pieces of code
+        - while debugging
+
+## 
+
+- [IPython repl](https://ipython.org/) is newer modern repl
+    - has to be installed separately
+    - additional configuration is needed to use it from editor
+
+# `pip`
+
+## Introduction
+
+- [The Python Package Index (PyPI)](https://pypi.org/) is a repository of packages
+
+- `pip` is one of the listed packages
+
+- `pip` is the package installer for Python which manages the installation and maintenance of other external packages contributed by developers
+
+- [`pip` website](https://pip.pypa.io/en/stable/)
+
+## Check installation
+
+::: {layout-ncol="3"}
+
+```bash
+pip -V
+```
+
+```bash
+pip -h
+```
+
+```bash
+pip --help
+```
+
+:::
+
+## Installation
+
+[Installation guide](https://pip.pypa.io/en/stable/installation/#ensurepip)
+
+## Usage
+
+- Basic but not recommended, does not work as expected in edge cases
+
+```bash
+pip install jupyterlab
+```
+
+- For system Python installation
+
+```bash
+python3 -m pip install jupyterlab
+```
+
+- For use with virtual environments
+
+```bash
+<venv path>/bin/python3 -m pip install jupyterlab
+```

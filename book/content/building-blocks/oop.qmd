@@ -1,0 +1,517 @@
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# OOP
+
+## Introduction
+
+**Object oriented programming**, commonly referred to as **OOP**, is fundamental to how objects are defined and used in a programming language.
+
+There are 2 components of OOP
+
+- **object definition**: aka **class** definition, **type** definition
+- **object instance[s]**: creation of the object[s] of a certain class (type)
+
+For example `int` is a class (type) and there can be multiple instances like `1`, `2` etc. Note that `int` is a class and its definition (code) to create `int` type objects is stored once on RAM. All instances, on creation are stored on RAM separately.
+
+In Python, `type` is the root class of all classes, that is the reason `type` and class are used interchangeably. `type` can also be used as a function to check the class of an object.
+
+```{python}
+type(10), type(int), type(type)
+```
+
+**Class** is the blueprint of a certain type of object, what attributes all instance objects of this type will share
+
+- **state**: data attributes define the state of an instance
+- **operations**: callable attributes (**methods**)
+
+Functions defined in a class are called methods. Methods are regular functions with some differences to provide features related to classes and instances.
+
+**Class instance object** is an instance object of certain class (`type`) created and stored on RAM
+
+- multiple instances can be created
+- usually referred to as objects
+
+### Use cases
+
+At a more abstract level, OOP provide
+
+- **means of combination**
+    - combine data and operations
+    - build smaller pieces and then join to make a bigger piece
+- **means of encapsulation**
+    - hide details of implementation during usage
+- **means of abstraction**:
+    - create blueprints of functionality
+    - although functions can be used, OOP is better for this
+
+OOP is generally used by developers for building tools and packages. Almost everything that can be implemented using OOP, can be implemented using functional programming. Functional programming keeps the complexity low. As a user it is recommended to know basics of OOP to use solutions provided by developers efficiently and actually use OOP only if necessary after getting some experience.
+
+### Namespaces
+
+Class and instances have their own namespaces. Instance object namespace is searched first then class namespace is searched by the interpreter for variables.
+
+### Attributes of an object
+
+::: {layout="[[49,-2,49]]"}
+
+#### Data attributes
+
+- class level
+    - bare
+    - properties: static or calculated
+- instance level
+    - bare
+    - properties: static or calculated
+
+#### Methods
+
+- instance methods
+- class methods
+- static methods
+
+:::
+
+#### Data attributes
+
+**Class data attributes** are shared across all instance objects. They are suited for data attributes that do not define the state of an object. Main advantage is that they can be configured centrally. If the value is changed all instance objects have access to the new value.
+
+**Instance data attributes** define the state of an instance object. If the value is changed in one of the instances, it does not impact the value of the attribute in other instance objects.
+
+**Bare data attributes** are attributes that can be accessed and modified directly without any pre or post functionality.
+
+**Properties** hide bare data attributes behind a property name, which if referenced from any instance object, act upon the bare attribute. Properties are also used to add some pre and post code while accessing or modifying the bare data attribute.
+
+**Static properties** do not calculate the values of the underlying bare data attribute.
+
+**Dynamic properties** do calculate the values of the underlying bare data attribute based on some other values.
+
+#### Methods
+
+Methods are callable attributes. Methods are simply functions defined in a class and they behave with minor difference compared to regular functions, to provide some basic functionality related to classes and objects.
+
+By **default** methods defined inside a class are **instance methods**. They can be declared to be class or static using decorator syntax.
+
+**Instance methods** are callable attributes intended to be called from instance objects. They are functions with access to the instance object itself. The first parameter is enforced to be the instance object. They cannot be called from the class directly.
+
+**Class methods** are callable attributes that are accessible from both class and all instance objects, with access to class attributes. The first parameter is enforced to be the class object.
+
+**Static methods** are callable attributes that are accessible from both class and all instance objects. They are regular functions without any enforced parameter.
+
+## Basics
+
+### Create a class and access attributes
+
+- it is a convention, in Python, to use CamelCase for class names
+
+```{python}
+class BasicClass:
+    data_attr = "bare class attribute"
+```
+
+- attributes are accessed using dot notation (`.`)
+
+```{python}
+BasicClass.data_attr
+```
+
+### Create instance and access attributes
+
+- create instances by calling the class
+
+```{python}
+obj_1 = BasicClass()
+obj_2 = BasicClass()
+```
+
+- access attributes using dot notation (`.`)
+
+```{python}
+obj_1.data_attr
+obj_2.data_attr
+```
+
+- check type of any instance object
+
+```{python}
+type(obj_1), type(obj_2)
+```
+
+- class attributes are shared by instance objects and are useful for data attributes to be changed centrally
+
+```{python}
+BasicClass.data_attr = "new value"
+obj_1.data_attr, obj_2.data_attr
+```
+
+## Instance methods
+
+### Incorrect example
+
+- define the class
+
+```{python}
+class CustomClass:
+  def custom_method():
+    print("running custom_method")
+```
+
+- call the method from class directly
+    - **this will work**
+
+```{python}
+CustomClass.custom_method()
+```
+
+- create an instance object and call the method from instance object
+    - **this will not work**
+
+```{python}
+#| echo: false
+
+class CustomClass:
+  def custom_method():
+    print("running custom_method")
+```
+
+```{python}
+#| error: true
+
+obj_1 = CustomClass()
+obj_1.custom_method()
+```
+
+### `self` argument
+
+- Error reason
+    - methods by default are bound to instance object
+    - first parameter is passed by Python as the instance object itself
+
+- It is a convention to call this first parameter `self`
+    - It can be named anything
+    - it is recommended to use `self` for consistency
+
+- Instance methods are not meant to be called directly from class
+
+```{python}
+class CustomClass:
+  def custom_method(self):
+    print("running custom_method")
+    print(self)
+```
+
+#### Calling from class
+
+- Call instance method from class directly: **this will not work**
+- This is because there is no instance object to pass as first argument
+- How class and static methods are defined will be covered later
+
+```{python}
+#| error: true
+
+CustomClass.custom_method()
+```
+
+#### Calling from instance
+
+```python
+class CustomClass:
+  def custom_method(self):
+    print("running custom_method")
+    print(self)
+```
+
+- Create an instance and call the method from instance directly: this will work
+
+```{python}
+#| error: true
+
+obj_1 = CustomClass()
+obj_1.custom_method()
+```
+
+## Instance data attributes
+
+### `__init__`
+
+- `__init__` is an instance method called at the time of instance object creation
+    - this is by Python design
+    - it is optional
+
+- Used to create instance attributes at the time of instance object creation
+
+```{python}
+class CustomClass:
+    def __init__(self, bare_data_attr_1_val, bare_data_attr_2_val):
+        self.bare_data_attr_1 = bare_data_attr_1_val
+        self.bare_data_attr_2 = bare_data_attr_2_val
+
+    def custom_method(self):
+        print('running custom_method')
+        print(f'with access to {self.bare_data_attr_1 = }')
+        print(f'and {self.bare_data_attr_2 = }')
+```
+
+#### Create instances
+
+```{python}
+obj_1 = CustomClass(2, 4)
+obj_1.bare_data_attr_1, obj_1.bare_data_attr_2
+obj_1.custom_method()
+```
+
+```{python}
+getattr(obj_1, "bare_data_attr_1")
+setattr(obj_1, "bare_data_attr_1", "abc")
+getattr(obj_1, "bare_data_attr_1")
+```
+
+## Instance properties
+
+- In other languages there is a concept of making certain attributes `private`
+    - in Python properties are used for this
+    - attribute is still accessible but direct access is discouraged
+
+- To define a property manually use
+    - `property(fget, fset, fdel, doc)`
+    - `fget`, `fset` and `fdel` are instance methods to get, set and delete property value
+
+- `del` reserved word is used to delete attributes
+
+- It is convention to name the underlying attribute name to be `_<property_name>`
+    - this is to indicate that attribute is for internal use
+
+- Using methods to access, modify and delete attributes helps with
+    - adding checks and other functionality as needed
+    - hiding attribute name behind property name
+        - change in attribute name does not break other code using the class
+
+### Example
+
+Below example illustrates all aspects of defining a property in a class. Note the difference in names to illustrate different components of the property.
+
+It is recommended to experiment in jupyter notebook by creating instance objects and accessing/modifying/deleting property and bare instance attribute.
+
+```{python}
+class CustomClass:
+    """This is CustomClass with a bare data attribute and a property"""
+    def __init__(self, property_1_val, bare_data_attr_1_val):
+        self.property_1_name = property_1_val
+        self.bare_data_atrr_1_name = bare_data_attr_1_val
+
+    def get_property_1_name(self):
+        print("getter called..")
+        return self._property_1_name
+
+    def set_property_1_name(self, property_1_val):
+        print("setter called..")
+        # required checks or calculations
+        self._property_1_name = property_1_val
+
+    def del_property_1_name(self):
+        print("delete method called..")
+        # required checks or calculations
+        del self._property_1_name
+
+    property_1_name = property(fget=get_property_1_name,
+        fset=set_property_1_name, fdel=del_property_1_name,
+        doc="""The property's description.""")
+```
+
+### Defining property using decorator syntax
+
+Below is the same example with Python decorator syntax. It is useful for cleaner syntax which is much easier to read.
+
+```{python}
+class CustomClass:
+    """This is CustomClass with a bare data attribute and a property"""
+    def __init__(self, property_1_val, bare_data_attr_1_val):
+        self.property_1_name = property_1_val
+        self.bare_data_atrr_1_name = bare_data_attr_1_val
+
+    @property
+    def property_1_name(self):
+        """Property description"""
+        print("getter called..")
+        return self._property_1_name
+
+    @property_1_name.setter
+    def property_1_name(self, property_1_val):
+        print("setter called..")
+        # required checks or calculations
+        self._property_1_name = property_1_val
+
+    @property_1_name.deleter
+    def property_1_name(self):
+        print("delete method called..")
+        # required checks or calculations
+        del self._property_1_name
+```
+
+## Class methods
+
+- Class methods can be defined using `@classmethod` decorator
+
+- Like instance methods, first parameter is mandatory and gives access to class
+    - it is bound to the class
+    - it is convention to name this first parameter as `cls`
+    - all instances created have access as well
+
+#### Example
+
+```{python}
+class CustomClass:
+    x = 10
+    @classmethod
+    def some_class_method(cls):
+        print(f"This is a class method bound to class - {cls}")
+        print(f"has access to class attributes {cls.x = }")
+
+CustomClass.some_class_method()
+obj = CustomClass()
+obj.some_class_method()
+```
+
+## Static methods
+
+- Static methods are regular functions defined in a class
+
+- Defined using `@staticmethod` decorator
+
+- Can be accessed from class and all instances
+
+- There is no mandatory first parameter
+
+#### Example
+
+```{python}
+class CustomClass:
+  @staticmethod
+  def some_static_method(a=10):
+    print("This is a static function")
+    print(f"a regular function with parameters, e.g. {a = }")
+
+CustomClass.some_static_method()
+
+obj = CustomClass()
+obj.some_static_method(a = 100)
+```
+
+## Full example
+
+Below is a full example to illustrate all the pieces together. There is a `Circle` class to create circle objects with the following components
+
+- `pi` is a class data attribute
+- `_radius` is instance data attribute marked private
+    - this is only available in instances
+    - not recommended for direct use
+- `radius` is a static property to access `_radius` from instances
+- `area` is a dynamic property with no set method
+    - provides access to attribute `_area`
+    - automatically updated when radius changes
+- `circumference` is an instance method
+
+```{python}
+class Circle:
+    def __init__(self, radius_val):
+        self.radius = radius_val
+
+    pi = 3.141592653589793
+
+    @property
+    def radius(self):
+        return self._radius
+
+    @radius.setter
+    def radius(self, radius_val):
+        print("setting radius and calculating area")
+        self._radius = radius_val
+        self._area = self.pi * (self.radius**2)
+
+    @property
+    def area(self):
+        return self._area
+
+    def calc_circumference(self):
+        print('calculating circumference')
+        return 2*self.pi*self.radius
+```
+
+```{python}
+c1 = Circle(1)
+c1.radius, c1.area, c1.calc_circumference()
+c1.area, c1.calc_circumference()
+c1.radius = 2
+```
+
+## Summary
+
+- `class` defines classes which are callable and used to create instance objects
+
+- `__init__` method is used to control creation of attributes at instance object creation
+
+- Access attributes
+    - `<obj_name>.<attr_name>[()]`
+    - `getattr(<obj_name>, <attr_name>)`
+- Modify attributes
+    - `<obj_name>.<attr_name> = <something>`
+    - `setattr(<obj_name>, <attr_name>, <something>)`
+- Delete attributes
+    - `del <obj_name>.<attr_name>`
+    - `delattr(<obj_name>, <attr_name>)`
+
+- Data attributes
+    - class level
+        - bare: defined directly
+        - properties: defined using meta classes (not covered)
+    - instance level
+        - bare: defined using `__init__`
+        - properties: defined using `property()` or `@property`, static or calculated
+
+- Methods (operations)
+    - instance: have access to the instance object (`self`)
+        - available for use with instances not with class itself
+    - class methods
+        - created using `@classmethod` decorator
+        - have access to the class object (`cls`)
+    - static methods
+        - regular functions
+        - created using `@staticmethod` decorator
+        - available across instance objects and class
+
+## Advanced topics
+
+Below are some topics needed for advanced usage of programming. Understanding these topics leads to understanding of how much of the functionality provided in Python is implemented.
+
+- Inheritance
+    - single inheritance
+    - multiple inheritance
+
+- Python special methods
+    - called *dunder* (double underscore) methods
+    - provide some default functionality with minimal code
+    - e.g. `__init__`, `__str__`, `__repr__`, `__add__`, ...
+    - this is the reason for convention to avoid `__` in variable names to avoid clashes
+
+- Meta programming and meta classes
+
+### Inheritance
+
+Inheritance means classes can inherit attributes from other classes, which allows classes to be structured and joined in efficient ways.
+
+**Single inheritance** refers to case where a class can inherit attributes from a single class. A hierarchy is built when a class inherits from another class. The class that inherits is called the **sub class**. The class from which the sub class inherits is called the **base class**.
+
+**Multiple inheritance** refers to case when a class can inherit attributes from multiple classes. Attributes are inherited following a recursive algorithm. More details are documented at [Python documentation](https://docs.Python.org/3/tutorial/classes.html#inheritance).
+
+There are some in-built functions provided to check the class hierarchy.
+
+- `isinstance(<obj>, <type>)`
+- `issubclass(<sub class>, <base class>)`
+
+For example `bool` is derived from `int` therefore `isinstance(True, int)` and `issubclass(bool, int)` both return `True`.
+
+```{python}
+isinstance(True, int), issubclass(bool, int)
+```

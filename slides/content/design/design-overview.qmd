@@ -1,0 +1,71 @@
+---
+title: "Design: Overview"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+
+# Motivation {.smaller}
+
+- Growth in scale and complexity of programs
+- Skill that makes a good programmer
+    - writing **a program** to solve a problem
+    - writing **a good program**
+- Requires knowledge and practice
+
+## Recommended properties of a good program
+
+- **Readable**: easy to read and understand
+- **Testable**: safe from errors, easy to test even after making changes
+- **Modular**: responsibilities are separated out into small independent blocks
+- **Extensible**: easy to extend functionality with little change in existing code
+- **Efficient**: in terms of speed and memory
+
+# Overview {.smaller}
+
+1. Design **components of programs**
+    - [**Design patterns**]{color="Salmon"}
+    - [**Data structures & Algorithms (DSA)**]{color="brown"}
+    - [**Regular expressions**]{color="brown"}
+    - **Testing**
+    - **Documentation**
+        - **Specifications**
+1. Design **structure of programs** (**Frameworks**)
+1. Design **process of creating programs** ([**Workflow**]{color="Salmon"})
+    - **Software requirement analysis**
+    - **Refactoring**
+
+# Objectives
+
+- It gives more context when using existing solutions from developers.
+- It allows to benefit from best practices by using them early.
+- It provides opportunity to apply and practice some of components in small code.
+    - This should help those who happen to pursue programming to advanced levels.
+
+# Design patterns
+
+## Definition {.smaller}
+
+::: {.definition data-latex="{}"}
+Design patterns are abstraction of ways to organize building blocks using the language specifications and architecture to improve properties of a program. Typically a given pattern improves a subset of properties.
+:::
+
+::: {.definition data-latex="{}"}
+There are 2 distinct dimensions
+
+- abstraction of common programming tasks
+- abstraction of good patterns to implement those tasks
+:::
+
+### Design patterns in Python
+
+- **Map-reduce**
+- **Iterators**
+- **Generators**
+- **Decorators**
+- **Context managers**
+- **Advanced OOP**
+- **Meta-programming**

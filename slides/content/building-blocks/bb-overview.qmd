@@ -1,0 +1,47 @@
+---
+title: "Overview"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+
+# Background
+
+Learning a programming language starts with learning the specifications of elemenatary pieces or building blocks.
+
+- **Language specifications**
+    - [**Building blocks**: _specifications for elements and blocks of code_]{color="brown"}
+    - **Architecture**: _specifications for writing programs_
+        - means to combine elements and blocks to build programs
+        - management of execution of blocks behind the scenes
+- **Design**: _knowledge of how to write good programs_
+- **Tools**: _needed to write, test, debug and run programs_
+
+# Introduction
+
+- _Basic specifications_
+    - **Lexicons**: allowed symbol
+    - **Variables**: mechanism of storing and re-using information
+    - **Comments**: annotating code
+- **Data types and operations**: storing and operating on numbers, strings, collections
+- _Control flow blocks_
+    - **Conditional exectution blocks**: `if-elif-else`, `match-case`
+    - **Loops (Iteration)**: `for`, `while`
+- **Functions**: re-use code with configurable inputs
+- **Object Oriented Programming** (**OOP**): re-use predefined type of data and associated operations
+- _Special features_: Python specific extra features
+    - **Conditional expressions**: short-circuit, context aware evaluation
+    - **Comprehensions**: special short syntax to combine `transformation iteration filter`
+
+# Objectives
+
+- Learn specifications (lexicons, syntax, semantics) for the building blocks
+- Understand semantic specifications and their implications
+    - do experiments in isolation
+- Introduce basic examples of combining different building blocks
+- Tools: Jupyter notebook in editor (VSCode or Jupyter lab)
+
+

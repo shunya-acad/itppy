@@ -1,0 +1,9 @@
+project:
+  output-dir: _slides/handout
+
+output-file: itppy-slides-handout
+
+format:
+  beamer:
+    classoption: [handout,dvipsnames] # handout/presentation
+

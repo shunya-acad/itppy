@@ -1,0 +1,38 @@
+---
+title: "Overview"
+---
+
+# Background
+
+- _**Why** do you learn computer programming?_ $\to$ **Use cases**
+- _**What** is computer programming?_ $\to$ **Theory**: **Building blocks**, **Architecture**, **Design**
+- [_**How** do you do computer programming?_ $\to$ **Practical experience**: **Tools**, **Application**]{color="brown"}
+
+# Objectives
+
+- **Application** of theoretical concepts of specifications to solve practical problems
+- **Practice** of writing programs
+- **Illustrate** some common **use cases**
+
+# Use cases
+
+- **Automate** repetitive manual tasks to
+    - increases efficiency
+    - reduces errors
+- Create **new solutions** using programming, which standard tools do not offer
+
+# Process {.smaller}
+
+- Finding relevant **existing solutions** from **standard library** or **PyPI**
+- Understanding
+    - how they are structured
+    - what are the different ways they can be used
+- **Integrating** them with the building blocks and architecture of Python to solve simple tasks
+- For getting **help** on specific topic,
+    - refer to the **documentation**
+    - search the **web**
+
+# Recommendations
+
+- Remember to refactor code
+- Do not try to memorize everything, remember where to look for information

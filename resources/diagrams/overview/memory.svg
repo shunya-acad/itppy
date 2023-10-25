@@ -1,0 +1,52 @@
+<mxfile host="Electron" modified="2023-08-12T09:46:05.859Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="mTEiMydGV4lnw_2np74k" version="21.6.8" type="device">
+  <diagram name="Page-1" id="0ySJ5CmeH1nvPdjo6QBU">
+    <mxGraphModel dx="1500" dy="907" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NXOLFD3LgBY81won49v_-13" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="150" y="320" width="280" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="NXOLFD3LgBY81won49v_-8" value="RAM" style="pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#4495D1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.ram;fontSize=24;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="520" y="440" width="280" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="NXOLFD3LgBY81won49v_-9" value="L1" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.cache_node;fillColor=#2E73B8;gradientColor=none;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="280" y="440" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NXOLFD3LgBY81won49v_-10" value="L2" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.cache_node;fillColor=#2E73B8;gradientColor=none;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="350" y="440" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NXOLFD3LgBY81won49v_-11" value="L3" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.cache_node;fillColor=#2E73B8;gradientColor=none;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="300" y="530" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NXOLFD3LgBY81won49v_-14" value="CPU" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="160" y="320" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NXOLFD3LgBY81won49v_-15" value="Hard Disk" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#4495D1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.2d.hard_drive;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="880" y="320" width="250" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="NXOLFD3LgBY81won49v_-16" value="Storage size" style="endArrow=classic;startArrow=none;html=1;rounded=0;startFill=0;fontSize=24;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="280" as="sourcePoint" />
+            <mxPoint x="1120" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NXOLFD3LgBY81won49v_-17" value="Speed" style="endArrow=classic;html=1;rounded=0;fontSize=24;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1120" y="240" as="sourcePoint" />
+            <mxPoint x="160" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8lGFiFzl7rDGcmaZPEP-1" value="Controller" style="pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#4495D1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.cpu;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="175" y="440" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="y8_naF8p6mOXrwo80ht7-3" value="ALU" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="170" y="360" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lTk1E2XFlxNXndBZB3am-2" value="Registers" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="280" y="360" width="140" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

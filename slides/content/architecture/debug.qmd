@@ -1,0 +1,114 @@
+---
+title: "Error handling (Debugging)"
+---
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+# Introduction
+
+## Terminology
+
+- Bugs & Debugging
+
+## Overview {.smaller}
+
+- Control flow: handling expected errors through code
+- Debugging: investigating errors while writing code
+    - **trace back**
+    - **debugger**
+- Testing: automate testing for reuse
+    - **Unit tests**: Automating testing of small pieces of code
+    - **Integration tests**: Automating testing of combination of pieces working together
+    - **Resources**
+        - Python standard library: [`unittest`](https://docs.python.org/3/library/unittest.html#module-unittest)
+        - PyPI package: [`pytest`](https://docs.pytest.org/)
+
+# Error types {.smaller}
+
+- **Lexical and syntax errors**: these are easily caught by the editor tools like linter and style checkers
+- **Semantic errors**: when some rules of implementation details are violated
+    - e.g. passing a string to function when number was required
+    - some common type of errors are caught by the editor tools, but not all
+- **Incorrect logic**: No error but the solution is incorrect
+    - e.g. while using nested loops the order of loop matters
+
+## Tools
+
+### Overview
+
+- Preventive
+    - [Editing tools](https://code.visualstudio.com/docs/python/editing): syntax highlighting, auto completion, refactoring, etc.
+    - [Lint tools](https://code.visualstudio.com/docs/python/linting): semantic errors to some extent
+
+- Investigative
+    - **Exceptions & trace back**
+    - **Debugger**
+
+### Exceptions & trace back
+
+- They contain 2 key information
+    - Exception type
+    - Trace back: also called stack trace, stack traceback, stack backtrace etc.
+        - history of execution instructions sent which caused the error
+
+- Error message in Python
+    - Where the error occurred
+    - Type of error if it is a known type
+
+#### Order of traceback
+
+- Starts from the bottom
+    - it tells where the error occurred
+- Traces back where the call to this error originated from
+
+#### Traceback example
+
+```{python}
+#| code-line-numbers: true
+#| eval: false
+some_list = [1, 2]
+
+def f1(): some_list.pop()
+def f2():
+    for i in range(3):
+        f1()
+
+f2()
+```
+
+#### Traceback example {.shrink}
+
+```python
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Cell In[1], line 8
+      5     for i in range(3):
+      6         f1()
+----> 8 f2()
+
+Cell In[1], line 6, in f2()
+      4 def f2():
+      5     for i in range(3):
+----> 6         f1()
+
+Cell In[1], line 3, in f1()
+----> 3 def f1(): some_list.pop()
+
+IndexError: pop from empty list
+```
+
+### Debugger
+
+####
+
+- Python interpreter, like most languages, provides a set of tools for debugging
+    - collectively referred to as debugger
+    - special set of commands which can interrupt the interpreter at given point saving the state of stack and heap and provide interactive execution options
+
+####
+
+- VSCode, like most editors, integrates this functionality in the editor
+    - [VSCode: Python tutorial: Debugging](https://code.visualstudio.com/docs/python/python-tutorial#_configure-and-run-the-debugger)

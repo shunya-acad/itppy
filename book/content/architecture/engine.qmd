@@ -1,0 +1,125 @@
+# Language engine
+
+## Overview
+
+As discussed in @sec-languages, overview of programming languages, there are 2 distinct aspects related to a programming language, specification and implementation. This book refers to the [official implementation of Python](https://www.python.org/) which is an **interpreter written in C**, and therefore also referred to as **CPython**.
+
+Therefore below terms usually refer to the default Python implementation.
+
+- Python interpreter
+- CPython
+- CPython interpreter
+
+When a Python script is run, Python interpreter does a lot of things in the background. Below diagram is a representation of major steps to help understand the mechanics of run time behavior.
+
+![](../../../resources/diagrams/architecture/python-interpreter.png)
+
+- The interpreter checks the conditions for .py file
+    - is .py file a new file
+    - is .py file modified since last compilation
+    - was .pyc file written using an older Python version
+- If any of the conditions is true then .py file is compiled to .pyc file (byte code)
+- Byte code is converted to machine code and sent for processing
+
+This is an simple representation to help understand run time behavior of interpreter, but under the hood there is much more going on.
+
+Since Python is a very high level language, there are more number of things kept under the hood, the programmer does not need to deal with them directly. In relatively lower languages like C/C++ some of these have to be dealt with by the programmer. Even in Python, some of the features can be turned off and dealt with directly for some advanced use cases.
+
+Below is an introductory overview of things that happen under the hood which interpreter handles.
+
+- **managing execution**: sending and receiving of operations and data, to and from the processor
+- **garbage collection**: clearing un used objects created during execution
+- **threads and processes**: python interpreter uses single thread and single core at a time by default
+
+## Hardware Management
+
+To understand this with full context requires a lot of effort and is beyond the scope until you pursue computer scientist or developer paths, but understanding all this at a high level will help.
+
+The first step is to understand the high level map of layers making the computer do what it does.
+
+1. **Hardware**: CPU controls all the different components. It understands only machine code (binary).
+2. **Operating system (OS)**: is the first major layer on top of hardware that controls all programs or applications interacting with the hardware.
+3. **Programs**: also referred to as _computer applications_ or just _applications_. This is the final layer offering specific interactions with the hardware. These have to go through the OS to finally send and receive instructions to and from hardware. Some examples include
+    - **file explorer**: provides a graphical interface to interact with the file system stored on hard disk. It displays the information on monitor and provides interaction through mouse and keyboard events.
+    - **browser**: provides a graphical user interface (gui) to interact with the data on the web. In the background it sends and receives data through network adapter and displays it on monitor.
+    - **network**: there are network processes always running in the background to keep the machine connected to web and internal networks
+
+The OS runs some default processes in background to provide the default functionality. In addition to this any application run, is run through the OS, it can create 1 or more independent process[es]. OS allocates space on RAM for each process. An application or program is stored on hard disk as executable or machine code. Once the executable is run, the OS allocates a dedicated space on RAM to the process, which holds the instructions and data to execute. The data and instructions are sent to CPU through OS. The OS manages data and instructions from all running processes.
+
+For example when a Python program is run, 
+
+- OS
+    - starts process[es] requested by Python interpreter
+    - allocates space on RAM for these process[es] using some algorithm
+    - manages sending/receiving data and instructions to/from CPU received from all running processes
+- Python interpreter
+    - sends/receives data and instructions to/from CPU through OS
+    - loads all the resources needed to run the program from hard disk to RAM
+    - manages the usage of allocated space on RAM
+- CPU
+    - does all the processing
+    - manages all the data and instructions received from OS
+    - sends back the results to OS
+
+There are 2 critical resources that a program has to manage:
+
+- Memory (RAM)
+- Processor (CPU)
+
+Python being a very high level language, manages both these automatically in background, unless programmer specifies not to, in which case there is manual configuration possible.
+
+Languages, mostly compiled, like C/C++ provide minimal management and programmer has almost complete control over these aspects, which increases complexity. These are required when developing applications and require a lot of effort to learn them correctly. Typically as a beginner and for light usage of programming, this is not required, general purpose language like Python is sufficient.
+
+### Memory (RAM)
+
+The space on RAM allocated by the system is used by the program as below representative diagram suggests. The space is broken into components for certain types of data.
+
+This is a rough representation and almost all languages follow similar structure, even compiled programs in languages like C/C++. 
+
+![](../../../resources/diagrams/architecture/ram-usage.png){width="70%" fig-align="center"}
+
+Stack and heap are parts which can be accessed from the program.
+
+{{< include ../../../resources/tables/_architecture-stack-heap.qmd >}}
+
+#### Stack
+
+Stack is the component of memory used for program execution. It is modeled as stack data structure, like a book stack, where the last book added is removed first, also called last in first out principle or LIFO.
+
+The code instructions and variable names are sent to the stack as the program is read and deleted when the instruction completes.
+
+Terms like `stack trace`, `stack overflow` relate to this portion of programs memory allocation.
+
+**Stack overflow** is self explanatory. It is easy to test, when you run an infinite recursive function with minimal data the stack gets full at around 3000 function calls and you get error as the stack gets full.
+
+```python
+n = 0
+def inf_rec():
+    global n; n += 1; print(n)
+    while True: inf_rec()
+inf_rec()
+```
+
+**Stack trace** is the history of instructions sent to stack which helps in debugging and is used to print messages on errors.
+
+#### Heap
+
+Heap is the part of allocated memory which is used for storing data objects. Heap functions like RAM, random memory addresses can be accessed.
+
+For example, in Python if code has statement, `x = [1, 2, 3, 4, 5]`, x is stored on stack and the list object is stored on heap.
+
+High level languages like Python have garbage collection which clears heap memory by using internal algorithms.
+
+### Processor management
+
+Managing the CPU through program is considered as one of the most complex topics in programming as it involves understanding multiple topics
+
+- CPU: how CPU processes data and instructions sent to it
+- OS: how does OS schedules and manages tasks from all running processes
+- Program: what features the programming language provides to handle execution of different tasks in a program
+
+All these parts have a lot of details to be understood and then applied together during design of a large program.
+
+For regular use of programming there is not much requirement to increase performance by designing the program. This is needed when building large and advanced applications.
+
+Python interpreter, by default, starts a single process with 1 main thread while running a program. Python has Global interpreter lock (GIL) which limits execution of one thread at a time.

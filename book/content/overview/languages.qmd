@@ -1,0 +1,391 @@
+# Programming languages {#sec-languages}
+
+```{r}
+#| include: false
+source(here::here("resources/scripts/content/source-all.R"))
+```
+
+## Overview
+
+Machines understand machine code which is in binary and is hard to work with. While writing instructions for the machine, it is easier to understand and work with natural language like english. Therefore, a mapping is needed to translate natural language like english to machine code.
+
+The general idea of **mapping natural language to machine code (binary)** lead to evolution of programming languages.
+
+There are multiple ways to solve the mapping problem based on the intended use case. Therefore there are numerous programming languages.
+
+Typically a programming language refers to 2 distinct parts.
+
+- **Specification**: rules for writing code
+    - **lexicon**: allowed keywords, symbols, characters
+    - **syntax**: rules of arranging lexicons and creating new names (variables)
+    - **semantics**: rules to assign meaning to different combinations of lexicons and syntax
+- **Implementation**: A system application that implements the specification, like Compiler or Interpreter, to convert the natural language code into machine code and execute.
+    - Referred to as **'language engine'** henceforth.
+
+Some common type of language engines, applications to create this mapping or conversion are
+
+- **Assembler**
+- **Compiler**
+- **Interpreter**
+
+Note that the implementation for a language, the engine, is itself a program in machine code stored on hardware. A programming language defines the mapping rules, specifications, which can be implemented using any of the above approaches, but usually a particular combination becomes more popular.
+
+For example Python has many implementations. The official and most popular is CPython which is interpreter written mostly in C. There are other [implementations](https://wiki.python.org/moin/PythonImplementations) as well, which have their own specifications which are similar but not the same.
+
+Another example is C++, the specifications are maintained and revised by a central organization, [The Standard C++ Foundation](https://isocpp.org/about). Then there are various organizations that implement the compiler using the latest specifications. The GNU compiler collection (GCC), Microsoft Visual C++ (MSVC), CLang (LLVM) etc.
+
+## Types
+
+Languages can be classified into below main categories in order of decreasing complexity and based on method of conversion.
+
+- _low level languages_
+    - **assembly languages**
+- _high level languages_
+    - **compiled languages** (_compiler_): C, C++, Go
+    - **interpreted languages** (_interpreter_): shell (bash, etc.)
+        - **hybrid**: Python
+            - **JIT**: Just in Time compilation, e.g. Java, JavaScript, C#
+
+### Assembly languages
+
+Assembly languages have very limited set of specifications and are difficult to code in. They are machine specific and used to provide basic configuration to hardware, e.g. BIOS setup on computers. They are closest to the hardware and hence provide access to all components. They are very fast as they are directly translated to machine code using an assembler and specifications to be checked and converted are very limited.
+
+Since there are very few mappings, every instruction has to be explicit, therefore the code written in assembly language is much longer compared to that in high level languages.
+
+### High level languages
+
+High level languages is the next step in the mapping problem. They define their own set of specifications (lexicon, syntax and semantics) to provide a lot more features for writing programs, e.g. data types, control flow mechanisms, ways to define functions and objects, managing storing data on memory, managing input/output etc.
+
+For example in C/C++ memory management and data types have to be dealt with by the programmer manually, but in Python a lot of these features are provided as default where programmer does not have to deal with them.
+
+Since there are many pre-built instructions built in, the code written in high level languages tend to be shorter.
+
+#### Compiled languages
+
+Compiled languages solve the mapping problem using a **compiler**.
+
+The compiler reads the whole program and converts it to machine code before execution. This process is also referred to as Ahead of time compilation (**AOT**).
+
+The compiler is dependent on 3 major factors
+
+- hardware architecture (this is dependent on CPU primarily)
+    - instruction set: x86, ARM64, ...
+    - processing size: 64 bit or 32 bit
+- Operating system (OS)
+
+Therefore compiled languages like C/C++ have compilers available for most common architecture and OS combinations. The compiled machine code produced is different for different combinations.
+
+- **Pros**
+    - **fast**
+        - machine code is generated as standalone output
+- **Cons**
+    - **Portability**
+        - have to be compiled for different OS + Hardware combinations
+        - this is more of an inconvenience, as compilers for most popular combinations are available
+    - **Difficulty**
+        - compared to hybrid interpreter languages which are higher level with more features towards ease of use
+        - have higher development time, takes more time to code
+
+::: {.callout-note icon="false"}
+
+####### **How to write the compiler itself?**
+
+This seems to be a chicken and egg problem but it is not. Imagine there are no high level languages available and the first compiler for C language has to be written. The first compiler can be written in assembly language on a given system. This gives the machine code for C compiler. But now you can write compiler for any high level language in C and get the machine code for that compiler by compiling it with C compiler. From there on any compiler can be written in any compiled language and turned to machine code for needed systems.
+
+:::
+
+#### Interpreted languages
+
+The interpreter produces machine code at run time and can run code interactively. Interpreter takes care of system architecture and OS dependencies so can be run on any machine as long as the interpreter can be installed on that machine.
+
+Interpreters are of different types depending on implementation for a language. In simplest form they execute one instruction at a time, like most shell programs do, e.g. bash or zsh.
+
+##### Hybrid
+
+Languages like Java, C# and CPython (Official and most used Python version) use a hybrid approach. The mapping is done in 2 main steps
+
+- **compilation step**: source code is checked and compiled into intermediate **bytecode**
+- **interpreter step**: the bytecode is interpreted into machine code and run at runtime
+
+The run time behavior is still same as interpreter, in the sense that machine code is produced at run time rather than at compile time.
+
+- **Pros**
+    - **Portability**
+        - same program can be run on different machines by just installing the language interpreter
+    - **Ease of use**
+        - generally these languages are higher than compiled languages than C, C++
+        - time to write code is reduced
+- **Cons**
+    - **Slower**
+        - program is converted to machine code at run time
+        - this depends on the use case, specially considering the increase in hardware capacity, for most of common tasks this can be ignored
+
+###### JIT
+
+Some implementations of some languages use **just in time compilation (JIT)** to optimize the interpreter.
+
+The key idea is to compile certain pieces of code to optimized machine code at run time.
+
+This is more of an optimization technique for increasing speed, but this is still slower compared to compiled languages.
+
+Examples of language implementations that use JIT:
+
+- **Java**: Java Virtual Machine (**JVM**)
+- **C#**: Common language runtime (**CLR**)
+
+## Popular languages
+
+```{r}
+#| echo: false
+#| output: asis
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "languages" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = 1, value = TRUE) |>
+    huxtable::set_align(col = c(2:7), value = "center") |>
+    huxtable::set_col_width(c(.2, rep(.8/6, 6))) |>
+    huxtable::set_all_padding(1) |>
+    huxtable::set_text_color(row = c(2:(nrow(tbl_df) + 1)),
+        col = 1, value = "#2c6297")
+
+print_tbl_out(tbl_out, package)
+```
+
+### Desktop & Mobile applications
+
+Major operating systems create their own language and frameworks to develop applications to run on the os. This is changing now to target cross platform development, i.e. application built using a framework + language combination can be built for multiple devices and OS, just like compilers.
+
+Frameworks are an extra layer of functionalities and ways of binding them for a specific hardware architecture + os combination. For example, for creating graphical user interfaces building blocks are prebuilt and can be glued into the main application program without having to write them from scratch.
+
+The OS specific languages and platforms are now shifting to being cross platform.
+
+```{r}
+#| echo: false
+#| output: asis
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "langs-app" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+tbl_df <- tbl_df[1:4]
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = 1, value = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+### Websites (web dev) {#sec-web}
+
+Web technologies have become popular with the creation and development of browsers and web networks.
+
+- Front end (GUI) is based on HTML, CSS and JavaScript
+- Backend functionalities: like databases, analytics can be developed in language of choice
+
+In practice there are many frameworks available for development which provide standard templates of pre built code for different functionalities.
+
+```{r}
+#| echo: false
+#| output: asis
+
+table_file_path <- "resources/tables/pybcb-tables.xlsx"
+sheet <- "langs-web" # name or number
+package <- "hux"
+
+tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
+
+tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
+    huxtable::set_bold(col = 1, value = TRUE)
+
+print_tbl_out(tbl_out, package)
+```
+
+**How do browsers run code?**
+
+Browsers are primarily running **JavaScript** using their own set of mapping engines.
+
+Earlier the browser JavaScript engines were using interpreter approach but now have shifted to JIT approach like Java.
+
+- Google Chrome: V8 engine
+- Mozilla Firefox: SpiderMonkey
+- Apple Safari: JavaScriptCore
+- Microsoft Edge: Chakra
+
+### General purpose
+
+#### C and C++
+
+C and C++ are very popular compiled languages for writing high performance code. They provide access to most of the functionality hardware has to offer. Most of the critical applications like operating systems, compilers, virtual machines are written in C/C++.
+
+These have the steepest learning curve as the programmer has to know the how the hardware works to use these languages and most of the interactions like managing data stored on RAM, directing CPU for parallel processing have to be coded by the programmer.
+
+C is the older among the two with lesser features available. Everything has to be built from scratch or using some one elses code.
+
+C++ is a newer version of C with OOP, few changes in syntax and a lot more features. Also C++ is under active development.
+
+Both are compiled languages and compilers are available from various sources, most common being GNU GCC, which is a collection of compilers for different hardware architecture and OS combinations.
+
+Although these are not used directly in all use cases but much of the functionality under the hood uses these for performance reasons. For example, much of the libraries for scientific computing and data analysis in languages like Python and R are developed using C/C++ and a wrapper is implemented in Python or R. All major operating systems are written using C/C++ in part or in full.
+
+#### Python
+
+Python is a general purpose programming language. The official and most common version of Python that is used and covered in this course is implemented in C, and therefore also referred to as CPython.
+
+Python is very popular language with applicability in most of the application areas. Also it has a lot of pre built code available for majority of the regular tasks.
+
+## Programming paradigms
+
+::: {.div data-latex="{}"}
+A programming paradigm defines the approach or style of solving problems through programming.
+:::
+
+Programming paradigms are grouped into 2 main categories.
+
+- Imperative: focusses on how to solve the problem
+    - Procedural programming
+    - Object oriented programming
+    - Structured programming
+- Declarative: focusses on what to solve
+    - Logic programming
+    - Functional programming
+    - Data driven programming
+
+A language, through design of specifications and implementation, can support one or more of paradigms.
+
+Almost all popular programming languages support multiple paradigms and hence the term multi-paradigm is used. e.g Python, C, C++, Java, Javascript etc.
+
+For example, in Python, a problem can be solved using loops, functional programming or OOP. Python provides all the options.
+
+## General structure
+
+This is an attempt to structure all knowledge related to programming, including practical aspects.
+
+- **Language specifications**
+    - **Building blocks**: _specifications for elements and blocks of code_
+    - **Architecture**: _specifications for writing programs_
+        - means and specifications to combine elements and blocks to build programs
+        - management of execution of blocks (under the hood)
+- **Design**: _knowledge of how to write good programs_
+- **Tools**: _needed to write, test, debug and run programs_
+
+:::::: {.callout-note icon="false"}
+### Language specification
+
+::::: {layout="[[-5,35,-5,55]]"}
+
+::: {.callout-note icon="false"}
+#### Building blocks
+
+- [Basic specifications]{color="black"}
+    - [Lexicons]{color="black"}
+    - [Variables]{color="black"}
+    - [Comments]{color="black"}
+- [Data types and operations]{color="black"}
+- [Control flow blocks]{color="black"}
+- [Functions]{color="black"}
+- [OOP]{color="black"}
+- [Special features]{color="black"}
+:::
+
+::: {.callout-note icon="false"}
+#### Architecture
+
+- [Environment = Namespace + Scope]{color="black"}
+- [Scripts and packages]{color="black"}
+- [External packages]{color="black"}
+- [Language engine]{color="black"}
+- [Debugging]{color="black"}
+:::
+:::::
+::::::
+
+:::::: {layout="[[-5,45,-5,45]]"}
+::: {.callout-note icon="false"}
+#### Design
+
+- [Components]{color="black"}
+    - [Design patterns]{color="black"}
+        - [Map reduce]{color="black"}
+    - [DSA]{color="black"}
+    - [Regular expressions]{color="black"}
+- [Frameworks]{color="black"}
+- [Workflow]{color="black"}
+:::
+
+::: {.callout-note icon="false"}
+#### Tools
+
+- [Command line interface]{color="black"}
+- [Version control system]{color="black"}
+- [Language installation]{color="black"}
+    - [Engine]{color="black"}
+    - [External packages]{color="black"}
+    - [Virtual environments]{color="black"}
+- [Editor]{color="black"}
+:::
+::::::
+
+Almost all programming languages can be fitted to this generic structure/framework, therefore getting started with any language will become easier if you keep this structure in mind. This book is structured to follow this structure as well.
+
+The [wiki link](https://en.wikipedia.org/wiki/Comparison_of_programming_languages_(basic_instructions)) provides a comparison of different languages where you can use this structure to look for relevant basic syntax.
+
+The implementation and implications will differ for some pieces from language to language which you learn by experience in coding in it as use case arise. For example, in Python you do not need to worry about hardware management as it is taken care by the interpreter, but in C/C++ you have to manage them yourself. The scope rules are different from language to language.
+
+## Underlying Concepts
+
+The 3 basic concepts (means of abstraction, encapsulation and combination) have been foundational in development of computer science from hardware to software. Once you start seeing this pattern in every aspect of definition of a programming language, you will understand and implement programming better.
+
+::: {.callout-note icon="false"}
+### Underlying concepts
+
+- Means of **abstraction**
+    - building blueprints of data, operations, functionality, ...
+- Means of **encapsulation**
+    - hiding details of implementation
+- Means of **combination**
+    - using basic data structures to create compound data
+    - combine basic functions to build bigger functionality
+:::
+
+### Means of Abstraction
+
+Abstraction in general means to isolate ideas or concepts from actual physical reality. In other words it is a process of generalizing physical phenomenon without worrying about the details around it. Below are examples to understand application of abstraction in programming.
+
+**Programming language** is itself built on this idea where abstract specification is isolated from actual implementation. For example C++ language specification is provided and maintained by a group of people. The actual implementation of the compiler can be done by anyone using those specifications. Therefore there are many C++ compilers available like [GCC](https://gcc.gnu.org/), [LLVM](https://llvm.org/) etc.
+
+**Data types** have evolved by isolating the specification and implementation. Interfaces, or abstract data types (ADT), define general desired properties a certain data type should possess. Data structure with algorithms provide a concrete implementation for an interface. For example, dictionary is an ADT while Python `dict` is a data structure with algorithms for different operations. The performance of a dictionary in CPython might differ from a dictionary in C++ or even JPython (Implementation of Python VM using Java).
+
+**Functional programming** uses this idea in many different ways. Example 1, map, filter and reduce are general concepts related to a collection of items, the actual output depends on the function supplied while using the concept. Example 2, factory functions provide a blueprint of functionality, the arguments supplied decide the actual function created.
+
+**Object oriented programming (OOP)** is built around this idea where class is an abstract blueprint of an object and instance is the actual object which depends on the data it holds.
+
+### Means of Encapsulation
+
+Encapsulation in general means hiding the details of implementation.
+
+**Programming language**: hides the details of mapping problem, which is the actual implementation of the engine, and lets the programmer create new solutions using natural language, rules and syntax without worrying about details of implementation of compiler, hardware management etc.
+
+**Data types**: Once a data type is implemented you can create multiple instances without worrying about the details of implementation. For e.g. most languages provide way of defining numbers and strings by directly entering them without worrying about implementation details of how and where to store the data.
+
+**Functional programming**: Once a function is created you can use them as and when required without worrying about the implementation details during usage.
+
+**Object oriented programming (OOP)**: Classes provide a way to define blue prints of objects with certain attributes. After that multiple instances of the data type can be created and operated upon without worrying about the implementation details during usage.
+
+### Means of Combination
+
+Combining in general means joining. In programming it means the same, ways to combine simple parts to make a more complex part and make it simple using encapsulation.
+
+**Programming language** is built around the same concept, smaller pieces are the elements of specification like lexicons and syntax, then semantics and architecture defines ways to combine them to make more complex programs.
+
+**Data types**: Data structures like tuple, list, dictionaries etc. provide means of combining different data types to create arbitrarily larger and more complex data.
+
+**Functional programming**: Using the rules of scopes and namespaces functions can be joined and nested in many interesting ways to create more complex functions.
+
+**Object oriented programming (OOP)**: Class itself allows combining data and operations to create arbitrarily large and complex data types as needed. Further more rules of inheritance provide ways of relating class definitions to create and structure even more complex data types.
+

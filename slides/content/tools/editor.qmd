@@ -1,0 +1,125 @@
+---
+title: "Editor"
+---
+
+# Overview
+
+## Introduction
+
+Editor combines most of the tools and functionality needed for programming in one interface. Therefore, it is the tool which is used most while programming.
+
+## Background
+
+- Text editors
+    - e.g. Emacs, Vim, Nano, Atom
+- Integrated development environments (IDE)
+    - Visual Studio, IntelliJ Idea
+- Plugins or Extensions
+
+## Features {.shrink .smaller}
+
+:::: {layout="[[-5,45,-5,45]]"}
+
+::: {.callout-note icon="false" data-latex=""}
+## Common features
+
+- User interface
+    - themes
+    - windows
+    - frames
+- Editing
+    - tabs/spaces
+    - folding
+    - multiple cursors
+    - keybindings
+- Outline
+    - project files
+    - vcs
+    - extensions
+- Terminal
+- Projects & Workspaces
+- Version control
+:::
+
+::: {.callout-note icon="false" data-latex=""}
+## Language specific features
+
+- Syntax highlighting
+- Auto
+    - completion
+    - formatting
+    - linting
+    - refactoring
+    - snippets
+    - help/documentation
+- Object browser
+- Debugger
+- Compile/build/run
+- Testing
+:::
+::::
+
+## Options
+
+### Python Specific
+
+- [PyCharm](https://www.jetbrains.com/pycharm/)
+- [Spyder](https://www.spyder-ide.org/)
+- [RStudio](https://posit.co/products/open-source/rstudio/)
+
+### Generic
+
+#### Vim {.smaller}
+
+- [Homepage](https://www.vim.org/)
+- Plain text editor
+- Steep learning curve
+- Modal key bindings are powerful
+- Useful for quick changes directly from terminal
+- Extensions are available for additional functionality
+- [NeoVim](https://neovim.io/) is based on Vim
+    - advanced features
+    - offers extensibility with Lua programming language
+    - neorg, inspired by Emacs org mode, under development
+- Faster than most other editors
+- Works from cli
+
+#### Emacs
+
+- [Homepage](https://www.gnu.org/software/emacs/)
+- Very powerful and hackable using `emacs lisp` language
+- Steep learning curve
+- [Spacemacs](https://develop.spacemacs.org/) (a modified distribution of Emacs) is a good blend of vim keybindings and emacs
+- Extensions are available for additional functionality
+- `org` mode system
+
+#### VSCode
+
+- Works out the box
+- Easy to configure
+- Easy to use
+- Supports Jupyter notebooks
+- Highly configurable
+- Light weight
+- Supports most of the languages
+- Supports most of functionality required
+- Extensions available for additional functionality
+
+# Recommendation
+
+- VSCode is recommended to begin programming with
+    - ease of use in getting started
+
+- Keybindings in VSCode can be configured
+    - Vim keybindings are recommended
+    - [VSpaceCode](https://vspacecode.github.io/docs/): Vim keybindings++
+
+# Resources
+
+- [VSCode docs](https://code.visualstudio.com/docs/)
+    - [Setup](https://code.visualstudio.com/docs/setup/setup-overview)
+        - [Keybindings](https://code.visualstudio.com/docs/getstarted/keybindings#_keymap-extensions)
+    - [Introductory video series](https://code.visualstudio.com/docs/getstarted/introvideos)
+    - [Python setup](https://code.visualstudio.com/docs/python/python-tutorial)
+    - [Profiles](https://code.visualstudio.com/docs/editor/profiles)
+

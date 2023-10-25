@@ -1,0 +1,26 @@
+---
+title: "Overview"
+---
+
+# Background
+
+- **Language specifications**
+    - [**Building blocks**: _specifications for elements and blocks of code_]{color="blue"}
+    - [ **Architecture**: _specifications for writing programs_ ]{color="brown"}
+        - [means and specifications to combine elements and blocks to build programs]{color="brown"}
+        - [management of execution of blocks (under the hood)]{color="brown"}
+- **Design**: _knowledge of how to write good programs_
+- **Tools**: _needed to write, test, debug and run programs_
+
+# Introduction
+
+- **Environment = Namespace + Scope**: _how to isolate and identify (variable) names and objects_
+- **Scripts and packages**: _how to organize and use building blocks in scripts and folders_
+- **External packages**: _overview of external packages available for use_
+- **Language engine**: _overview of workings of Python interpreter_
+- **Debugging**: _investigating and troubleshooting errors while writing programs_
+
+# Objectives
+
+- Understand the specifications related to architecture and do experiments in isolation
+- Tools: use editor and cli to manage installation, scripts and projects
