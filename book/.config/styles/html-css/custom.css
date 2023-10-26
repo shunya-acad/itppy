@@ -1,0 +1,7 @@
+body {
+    text-align: justify
+}
+.cell-output pre {
+    /* background-color: #797f85; */
+    border-left: 3px solid rgb(197, 98, 71);
+}

@@ -28,3 +28,6 @@
 *.pdf
 
 # special cases
+
+/.quarto/
+itppy-package/

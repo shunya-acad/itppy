@@ -5,7 +5,7 @@ format:
   revealjs:
     theme:
       - default
-      - .config/css/slides-custom.scss
+      - .config/styles/html-css/slides-custom.scss
     slide-level: 4
     slide-number: c/t
     smaller: false

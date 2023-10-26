@@ -6,7 +6,7 @@ import shutil as sh
 root_path = pathlib.Path("slides")
 book_yaml_path = pathlib.Path("book/_quarto.yml")
 file_path_out = pathlib.Path("slides/content/.aggregate/itppy-slides.qmd")
-template_path = pathlib.Path("slides/.config/itppy_slides_template.qmd")
+template_path = pathlib.Path("slides/.config/templates/itppy_slides_template.qmd")
 
 file_path_out.unlink(missing_ok=True)
 sh.copyfile(template_path, file_path_out)

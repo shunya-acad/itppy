@@ -5,7 +5,7 @@ project:
     - content/.aggregate/itppy-slides.qmd
 
 filters: 
-  - ".config/lua/color-text.lua"
+  - ".config/filters/color-text.lua"
 
 subtitle: "Introduction to Programming - using Python"
 extract-media: ".resources"
@@ -17,8 +17,8 @@ knitr:
   opts_chunk:
       comment: ''
 execute:
-  freeze: false
-  cache: false
+  freeze: true
+  cache: true
   echo: true
   eval: true
   error: true
@@ -39,6 +39,6 @@ format:
       colorlinks: true
       slide-level: 6
       include-in-header:
-        - '../../.config/ltx/preamble-common.tex'
-        - '../../.config/ltx/preamble-outlines-multicols.tex'
-        - '../../.config/ltx/preamble-boxes.tex'
+        - '../../.config/styles/latex/preamble-common.tex'
+        - '../../.config/styles/latex/preamble-outlines-multicols.tex'
+        - '../../.config/styles/latex/preamble-boxes.tex'

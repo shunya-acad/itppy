@@ -49,4 +49,3 @@ The computer hardware understands machine code, which is in binary, but it is no
 For illustration, if `010011001010 ...` is a set of instruction in binary to tell the computer to beep, in programming language you type `beep`, the code will be mapped to instruction in binary and sent to processor.
 
 Therefore programming language is needed. The key idea is to have a set of instructions in natural language which can be mapped to different set of instructions in machine code.
-

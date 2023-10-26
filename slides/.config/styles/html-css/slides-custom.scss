@@ -1,0 +1,26 @@
+/*-- scss:defaults --*/
+
+
+/*-- scss:rules --*/
+
+.reveal .callout {
+  margin: .25rem;
+  /* 1.25rem by default */
+}
+
+.vcenter {
+  vertical-align: middle;
+}
+
+.v-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
+
+.block, .cell-code, .reveal div.sourceCode {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
