@@ -23,7 +23,7 @@ Learning a programming language starts with learning the specifications of eleme
 # Introduction
 
 - _Basic specifications_
-    - **Lexicons**: allowed symbol
+    - **Lexicons**: allowed symbols and characters
     - **Variables**: mechanism of storing and re-using information
     - **Comments**: annotating code
 - **Data types and operations**: storing and operating on numbers, strings, collections

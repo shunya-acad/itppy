@@ -1,2 +1,22 @@
 # Preface {.unnumbered}
 
+This book is intended for teachers to teach an introductory course on computer programming. The book should serve as reference textbook for both students and teachers, slides should help teachers teach the course.
+
+Although, students and learners can use it for learning to program, but computer programming is a practical skill. Therefore, it is recommended to learn it, if possible, within an interactive classroom type setup with demos and labs.
+
+The book is available to download as a package for offline usage from this [link](https://drive.google.com/drive/folders/1QZHgfpVra2S-KbN-dCLLSlxruOJFbQS0?usp=sharing), which contains
+
+- Book: html and pdf formats
+- Slides: pdfs in handout and presentation formats
+
+All the content has been created using [Quarto](https://quarto.org/), a tool for automating publishing, documentation and more. The GitHub link to source code is at this [link](https://github.com/shunya-acad/itppy) and there is an icon in the html format of the book in the tools section, towards the top area. This provides the option to edit the content as required.
+
+The website [Shunya.Acad]() is a placeholder for more general discussion on approach to create teaching content.
+
+All the content is available without charges with the aim to provide free access to all institutes and individuals, to inhibit lack of resources being a limitation to accesss.
+
+In case you have the resources and decide to pay for the content: [Payments]()
+
+## License
+
+The content is free to use, modify or distribute with only condition that author is not liable for anything under any situation related to this content.

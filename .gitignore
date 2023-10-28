@@ -30,4 +30,5 @@
 # special cases
 
 /.quarto/
-itppy-package/
+itppy-package*
+paytm*

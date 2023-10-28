@@ -19,6 +19,7 @@ book:
   output-file: "itppy-book"
   search: true
   reader-mode: true
+  repo-url: https://github.com/shunya-acad/itppy
   sidebar:
     collapse-level: 1
     style: docked
@@ -83,9 +84,11 @@ code-block-bg: true
 code-block-border-left: "#3ab2ea"
 highlight-style: github
 latex-auto-install: true
+link-external-newwindow: true
 extract-media: ".resources"
 comments: 
   hypothesis: true
+
 
 format:
   html:

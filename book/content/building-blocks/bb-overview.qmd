@@ -22,7 +22,7 @@ Learning a programming language starts with learning the specifications of eleme
 Building blocks comprise of following elements which provide the basic elements to write code.
 
 - _Basic specifications_
-    - **Lexicons**: allowed symbol
+    - **Lexicons**: allowed symbols and characters
     - **Variables**: mechanism of storing and re-using information
     - **Comments**: annotating code
 - **Data types and operations**: storing and operating on numbers, strings, collections
@@ -39,7 +39,7 @@ Building blocks comprise of following elements which provide the basic elements 
 
 Building blocks are introduced with related specifications (lexicons, syntax, semantics). Examples are provided to demonstrate implications of the specifications to demonstrate experimentation. Specifications are limited and easy to understand, implications are a lot as they grow with application and combination of the specifications.
 
-Building blocks can be combined in multiple directions to solve problems. Multiple direction means a conditional block can contain a function, and a function can contain a conditional block. Therefore there are multiple ways to combine different elements, but not are same in terms of readability elegance and efficiency.
+Building blocks can be combined in multiple directions to solve problems. Multiple direction means a conditional block can contain a function, and a function can contain a conditional block. Therefore there are multiple ways to combine different elements, but not all are same in terms of readability elegance and efficiency.
 
 The objectives for this part are to
 

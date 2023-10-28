@@ -1,0 +1,1 @@
+The content is free to use, modify or distribute with only condition that author is not liable for anything under any situation related to this content.
