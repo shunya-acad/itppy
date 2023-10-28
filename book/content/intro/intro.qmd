@@ -25,9 +25,11 @@ For **learners**, this should help as reference notes to quickly find informatio
 
 For **instructors**, this book along with slides should be helpful to teach the course. The content is available with freedom to use, modify and distribute. It should help focus efforts on creating other material (assignments, quizes, exams, labs, projects) and student interaction and monitoring.
 
-The source code for the book and slides is available to edit as required. More information is at resources section at the end of this chapter.
+The source code for the book and slides is available to edit as required.
 
 The offline version for the content is available too and can be downloaded as required.
+
+Link to all the resources is provided in preface/home page of the book.
 
 ## Content
 
@@ -72,9 +74,3 @@ Python provides features like garbage collection which does the memory managemen
         - e.g. item[s] means 's' is optional as there can be one or more item[s]
     - `<>` is typically used as place holder
         - e.g. `cp <src path> <dst path>` implies source and destination paths are to be entered as needed
-
-## Resources {#sec-resources}
-
-### Lecture slides
-### Solutions
-### Source code

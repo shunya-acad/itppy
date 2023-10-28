@@ -343,15 +343,15 @@ This section provides introduction to some basic functions which will be used to
 
 Focus on 
 
-- understand at high level what information the function provides
-- getting a hang of running code in jupyter notebooks
+- understanding at a high level what the function does
+- getting used to executing small pieces of code (in jupyter notebooks)
 - using variable assignment
 
-Ignore the details of `f''` string formats for now, they are there for formatting output. They will be covered later.
+Ignore the details of `f''` string formats for now, they are there for formatting output. They will be covered later in data types section under string operations.
 
 ### type
 
-- `type()`: returns object type
+- `type(_obj)`: returns object type
 
 ```{python}
 var_1 = 10
@@ -365,8 +365,8 @@ type(var_1), type(var_2), type(var_3), type(10.2)
 
 ### id
 
-- `id()`: returns object memory reference id
-  - `hex()` just converts to hexadecimal for better readability
+- `id(_obj)`: returns object memory reference id
+  - `hex(_integer)` converts to hexadecimal for better readability
 
 ```{python}
 _string_1 = "some text"
@@ -432,7 +432,7 @@ Import system in Python provides ways of managing objects in code and files. Thi
 In the example below,
 
 - `math` module is imported using `import` statement
-- objects: data and definitions are accessed using dot operator
+- objects: definitions are accessed using dot operator
 
 ```{python}
 import math
@@ -440,3 +440,27 @@ import math
 print(math.pi)
 print(math.ceil(10.2))
 ```
+
+## Executing Python files
+
+There are 2 main ways to execute a Python (`.py`) file using command line.
+
+- `<path to python executable> <path to file>`
+    - can take relative path
+    - for a regular package
+        - only `__main__.py` is executed if package name is used
+        - `__main__.py` or `__init__.py` can be given explicitly
+- `<path to python executable> -m <file name without extension>`
+    - cannot take relative paths
+    - command has to be executed from the directory containing the file
+    - if the file is in a directory below the shell directory then dot notation can be used
+        - e.g. `python3 -m sub_dir.file_1`
+    - in case of a regular package, `__init.py` and `__main__.py` both are executed
+
+Since using the first approach, a Python file can be executed from any directory it is the preferred approach.
+
+### Executing one script from another
+
+The recommended approach for executing one script from another is to keep the files in same folder and then use `import`.
+
+For example, `file_1.py` has to execute `file_2.py`. Place `file_2.py` in same folder as `file_1` then use `import file_2` in `file_1.py`. Whenever `file_1.py` is executed it will execute `file_2.py`.

@@ -20,3 +20,4 @@ In case you have the resources and decide to pay for the content: [Payments]()
 ## License
 
 The content is free to use, modify or distribute with only condition that author is not liable for anything under any situation related to this content.
+

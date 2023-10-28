@@ -86,9 +86,6 @@ highlight-style: github
 latex-auto-install: true
 link-external-newwindow: true
 extract-media: ".resources"
-comments: 
-  hypothesis: true
-
 
 format:
   html:

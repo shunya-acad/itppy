@@ -2140,6 +2140,50 @@ _num_1 = 1.5
 _num_1.as_integer_ratio()
 ```
 
+#### Modules and `import`
+
+Modules in Python refer to different things, based on context.
+
+- a file with `.py` extension containing Python code
+- an object once a `.py` file or package is imported using `import` statement
+
+- Packages are special type of modules, a folder containing Python files
+
+##### Use case
+
+- Re-use repeatable code
+    - Python standard library
+
+##### Example
+
+```{python}
+import math
+
+print(math.pi)
+print(math.ceil(10.2))
+```
+
+#### Executing Python files
+
+- `<path to python executable> <path to file>`
+    - can take relative path
+    - for a regular package
+        - only `__main__.py` is executed if package name is used
+        - `__main__.py` or `__init__.py` can be given explicitly
+- `<path to python executable> -m <file name without extension>`
+    - cannot take relative paths
+    - command has to be executed from the directory containing the file
+    - if the file is in a directory below the shell directory then dot notation can be used
+        - e.g. `python3 -m sub_dir.file_1`
+    - in case of a regular package, `__init.py` and `__main__.py` both are executed
+
+##### Executing one script from another
+
+- use `import`
+- For example, `file_1.py` has to execute `file_2.py`
+    - Place `file_2.py` in same folder as `file_1`
+    - use `import file_2` in `file_1.py`
+    - Whenever `file_1.py` is executed it will execute `file_2.py`
 ## Data types
 
 ### Introduction
@@ -6828,11 +6872,17 @@ There are 2 main uses of modules and packages.
 
 - Manages the run time behavior of modules and packages
 - Only run when a module or package is run as top level, i.e. directly
-    - `python3 -m <module or package name>`
-        - works when in the same directory as the module or package
-        - module name is used without `.py` extension
-    - `python3 <module or package path>`
-        - full path includes `.py` extension for files
+- `<path to python executable> <path to file>`
+    - can take relative path
+    - for a regular package
+        - only `__main__.py` is executed if package name is used
+        - `__main__.py` or `__init__.py` can be given explicitly
+- `<path to python executable> -m <name without extension>`
+    - cannot take relative paths
+    - command has to be executed from the directory containing the file or package
+    - if the file is in a directory below the shell directory then dot notation can be used
+        - e.g. `python3 -m sub_dir.file_1`
+    - in case of a regular package, `__init.py` and `__main__.py` both are executed
 
 ##### Modules
 

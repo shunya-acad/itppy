@@ -94,22 +94,36 @@ print_tbl_out(tbl, package)
 
 There are 2 main uses of modules and packages.
 
-- Execution as top level environment  
-   Python `'__main__'` system manages this
-- Organizing and cross referencing objects  
-   Python `import` system manages this
+- Execution as top level environment
+    - Python `'__main__'` system manages this
+- Organizing and cross referencing objects
+    - Python `import` system manages this
 
 ### `__main__` {#sec-dunder-main}
 
 In Python, the system of `__main__` manages the run time behavior of modules and packages, when they are run as top level environment. It helps in differentiating how a module or package is intended to be used.
 
-To execute a Python module or package as top level environment from command line, the recommended command is
+To execute a Python module or package as top level environment from command line, there are 2 main ways
 
-`python3 -m <module or package name>`
+- `<path to python executable> <path to file>`
+    - can take relative path
+    - for a regular package
+        - only `__main__.py` is executed if package name is used
+        - `__main__.py` or `__init__.py` can be given explicitly
+- `<path to python executable> -m <name without extension>`
+    - cannot take relative paths
+    - command has to be executed from the directory containing the file or package
+    - if the file is in a directory below the shell directory then dot notation can be used
+        - e.g. `python3 -m sub_dir.file_1`
+    - in case of a regular package, `__init.py` and `__main__.py` both are executed
 
-Note that if module name is `abc.py` the above command needs only `abc` without the `.py` extension.
+Since using the first approach, a Python file can be executed from any directory it is the preferred approach.
 
-Another form of command to run a python module or package is `python3 <abc.py>` or `python3 <some package path>`.
+Note that, while using `python3 -m <module or package name>`, if module name is `abc.py` the above command needs only `abc` without the `.py` extension.
+
+The recommended approach for executing one script from another is to keep the files in same folder and then use `import`.
+
+For example, `file_1.py` has to execute `file_2.py`. Place `file_2.py` in same folder as `file_1` then use `import file_2` in `file_1.py`. Whenever `file_1.py` is executed it will execute `file_2.py`. Note that if there is a main block present in `file_2`, it will not be executed.
 
 #### Modules
 
@@ -147,7 +161,15 @@ Any folder containing `__init__.py` is treated as a regular package by Python. P
 
 For packages, instead of a `if __name__ = '__main__'` block, `__main__.py` is used. If `if __name__ = '__main__'` block is used in `__init__.py`, it will give error when the package is called directly as the top level environment.
 
-If `__main__.py` is present in the regular package it is run along with the `__init__.py` when the package is run as the top level environment. Again this helps isolate code which needs to run only when the package is run directly as top level environment. When calling the same package using `import`, `__main__.py` is not run.
+**Executing _with_ `-m` switch**
+
+If `__main__.py` is present in the regular package it is run along with the `__init__.py` when the package is run as the top level environment using the `-m` switch. If `__main__` is not present, error occurs. Again this helps isolate code which needs to run only when the package is run directly as top level environment. When calling the same package using `import`, `__main__.py` is not run.
+
+**Executing _without_ `-m` switch**
+
+If a regular package is run without `-m` switch, only `__main__.py` is run else error is given.
+
+Regular packages in general are supposed to be used with import for reusing object definitions rather than executing code. `__main__.py` is for special cases, e.g. testing.
 
 This is simple to test.
 
@@ -183,7 +205,7 @@ if __name__ == "__main__":
 ```
 
 - experiment
-    - run each package as top level environment
+    - run each package as top level environment with and without `-m` flag
     - import each package from repl
 
 - note that running `reg_pkg_2` as top level environment will give error because it is a regular package and `if __name__ = '__main__'` does not work
@@ -196,7 +218,7 @@ Once imported, a module or package is a module type object with attributes. Pyth
 
 - `<module name>.__name__`: module's name or `__main__` if run directly
 - `<module name>.__file__`: absolute path to the module location
-- `<module name>.__package__`: is populated if is a regular package or a part of one, else is empty string
+- `<module name>.__package__`: is populated if it is a regular package or a part of one, else is empty string
 - `<module name>.__path__`: exists if module is a regular package or is part of one, else gives error
 
 All this is supported using Python's import system. Detailed documentation can be found at [Python language reference: Import system](https://docs.python.org/3/reference/import.html?highlight=namespace#the-import-system).
@@ -250,11 +272,12 @@ A Python project might be intended to do one or both type of below tasks.
 Below are the use cases with recommendations.
 
 - **Adhoc and small projects**: jupyter notebooks are sufficient most of the times.
+    - if code grows, definitions can be kept in modules and imported into notebook
 
-- For **adhoc and large projects** modules may be needed.
+- **Adhoc and large projects**: modules may be needed.
     - If the size of code grows, it is useful to organize the code using regular packages.
 
-- For **recurring tasks** it makes sense to use modules which can be run from command line.
+- **Recurring tasks**: it makes sense to use modules which can be run from command line.
     - If the size of code grows, it is useful to organize the code using regular packages.
 
 ### Small projects
