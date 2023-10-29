@@ -600,6 +600,7 @@ The static array object then needs to contain only the start memory address and 
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 tbl_df_seq[tbl_df_seq[1] == "array", ] |>
     create_table_seq() |>
@@ -609,6 +610,7 @@ tbl_df_seq[tbl_df_seq[1] == "array", ] |>
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 tbl_df_map[tbl_df_seq[1] == "array", ] |>
     create_table_map() |>
@@ -685,6 +687,7 @@ create_table_seq(tbl_df = tbl_df_seq[tbl_df_seq[1] == "linked list", ]) |>
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 filter = tbl_df_seq[1] == "linked list" | 
     tbl_df_seq[1] == "doubly linked list w/ tail"
@@ -710,6 +713,7 @@ tbl_df_seq[filter,] |>
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 tbl_df <- tbl_df_seq[tbl_df_seq[1] == "dynamic array",]
 tbl_df |>
@@ -810,6 +814,7 @@ Taking example of a phone book where the requirements are
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 print_tbl_out(tbl_out_seq, package_seq)
 ```
@@ -819,6 +824,7 @@ print_tbl_out(tbl_out_seq, package_seq)
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 print_tbl_out(tbl_out_map, package_map)
 ```

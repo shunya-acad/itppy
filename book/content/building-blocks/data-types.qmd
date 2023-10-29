@@ -89,6 +89,7 @@ print(f'{some_var=}, {type(some_var)=}')
 
 ```{r message=FALSE, warning=FALSE, eval=TRUE}
 #| output: asis
+#| cache: false
 #| echo: false
 
 tables_file_path <- "resources/tables/pybcb-tables.xlsx"
@@ -150,6 +151,7 @@ Regular math operations can done using the symbols provided as listed below. Oth
 
 ```{r message=FALSE, warning=FALSE, eval=TRUE}
 #| output: asis
+#| cache: false
 #| echo: false
 
 tables_file_path <- "resources/tables/pybcb-tables.xlsx"
@@ -469,6 +471,7 @@ Enumerate function is used to get pairs of index and elements of a sequence.
 
 ```{python}
 #| output: asis
+#| cache: false
 
 print([*enumerate(string_1)])
 ```
@@ -488,6 +491,7 @@ string_1[-2]
 ```{python}
 #| echo: false
 #| output: asis
+#| cache: false
 print([*enumerate(string_1)])
 ```
 
@@ -500,6 +504,7 @@ string_1[-3:]
 ```{python}
 #| echo: false
 #| output: asis
+#| cache: false
 print([*enumerate(string_1)])
 ```
 
@@ -864,6 +869,7 @@ When used with sequence types (string, tuple, list)
 
 ```{r}
 #| output: asis
+#| cache: false
 #| echo: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
@@ -983,6 +989,7 @@ Boolean combination operators use boolean math to provide means of combining mul
 
 ```{r}
 #| output: asis
+#| cache: false
 #| echo: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"

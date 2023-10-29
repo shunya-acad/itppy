@@ -66,17 +66,17 @@ Compiled languages solve the mapping problem using a **compiler**.
 
 The compiler reads the whole program and converts it to machine code before execution. This process is also referred to as Ahead of time compilation (**AOT**).
 
-The compiler is dependent on 3 major factors
+The compiler is dependent on a few major factors
 
-- hardware architecture (this is dependent on CPU primarily)
-    - instruction set: x86, ARM64, ...
-    - processing size: 64 bit or 32 bit
+- Hardware architecture (this is dependent on CPU primarily)
+    - Instruction set: x86, ARM64, ...
+    - Processing size: 64 bit or 32 bit
 - Operating system (OS)
 
 Therefore compiled languages like C/C++ have compilers available for most common architecture and OS combinations. The compiled machine code produced is different for different combinations.
 
 - **Pros**
-    - **fast**
+    - **Fast**
         - machine code is generated as standalone output
 - **Cons**
     - **Portability**
@@ -138,6 +138,7 @@ Examples of language implementations that use JIT:
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "languages" # name or number
@@ -167,6 +168,7 @@ The OS specific languages and platforms are now shifting to being cross platform
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "langs-app" # name or number
@@ -193,6 +195,7 @@ In practice there are many frameworks available for development which provide st
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "langs-web" # name or number

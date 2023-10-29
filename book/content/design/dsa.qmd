@@ -83,6 +83,7 @@ The study of data structures and algorithms can be summarized as below.
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "dsa-1" # name or number
@@ -170,6 +171,7 @@ Below are the set of asymptotic notations.
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "asymptotics" # name or number
@@ -243,6 +245,7 @@ In terms of efficiency of algorithms it is often desired to keep the complexity 
 ```{r "theta order"}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "theta-order" # name or number
@@ -322,6 +325,7 @@ Below tables summarize the common operation specifications for sequence and mapp
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "dsa-seq-ops" # name or number
@@ -342,6 +346,7 @@ print_tbl_out(tbl_out, package)
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "dsa-set-ops" # name or number
@@ -477,6 +482,7 @@ For dynamic operations, in the worst case new contiguous slot of free memory has
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 tbl_df_seq[tbl_df_seq[1] == "array", ] |>
     create_table_seq() |>
@@ -486,6 +492,7 @@ tbl_df_seq[tbl_df_seq[1] == "array", ] |>
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 tbl_df_map[tbl_df_seq[1] == "array", ] |>
     create_table_map() |>
@@ -556,6 +563,7 @@ create_table_seq(tbl_df = tbl_df_seq[tbl_df_seq[1] == "linked list", ]) |>
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 filter = tbl_df_seq[1] == "linked list" | 
     tbl_df_seq[1] == "doubly linked list w/ tail"
@@ -579,6 +587,7 @@ tbl_df_seq[filter,] |>
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 tbl_df <- tbl_df_seq[tbl_df_seq[1] == "dynamic array",]
 tbl_df |>
@@ -673,6 +682,7 @@ Taking example of a phone book where the requirements are
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 print_tbl_out(tbl_out_seq, package_seq)
 ```
@@ -682,6 +692,7 @@ print_tbl_out(tbl_out_seq, package_seq)
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 print_tbl_out(tbl_out_map, package_map)
 ```

@@ -224,6 +224,7 @@ source(here::here("resources/scripts/content/source-all.R"))
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "languages" # name or number
@@ -247,6 +248,7 @@ print_tbl_out(tbl_out, package)
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "langs-app" # name or number
@@ -272,6 +274,7 @@ Frameworks are an extra layer of functionalities and ways of binding them for a 
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "langs-web" # name or number

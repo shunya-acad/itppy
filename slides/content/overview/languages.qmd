@@ -92,7 +92,7 @@ source(here::here("resources/scripts/content/source-all.R"))
 #### Compiled languages {.smaller}
 
 - **Pros**
-    - **fast**
+    - **Fast**
         - machine code is generated as standalone output
 - **Cons**
     - **Portability**

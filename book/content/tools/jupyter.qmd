@@ -87,6 +87,7 @@ Markdown syntax is easy and quick to learn.
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "md-part-1" # name or number

@@ -45,6 +45,7 @@ Databases are applications which specialize in storage, maintenance and operatio
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "databases" # name or number
@@ -71,6 +72,7 @@ In practice there are many frameworks available for development which provide st
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "langs-web" # name or number

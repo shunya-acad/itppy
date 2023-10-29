@@ -64,6 +64,7 @@ print(keyword.kwlist)
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 library('reticulate')
 kwp  <- reticulate::import('keyword')
@@ -107,6 +108,7 @@ create_table(df, caption = caption, package = package, col_names = col_names) |>
 
 ```{r}
 #| output: asis
+#| cache: false
 #| echo: false
 #| cache: false
 

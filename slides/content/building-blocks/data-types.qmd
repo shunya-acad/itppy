@@ -61,6 +61,7 @@ source(here::here("resources/scripts/content/source-all.R"))
 
 ```{r message=FALSE, warning=FALSE, eval=TRUE}
 #| output: asis
+#| cache: false
 #| echo: false
 
 tables_file_path <- "resources/tables/pybcb-tables.xlsx"
@@ -84,6 +85,7 @@ create_table(df, package = package) |>
 
 ```{r message=FALSE, warning=FALSE, eval=TRUE}
 #| output: asis
+#| cache: false
 #| echo: false
 
 tables_file_path <- "resources/tables/pybcb-tables.xlsx"
@@ -435,6 +437,7 @@ Enumerate function is used to get pairs of index and elements of a sequence.
 
 ```{python}
 #| output: asis
+#| cache: false
 
 print([*enumerate(some_str)])
 ```
@@ -453,6 +456,7 @@ some_str = "abcdefgh"
 
 ```{python}
 #| output: asis
+#| cache: false
 
 print([*enumerate(some_str)])
 ```
@@ -471,6 +475,7 @@ some_str = "abcdefgh"
 
 ```{python}
 #| output: asis
+#| cache: false
 
 print([*enumerate(some_str)])
 ```
@@ -489,6 +494,7 @@ some_str = "abcdefgh"
 
 ```{python}
 #| output: asis
+#| cache: false
 
 print([*enumerate(some_str)])
 ```
@@ -507,6 +513,7 @@ some_str = "abcdefgh"
 
 ```{python}
 #| output: asis
+#| cache: false
 
 print([*enumerate(some_str)])
 ```
@@ -883,6 +890,7 @@ When used with sequence types (string, tuple, list)
 
 ```{r}
 #| output: asis
+#| cache: false
 #| echo: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
@@ -1005,6 +1013,7 @@ some_var is None
 
 ```{r}
 #| output: asis
+#| cache: false
 #| echo: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"

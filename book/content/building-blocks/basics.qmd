@@ -97,6 +97,7 @@ print(keyword.kwlist)
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 library('reticulate')
 kwp  <- reticulate::import('keyword')
@@ -145,6 +146,7 @@ Following these conventions makes the code readability and understanding the cod
 
 ```{r}
 #| output: asis
+#| cache: false
 #| echo: false
 #| cache: false
 

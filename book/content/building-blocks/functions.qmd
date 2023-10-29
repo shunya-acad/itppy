@@ -418,6 +418,7 @@ some_func(1, 2, 3, a = 4, b = 5)
 ```{r}
 #| echo: false
 #| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "fun-arg-types" # name or number

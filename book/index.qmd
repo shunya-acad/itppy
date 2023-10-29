@@ -2,7 +2,9 @@
 
 This book is intended for teachers to teach an introductory course on computer programming. The book should serve as reference textbook for both students and teachers, slides should help teachers teach the course.
 
-Although, students and learners can use it for learning to program, but computer programming is a practical skill. Therefore, it is recommended to learn it, if possible, within an interactive classroom type setup with demos and labs.
+For absolute beginners, it is recommended to learn computer programming, if possible, within an interactive classroom type setup with demos and labs. Although, students and learners can use it for learning to program, but computer programming is a practical skill which needs demos and live interactive sessions.
+
+For learners, with existing knowledge of programming, this should provide an independent perspective to structure knowledge related to computer programming.
 
 The book is available to download as a package for offline usage from this [link](https://drive.google.com/drive/folders/1QZHgfpVra2S-KbN-dCLLSlxruOJFbQS0?usp=sharing), which contains
 
