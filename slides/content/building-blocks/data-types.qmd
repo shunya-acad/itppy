@@ -1012,9 +1012,9 @@ some_var is None
 ### Overview {.fragile .smaller .shrink}
 
 ```{r}
+#| echo: false
 #| output: asis
 #| cache: false
-#| echo: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-ops" # name or number
@@ -1062,7 +1062,8 @@ print_tbl_out(tbl_out, package)
 
 ```{r}
 #| echo: false
-#| results: 'asis'
+#| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-tbl" # name or number

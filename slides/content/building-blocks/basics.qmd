@@ -107,9 +107,8 @@ create_table(df, caption = caption, package = package, col_names = col_names) |>
 #### PEP-8 Conventions {.fragile .shrink .smaller}
 
 ```{r}
-#| output: asis
-#| cache: false
 #| echo: false
+#| output: asis
 #| cache: false
 
 tables_file_path <- "resources/tables/pybcb-tables.xlsx"

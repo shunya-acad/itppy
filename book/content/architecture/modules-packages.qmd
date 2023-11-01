@@ -75,7 +75,6 @@ One of the key features of regular packages is that they allow cross referencing
 
 ```{r}
 #| output: asis
-#| cache: false
 #| echo: false
 #| cache: false
 

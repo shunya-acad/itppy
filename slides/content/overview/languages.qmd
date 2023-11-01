@@ -129,7 +129,7 @@ source(here::here("resources/scripts/content/source-all.R"))
     - **Portability**
         - same program can be run on different machines by just installing the language interpreter
     - **Ease of use**
-        - generally these languages are higher than compiled languages than C, C++
+        - generally these languages are higher than compiled languages like C, C++
         - time to write code is reduced
 - **Cons**
     - **Slower**
@@ -246,23 +246,23 @@ A programming paradigm defines the approach or style of solving problems through
 
 Programming paradigms are grouped into 2 main categories.
 
-- **Imperative**: _focusses on how to solve the problem_
-    - **Procedural programming**
-    - **Object oriented programming**
-    - **Structured programming**
 - **Declarative**: _focusses on what to solve_
     - **Logic programming**
     - **Functional programming**
     - **Data driven programming**
+- **Imperative**: _focusses on how to solve the problem_
+    - **Procedural programming**
+    - **Object oriented programming**
+    - **Structured programming**
 
 ## Applications
 
 - A language, through design of specifications and implementation, can support one or more of paradigms.
 
-- Almost all popular programming languages support multiple paradigms and hence the term **multi-paradigm** is used.
+- Almost all popular programming languages support multiple paradigms and hence the term **multi-paradigm** is used
     - e.g Python, C, C++, Java, Javascript etc.
 
-- For example, in Python, a problem can be solved using loops, functional programming or OOP.
+- For example, in Python, same problem can be solved using functional programming or OOP
     - Python provides most of the options.
     - In the beginning avoid using OOP.
 

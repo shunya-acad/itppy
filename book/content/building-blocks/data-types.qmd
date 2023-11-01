@@ -868,9 +868,9 @@ When used with sequence types (string, tuple, list)
 #### Options and syntax
 
 ```{r}
+#| echo: false
 #| output: asis
 #| cache: false
-#| echo: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-ops" # name or number
@@ -988,9 +988,9 @@ some_var is None
 Boolean combination operators use boolean math to provide means of combining multiple comparison operations and conditions to form larger conditions.
 
 ```{r}
+#| echo: false
 #| output: asis
 #| cache: false
-#| echo: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-ops" # name or number
@@ -1034,7 +1034,8 @@ print_tbl_out(tbl_out, package)
 
 ```{r}
 #| echo: false
-#| results: 'asis'
+#| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-tbl" # name or number

@@ -16,10 +16,10 @@ Python itself has multiple different flavors/implementations of regular expressi
     - `regex` package in PyPI, extension of `re` module: [homepage](https://github.com/mrabarnett/mrab-regex)
 - Unix style pathname pattern matching, used in bash commands
     - [`glob`](https://docs.python.org/3/library/glob.html) module
-    - `pathlib` module in standard library provides [`Path.glob()`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob)
+    - `pathlib` module in standard library provides [`Path.glob(ptrn)`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob)
 
 The key idea is to provide much more powerful pattern searching than regular string methods provide. For example, to search all pdf files in a folder you can use `*.pdf` pattern to do a search on all file names. Or, `^project` pattern to find all files starting with the word project.
 
-Regular expressions provide much more advanced features but are slower compared to regular string methods. The python tutorial has a [section](https://docs.python.org/3/howto/regex.html#common-problems) dedicated to describe the issue with choice between using string methods and regular expressions.
+Regular expressions provide much more advanced features but are slower compared to regular string methods. The python tutorial has a [section](https://docs.python.org/3/howto/regex.html#common-problems) dedicated to describe the choice between using string methods and regular expressions.
 
-Regular expressions can get very messy very fast. So in the beginning use only basics of regex, when it is clear that string method is not available or will be too complex. The most common situation is to use regex for path related operations.
+Regular expressions can get very messy very fast. So, in the beginning, use only basics of regex, when it is clear that string method is not available or will be too complex. The most common situation is to use regex for path related operations.

@@ -488,6 +488,7 @@ cl$green <- "#e0e6cd"
 
 ```{r}
 #| include: false
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "dsa-ds-seq" # name or number
@@ -516,6 +517,7 @@ tbl_out_seq <- create_table_seq(tbl_df_seq)
 
 ```{r}
 #| include: false
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "dsa-ds-map" # name or number

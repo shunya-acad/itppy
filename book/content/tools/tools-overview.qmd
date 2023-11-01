@@ -2,7 +2,7 @@
 
 ## Background
 
-To be able to use any of the tools a computer with an operating system is required. Computers come with 2 major commercial operating system options are Windows and Mac. Then there are a large number of free (in context of price) and open source Linux (Unix based) distributions. Mac is itself based on Linux so has similar workflow as other Linux distributions. Newer windows machines can run a Linux distribution using wsl or a virtual machine.
+To be able to use any of the tools a computer with an operating system is required. Computers come with 2 major commercial operating system options, Windows and Mac. Then there are a large number of free (in context of price) and open source Linux and GNU/Linux distributions. Mac is itself based on Linux so has similar workflow as other Linux distributions. Newer windows machines can run a Linux distribution using wsl or a virtual machine.
 
 With the evolution of programming, there has been evolution of tools to write and execute programs. Learning these tools is not a one time task and takes time.
 

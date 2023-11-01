@@ -1,6 +1,6 @@
 # Introduction {.unnumbered}
 
-## Book Anatomy
+## Book Anatomy (html)
 
 ![](../../../resources/images/book-anatomy.png)
 
@@ -33,7 +33,7 @@ Link to all the resources is provided in preface/home page of the book.
 
 ## Content
 
-The attempt is to abstract the core concepts and contexts related to computer programming which acts as a framework to learn not just Python but any programming language.
+The attempt is to abstract the core concepts and contexts related to computer programming, which acts as a framework to learn not just Python but any programming language.
 
 The focus is on concretizing the framework to understand evolution of programming. The concepts involved are generally the same for most part.
 

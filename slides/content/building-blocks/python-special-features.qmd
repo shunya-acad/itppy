@@ -184,7 +184,8 @@ x or y
 
 ```{r}
 #| echo: false
-#| results: 'asis'
+#| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-tbl" # name or number
@@ -203,7 +204,8 @@ print_tbl_out(tbl_out, package)
 
 ```{r}
 #| echo: false
-#| results: 'asis'
+#| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-tbl" # name or number

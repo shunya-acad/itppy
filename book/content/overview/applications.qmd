@@ -11,7 +11,13 @@ Across industries more and more robotic devices are in use for automation of man
 
 ## Operating Systems
 
-Major operating systems like Microsoft Windows, Apple Mac, Linux distributions are built with C/C++.
+Major commercial operating systems like Microsoft Windows, Apple Mac, Linux based distributions are built with C/C++.
+
+There a lot of Linux and GNU/Linux based operating systems, built by various communities of developers and commercial organizations, available for free.
+
+An operating systems can be understood as 2 main parts, a kernel and applications. Kernel manages and provides means for applications to interact with the hardware. Applications provide the user interface, e.g. file manager, terminal, shell, media player etc.
+
+Unix was a commercial operating system. Linus Torvalds developed a kernel based on Unix and provided it for free. Independently, Richard Stallman established GNU, which developed most of the applications needed for an operating system. There are several other foundations which create free software like KDE. Mixing these allowed creation of free operating systems commonly referred to as Linux or GNU/Linux operating systems. Linux in general refers to any operating system using Linux kernel as its base, applications can or cannot be from GNU's collection.
 
 Mobile devices have their own operating systems like Google's Android and Apple's IOS. These are written in multiple languages but use C heavily.
 
@@ -22,7 +28,7 @@ OS provides a default set of operations to interact with the hardware. There are
 - network devices
 - hard disk: file system
 
-All the smaller applications are glued by the operating system and a graphical user interface is provided to interact with the hardware. This is done through desktop applications like file manager, text editor, photo viewer etc.
+All the smaller applications are glued by the kernel and a graphical user interface is provided to interact with the hardware. This is done through desktop applications like file manager, text editor, photo viewer etc.
 
 ## CLI = Terminal + Shell
 

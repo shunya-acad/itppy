@@ -76,9 +76,8 @@ There are 3 cases when module type object is created using import in Python
 ## Pep-8 Conventions {.fragile .smaller}
 
 ```{r}
-#| output: asis
-#| cache: false
 #| echo: false
+#| output: asis
 #| cache: false
 
 tables_file_path <- "resources/tables/pybcb-tables.xlsx"

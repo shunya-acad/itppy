@@ -11,13 +11,13 @@ The book is available to download as a package for offline usage from this [link
 - Book: html and pdf formats
 - Slides: pdfs in handout and presentation formats
 
-All the content has been created using [Quarto](https://quarto.org/), a tool for automating publishing, documentation and more. The GitHub link to source code is at this [link](https://github.com/shunya-acad/itppy) and there is an icon in the html format of the book in the tools section, towards the top area. This provides the option to edit the content as required.
+All the content has been created using [Quarto](https://quarto.org/), a tool for automating publishing, documentation and more. The source code is at this [GitHub link](https://github.com/shunya-acad/itppy) and there is an icon in the html format of the book in the tools section, towards the top area. This provides the option to edit the content as required.
 
-The website [Shunya.Acad]() is a placeholder for more general discussion on approach to create teaching content.
+The website [shunya.acad](https://shunya-acad.web.app/) is a placeholder for more general discussion on approach to create teaching content.
 
-All the content is available without charges with the aim to provide free access to all institutes and individuals, to inhibit lack of resources being a limitation to accesss.
+All the content is available without charges with the aim to provide free access to all institutes and individuals, to inhibit lack of resources being a limitation to access.
 
-In case you have the resources and decide to pay for the content: [Payments]()
+In case you have the resources and decide to pay for the content: [Payments](https://shunya-acad.web.app/content/payments.html)
 
 ## License
 

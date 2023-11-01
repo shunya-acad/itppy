@@ -175,7 +175,7 @@ source(here::here("resources/scripts/content/source-all.R"))
 ###### Compiled languages {.smaller}
 
 - **Pros**
-    - **fast**
+    - **Fast**
         - machine code is generated as standalone output
 - **Cons**
     - **Portability**
@@ -212,7 +212,7 @@ source(here::here("resources/scripts/content/source-all.R"))
     - **Portability**
         - same program can be run on different machines by just installing the language interpreter
     - **Ease of use**
-        - generally these languages are higher than compiled languages than C, C++
+        - generally these languages are higher than compiled languages like C, C++
         - time to write code is reduced
 - **Cons**
     - **Slower**
@@ -329,23 +329,23 @@ A programming paradigm defines the approach or style of solving problems through
 
 Programming paradigms are grouped into 2 main categories.
 
-- **Imperative**: _focusses on how to solve the problem_
-    - **Procedural programming**
-    - **Object oriented programming**
-    - **Structured programming**
 - **Declarative**: _focusses on what to solve_
     - **Logic programming**
     - **Functional programming**
     - **Data driven programming**
+- **Imperative**: _focusses on how to solve the problem_
+    - **Procedural programming**
+    - **Object oriented programming**
+    - **Structured programming**
 
 #### Applications
 
 - A language, through design of specifications and implementation, can support one or more of paradigms.
 
-- Almost all popular programming languages support multiple paradigms and hence the term **multi-paradigm** is used.
+- Almost all popular programming languages support multiple paradigms and hence the term **multi-paradigm** is used
     - e.g Python, C, C++, Java, Javascript etc.
 
-- For example, in Python, a problem can be solved using loops, functional programming or OOP.
+- For example, in Python, same problem can be solved using functional programming or OOP
     - Python provides most of the options.
     - In the beginning avoid using OOP.
 
@@ -569,7 +569,7 @@ Combining in general means joining. In programming it means the same, ways to co
 
 ### Operating Systems
 
-- Major operating systems like Microsoft Windows, Apple Mac, Linux distributions are built with C/C++.
+- Major operating systems like Microsoft Windows, Apple Mac, Linux, GNU/Linux are built with C/C++.
 
 - Mobile devices have their own operating systems like Google's Android and Apple's IOS.
     - These are written in multiple languages but use C heavily.
@@ -578,13 +578,15 @@ Combining in general means joining. In programming it means the same, ways to co
 
 ####
 
+- OS = Kernel + Applications
+
 - There are several smaller applications to interact with components of hardware
     - input devices: keyboard, mouse, camera, microphone
     - output devices: display, speakers
     - network devices
     - hard disk: file system
 
-- All the smaller applications are glued by the operating system and a graphical user interface is provided to interact with the hardware.
+- All the smaller applications are glued by the kernel and a graphical user interface is provided to interact with the hardware.
 
 - This is done through desktop applications like file manager, text editor, photo viewer etc.
 
@@ -1874,9 +1876,8 @@ create_table(df, caption = caption, package = package, col_names = col_names) |>
 ###### PEP-8 Conventions {.fragile .shrink .smaller}
 
 ```{r}
-#| output: asis
-#| cache: false
 #| echo: false
+#| output: asis
 #| cache: false
 
 tables_file_path <- "resources/tables/pybcb-tables.xlsx"
@@ -3184,9 +3185,9 @@ some_var is None
 ##### Overview {.fragile .smaller .shrink}
 
 ```{r}
+#| echo: false
 #| output: asis
 #| cache: false
-#| echo: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-ops" # name or number
@@ -3233,7 +3234,8 @@ print_tbl_out(tbl_out, package)
 
 ```{r}
 #| echo: false
-#| results: 'asis'
+#| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-tbl" # name or number
@@ -6304,7 +6306,8 @@ x or y
 
 ```{r}
 #| echo: false
-#| results: 'asis'
+#| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-tbl" # name or number
@@ -6323,7 +6326,8 @@ print_tbl_out(tbl_out, package)
 
 ```{r}
 #| echo: false
-#| results: 'asis'
+#| output: asis
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "bool-tbl" # name or number
@@ -6855,9 +6859,8 @@ There are 3 cases when module type object is created using import in Python
 #### Pep-8 Conventions {.fragile .smaller}
 
 ```{r}
-#| output: asis
-#| cache: false
 #| echo: false
+#| output: asis
 #| cache: false
 
 tables_file_path <- "resources/tables/pybcb-tables.xlsx"
@@ -7999,6 +8002,7 @@ cl$green <- "#e0e6cd"
 
 ```{r}
 #| include: false
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "dsa-ds-seq" # name or number
@@ -8027,6 +8031,7 @@ tbl_out_seq <- create_table_seq(tbl_df_seq)
 
 ```{r}
 #| include: false
+#| cache: false
 
 table_file_path <- "resources/tables/pybcb-tables.xlsx"
 sheet <- "dsa-ds-map" # name or number

@@ -146,7 +146,6 @@ Following these conventions makes the code readability and understanding the cod
 
 ```{r}
 #| output: asis
-#| cache: false
 #| echo: false
 #| cache: false
 

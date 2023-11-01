@@ -15,7 +15,7 @@ source(here::here("resources/scripts/content/source-all.R"))
 
 # Operating Systems
 
-- Major operating systems like Microsoft Windows, Apple Mac, Linux distributions are built with C/C++.
+- Major operating systems like Microsoft Windows, Apple Mac, Linux, GNU/Linux are built with C/C++.
 
 - Mobile devices have their own operating systems like Google's Android and Apple's IOS.
     - These are written in multiple languages but use C heavily.
@@ -24,13 +24,15 @@ source(here::here("resources/scripts/content/source-all.R"))
 
 ##
 
+- OS = Kernel + Applications
+
 - There are several smaller applications to interact with components of hardware
     - input devices: keyboard, mouse, camera, microphone
     - output devices: display, speakers
     - network devices
     - hard disk: file system
 
-- All the smaller applications are glued by the operating system and a graphical user interface is provided to interact with the hardware.
+- All the smaller applications are glued by the kernel and a graphical user interface is provided to interact with the hardware.
 
 - This is done through desktop applications like file manager, text editor, photo viewer etc.
 
