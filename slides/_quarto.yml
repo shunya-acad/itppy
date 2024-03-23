@@ -38,6 +38,7 @@ format:
       keep-tex: true
       colorlinks: true
       slide-level: 6
+      fig-format: pdf
       include-in-header:
         - '../../.config/styles/latex/preamble-common.tex'
         - '../../.config/styles/latex/preamble-outlines-multicols.tex'

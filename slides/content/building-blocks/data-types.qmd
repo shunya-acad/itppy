@@ -15,7 +15,7 @@ source(here::here("resources/scripts/content/source-all.R"))
 - Collections provide ways to combine data types: `tuple`, `list`, `set`, `dict`
 - **Data Structures and Algorithms (DSA)** used to design data types and operations (methods)
 
-### Overview {.shrink}
+## Overview {.shrink}
 
 ![](../../../resources/mindmaps/python-dataobject-types.png)
 
@@ -25,7 +25,7 @@ source(here::here("resources/scripts/content/source-all.R"))
   - just refer whats needed, gradually it will stick
 :::
 
-### Terminology
+## Terminology
 
 - **Collection** is generally used for collection of objects, and it can be compounded, collection of collection of objects.
 
@@ -37,7 +37,7 @@ source(here::here("resources/scripts/content/source-all.R"))
 
 - **Sequence** is a subset of **collections**. All sequences are iterables.
 
-### Objectives
+## Objectives
 
 - **Creation and syntax**
 - **Operations**: understand how operations are **structured** across data types
@@ -122,7 +122,7 @@ create_table(df, package = package) |>
 
 ## Examples
 
-----
+### Example 1
 
 - basic example of assigning int and float
 
@@ -141,7 +141,7 @@ print(f'{num2 = }, {type(num2) = }')
 
 - if decimal is present then, even if number is integer, it is stored as float
 
-----
+### Example 2 {.shrink}
 
 - Operations with `int` and `float` return `float`.
 
@@ -160,7 +160,7 @@ print(f'{num3 = }, {type(num3) = }')
 ```
 :::
 
-----
+### Example 3
 
 - Objects of type `int` (-5 to 256) are not **duplicated**
 
@@ -177,7 +177,7 @@ some_int_1 is some_int_2
 ```
 :::
 
-----
+### Example 4
 
 - Numeric data types are immutable
 
@@ -430,6 +430,8 @@ print(my_string)
 #### Examples
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -451,6 +453,8 @@ some_str[2:6]
 #### Examples
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -470,6 +474,8 @@ some_str[-2]
 #### Examples
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -489,6 +495,8 @@ some_str[-3:]
 #### Examples
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -505,9 +513,11 @@ print([*enumerate(some_str)])
 some_str[3:]
 ```
 
-#### Examples
+#### Examples {.shrink}
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -692,7 +702,9 @@ Range is a special **iterable** to **generate a sequence of integers** with foll
     - **stop** is **excluded**
 - primarily used for loops, discussed later
 
-## Examples
+## Examples {.shrink}
+
+### Examples
 
 ```{python}
 print(range(10))
@@ -705,6 +717,8 @@ print(list(range(10)))
 ```{python}
 print([*range(11)])
 ```
+
+### Examples
 
 ```{python}
 print([*range(1, 11)])
@@ -734,7 +748,7 @@ A dictionary is a **mutable** **mapping type** collection of **heterogeneous obj
         - **lists, dictionary cannot be used**
     - **value** can be any **Python object**
 
-----
+### Overview (Cntd...)
 
 A dictionary is useful when a collection of objects is needed with the option to do quick searches based on keys rather than index, unlike sequences.
 
@@ -951,8 +965,6 @@ some_chr_1 in some_string
 some_chr_2 in some_string
 ```
 
-----
-
 #### Small string in a longer string
 
 ```{python}
@@ -1026,7 +1038,7 @@ tbl_df <- tbl_df[tbl_df$Type == "Combination",][-c(1, 5)]
 
 tbl_out <- create_table(tbl_df, package) |>
     huxtable::theme_article() |>
-    huxtable::set_col_width(c(.1, .4, .5))
+    huxtable::set_col_width(c(.15, .4, .45))
 
 print_tbl_out(tbl_out, package)
 ```
@@ -1048,7 +1060,7 @@ print_tbl_out(tbl_out, package)
     - example: `a < b < c` is same as `a < b and b < c`
     - this is specific to Python
 
-----
+#### Specifications (Cntd...)
 
 - for conditions with too many nested combinations
   it is recommended to use `()`
@@ -1240,7 +1252,7 @@ some_tuple = (0, 1, 1)
 some_tuple[2] = 2
 ```
 
-#### Mutable types - lists, dictionaries
+#### Mutable types - lists, dictionaries {.shrink}
 
 ```{python}
 some_list = [0, 1, 5]
@@ -1290,7 +1302,7 @@ some_string = some_string.replace("a", "b")
 print(f'{some_string=}\n{hex(id(some_string)) = }\n{some_string_orig_id = }')
 ```
 
-### Propagation of changes
+### Propagation of changes {.shrink}
 
 Mutable types like lists or dictionaries, when passed around through variable assignment, changes are propagated.
 
@@ -1304,6 +1316,8 @@ Mutable types like lists or dictionaries, when passed around through variable as
   - **unpacking** `[*iterable]`
   - **loops**
 
+#### Examples
+
 ```{python}
 some_list_1 = [1, 2, "a", "b"]
 some_list_2 = some_list_1
@@ -1313,6 +1327,8 @@ some_list_2 = some_list_1
 print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
 ```
 
+#### Examples
+
 ```{python}
 some_list_1[2] = "abc"
 ```
@@ -1321,6 +1337,8 @@ some_list_1[2] = "abc"
 print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
 ```
 
+#### Examples
+
 ```{python}
 some_list_2[-1] = "xyz"
 ```
@@ -1328,6 +1346,8 @@ some_list_2[-1] = "xyz"
 ```{python}
 print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
 ```
+
+#### Examples
 
 - using constructor or unpacking does not pass the object itself
 
@@ -1349,6 +1369,8 @@ some_list_1[2] = "abc"
 #| echo: false
 print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
 ```
+
+#### Examples
 
 - using constructor or unpacking does not pass the object itself
 
@@ -1392,7 +1414,7 @@ some_list.pop()
 print(f'{some_list=}\n{some_tuple=}\n{some_list is some_tuple[0] = }')
 ```
 
-#### 
+#### {.shrink}
 
 - if only contents are needed and propagation is to be avoided use **unpacking** or **constructor**
 
@@ -1407,7 +1429,7 @@ print(f'{some_list is some_tuple_1 = }')
 print(f'{some_list is some_tuple_2 = }')
 ```
 
-####
+#### {.shrink}
 
 ```{python}
 some_list.pop()

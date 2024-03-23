@@ -7,6 +7,13 @@ title: "Data structures & Algorithms (DSA)"
 source(here::here("resources/scripts/content/source-all.R"))
 ```
 
+```{r}
+#| include: false
+cl <- list()
+cl$red <- "#efcbcb"
+cl$amber <- "#f0d2c0"
+cl$green <- "#e0e6cd"
+```
 
 # Introduction
 
@@ -93,7 +100,7 @@ The study of data structures and algorithms can be summarized as below.
 
 - The choice of data structure decides available algorithms for different operations implemented for a data structure
 
-## Interface vs data structure {.fragile .smaller}
+## Interface vs data structure {.fragile .shrink .smaller}
 
 ```{r}
 #| echo: false
@@ -109,8 +116,8 @@ tbl_df <- readxl::read_excel(here::here(table_file_path), sheet = sheet)
 tbl_df <- tbl_df[2:3]
 
 tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
-    huxtable::theme_compact() |>
-    huxtable::set_bottom_border(TRUE)
+    huxtable::set_right_border(row = c(-1), value = 0.4) |>
+    huxtable::stripe_rows()
 
 print_tbl_out(tbl_out, package)
 ```
@@ -228,19 +235,19 @@ print_tbl_out(tbl_out, package)
 #### Definitions
 
 ::: {.block data-latex="{}"}
-##### O Notation
+**O Notation**
 
 A non-negative function $f(n)$ is in $O(g(n))$ if and only if there exist constants $c, n_0 \in \mathbb{R}$ such that $f(n) \le c \cdot g(n) \quad \forall \ n > n_0$.
 :::
 
 ::: {.block data-latex="{}"}
-##### Omega Notation
+**Omega Notation**
 
 A non-negative function $f(n)$ is in $\Omega(g(n))$ if and only if there exist constants $c, n_0 \in \mathbb{R}$ such that $f(n) \ge c \cdot g(n) \quad \forall \ n > n_0$.
 :::
 
 ::: {.block data-latex="{}"}
-##### Theta Notation
+**Theta Notation**
 
 A non-negative function $f(n)$ is in $\Theta(g(n))$ if and only if $f(n) \in (O(g(n)) \cap \Omega(g(n)))$.
 :::
@@ -253,11 +260,12 @@ Theta notation allows for stating complexity in simpler terms ignoring scaling a
 
 Plots show how the $n^2$ term dominates as n grows larger.
 
-#### Plot
+#### Plot {.shrink}
 
 ```{r}
 #| echo: false
 #| warning: false
+#| out-height: "90%"
 
 func_list <- list(
     c("3*x^2 + 4*x + 2", "3*n^2 + 4*n + 2"),
@@ -271,8 +279,7 @@ plt_function(
 )
 
 ```
-
-#### Plot
+#### Plot {.shrink}
 
 ```{r}
 #| echo: false
@@ -283,7 +290,7 @@ plt_function(
 )
 ```
 
-#### Plot
+#### Plot {.shrink}
 
 ```{r}
 #| echo: false
@@ -294,7 +301,7 @@ plt_function(
 )
 ```
 
-#### Plot
+#### Plot {.shrink}
 
 ```{r}
 #| echo: false
@@ -336,7 +343,7 @@ tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
 print_tbl_out(tbl_out, package)
 ```
 
-#### Summary
+#### Summary {.shrink}
 
 ```{r}
 #| echo: false
@@ -423,10 +430,9 @@ tbl_df <- readxl::read_excel(here::here(table_file_path), sheet = sheet)
 
 tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
     huxtable::set_bold(col = c(1), value = TRUE) |>
-    huxtable::set_col_width(c(.15, .15, .7)) |>
-    huxtable::theme_compact() |>
-    huxtable::set_font_size(value = 14) |>
-    huxtable::set_bottom_border(TRUE)
+    huxtable::set_col_width(c(.15, .25, .6)) |>
+    huxtable::set_bottom_border(TRUE) |>
+    huxtable::stripe_rows()
 
 print_tbl_out(tbl_out, package)
 ```
@@ -446,10 +452,9 @@ tbl_df <- readxl::read_excel(here::here(table_file_path), sheet = sheet)
 
 tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
     huxtable::set_bold(col = c(1), value = TRUE) |>
-    huxtable::set_col_width(c(.15, .15, .7)) |>
-    huxtable::theme_compact() |>
-    huxtable::set_font_size(value = 16) |>
-    huxtable::set_bottom_border(TRUE)
+    huxtable::set_col_width(c(.15, .25, .6)) |>
+    huxtable::set_bottom_border(TRUE) |>
+    huxtable::stripe_rows()
 
 print_tbl_out(tbl_out, package)
 ```
@@ -479,11 +484,6 @@ if (knitr::is_html_output()) {
         "h is height of the tree"
     )
 }
-
-cl = list()
-cl$red <- "#efcbcb"
-cl$amber <- "#f0d2c0"
-cl$green <- "#e0e6cd"
 ```
 
 ```{r}
@@ -847,7 +847,7 @@ An operation for a implementation of a data structure can use any of the compati
 
 For example, for sorting an array merge sort is much quicker than most algorithms.
 
-## Examples {.fragile .smaller}
+## Examples {.fragile .shrink .smaller}
 
 ```{r}
 #| echo: false
@@ -861,11 +861,12 @@ package <- "hux"
 tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
 
 tbl_out <- create_table(tbl_df, package = package) |>
+    huxtable::theme_compact() |>
+    huxtable::stripe_rows() |>
+    huxtable::set_col_width(c(.15, .20, .20, .45)) |>
     huxtable::set_markdown(col = 3, row = c(-1), value = FALSE) |>
     huxtable::set_escape_contents(col = 3, row = c(-1), value = FALSE) |>
-    huxtable::theme_compact() |>
-    huxtable::set_width(1) |>
-    huxtable::set_background_color(row = (-1), col = 3,
+    huxtable::set_background_color(row = c(-1), col = 3,
         value = c(cl$amber, cl$green, cl$red, cl$red, cl$amber))
 
 print_tbl_out(tbl_out, package)

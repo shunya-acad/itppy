@@ -6,9 +6,9 @@ title: "Version control system: Git"
 
 ## Definition
 
-::: {.block .div data-latex=""}
+####### **Version control system**
+
 Version control system, aka **VCS** or **source control**, is a software to maintain history of changes to a project, in context of folders, files and content of files.
-:::
 
 ## Use cases
 

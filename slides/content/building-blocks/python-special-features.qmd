@@ -304,7 +304,7 @@ new_var = expected_var or default_object
 
 ### Examples
 
-#### Without filter
+#### Without filter {.shrink}
 
 - _list of squares from a list of integers_
 

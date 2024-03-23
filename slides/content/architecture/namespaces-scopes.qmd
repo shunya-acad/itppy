@@ -154,7 +154,7 @@ func()
 print("in global scope var = " + var)
 ```
 
-## `global` with nested scopes
+## `global` with nested scopes {.shrink}
 
 ```{python}
 #| results: 'hold'
@@ -219,6 +219,7 @@ print("in global scope var = " + var)
 :::: {layout="[[45,-10,45]]"}
 
 ::: {.div data-latex="{}"}
+
 - Basic use cases
     - avoiding errors
     - resolving errors
@@ -226,6 +227,7 @@ print("in global scope var = " + var)
 :::
 
 ::: {.div data-latex="{}"}
+
 - Advanced use cases
     - implementing design patterns
         - factory functions
@@ -235,3 +237,4 @@ print("in global scope var = " + var)
 :::
 
 ::::
+

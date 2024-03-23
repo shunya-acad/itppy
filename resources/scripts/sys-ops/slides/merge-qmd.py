@@ -34,7 +34,7 @@ def check_line(line: str):
             return "## " + line[line.find("'") + 1:-2]
 
     ptrn_1 = re.compile("^#")
-    if ptrn_1.match(line) and ":" not in line:
+    if ptrn_1.match(line) and "|" not in line:
         return re.sub(ptrn_1, "###", line)
 
     return line
@@ -71,7 +71,7 @@ for part in book_structure["chapters"]:
             file_out.writelines("\n# " + title + "\n")
         for file_path_in in part["chapters"]:
             file_path_in = root_path.joinpath(file_path_in)
-            lines = []
+            lines = ["\n", "\n"]
             if file_path_in.exists():
                 with open(file_path_in) as file_in:
                     for idx, line in enumerate(file_in):

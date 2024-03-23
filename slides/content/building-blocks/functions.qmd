@@ -372,7 +372,7 @@ def some_func(a, b, c):
 :::
 :::::::::
 
-### Separation
+### Separation {.shrink}
 
 - `/` is used to separate positional only arguments
 - `*` is used to separate keyword arguments
@@ -398,7 +398,7 @@ some_func(1, pos_2=2, pos_or_kw_1=3, kw_1=4, kw_2=5)
         - has to be defined at the end
         - `kwargs` is just convention, can be name of choice, but recommended
 
-#### Examples
+#### Examples {.shrink}
 
 ```{python}
 def some_func(*args, **kwargs):
@@ -459,7 +459,7 @@ def check_prime(num: int) -> None:
         print(f'{num} is not a prime')
 ```
 
-#### Solution: Results
+#### Solution: Results {.shrink}
 
 ```{python}
 check_prime(10)
@@ -629,7 +629,7 @@ Improvement in in properties of the program
     - function applied should take as many arguments as iterables
     - `map` stops at iterable of shortest length, if lengths are different
 
-####
+#### Syntax (Ctnd...)
 
 :::::: {layout="[[45,-5,50]]"}
 ::: {.center data-latex=""}
@@ -641,7 +641,7 @@ Improvement in in properties of the program
 :::
 ::::::
 
-#### Example: Single iterable
+#### Example: Single iterable {.shrink}
 
 ```{python}
 some_list = list(range(5))
@@ -734,7 +734,7 @@ for item in some_list:
 filtered_list
 ```
 
-#### Example
+#### Example {.shrink}
 
 - filter positive integers from a list
 

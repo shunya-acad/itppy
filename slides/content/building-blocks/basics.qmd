@@ -1,11 +1,13 @@
-# Basics
+---
+title: "Basics"
+---
 
 ```{r}
 #| include: false
 source(here::here("resources/scripts/content/source-all.R"))
 ```
 
-## Objects
+# Objects
 
 - In Python, everything is an **object** stored on RAM
 - Can be looked up using object reference that is a memory address on RAM
@@ -15,9 +17,9 @@ source(here::here("resources/scripts/content/source-all.R"))
 - **data = noun** and **operation = verb**
 - **data = state** and **operation = behavior**
 
-## Variables
+# Variables
 
-### Introduction to variables
+## Introduction to variables
 
 - Variables are named references that provide a handle to the object
 - Namespaces are mapping between variable names and reference to objects
@@ -27,7 +29,7 @@ source(here::here("resources/scripts/content/source-all.R"))
     - reuse and passing around objects
     - performing operations
 
-#### Name binding
+### Name binding
 
 - Variable are defined using the `=` operator.
 
@@ -39,13 +41,13 @@ source(here::here("resources/scripts/content/source-all.R"))
     - this is referred to as **name binding**
 - variable name `some_var` is mapped to `some_id` in namespace
 
-#### 
+### 
 
 ![](../../../resources/diagrams/data-types/var-obj-namespace.png)
 
-### Deciding variable names
+## Deciding variable names
 
-#### Must-follow
+### Must-follow
 
 - **case sensitive**
 - **start** with `_` or `letter` (a-z A-Z)
@@ -59,7 +61,7 @@ import keyword
 print(keyword.kwlist)
 ```
 
-#### Keywords {.fragile .shrink .smaller}
+### Keywords {.fragile .shrink .smaller}
 
 ```{r}
 #| echo: false
@@ -89,7 +91,7 @@ create_table(df, caption = caption, package = package, col_names = col_names) |>
     print_tbl_out(package = package)
 ```
 
-#### Should-follow
+### Should-follow
 
 - `_my_var`: names starting with single underscore
   - used for `private` or `internal` objects
@@ -98,13 +100,13 @@ create_table(df, caption = caption, package = package, col_names = col_names) |>
     - `__my_var`: names starting with double underscore
     - `__my_var__`: names starting and ending in double underscore
 
-#### PEP-8 Conventions
+### PEP-8 Conventions
 
 - [**PEP**](https://peps.python.org/pep-0000/#): Python enhancement proposals
 
 - [**PEP-8**](https://peps.python.org/pep-0008/): Python code styles
 
-#### PEP-8 Conventions {.fragile .shrink .smaller}
+### PEP-8 Conventions {.fragile .shrink .smaller}
 
 ```{r}
 #| echo: false
@@ -122,9 +124,9 @@ tbl <- create_table(df, package = package)
 print_tbl_out(tbl, package)
 ```
 
-### Python features
+## Python features
 
-#### Dynamic `type`
+### Dynamic `type`
 
 - In Python, variables are typed dynamically
     - variable `type` do not need to be declared
@@ -141,7 +143,7 @@ some_var = "some text string"
 print(f'{some_var=}')
 ```
 
-#### `type` annotation
+### `type` annotation
 
 - Variable type can be declared for assistance and code readability
     - Optional
@@ -159,7 +161,7 @@ some_var:int = 10
 print(f'{some_var=}')
 ```
 
-#### Multiple assignment
+### Multiple assignment
 
 To exchange values of a set of variables you do not need temporary assignments. Below examples illustrates this.
 
@@ -179,9 +181,9 @@ a, b, c = c, a, b
 print(f'{a=}, {b=}, {c=}')
 ```
 
-## Commonly used syntax
+# Commonly used syntax
 
-### Comments (`#`)
+## Comments (`#`)
 
 Comments are text within code which is not evaluated and is used for documentation and code readability.
 
@@ -191,7 +193,7 @@ There are 2 basic rules related to comments.
 
 - cannot use `#` just after assignment operator `=`
 
-#### Example 1
+### Example 1
 
 Below is simple usage to document the code.
 
@@ -204,7 +206,7 @@ y = 20
 z = x + y
 ```
 
-#### Example 2
+### Example 2
 
 ```{python}
 #| error: true
@@ -212,7 +214,7 @@ z = x + y
 print(num_in_comment)
 ```
 
-#### Example 3
+### Example 3
 
 ```{python}
 #| error: true
@@ -221,7 +223,7 @@ some_num = # value on next line
 print(some_num)
 ```
 
-### Newline
+## Newline
 
 - New lines can be introduced in multiple ways
     - explicit method
@@ -233,7 +235,7 @@ print(some_num)
         - can have trailing commas
 - New line syntax can be used to enhance code readability
 
-#### Explicit method example
+### Explicit method example
 
 ```python
 some_var_1 = 10
@@ -253,7 +255,7 @@ if some_var_1 > 5 and some_var_2 > 10 \
     print('yes')
 ```
 
-#### Implicit method example
+### Implicit method example
 
 ::: {layout-ncol="2"}
 
@@ -274,7 +276,7 @@ a = [
 ```
 :::
 
-### Blocks (indentation)
+## Blocks (indentation)
 
 - Python uses indentation to isolate distinct blocks
     - e.g. control flow blocks (`if`, `while`), functions (`def`), classes (`class`)
@@ -291,7 +293,7 @@ def calc_circle_area(r=1, pi=math.pi):
         return pi*(r**2)
 ```
 
-## Functions
+# Functions
 
 - Objectives
     - understand at high level what information the function provides
@@ -299,7 +301,7 @@ def calc_circle_area(r=1, pi=math.pi):
     - using variable assignment
     - functions and f-strings will be covered later in detail
 
-### type
+## type
 
 - `type(_o)`: returns object type
 
@@ -313,7 +315,7 @@ var_3 = "string"
 type(var_1), type(var_2), type(var_3), type(10.2)
 ```
 
-### id
+## id
 
 - `id(_obj)`: returns object memory reference id
   - `hex(_number)` just converts a number to hexadecimal format for better readability
@@ -326,7 +328,7 @@ _string_1 = "some text"
 id(_string_1), hex(id(_string_1))
 ```
 
-### is
+## is
 
 - `a is b`: check if `a` and `b` refer to same object
 - checks if memory addresses are same not just value
@@ -339,7 +341,7 @@ a = b = [10]
 print(f'{a is b = }\n{hex(id(a))=}\n{hex(id(b))=}')
 ```
 
-#### `is` examples
+### `is` examples
 
 ```{python}
 a = [10]
@@ -350,7 +352,7 @@ b = a
 print(f'{a is b = }\n{hex(id(a))=}\n{hex(id(b))=}')
 ```
 
-#### `is` examples
+### `is` examples
 
 ```{python}
 c = [10]
@@ -361,7 +363,7 @@ d = [10]
 print(f'{c is d = }\n{hex(id(c))=}\n{hex(id(d))=}')
 ```
 
-### dot operator
+## dot operator
 
 - dot operator `.`
     - `.` operator gives access to object's data attributes and operations
@@ -374,7 +376,7 @@ _num_1 = 1.5
 _num_1.as_integer_ratio()
 ```
 
-## Modules and `import`
+# Modules and `import`
 
 Modules in Python refer to different things, based on context.
 
@@ -383,12 +385,12 @@ Modules in Python refer to different things, based on context.
 
 - Packages are special type of modules, a folder containing Python files
 
-### Use case
+## Use case
 
 - Re-use repeatable code
     - Python standard library
 
-### Example
+## Example
 
 ```{python}
 import math
@@ -397,7 +399,7 @@ print(math.pi)
 print(math.ceil(10.2))
 ```
 
-## Executing Python files
+# Executing Python files
 
 - `<path to python executable> <path to file>`
     - can take relative path
@@ -411,7 +413,7 @@ print(math.ceil(10.2))
         - e.g. `python3 -m sub_dir.file_1`
     - in case of a regular package, `__init.py` and `__main__.py` both are executed
 
-### Executing one script from another
+## Executing one script from another
 
 - use `import`
 - For example, `file_1.py` has to execute `file_2.py`

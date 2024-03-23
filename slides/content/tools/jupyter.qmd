@@ -132,7 +132,7 @@ print_tbl_out(tbl_out, package)
 ```
 
 
-### 
+### {.shrink}
 
 ```{r}
 #| echo: false

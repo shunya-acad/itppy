@@ -14,6 +14,7 @@ source(here::here("resources/scripts/content/source-all.R"))
 
 # Overview of programming
 
+
 ## Background
 
 ### Definition
@@ -88,6 +89,7 @@ source(here::here("resources/scripts/content/source-all.R"))
 - **Map**: Natural language code $\to$ Machine code
 
 - e.g. `beep` $\to$ `010011001010...`
+
 ## Programming languages
 
 ### Introduction
@@ -559,6 +561,7 @@ Combining in general means joining. In programming it means the same, ways to co
 - Further more rules of inheritance provide ways of relating class definitions to create and structure even more complex data types.
 :::
 
+
 ## Applications
 
 ### Embedded Devices
@@ -720,6 +723,7 @@ Earlier the browser JavaScript engines were using interpreter approach but now h
 - This book therefore introduces system task automation later as an application of programming.
 
 
+
 ## Learning Map
 ### Introduction
 
@@ -871,6 +875,7 @@ In terms of application the path will depend on the choices.
 - ...
 
 # Tools
+
 ## Overview
 ###### {.smaller}
 
@@ -888,6 +893,7 @@ In terms of application the path will depend on the choices.
 ######
 
 ![](../../../resources/diagrams/tools/tools-timeline.png)
+
 
 ## Command Line Interface (CLI)
 ### Overview
@@ -1084,7 +1090,7 @@ Bash configurations involve
 - print current directory: `pwd`
 - print to console: `echo "content"`
 
-### File & Folder: Change directory
+##### File & Folder: Change directory
 
 - change directory 1 level up: `cd ..`
   - change directory 2 level up: `cd ../..`
@@ -1093,7 +1099,7 @@ Bash configurations involve
 - `cd <absolute dir path>`
 - tab completion
 
-### File & Folder: Create
+##### File & Folder: Create
 
 - create file: `touch <file-path>`
   - directory should exist
@@ -1102,13 +1108,13 @@ Bash configurations involve
 - create directory and intermediate directories if does not exist:
   - `mkdir -p <dir-path>`
 
-### File & Folder: Remove
+##### File & Folder: Remove
 
 - remove file: `rm <file path>`
 - remove empty directory: `rm -r <dir path>`
 - remove non-empty directory: `rm -rf <dir path>`
 
-### File & Folder: Copy
+##### File & Folder: Copy
 
 - copy file:
 
@@ -1122,7 +1128,7 @@ Bash configurations involve
 
   `cp -r <src dir path>/. <dst dir path>`
 
-### File & Folder: Move (rename)
+##### File & Folder: Move (rename)
 
 - move/rename: `mv <src> <dst>`
   - `src` = old file/directory name
@@ -1198,14 +1204,15 @@ Bash configurations involve
 :::
 
 
+
 ## Version control system: Git
 ### Introduction
 
 #### Definition
 
-::: {.block .div data-latex=""}
+######### **Version control system**
+
 Version control system, aka **VCS** or **source control**, is a software to maintain history of changes to a project, in context of folders, files and content of files.
-:::
 
 #### Use cases
 
@@ -1353,6 +1360,7 @@ git restore <file name>
 ```
 - Discard changes to file in working directory
 
+
 ## Python
 ### Installation
 
@@ -1472,6 +1480,7 @@ python3 -m pip install jupyterlab
 ```bash
 <venv path>/bin/python3 -m pip install jupyterlab
 ```
+
 ## Jupyter Notebooks
 
 ### Overview
@@ -1598,7 +1607,7 @@ tbl_out <- create_table(tbl_df_2, package = package, set_hux_md = TRUE)
 print_tbl_out(tbl_out, package)
 ```
 
-##### 
+##### {.shrink}
 
 ```{r}
 #| echo: false
@@ -1608,6 +1617,7 @@ print_tbl_out(tbl_out, package)
 tbl_out <- create_table(tbl_df_3, package = package, set_hux_md = TRUE)
 print_tbl_out(tbl_out, package)
 ```
+
 
 ## Editor
 ### Overview
@@ -1733,6 +1743,7 @@ Editor combines most of the tools and functionality needed for programming in on
 
 
 # Building Blocks
+
 ## Overview
 
 ### Background
@@ -1771,10 +1782,11 @@ Learning a programming language starts with learning the specifications of eleme
 - Introduce basic examples of combining different building blocks
 - Tools: Jupyter notebook in editor (VSCode or Jupyter lab)
 
-### Basics
 
 
-#### Objects
+## Basics
+
+### Objects
 
 - In Python, everything is an **object** stored on RAM
 - Can be looked up using object reference that is a memory address on RAM
@@ -1784,9 +1796,9 @@ Learning a programming language starts with learning the specifications of eleme
 - **data = noun** and **operation = verb**
 - **data = state** and **operation = behavior**
 
-#### Variables
+### Variables
 
-##### Introduction to variables
+#### Introduction to variables
 
 - Variables are named references that provide a handle to the object
 - Namespaces are mapping between variable names and reference to objects
@@ -1796,7 +1808,7 @@ Learning a programming language starts with learning the specifications of eleme
     - reuse and passing around objects
     - performing operations
 
-###### Name binding
+##### Name binding
 
 - Variable are defined using the `=` operator.
 
@@ -1808,13 +1820,13 @@ Learning a programming language starts with learning the specifications of eleme
     - this is referred to as **name binding**
 - variable name `some_var` is mapped to `some_id` in namespace
 
-###### 
+##### 
 
 ![](../../../resources/diagrams/data-types/var-obj-namespace.png)
 
-##### Deciding variable names
+#### Deciding variable names
 
-###### Must-follow
+##### Must-follow
 
 - **case sensitive**
 - **start** with `_` or `letter` (a-z A-Z)
@@ -1828,7 +1840,7 @@ import keyword
 print(keyword.kwlist)
 ```
 
-###### Keywords {.fragile .shrink .smaller}
+##### Keywords {.fragile .shrink .smaller}
 
 ```{r}
 #| echo: false
@@ -1858,7 +1870,7 @@ create_table(df, caption = caption, package = package, col_names = col_names) |>
     print_tbl_out(package = package)
 ```
 
-###### Should-follow
+##### Should-follow
 
 - `_my_var`: names starting with single underscore
   - used for `private` or `internal` objects
@@ -1867,13 +1879,13 @@ create_table(df, caption = caption, package = package, col_names = col_names) |>
     - `__my_var`: names starting with double underscore
     - `__my_var__`: names starting and ending in double underscore
 
-###### PEP-8 Conventions
+##### PEP-8 Conventions
 
 - [**PEP**](https://peps.python.org/pep-0000/#): Python enhancement proposals
 
 - [**PEP-8**](https://peps.python.org/pep-0008/): Python code styles
 
-###### PEP-8 Conventions {.fragile .shrink .smaller}
+##### PEP-8 Conventions {.fragile .shrink .smaller}
 
 ```{r}
 #| echo: false
@@ -1891,9 +1903,9 @@ tbl <- create_table(df, package = package)
 print_tbl_out(tbl, package)
 ```
 
-##### Python features
+#### Python features
 
-###### Dynamic `type`
+##### Dynamic `type`
 
 - In Python, variables are typed dynamically
     - variable `type` do not need to be declared
@@ -1910,7 +1922,7 @@ some_var = "some text string"
 print(f'{some_var=}')
 ```
 
-###### `type` annotation
+##### `type` annotation
 
 - Variable type can be declared for assistance and code readability
     - Optional
@@ -1928,7 +1940,7 @@ some_var:int = 10
 print(f'{some_var=}')
 ```
 
-###### Multiple assignment
+##### Multiple assignment
 
 To exchange values of a set of variables you do not need temporary assignments. Below examples illustrates this.
 
@@ -1948,9 +1960,9 @@ a, b, c = c, a, b
 print(f'{a=}, {b=}, {c=}')
 ```
 
-#### Commonly used syntax
+### Commonly used syntax
 
-##### Comments (`#`)
+#### Comments (`#`)
 
 Comments are text within code which is not evaluated and is used for documentation and code readability.
 
@@ -1960,7 +1972,7 @@ There are 2 basic rules related to comments.
 
 - cannot use `#` just after assignment operator `=`
 
-###### Example 1
+##### Example 1
 
 Below is simple usage to document the code.
 
@@ -1973,7 +1985,7 @@ y = 20
 z = x + y
 ```
 
-###### Example 2
+##### Example 2
 
 ```{python}
 #| error: true
@@ -1981,7 +1993,7 @@ z = x + y
 print(num_in_comment)
 ```
 
-###### Example 3
+##### Example 3
 
 ```{python}
 #| error: true
@@ -1990,7 +2002,7 @@ some_num = # value on next line
 print(some_num)
 ```
 
-##### Newline
+#### Newline
 
 - New lines can be introduced in multiple ways
     - explicit method
@@ -2002,7 +2014,7 @@ print(some_num)
         - can have trailing commas
 - New line syntax can be used to enhance code readability
 
-###### Explicit method example
+##### Explicit method example
 
 ```python
 some_var_1 = 10
@@ -2022,7 +2034,7 @@ if some_var_1 > 5 and some_var_2 > 10 \
     print('yes')
 ```
 
-###### Implicit method example
+##### Implicit method example
 
 ::: {layout-ncol="2"}
 
@@ -2043,7 +2055,7 @@ a = [
 ```
 :::
 
-##### Blocks (indentation)
+#### Blocks (indentation)
 
 - Python uses indentation to isolate distinct blocks
     - e.g. control flow blocks (`if`, `while`), functions (`def`), classes (`class`)
@@ -2060,7 +2072,7 @@ def calc_circle_area(r=1, pi=math.pi):
         return pi*(r**2)
 ```
 
-#### Functions
+### Functions
 
 - Objectives
     - understand at high level what information the function provides
@@ -2068,7 +2080,7 @@ def calc_circle_area(r=1, pi=math.pi):
     - using variable assignment
     - functions and f-strings will be covered later in detail
 
-##### type
+#### type
 
 - `type(_o)`: returns object type
 
@@ -2082,7 +2094,7 @@ var_3 = "string"
 type(var_1), type(var_2), type(var_3), type(10.2)
 ```
 
-##### id
+#### id
 
 - `id(_obj)`: returns object memory reference id
   - `hex(_number)` just converts a number to hexadecimal format for better readability
@@ -2095,7 +2107,7 @@ _string_1 = "some text"
 id(_string_1), hex(id(_string_1))
 ```
 
-##### is
+#### is
 
 - `a is b`: check if `a` and `b` refer to same object
 - checks if memory addresses are same not just value
@@ -2108,7 +2120,7 @@ a = b = [10]
 print(f'{a is b = }\n{hex(id(a))=}\n{hex(id(b))=}')
 ```
 
-###### `is` examples
+##### `is` examples
 
 ```{python}
 a = [10]
@@ -2119,7 +2131,7 @@ b = a
 print(f'{a is b = }\n{hex(id(a))=}\n{hex(id(b))=}')
 ```
 
-###### `is` examples
+##### `is` examples
 
 ```{python}
 c = [10]
@@ -2130,7 +2142,7 @@ d = [10]
 print(f'{c is d = }\n{hex(id(c))=}\n{hex(id(d))=}')
 ```
 
-##### dot operator
+#### dot operator
 
 - dot operator `.`
     - `.` operator gives access to object's data attributes and operations
@@ -2143,7 +2155,7 @@ _num_1 = 1.5
 _num_1.as_integer_ratio()
 ```
 
-#### Modules and `import`
+### Modules and `import`
 
 Modules in Python refer to different things, based on context.
 
@@ -2152,12 +2164,12 @@ Modules in Python refer to different things, based on context.
 
 - Packages are special type of modules, a folder containing Python files
 
-##### Use case
+#### Use case
 
 - Re-use repeatable code
     - Python standard library
 
-##### Example
+#### Example
 
 ```{python}
 import math
@@ -2166,7 +2178,7 @@ print(math.pi)
 print(math.ceil(10.2))
 ```
 
-#### Executing Python files
+### Executing Python files
 
 - `<path to python executable> <path to file>`
     - can take relative path
@@ -2180,13 +2192,15 @@ print(math.ceil(10.2))
         - e.g. `python3 -m sub_dir.file_1`
     - in case of a regular package, `__init.py` and `__main__.py` both are executed
 
-##### Executing one script from another
+#### Executing one script from another
 
 - use `import`
 - For example, `file_1.py` has to execute `file_2.py`
     - Place `file_2.py` in same folder as `file_1`
     - use `import file_2` in `file_1.py`
     - Whenever `file_1.py` is executed it will execute `file_2.py`
+
+
 ## Data types
 
 ### Introduction
@@ -2197,7 +2211,7 @@ print(math.ceil(10.2))
 - Collections provide ways to combine data types: `tuple`, `list`, `set`, `dict`
 - **Data Structures and Algorithms (DSA)** used to design data types and operations (methods)
 
-##### Overview {.shrink}
+#### Overview {.shrink}
 
 ![](../../../resources/mindmaps/python-dataobject-types.png)
 
@@ -2207,7 +2221,7 @@ print(math.ceil(10.2))
   - just refer whats needed, gradually it will stick
 :::
 
-##### Terminology
+#### Terminology
 
 - **Collection** is generally used for collection of objects, and it can be compounded, collection of collection of objects.
 
@@ -2219,7 +2233,7 @@ print(math.ceil(10.2))
 
 - **Sequence** is a subset of **collections**. All sequences are iterables.
 
-##### Objectives
+#### Objectives
 
 - **Creation and syntax**
 - **Operations**: understand how operations are **structured** across data types
@@ -2303,6 +2317,7 @@ create_table(df, package = package) |>
 
 #### Examples
 
+##### Example 1
 
 - basic example of assigning int and float
 
@@ -2321,6 +2336,7 @@ print(f'{num2 = }, {type(num2) = }')
 
 - if decimal is present then, even if number is integer, it is stored as float
 
+##### Example 2 {.shrink}
 
 - Operations with `int` and `float` return `float`.
 
@@ -2339,6 +2355,7 @@ print(f'{num3 = }, {type(num3) = }')
 ```
 :::
 
+##### Example 3
 
 - Objects of type `int` (-5 to 256) are not **duplicated**
 
@@ -2354,6 +2371,7 @@ some_int_1 is some_int_2
 ```
 :::
 
+##### Example 4
 
 - Numeric data types are immutable
 
@@ -2605,6 +2623,8 @@ print(my_string)
 ###### Examples
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -2626,6 +2646,8 @@ some_str[2:6]
 ###### Examples
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -2645,6 +2667,8 @@ some_str[-2]
 ###### Examples
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -2664,6 +2688,8 @@ some_str[-3:]
 ###### Examples
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -2680,9 +2706,11 @@ print([*enumerate(some_str)])
 some_str[3:]
 ```
 
-###### Examples
+###### Examples {.shrink}
 
 ```{python}
+#| cache: false
+
 some_str = "abcdefgh"
 ```
 
@@ -2867,7 +2895,9 @@ Range is a special **iterable** to **generate a sequence of integers** with foll
     - **stop** is **excluded**
 - primarily used for loops, discussed later
 
-#### Examples
+#### Examples {.shrink}
+
+##### Examples
 
 ```{python}
 print(range(10))
@@ -2880,6 +2910,8 @@ print(list(range(10)))
 ```{python}
 print([*range(11)])
 ```
+
+##### Examples
 
 ```{python}
 print([*range(1, 11)])
@@ -2909,6 +2941,7 @@ A dictionary is a **mutable** **mapping type** collection of **heterogeneous obj
         - **lists, dictionary cannot be used**
     - **value** can be any **Python object**
 
+##### Overview (Cntd...)
 
 A dictionary is useful when a collection of objects is needed with the option to do quick searches based on keys rather than index, unlike sequences.
 
@@ -3125,7 +3158,6 @@ some_chr_1 in some_string
 some_chr_2 in some_string
 ```
 
-
 ###### Small string in a longer string
 
 ```{python}
@@ -3199,7 +3231,7 @@ tbl_df <- tbl_df[tbl_df$Type == "Combination",][-c(1, 5)]
 
 tbl_out <- create_table(tbl_df, package) |>
     huxtable::theme_article() |>
-    huxtable::set_col_width(c(.1, .4, .5))
+    huxtable::set_col_width(c(.15, .4, .45))
 
 print_tbl_out(tbl_out, package)
 ```
@@ -3221,6 +3253,7 @@ print_tbl_out(tbl_out, package)
     - example: `a < b < c` is same as `a < b and b < c`
     - this is specific to Python
 
+###### Specifications (Cntd...)
 
 - for conditions with too many nested combinations
   it is recommended to use `()`
@@ -3412,7 +3445,7 @@ some_tuple = (0, 1, 1)
 some_tuple[2] = 2
 ```
 
-###### Mutable types - lists, dictionaries
+###### Mutable types - lists, dictionaries {.shrink}
 
 ```{python}
 some_list = [0, 1, 5]
@@ -3462,7 +3495,7 @@ some_string = some_string.replace("a", "b")
 print(f'{some_string=}\n{hex(id(some_string)) = }\n{some_string_orig_id = }')
 ```
 
-##### Propagation of changes
+##### Propagation of changes {.shrink}
 
 Mutable types like lists or dictionaries, when passed around through variable assignment, changes are propagated.
 
@@ -3476,6 +3509,8 @@ Mutable types like lists or dictionaries, when passed around through variable as
   - **unpacking** `[*iterable]`
   - **loops**
 
+###### Examples
+
 ```{python}
 some_list_1 = [1, 2, "a", "b"]
 some_list_2 = some_list_1
@@ -3485,6 +3520,8 @@ some_list_2 = some_list_1
 print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
 ```
 
+###### Examples
+
 ```{python}
 some_list_1[2] = "abc"
 ```
@@ -3493,6 +3530,8 @@ some_list_1[2] = "abc"
 print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
 ```
 
+###### Examples
+
 ```{python}
 some_list_2[-1] = "xyz"
 ```
@@ -3500,6 +3539,8 @@ some_list_2[-1] = "xyz"
 ```{python}
 print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
 ```
+
+###### Examples
 
 - using constructor or unpacking does not pass the object itself
 
@@ -3521,6 +3562,8 @@ some_list_1[2] = "abc"
 #| echo: false
 print(f'{some_list_1=}, {some_list_2=}\n{some_list_2 is some_list_1 = }')
 ```
+
+###### Examples
 
 - using constructor or unpacking does not pass the object itself
 
@@ -3564,7 +3607,7 @@ some_list.pop()
 print(f'{some_list=}\n{some_tuple=}\n{some_list is some_tuple[0] = }')
 ```
 
-###### 
+###### {.shrink}
 
 - if only contents are needed and propagation is to be avoided use **unpacking** or **constructor**
 
@@ -3579,7 +3622,7 @@ print(f'{some_list is some_tuple_1 = }')
 print(f'{some_list is some_tuple_2 = }')
 ```
 
-######
+###### {.shrink}
 
 ```{python}
 some_list.pop()
@@ -3622,6 +3665,7 @@ print(f'{some_list_2[0] is some_list_1[0] = }')
 print(f'{some_list_3[0] is some_list_1[0] = }')
 print(f'{some_list_4[0] is some_list_1[0] = }')
 ```
+
 
 ## Control Flow
 
@@ -3974,7 +4018,7 @@ else:
 
 ##### Examples
 
-###### Basic
+###### Basic {.shrink}
 
 - Loop through 1 to `n_max = 20`
     - store even numbers in a list `evens`
@@ -4113,7 +4157,7 @@ while condition:
     print("inside infinite loop")
 ```
 
-###### Basic
+###### Basic {.shrink}
 
 ```{python}
 a = 6
@@ -4299,7 +4343,7 @@ for k, v in some_dict.items():
 
 ###### Solutions
 
-#### Create a new collection: List
+###### Create a new collection: List
 
 ```{python}
 nums = list(range(1, 6))
@@ -4314,7 +4358,7 @@ print(nums)
 print(new_nums)
 ```
 
-#### Create a new collection: Dictionary
+###### Create a new collection: Dictionary
 
 ```{python}
 some_dict = {"k1": "v1", "k2": "v2", "k3": "v3"}
@@ -4329,7 +4373,7 @@ print(some_dict)
 print(new_dict)
 ```
 
-#### Create a copy: List
+###### Create a copy: List
 
 ```{python}
 nums = list(range(1, 6))
@@ -4343,7 +4387,7 @@ for num in nums.copy():
 print(nums)
 ```
 
-#### Create a copy: Dictionary
+###### Create a copy: Dictionary
 
 ```{python}
 some_dict = {"k1": "v1", "k2": "v2", "k3": "v3"}
@@ -4386,9 +4430,9 @@ a =, 2
 
 ```{python}
 #| error: true
-# try:
+### try:
 ###     1/0
-# except Exception as e:
+### except Exception as e:
 ###     print(e)
 eg_num = 1/0
 ```
@@ -4452,7 +4496,7 @@ float("text")
 
 ##### Overview
 
-- `try...except` blocks are used to [intercept]{color="blue"} and [handle]{color="blue"} [expected]{color="green"} [run time errors]{color="red"} [differently]{color="blue"}
+- `try...except` blocks are used to [intercept]{color="blue"} and [handle]{color="blue"} [expected]{color="olive"} [run time errors]{color="red"} [differently]{color="blue"}
 
 - Use cases
     - ignore the error and continue running the program
@@ -4541,6 +4585,7 @@ while True:
     except ValueError:
         continue
 ```
+
 
 ## Functions
 
@@ -4908,7 +4953,7 @@ def some_func(a, b, c):
 :::
 :::::::::
 
-##### Separation
+##### Separation {.shrink}
 
 - `/` is used to separate positional only arguments
 - `*` is used to separate keyword arguments
@@ -4934,7 +4979,7 @@ some_func(1, pos_2=2, pos_or_kw_1=3, kw_1=4, kw_2=5)
         - has to be defined at the end
         - `kwargs` is just convention, can be name of choice, but recommended
 
-###### Examples
+###### Examples {.shrink}
 
 ```{python}
 def some_func(*args, **kwargs):
@@ -4971,7 +5016,7 @@ Prime is a positive integer greater than 1 which is divisible only by 1 and itse
 
 Given a positive integer check if it is a prime. Print a message confirming the result.
 
-### Solution: Code {.shrink}
+##### Solution: Code {.shrink}
 
 ```{python}
 def check_prime(num: int) -> None:
@@ -4995,7 +5040,7 @@ def check_prime(num: int) -> None:
         print(f'{num} is not a prime')
 ```
 
-#### Solution: Results
+###### Solution: Results {.shrink}
 
 ```{python}
 check_prime(10)
@@ -5016,7 +5061,7 @@ Below is gcd algorithm to find the greatest common divisor of 2 integers.
     3. replace a with b and b with remainder (*in python this is 1 step using multiple assignment*)
     4. goto to step 1
 
-### Solution: `while`
+##### Solution: `while`
 
 ```{python}
 #| results: 'hold'
@@ -5032,7 +5077,7 @@ print(f'{a = }, {b = }, {rem = }')
 print(b)
 ```
 
-### Solution: function {.shrink .smaller}
+##### Solution: function {.shrink .smaller}
 
 ```{python}
 def calc_gcd(num_1: int, num_2: int) -> int:
@@ -5164,7 +5209,7 @@ Improvement in in properties of the program
     - function applied should take as many arguments as iterables
     - `map` stops at iterable of shortest length, if lengths are different
 
-######
+###### Syntax (Ctnd...)
 
 :::::: {layout="[[45,-5,50]]"}
 ::: {.center data-latex=""}
@@ -5176,7 +5221,7 @@ Improvement in in properties of the program
 :::
 ::::::
 
-#### Example: Single iterable
+###### Example: Single iterable {.shrink}
 
 ```{python}
 some_list = list(range(5))
@@ -5220,7 +5265,7 @@ sqrd_itr = map(lambda x: x**2, some_list)
 print(f'{list(sqrd_itr) = }')
 ```
 
-#### Example: Multiple iterables
+###### Example: Multiple iterables
 
 ```{python}
 tuple_1 = 1, 2, 3
@@ -5250,7 +5295,7 @@ Note that it is a special case of map.
     - function should return true or false when acting on an element
     - if function is `None` then all truthy elements are returned
 
-#### Example: `None`
+###### Example: `None`
 
 ```{python}
 some_list = [1, 0, None, '', 'abc', tuple()]
@@ -5269,7 +5314,7 @@ for item in some_list:
 filtered_list
 ```
 
-###### Example
+###### Example {.shrink}
 
 - filter positive integers from a list
 
@@ -5441,7 +5486,7 @@ fact_rec = lambda n: 1 if n == 0 else n*fact_rec(n-1)
     - regular function
     - recursive function
 
-#### Solution: `while`
+###### Solution: `while`
 
 ```{python}
 #| results: 'hold'
@@ -5524,7 +5569,7 @@ def find_gcd_rec(a: int, b: int) -> int:
 - Ask user input until it is correct
 - Limit maximum incorrect trials
 
-#### Solution: control flow blocks
+###### Solution: control flow blocks
 
 ```{python}
 #| eval: false
@@ -5538,7 +5583,7 @@ while True:
         continue
 ```
 
-#### Solution: recursive function {.shrink}
+###### Solution: recursive function {.shrink}
 
 ```{python}
 def get_an_integer(max_count=5, count=1):
@@ -5557,6 +5602,8 @@ def get_an_integer(max_count=5, count=1):
         else:
             print(f"maximum tries ({max_count}) reached")
 ```
+
+
 ## Object Oriented Programming (OOP)
 
 ### Introduction
@@ -5975,7 +6022,7 @@ obj.some_class_method()
 
 - There is no mandatory first parameter
 
-#### Example
+#### Example {.shrink}
 
 ```{python}
 class CustomClass:
@@ -6034,7 +6081,7 @@ class Circle:
         return 2*self.pi*self.radius
 ```
 
-#### Usage
+#### Usage {.shrink}
 
 ```{python}
 c1 = Circle(1)
@@ -6126,6 +6173,7 @@ c1.radius = 2
 ```{python}
 isinstance(True, int), issubclass(bool, int)
 ```
+
 
 ## Python special features
 
@@ -6426,7 +6474,7 @@ new_var = expected_var or default_object
 
 ##### Examples
 
-###### Without filter
+###### Without filter {.shrink}
 
 - _list of squares from a list of integers_
 
@@ -6535,6 +6583,7 @@ dict_2 = {k: v**2 for k, v in dict_1.items() if k in {'a', 'e', 'i'}}
 print(type(dict_2))
 print(dict_2)
 ```
+
 # Architecture
 
 ## Overview
@@ -6560,6 +6609,8 @@ print(dict_2)
 
 - Understand the specifications related to architecture and do experiments in isolation
 - Tools: use editor and cli to manage installation, scripts and projects
+
+
 ## Namespaces and scopes
 
 ### Introduction
@@ -6706,7 +6757,7 @@ func()
 print("in global scope var = " + var)
 ```
 
-#### `global` with nested scopes
+#### `global` with nested scopes {.shrink}
 
 ```{python}
 #| results: 'hold'
@@ -6771,6 +6822,7 @@ print("in global scope var = " + var)
 :::: {layout="[[45,-10,45]]"}
 
 ::: {.div data-latex="{}"}
+
 - Basic use cases
     - avoiding errors
     - resolving errors
@@ -6778,6 +6830,7 @@ print("in global scope var = " + var)
 :::
 
 ::: {.div data-latex="{}"}
+
 - Advanced use cases
     - implementing design patterns
         - factory functions
@@ -6787,6 +6840,8 @@ print("in global scope var = " + var)
 :::
 
 ::::
+
+
 
 ## Modules & Packages
 
@@ -7014,6 +7069,7 @@ Below are the use cases with recommendations.
     - relative imports for cross referencing
     - controlling exports
 
+
 ## Available Modules & Packages
 
 ### Introduction
@@ -7238,6 +7294,7 @@ print_tbl_out(tbl[c(1, 4, 5, 7, 8),], package)
     - `py-requirements.txt`
     - `.gitignore`
 
+
 ## Language engine
 ### Overview
 
@@ -7350,6 +7407,7 @@ For regular use of programming there is not much requirement to increase perform
 
 - Python has Global interpreter lock (GIL) which limits execution of one thread at a time
 
+
 ## Error handling (Debugging)
 
 ### Introduction
@@ -7457,6 +7515,7 @@ IndexError: pop from empty list
 
 # Design
 
+
 ## Design: Overview
 
 ### Motivation {.smaller}
@@ -7521,7 +7580,16 @@ There are 2 distinct dimensions
 - **Advanced OOP**
 - **Meta-programming**
 
+
 ## Data structures & Algorithms (DSA)
+
+```{r}
+#| include: false
+cl <- list()
+cl$red <- "#efcbcb"
+cl$amber <- "#f0d2c0"
+cl$green <- "#e0e6cd"
+```
 
 ### Introduction
 
@@ -7608,7 +7676,7 @@ The study of data structures and algorithms can be summarized as below.
 
 - The choice of data structure decides available algorithms for different operations implemented for a data structure
 
-#### Interface vs data structure {.fragile .smaller}
+#### Interface vs data structure {.fragile .shrink .smaller}
 
 ```{r}
 #| echo: false
@@ -7624,8 +7692,8 @@ tbl_df <- readxl::read_excel(here::here(table_file_path), sheet = sheet)
 tbl_df <- tbl_df[2:3]
 
 tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
-    huxtable::theme_compact() |>
-    huxtable::set_bottom_border(TRUE)
+    huxtable::set_right_border(row = c(-1), value = 0.4) |>
+    huxtable::stripe_rows()
 
 print_tbl_out(tbl_out, package)
 ```
@@ -7743,19 +7811,19 @@ print_tbl_out(tbl_out, package)
 ###### Definitions
 
 ::: {.block data-latex="{}"}
-####### O Notation
+**O Notation**
 
 A non-negative function $f(n)$ is in $O(g(n))$ if and only if there exist constants $c, n_0 \in \mathbb{R}$ such that $f(n) \le c \cdot g(n) \quad \forall \ n > n_0$.
 :::
 
 ::: {.block data-latex="{}"}
-####### Omega Notation
+**Omega Notation**
 
 A non-negative function $f(n)$ is in $\Omega(g(n))$ if and only if there exist constants $c, n_0 \in \mathbb{R}$ such that $f(n) \ge c \cdot g(n) \quad \forall \ n > n_0$.
 :::
 
 ::: {.block data-latex="{}"}
-####### Theta Notation
+**Theta Notation**
 
 A non-negative function $f(n)$ is in $\Theta(g(n))$ if and only if $f(n) \in (O(g(n)) \cap \Omega(g(n)))$.
 :::
@@ -7768,11 +7836,12 @@ Theta notation allows for stating complexity in simpler terms ignoring scaling a
 
 Plots show how the $n^2$ term dominates as n grows larger.
 
-###### Plot
+###### Plot {.shrink}
 
 ```{r}
 #| echo: false
 #| warning: false
+#| out-height: "90%"
 
 func_list <- list(
     c("3*x^2 + 4*x + 2", "3*n^2 + 4*n + 2"),
@@ -7786,8 +7855,7 @@ plt_function(
 )
 
 ```
-
-###### Plot
+###### Plot {.shrink}
 
 ```{r}
 #| echo: false
@@ -7798,7 +7866,7 @@ plt_function(
 )
 ```
 
-###### Plot
+###### Plot {.shrink}
 
 ```{r}
 #| echo: false
@@ -7809,7 +7877,7 @@ plt_function(
 )
 ```
 
-###### Plot
+###### Plot {.shrink}
 
 ```{r}
 #| echo: false
@@ -7851,7 +7919,7 @@ tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
 print_tbl_out(tbl_out, package)
 ```
 
-###### Summary
+###### Summary {.shrink}
 
 ```{r}
 #| echo: false
@@ -7937,10 +8005,9 @@ tbl_df <- readxl::read_excel(here::here(table_file_path), sheet = sheet)
 
 tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
     huxtable::set_bold(col = c(1), value = TRUE) |>
-    huxtable::set_col_width(c(.15, .15, .7)) |>
-    huxtable::theme_compact() |>
-    huxtable::set_font_size(value = 14) |>
-    huxtable::set_bottom_border(TRUE)
+    huxtable::set_col_width(c(.15, .25, .6)) |>
+    huxtable::set_bottom_border(TRUE) |>
+    huxtable::stripe_rows()
 
 print_tbl_out(tbl_out, package)
 ```
@@ -7960,10 +8027,9 @@ tbl_df <- readxl::read_excel(here::here(table_file_path), sheet = sheet)
 
 tbl_out <- create_table(tbl_df, package = package, apply_theme = TRUE) |>
     huxtable::set_bold(col = c(1), value = TRUE) |>
-    huxtable::set_col_width(c(.15, .15, .7)) |>
-    huxtable::theme_compact() |>
-    huxtable::set_font_size(value = 16) |>
-    huxtable::set_bottom_border(TRUE)
+    huxtable::set_col_width(c(.15, .25, .6)) |>
+    huxtable::set_bottom_border(TRUE) |>
+    huxtable::stripe_rows()
 
 print_tbl_out(tbl_out, package)
 ```
@@ -7993,11 +8059,6 @@ if (knitr::is_html_output()) {
         "h is height of the tree"
     )
 }
-
-cl = list()
-cl$red <- "#efcbcb"
-cl$amber <- "#f0d2c0"
-cl$green <- "#e0e6cd"
 ```
 
 ```{r}
@@ -8361,7 +8422,7 @@ An operation for a implementation of a data structure can use any of the compati
 
 For example, for sorting an array merge sort is much quicker than most algorithms.
 
-#### Examples {.fragile .smaller}
+#### Examples {.fragile .shrink .smaller}
 
 ```{r}
 #| echo: false
@@ -8375,15 +8436,18 @@ package <- "hux"
 tbl_df <- readxl::read_excel(here::here(table_file_path), sheet=sheet)
 
 tbl_out <- create_table(tbl_df, package = package) |>
+    huxtable::theme_compact() |>
+    huxtable::stripe_rows() |>
+    huxtable::set_col_width(c(.15, .20, .20, .45)) |>
     huxtable::set_markdown(col = 3, row = c(-1), value = FALSE) |>
     huxtable::set_escape_contents(col = 3, row = c(-1), value = FALSE) |>
-    huxtable::theme_compact() |>
-    huxtable::set_width(1) |>
-    huxtable::set_background_color(row = (-1), col = 3,
+    huxtable::set_background_color(row = c(-1), col = 3,
         value = c(cl$amber, cl$green, cl$red, cl$red, cl$amber))
 
 print_tbl_out(tbl_out, package)
 ```
+
+
 
 ## Design: Workflow
 
@@ -8453,7 +8517,7 @@ Learning and practising project workflow management from the very start and for 
 
 - [Python docs: packaging python projects](https://packaging.python.org/en/latest/tutorials/packaging-projects/#packaging-python-projects)
 
-### Tools: Settings
+##### Tools: Settings
 
 - [VSCode: workspaces](https://code.visualstudio.com/docs/editor/workspaces)
 - [VSCode: profiles](https://code.visualstudio.com/docs/editor/profiles)
@@ -8516,6 +8580,7 @@ There are 2 key dependencies of a Python project.
 
 # Applications
 
+
 ## Overview
 ### Background
 
@@ -8551,6 +8616,7 @@ There are 2 key dependencies of a Python project.
 
 - Remember to refactor code
 - Do not try to memorize everything, remember where to look for information
+
 
 ## Automation
 ### Overview
@@ -8774,6 +8840,7 @@ Create a mirroring software implemented as a python cli package with the below f
 
 - [AsciiDoc](https://asciidoc.org/)
 - [Sphinx](https://www.sphinx-doc.org/en/master/)
+
 
 ## Data Analysis
 ### Background

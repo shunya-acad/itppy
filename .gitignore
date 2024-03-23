@@ -32,3 +32,5 @@
 /.quarto/
 itppy-package*
 paytm*
+book/_publish*
+

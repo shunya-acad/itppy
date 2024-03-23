@@ -357,7 +357,7 @@ else:
 
 ### Examples
 
-#### Basic
+#### Basic {.shrink}
 
 - Loop through 1 to `n_max = 20`
     - store even numbers in a list `evens`
@@ -496,7 +496,7 @@ while condition:
     print("inside infinite loop")
 ```
 
-#### Basic
+#### Basic {.shrink}
 
 ```{python}
 a = 6
@@ -835,7 +835,7 @@ float("text")
 
 ### Overview
 
-- `try...except` blocks are used to [intercept]{color="blue"} and [handle]{color="blue"} [expected]{color="green"} [run time errors]{color="red"} [differently]{color="blue"}
+- `try...except` blocks are used to [intercept]{color="blue"} and [handle]{color="blue"} [expected]{color="olive"} [run time errors]{color="red"} [differently]{color="blue"}
 
 - Use cases
     - ignore the error and continue running the program
