@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source ./resources/scripts/sys-ops/check-current-directory.sh
+script_dir="$(dirname "$(readlink -f "$0")")"
+source "$script_dir"/get-current-directory.sh
 
 cd "${itppy_absolute_path}" || exit
 
