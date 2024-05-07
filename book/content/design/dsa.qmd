@@ -454,12 +454,13 @@ tbl_out_map <- create_table_map(tbl_df_map)
 
 Data structures are the actual implementations of interfaces. There is no single data structure that solves all operations required in an interface efficiently. Different data structures solve a subset of operations efficiently.
 
-Below are main types of data structures
+Below are some basic categories of data structures with examples.
 
 - *array based*: **static array**, **dynamic array**
 - *pointer based*: **linked list** (w[/o] tail), **doubly linked list** (w[/o] tail)
 - **hash table** (*array and pointer mixed*)
-- *graph based*: **binary search tree**, **AVL tree**, ...
+- *tree based*: **binary search tree**, **AVL tree**, ...
+- *graph based*
 
 ### Static array
 
@@ -581,9 +582,8 @@ tbl_df_seq[filter,] |>
 - Idea is to **amortize the cost** of operations by providing extra space
     - when list is full, it is extended by a target **fill ratio**
     - when list is empty, the size is reduced to target **delete ratio**
-- Python **list** is a dynamic array, with extra slots alloted both in the beginning and end of container
-    - inserting or deleting at first or last position takes $O(1)$ time (averaged over $n$ operations)
-
+- Python **list** is a dynamic array
+    - inserting or deleting at last position takes $O(1)$ time (amortized over $n$ operations)
 ![](../../../resources/diagrams/dsa/dyn-array-1.png)
 
 ```{r}

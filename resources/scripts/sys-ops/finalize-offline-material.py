@@ -4,7 +4,7 @@ import shutil as sh
 
 import render
 
-cmd = "bash resources/scripts/sys-ops/check-current-directory.sh"
+cmd = "bash resources/scripts/sys-ops/get-current-directory.sh"
 subprocess.run(cmd, shell=True, check=True,
                stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 

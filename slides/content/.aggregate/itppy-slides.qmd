@@ -8280,8 +8280,8 @@ tbl_df_seq[filter,] |>
 - Idea is to **amortize the cost** of operations by providing extra space
     - when list is full, it is extended by a target **fill ratio**
     - when list is empty, the size is reduced to target **delete ratio**
-- Python **list** is a dynamic array, with extra slots alloted both in the beginning and end of container
-    - inserting or deleting at first or last position takes $O(1)$ time (averaged over $n$ operations)
+- Python **list** is a dynamic array
+    - inserting at last position takes $O(1)$ time (amortized over $n$ operations)
 
 ![](../../../resources/diagrams/dsa/dyn-array-1.png)
 
